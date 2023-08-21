@@ -38,18 +38,19 @@ public class HomeController {
 	
 
 	@RequestMapping(value = "/sy", method = RequestMethod.GET)
-	public String home() {
+	public String home1() {
 
 		return "sy";
-
+		
+	}
 
 	@RequestMapping(value = "ex1", method = RequestMethod.GET)
-	public String home() {
+	public String home2() {
 		
 		return "ex1";
-
+	}
 	@RequestMapping(value = "ksh", method = RequestMethod.GET)
-	public String home() {
+	public String home3() {
 		return "ksh";
 
 
