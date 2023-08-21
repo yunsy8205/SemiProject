@@ -37,6 +37,12 @@ public class HomeController {
 	}
 	
 
+	@RequestMapping(value = "/sy", method = RequestMethod.GET)
+	public String home() {
+
+		return "sy";
+
+
 	@RequestMapping(value = "ex1", method = RequestMethod.GET)
 	public String home() {
 		
@@ -45,6 +51,7 @@ public class HomeController {
 	@RequestMapping(value = "ksh", method = RequestMethod.GET)
 	public String home() {
 		return "ksh";
+
 
 	}
 	
