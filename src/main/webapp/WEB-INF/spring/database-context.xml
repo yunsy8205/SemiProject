@@ -5,27 +5,37 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<!-- database.properties 파일의 위치를 설정하여 파일을 톰켓이 읽을 수 있도록 함.
+		 placeholder : database.properties 파일에 있는 내용을 쓰겠다고 톰켓에 요청함. -->
 	<context:property-placeholder location="classpath:database/config/database.properties"/>
-
 	
-	
-
-	<!-- mybatis 사용하기 위해 객체 생성 -->
-	<!-- Connection -->
+	<!-- mybatis 사용하기 위한 객체를 3개 생성함
+		 bean : 객체를 생성하는데 기본생성자를 호출함
+		 객체 생성 태그 <bean>, 어느 class를 보고 만들것인가 (class="라이브러리)" 
+	-->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<!-- DB연결 : Connection
+		property name="setter명 입력함" -->
 		<property name="username" value="${oracle.user}"></property>
 		<property name="password" value="${oracle.password}"></property>
 		<property name="url" value="${oracle.url}"></property>
-		<property name="driverClassName" value="${oracle.driver}"></property>		
+		<property name="driverClassName" value="${oracle.driver}"></property>
 	</bean>
-
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+	
+	<!-- 모으는 bean(객체) 정보 생성함 : mapper 연결함 (데이터를 연결함)
+	객체 변수값 입력: ref="ID값 입력" -->
+	<bean class = "org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
+		<!-- classpath 폴더 밑에 config 설정파일의 위치를 알려줌. (개발코드는 나중에 classas 폴더로 변하고, 그 경로명이 classpath 라 한다. -->
 		<property name="configLocation" value="classpath:database/config/mybatisConfig.xml"></property>
 		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
 	</bean>
-
+	
+	<!-- 실제로 실행하는 bean(객체) 생성함.
+	SqlSessionTemplate 클래스에 기본생성자가 없어서 생성자를 호출해야 함.
+	생성자 호출함 : name으로 찾을 수 있다. -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
+
 </beans>
