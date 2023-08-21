@@ -13,7 +13,12 @@ public class TestController {
 		
 		return "home";
 	}
-	
+
+		@RequestMapping(value = "/ex1", method = RequestMethod.GET)
+		public String test() throws Exception{
+			
+			return "ex1";
+		}	
 
 
 
