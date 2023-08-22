@@ -1,6 +1,7 @@
 package com.semi.main.product;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ProductDTO {
 	
@@ -17,8 +18,29 @@ public class ProductDTO {
 	private int proStatus;
 	private Long proHit;
 	private int proSale;
+	private String catName;
+	private String userId;
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getCatName() {
+		return catName;
+	}
+	public void setCatName(String catName) {
+		this.catName = catName;
+	}
+	private List<ProductFileDTO> fileDTOs;
 	
+	public List<ProductFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<ProductFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
 	public Long getProNo() {
 		return proNo;
 	}
@@ -98,5 +120,5 @@ public class ProductDTO {
 		this.proSale = proSale;
 	}
 	
-
+	
 }

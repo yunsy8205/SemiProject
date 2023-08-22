@@ -26,8 +26,16 @@ public class ProductDAO {
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
 		System.out.println(productDTO.getProNo());
 		productDTO= sqlSession.selectOne(NAMESPACE+"getDetail", productDTO);
-		System.out.println(productDTO);
+		
 		return productDTO;
+	}
+	
+	public Long countProduct(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"countProduct",productDTO);
+	}
+	
+	public Long countReview(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"countReview",productDTO);
 	}
 	
 }

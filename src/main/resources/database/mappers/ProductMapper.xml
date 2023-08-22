@@ -7,35 +7,56 @@
  
 		 <!--  
 		 id의 역할 : 중복되면 안됨. --> 
-		  <mapper namespace="com.semi.main.product.ProductDAO">
-		  	
-		  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
-		  	SELECT * FROM PRODUCT
-		  	
-		  </select>
+	 <mapper namespace="com.semi.main.product.ProductDAO">
+	  	
+	  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
+	  	SELECT * FROM PRODUCT
+	  	
+	  </select>
 		  
-	 <!-- <resultMap type="ProductDTO" id="getSelectResult">
-  		<id column="PRONO" property="proNo"/>
-  		<result column="PRONAME" property="proName"/>
-  		<result column="USERNO" property="userNo"/>
-  		<result column="PROPRICE" property="proProce"/>
-  		<result column="PROCONTENTS" property="proContents"/>
-  		<result column="CREATEDATE" property="createDate"/>
-  		<result column="HIT" property="hit"/>
-  		<collection property="dtos" javaType="List" ofType="ProductFileDTO">
-  			<id column="PROIMAGENO" property="proImageNo"/>
-  			<result column="PROIMAGENAME" property="proImageName"/>
-  			<result column="PROORIGINALIMG" property="peoOriginalName"/>
-  		</collection>	
-  	</resultMap> -->
+     <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="proHit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+  
+  	<select id="getDetail" parameterType="ProductDTO" resultMap="getResult">
+  		SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P
+  		LEFT JOIN PRODUCTIMAGE PR
+  		ON (P.PRONO=PR.PRONO)
+  		JOIN CATEGORY C
+  		ON (P.CATNO = C.CATNO)
+  		JOIN MEMBER M
+  		ON (P.USERNO = M.USERNO)
+  		WHERE P.PRONO= #{proNo}
+  	</select>
   	
+  	<select id="countProduct" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{userNo}
+  	</select>
   	
-		  </mapper>
- <!--  
- id의 역할 : 중복되면 안됨. --> 
-  <mapper namespace="com.semi.main.product.ProductDAO">
-  	<select id="getDetail" parameterType="ProductDTO" resultMap="">
-  		SELECT * FROM PRODUCT WHERE PRONO= #{proNo}
+  	<select id="countReview" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(REVIEWNO)
+  		FROM REVIEW WHERE USERNO=#{userNo}
   	</select>
   	
   	<insert id="a"></insert>

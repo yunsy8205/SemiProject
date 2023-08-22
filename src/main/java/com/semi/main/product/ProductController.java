@@ -28,9 +28,14 @@ public class ProductController {
 	
 	@GetMapping("detail")
 	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
-		System.out.println("C");
-		productDTO=productService.getDetail(productDTO);
+		
+		productDTO = productService.getDetail(productDTO);
 		model.addAttribute("dto", productDTO);
+		System.out.println("userNo"+productDTO.getUserNo());
+		Long countProduct = productService.countProduct(productDTO);
+		model.addAttribute("countp", countProduct);
+		Long countReview = productService.countReview(productDTO);
+		model.addAttribute("countr", countReview);
 		
 		return "product/detail";
 	}
