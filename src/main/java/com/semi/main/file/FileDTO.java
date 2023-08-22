@@ -2,28 +2,29 @@ package com.semi.main.file;
 
 public class FileDTO {
 	
-	private Long proImageNo;
-	private String proOrignalImg;
-	private String proImageName;
+	private Long fileNo;
+	private String fileName;
+	private String originalName;
 	
 	
-	public Long getProImageNo() {
-		return proImageNo;
+	public Long getFileNo() {
+		return fileNo;
 	}
-	public void setProImageNo(Long proImageNo) {
-		this.proImageNo = proImageNo;
+	public void setFileNo(Long fileNo) {
+		this.fileNo = fileNo;
 	}
-	public String getProOrignalImg() {
-		return proOrignalImg;
+	public String getFileName() {
+		return fileName;
 	}
-	public void setProOrignalImg(String proOrignalImg) {
-		this.proOrignalImg = proOrignalImg;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-	public String getProImageName() {
-		return proImageName;
+	public String getOriginalName() {
+		return originalName;
 	}
-	public void setProImageName(String proImageName) {
-		this.proImageName = proImageName;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
- 
+	
+	
 }
