@@ -1,16 +1,17 @@
 package com.semi.main.product;
 
-public class ProductFileDTO {
+import com.semi.main.file.FileDTO;
 
-	private Long proImageNo;
-	
-	
+public class ProductFileDTO extends FileDTO{
 
-	public Long getProImageNo() {
-		return proImageNo;
+	private Long proNo;
+
+	public Long getProNo() {
+		return proNo;
 	}
 
-	public void setProImageNo(Long proImageNo) {
-		this.proImageNo = proImageNo;
+	public void setProNo(Long proNo) {
+		this.proNo = proNo;
 	}
+	
 }

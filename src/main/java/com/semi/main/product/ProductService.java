@@ -16,12 +16,23 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
-	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		//Long total = ProductDAO.getTotal(pager);
 		//pager.makePageNum(total);
 		return productDAO.getList(pager);
+	}
+	
+	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
+		return productDAO.getDetail(productDTO);
+	}
+	
+	public Long countProduct(ProductDTO productDTO) throws Exception{
+		return productDAO.countProduct(productDTO);
+	}
+	
+	public Long countReview(ProductDTO productDTO) throws Exception{
+		return productDAO.countReview(productDTO);
 	}
 
 }

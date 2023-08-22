@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,4 +25,19 @@ public class ProductController {
 		model.addAttribute("pager", pager);
 		return "product/list";
 	}
+	
+	@GetMapping("detail")
+	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
+		
+		productDTO = productService.getDetail(productDTO);
+		model.addAttribute("dto", productDTO);
+		System.out.println("userNo"+productDTO.getUserNo());
+		Long countProduct = productService.countProduct(productDTO);
+		model.addAttribute("countp", countProduct);
+		Long countReview = productService.countReview(productDTO);
+		model.addAttribute("countr", countReview);
+		
+		return "product/detail";
+	}
+
 }
