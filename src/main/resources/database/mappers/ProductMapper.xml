@@ -10,8 +10,16 @@
 		  <mapper namespace="com.semi.main.product.ProductDAO">
 		  	
 		  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
-		  	SELECT * FROM PRODUCT
-		  	
+			SELECT
+		        P.*,
+		        M.USERID
+		    FROM
+		        PRODUCT P
+		    INNER JOIN
+		        MEMBER M
+		    ON
+		        P.USERNO = M.USERNO
+				  	
 		  </select>
 		  
 	 <!-- <resultMap type="ProductDTO" id="getSelectResult">

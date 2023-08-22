@@ -21,7 +21,7 @@
 				<tr>
 					<td>${d.proNo}</td>
 					<td>${d.proName} </td>
-					<td>${d.userNo} </td>
+					<td>${d.userId} </td>
 					<td>${d.createDate} </td>
 					<td>${d.proHit} </td>
 				</tr>
