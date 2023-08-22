@@ -7,10 +7,10 @@
 </head>
 <body>
 <h1>
-	Hello world!  한글테스트
+	 INDEX PAGE
 	
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<a href="../product/list">리스트</a>
 </body>
 </html>
