@@ -1,73 +1,24 @@
 package com.semi.main.product;
 
 import java.sql.Date;
-import java.util.List;
 
 public class ProductDTO {
-
-	private String proContents;
-	private Long proAmount;
-	private Date createDate;
-	private Date ModifyDate;
-	private Integer exChange;
-	private Integer proState;
-	private Long proHit;
-	private Integer proSale;
+	
 	private Long proNo;
 	private Long catNo;
 	private Long userNo;
-	private String proName;
-	private Long proPrice;
-	private List<ProductFileDTO> fileDTOs;
+	private	String proName;
+	private	Long proPrice;
+	private	String proContents;
+	private	Long proAmount;
+	private	Date createDate;
+	private	Date modifyDate;
+	private	int	exchange;
+	private int proStatus;
+	private Long proHit;
+	private int proSale;
 	
-	public String getProContents() {
-		return proContents;
-	}
-	public void setProContents(String proContents) {
-		this.proContents = proContents;
-	}
-	public Long getProAmount() {
-		return proAmount;
-	}
-	public void setProAmount(Long proAmount) {
-		this.proAmount = proAmount;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getModifyDate() {
-		return ModifyDate;
-	}
-	public void setModifyDate(Date modifyDate) {
-		ModifyDate = modifyDate;
-	}
-	public Integer getExChange() {
-		return exChange;
-	}
-	public void setExChange(Integer exChange) {
-		this.exChange = exChange;
-	}
-	public Integer getProState() {
-		return proState;
-	}
-	public void setProState(Integer proState) {
-		this.proState = proState;
-	}
-	public Long getProHit() {
-		return proHit;
-	}
-	public void setProHit(Long proHit) {
-		this.proHit = proHit;
-	}
-	public Integer getProSale() {
-		return proSale;
-	}
-	public void setProSale(Integer proSale) {
-		this.proSale = proSale;
-	}
+	
 	public Long getProNo() {
 		return proNo;
 	}
@@ -97,6 +48,55 @@ public class ProductDTO {
 	}
 	public void setProPrice(Long proPrice) {
 		this.proPrice = proPrice;
-	}	
+	}
+	public String getProContents() {
+		return proContents;
+	}
+	public void setProContents(String proContents) {
+		this.proContents = proContents;
+	}
+	public Long getProAmount() {
+		return proAmount;
+	}
+	public void setProAmount(Long proAmount) {
+		this.proAmount = proAmount;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	public int getExchange() {
+		return exchange;
+	}
+	public void setExchange(int exchange) {
+		this.exchange = exchange;
+	}
+	public int getProStatus() {
+		return proStatus;
+	}
+	public void setProStatus(int proStatus) {
+		this.proStatus = proStatus;
+	}
+	public Long getProHit() {
+		return proHit;
+	}
+	public void setProHit(Long proHit) {
+		this.proHit = proHit;
+	}
+	public int getProSale() {
+		return proSale;
+	}
+	public void setProSale(int proSale) {
+		this.proSale = proSale;
+	}
+	
 
 }

@@ -5,6 +5,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
+		 <!--  
+		 id의 역할 : 중복되면 안됨. --> 
+		  <mapper namespace="com.semi.main.product.ProductDAO">
+		  	
+		  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
+		  	SELECT * FROM PRODUCT
+		  	
+		  </select>
+		  
+	 <!-- <resultMap type="ProductDTO" id="getSelectResult">
+  		<id column="PRONO" property="proNo"/>
+  		<result column="PRONAME" property="proName"/>
+  		<result column="USERNO" property="userNo"/>
+  		<result column="PROPRICE" property="proProce"/>
+  		<result column="PROCONTENTS" property="proContents"/>
+  		<result column="CREATEDATE" property="createDate"/>
+  		<result column="HIT" property="hit"/>
+  		<collection property="dtos" javaType="List" ofType="ProductFileDTO">
+  			<id column="PROIMAGENO" property="proImageNo"/>
+  			<result column="PROIMAGENAME" property="proImageName"/>
+  			<result column="PROORIGINALIMG" property="peoOriginalName"/>
+  		</collection>	
+  	</resultMap> -->
+  	
+  	
+		  </mapper>
  <!--  
  id의 역할 : 중복되면 안됨. --> 
   <mapper namespace="com.semi.main.product.ProductDAO">
