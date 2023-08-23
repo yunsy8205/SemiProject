@@ -42,11 +42,6 @@
 
 		</tr>
 		<tr>
-			<th>거래지역</th>
-			<td></td>
-
-		</tr>
-		<tr>
 			<th>내용</th>
 			<td>${dto.proContents}</td>
 
@@ -70,7 +65,11 @@
 		</tr>
 		<tr>
 			<th>최근 판매상품목록</th>
-			<td></td>
+			<td>
+				<c:forEach items="${list}" var="d">
+					${d.proNo} ${d.proName}
+				</c:forEach>
+			</td>
 
 		</tr>
 		<tr>
@@ -80,7 +79,11 @@
 		</tr>
 		<tr>
 			<th>최근 후기목록</th>
-			<td></td>
+			<td>
+				<c:forEach items="${review}" var="r">
+					${r.reviewNo} ${r.contents}
+				</c:forEach>
+			</td>
 
 		</tr>
 	 </table>

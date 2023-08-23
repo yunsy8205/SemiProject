@@ -36,6 +36,10 @@ public class ProductController {
 		model.addAttribute("countp", countProduct);
 		Long countReview = productService.countReview(productDTO);
 		model.addAttribute("countr", countReview);
+		List<ProductDTO> ar = productService.memberProList(productDTO);
+		model.addAttribute("list", ar);
+		List<ProductReviewDTO> ar2 = productService.memberReviewList(productDTO);
+		model.addAttribute("review", ar2);
 		
 		return "product/detail";
 	}

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 어떤 태그가 어떤 역할을 한다 : 스키마코드 필요함 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -58,6 +57,15 @@
   		SELECT COUNT(REVIEWNO)
   		FROM REVIEW WHERE USERNO=#{userNo}
   	</select>
+  	
+  	<select id="memberProList" parameterType="ProductDTO" resultMap="getResult">
+  		SELECT PRONO,PRONAME FROM PRODUCT WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="memberReviewList" parameterType="ProductDTO" resultType="com.semi.main.product.ProductReviewDTO">
+  		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
+  	</select>
+  	
   	
   	<insert id="a"></insert>
   	<update id="b"></update>

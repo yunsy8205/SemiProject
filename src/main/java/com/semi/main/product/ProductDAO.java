@@ -24,7 +24,6 @@ public class ProductDAO {
 
 
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
-		System.out.println(productDTO.getProNo());
 		productDTO= sqlSession.selectOne(NAMESPACE+"getDetail", productDTO);
 		
 		return productDTO;
@@ -36,6 +35,14 @@ public class ProductDAO {
 	
 	public Long countReview(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"countReview",productDTO);
+	}
+	
+	public List<ProductDTO> memberProList(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberProList", productDTO);
+	}
+	
+	public List<ProductReviewDTO> memberReviewList(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberReviewList", productDTO);
 	}
 	
 }
