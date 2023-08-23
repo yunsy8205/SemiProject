@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+  <mapper namespace="com.semi.main.profile.ProfileDAO">
+  	<select id="memberProfile" parameterType="ProfileDTO" resultType="ProfileDTO">
+  		SELECT M.*, P.ORIGINALFILENAME
+		FROM MEMBER M LEFT JOIN PROFILE P
+		ON(M.USERNO=P.USERNO)
+		WHERE M.USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="countSaleProduct" parameterType="ProfileDTO" resultType="Long">
+  		SELECT COUNT(PROSALE) FROM PRODUCT
+  		WHERE USERNO=#{userNo}
+  	</select>
+ 
+  	<insert id="a"></insert>
+  	<update id="b"></update>
+  	<delete id="c"></delete>
+  	
+  </mapper>

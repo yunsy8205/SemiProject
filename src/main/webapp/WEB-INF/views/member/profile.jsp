@@ -10,21 +10,17 @@
 	<table>
 		<tr>
 			<th>회원사진</th>
-			<td>
-				<c:forEach items="${dto.fileDTOs}" var="f">
-					${f.fileName}
-				</c:forEach>
-			</td>
+			<td>${dto.originalFileName}</td>
 
 		</tr>
 		<tr>
 			<th>회원아이디</th>
-			<td></td>
+			<td>${dto.userId}</td>
 
 		</tr>
 		<tr>
 			<th>상품판매횟수</th>
-			<td></td>
+			<td>${countp}</td>
 
 		</tr>
 		<tr>
@@ -34,7 +30,7 @@
 		</tr>
 		<tr>
 			<th>소개글</th>
-			<td></td>
+			<td>${dto.intro}</td>
 
 		</tr>
 		<tr>
