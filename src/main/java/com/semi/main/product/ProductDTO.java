@@ -1,6 +1,7 @@
 package com.semi.main.product;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ProductDTO {
 	
@@ -15,12 +16,21 @@ public class ProductDTO {
 	private	Date modifyDate;
 	private	int	exchange;
 	private int proStatus;
-	private Long proHit;
+	private Long hit;
 	private int proSale;
 	
 	private String userId;
 	
+	private List<ProductFileDTO> dtos;
 	
+	
+	
+	public List<ProductFileDTO> getDtos() {
+		return dtos;
+	}
+	public void setDtos(List<ProductFileDTO> dtos) {
+		this.dtos = dtos;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -93,11 +103,12 @@ public class ProductDTO {
 	public void setProStatus(int proStatus) {
 		this.proStatus = proStatus;
 	}
-	public Long getProHit() {
-		return proHit;
+	
+	public Long getHit() {
+		return hit;
 	}
-	public void setProHit(Long proHit) {
-		this.proHit = proHit;
+	public void setHit(Long hit) {
+		this.hit = hit;
 	}
 	public int getProSale() {
 		return proSale;

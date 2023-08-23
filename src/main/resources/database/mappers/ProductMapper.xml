@@ -8,9 +8,24 @@
 		 <!--  
 		 id의 역할 : 중복되면 안됨. --> 
 		  <mapper namespace="com.semi.main.product.ProductDAO">
+		  
+		  <select id="getListByCategory" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
+			    SELECT
+			        P.*,
+			        M.USERID
+			    FROM
+			        PRODUCT P
+			    INNER JOIN
+			        MEMBER M
+			    ON
+			        P.USERNO = M.USERNO
+			    WHERE
+			        P.CATNO = #{catNo}
+			</select>
+		  
 		  	
-		  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
-			SELECT
+		  <select id="getList" parameterType="com.semi.main.util.Pager" resultMap="getSelectResult">
+			<!-- SELECT
 		        P.*,
 		        M.USERID
 		    FROM
@@ -18,9 +33,47 @@
 		    INNER JOIN
 		        MEMBER M
 		    ON
-		        P.USERNO = M.USERNO
+		        P.USERNO = M.USERNO -->
+		         SELECT
+			        P.*,
+			        M.USERID,
+			        PI.FILENO,
+			        PI.ORIGINALNAME,
+			        PI.FILENAME
+			    FROM
+			        PRODUCT P
+			    INNER JOIN
+			        MEMBER M ON P.USERNO = M.USERNO
+			    LEFT JOIN
+			        PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
 				  	
 		  </select>
+	
+	
+	<resultMap type="ProductDTO" id="getSelectResult">
+	    <id column="PRONO" property="proNo"/>
+	    <result column="PRONAME" property="proName"/>
+	    <result column="USERNO" property="userNo"/>
+	    <result column="CATNO" property="catNo"/>
+	    <result column="PROPRICE" property="proPrice"/>
+	    <result column="PROCONTENTS" property="proContents"/>
+	    <result column="CREATEDATE" property="createDate"/>
+	    <result column="PROHIT" property="hit"/>
+	    <result column="PROSALE" property="proSale"/>
+	    <result column="USERID" property="userId"/>
+	    <!-- <association property="category" javaType="CategoryDTO">
+	        <id column="CATNO" property="catNo"/>
+	        Add other properties of CategoryDTO here
+	    </association> -->
+	    <collection property="dtos" javaType="List" ofType="ProductFileDTO">
+	        <id column="FILENO" property="fileNo"/>
+	        <result column="ORIGINALNAME" property="originalName"/>
+	        <result column="FILENAME" property="fileName"/>
+	    </collection>
+</resultMap>
+
+	
+	
 		  
 	 <!-- <resultMap type="ProductDTO" id="getSelectResult">
   		<id column="PRONO" property="proNo"/>
@@ -31,11 +84,27 @@
   		<result column="CREATEDATE" property="createDate"/>
   		<result column="HIT" property="hit"/>
   		<collection property="dtos" javaType="List" ofType="ProductFileDTO">
-  			<id column="PROIMAGENO" property="proImageNo"/>
-  			<result column="PROIMAGENAME" property="proImageName"/>
-  			<result column="PROORIGINALIMG" property="peoOriginalName"/>
+  			<id column="FILENO" property="fileNo"/>
+  			<result column="ORIGINALNAME" property="originalName"/>
+  			<result column="FILENAME" property="fileName"/>
   		</collection>	
   	</resultMap> -->
   	
+  		<insert id="setAdd" parameterType="ProductDTO">
+  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCT
+  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+  		VALUES
+  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
+		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
+  	  </insert>
+  	  
+  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
+  		INSERT INTO PRODUCTIMAGE
+  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
+  	  </insert>
   	
 		  </mapper>

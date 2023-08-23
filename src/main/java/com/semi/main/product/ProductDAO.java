@@ -22,5 +22,14 @@ public class ProductDAO {
 		return sqlSession.selectList(NAMESPACE+"getList",pager);
 	}
 
+	public int setAdd(ProductDTO productDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setAdd", productDTO);
+	}
+	
+	public int setFileAdd(ProductFileDTO productFileDTO)throws Exception{
+		
+		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
+	}
 	
 }

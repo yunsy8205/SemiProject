@@ -9,6 +9,7 @@
   <configuration>
   	<typeAliases>
 			<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"/>
+			<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"/>
   		
   	</typeAliases>
   </configuration>

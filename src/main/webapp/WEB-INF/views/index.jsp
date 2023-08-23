@@ -5,7 +5,17 @@
 <head>
 	<title>Home</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
+	<style>
+		.card-num{
+			float: left;
+		}
+		.card{
+			float: left;
+		}
+		.card-body{
+			float: left;
+		}
+	</style>
 </head>
 <body>
 <ul class="nav justify-content-center">
@@ -13,10 +23,10 @@
     <a class="nav-link active" aria-current="page" href="#">Active</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../product/add">상품등</a>
+    <a class="nav-link" href="../product/add">상품등록</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="../product/list">상품목록</a>
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -55,15 +65,37 @@
 </div>
 
 
-<div class="card" style="width: 18rem;">
-  <img src="/resources/images/test1.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">에어</h5>
-    <p class="card-text">저렴하게 판매중입니다</p>
-    <a href="#" class="btn btn-primary">구매하기</a>
-  </div>
-</div>
-<button type="button" class="btn btn-danger"><a href="../product/list">List</a></button>
+
+
+		<table class="table table-dark table-hover">
+		<thead>
+			<th>번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="d">
+			
+				<div>
+				<tr>
+				<td>${d.proNo}</td>
+					<td>
+                        <c:if test="${not empty d.dtos}">
+                            <img src="${pageContext.request.contextPath}/resources/upload/product/${d.dtos[0].fileName}" alt="">
+                        </c:if>
+                    </td>
+					
+					<td>${d.proName} </td>
+					<td>${d.userId} </td>
+					<td>${d.createDate} </td>
+					<td>${d.hit} </td>
+				</tr>
+				</div>
+				
+					
+			</c:forEach>			
+		</tbody>
+	</table>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
