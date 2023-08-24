@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 어떤 태그가 어떤 역할을 한다 : 스키마코드 필요함 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+  <mapper namespace="com.semi.main.adminNotice.AdminNoticeDAO">
+  	
+  	<!-- total  -->
+  	<select id="getTotal" resultType="Long" >
+  		SELECT COUNT(BOARDNO) FROM NOTICE
+  		WHERE BOARDNO > 0
+  	</select>
+  	
+  	<!-- List -->
+  	<select id="getList" resultType="AdminNoticeDTO">
+  	
+  	SELECT USERID,TITLE,CREATEDATE,HIT
+  	FROM(SELECT ROWNUM R, B.* 
+  		FROM(
+  			SELECT N.*,M.USERID 
+  			FROM NOTICE N JOIN MEMBER M
+  			ON N.USERNO = M.USERNO
+  			WHERE BOARDNO > 0
+  			ORDER BY BOARDNO DESC
+  		
+  		)B )
+  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+  		  	
+  	</select>
+  	
+  	<!-- add  -->
+  	<insert id="setAdd" parameterType="AdminNoticeDTO">
+  		<selectKey keyProperty="boardNo" resultType="Long" order="BEFORE">
+  		 	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  			INSERT INTO NOTICE 
+  			VALUES(#{boardNo}, #{userNo},#{title},sysdate,sysdate,1,#{contents})
+  	</insert>
+  	
+  	<!-- 파일 ADD -->
+	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
+		INSERT INTO VALUES (NOTICEFILE_SEQ.NEXTVAL,#{boardNo},#{orginalName},#{fileName})
+	</insert>  	
+  
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
