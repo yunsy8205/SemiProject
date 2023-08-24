@@ -42,7 +42,7 @@
   	
   	<!-- 파일 ADD -->
 	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
-		INSERT INTO VALUES (NOTICEFILE_SEQ.NEXTVAL,#{boardNo},#{orginalName},#{fileName})
+		INSERT INTO NOTICEFILE VALUES (NOTICEFILE_SEQ.NEXTVAL,#{boardNo},#{originalName},#{fileName})
 	</insert>  	
   
   </mapper>

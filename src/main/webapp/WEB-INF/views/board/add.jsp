@@ -7,7 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <c:import url="../temp/bootstrap.jsp"></c:import>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 
@@ -33,12 +36,12 @@
 			
 			
 			
-<!-- 									file
+							<!-- file -->
 			<div id="fileList" class="my-5"></div>
 			
 			<div class="mb-3">
 				<button type="button" class="btn btn-outline-primary" id="fileAdd">File추가</button>
-			</div> -->
+			</div>
 			
 			<button class="btn btn-danger" type="submit" id="btn">등록</button>
 			
@@ -48,6 +51,8 @@
 	
 	
 
+
+<script src="../resources/js/file.js"></script>
 
 </body>
 </html>
