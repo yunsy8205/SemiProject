@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 어떤 태그가 어떤 역할을 한다 : 스키마코드 필요함 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+		 <!--  
+		 id의 역할 : 중복되면 안됨. --> 
+	 <mapper namespace="com.semi.main.product.ProductDAO">
+	  	
+	  <select id="getList" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
+	  	SELECT * FROM PRODUCT
+	  	
+	  </select>
+		  
+     <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="proHit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+  
+  	<select id="getDetail" parameterType="ProductDTO" resultMap="getResult">
+  		SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P
+  		LEFT JOIN PRODUCTIMAGE PR
+  		ON (P.PRONO=PR.PRONO)
+  		JOIN CATEGORY C
+  		ON (P.CATNO = C.CATNO)
+  		JOIN MEMBER M
+  		ON (P.USERNO = M.USERNO)
+  		WHERE P.PRONO= #{proNo}
+  	</select>
+  	
+  	<select id="countProduct" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="countReview" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(REVIEWNO)
+  		FROM REVIEW WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<insert id="a"></insert>
+  	<update id="b"></update>
+  	<delete id="c"></delete>
+  
+  </mapper>
