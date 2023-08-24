@@ -25,11 +25,14 @@ public class ProfileController {
 	public String profileProducts(ProfileDTO profileDTO, Model model) throws Exception{
 		profileDTO=profileService.memberProfile(profileDTO);
 		model.addAttribute("dto", profileDTO);
+		System.out.println("1:"+profileDTO.getUserNo());
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
+		System.out.println("2:"+profileDTO.getUserNo());
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "products");
+		System.out.println("3:"+profileDTO.getUserNo());
 		List<ProductDTO> ar = profileService.memberProList(profileDTO);
 		model.addAttribute("list", ar);
 		
@@ -40,11 +43,14 @@ public class ProfileController {
 	public String ProfileReviews(ProfileDTO profileDTO, Model model) throws Exception{
 		profileDTO=profileService.memberProfile(profileDTO);
 		model.addAttribute("dto", profileDTO);
+		System.out.println("1:"+profileDTO.getUserNo());
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
+		System.out.println("2:"+profileDTO.getUserNo());
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "reviews");
+		System.out.println("3:"+profileDTO.getUserNo());
 		List<ProductReviewDTO> ar2 = profileService.memberReviewList(profileDTO);
 		model.addAttribute("list", ar2);
 		

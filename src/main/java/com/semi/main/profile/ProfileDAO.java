@@ -18,6 +18,7 @@ public class ProfileDAO {
 	private final String NAMESPACE="com.semi.main.profile.ProfileDAO.";
 	
 	public ProfileDTO memberProfile(ProfileDTO profileDTO) throws Exception{
+		System.out.println(profileDTO.getUserNo());
 		return sqlSession.selectOne(NAMESPACE+"memberProfile", profileDTO);
 	}
 	

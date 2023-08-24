@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<th>회원아이디</th>
-			<td>${dto.userId}</td>
+			<td>${dto.userNo} ${dto.userId}</td>
 
 		</tr>
 		<tr>
@@ -38,28 +38,29 @@
 			<td>${score}</td>
 
 		</tr>
+		
+		<a href="./reviews?userNo=${dto.userNo}">후기</a>
 		<c:choose>
 			<c:when test="${flag eq 'products'}">
-				<tr>
-					<th>판매자상품목록</th>
-					<td>
+				
+					<h3>판매자상품목록</h3>
+					<div>
 			            <c:forEach items="${list}" var="d">
 							${d.proNo} ${d.proName}
 						</c:forEach>
-					</td>
-				</tr>	
+					</div>
+
 			</c:when>
 			<c:otherwise>
-				<tr>
-					<th>판매자후기목록</th>
-					<td>
+  				<h3>판매자후기목록</h3>
+					<div>
 			            <c:forEach items="${list}" var="d">
 							${d.reviewNo} ${d.contents} ${d.score}
 						</c:forEach>
-					</td>
-				</tr>
+					</div>
 			</c:otherwise>
 		</c:choose>
 	 </table>
+	 
 </body>
 </html>
