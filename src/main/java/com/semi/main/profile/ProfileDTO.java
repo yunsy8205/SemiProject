@@ -13,7 +13,7 @@ public class ProfileDTO {
 	private Date accountDate;
 	private String intro;
 	private String originalFileName;
-	
+
 	public String getOriginalFileName() {
 		return originalFileName;
 	}

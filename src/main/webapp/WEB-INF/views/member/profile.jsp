@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,9 +35,31 @@
 		</tr>
 		<tr>
 			<th>별점</th>
-			<td></td>
+			<td>${score}</td>
 
 		</tr>
+		<c:choose>
+			<c:when test="${flag eq 'products'}">
+				<tr>
+					<th>판매자상품목록</th>
+					<td>
+			            <c:forEach items="${list}" var="d">
+							${d.proNo} ${d.proName}
+						</c:forEach>
+					</td>
+				</tr>	
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<th>판매자후기목록</th>
+					<td>
+			            <c:forEach items="${list}" var="d">
+							${d.reviewNo} ${d.contents} ${d.score}
+						</c:forEach>
+					</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
 	 </table>
 </body>
 </html>

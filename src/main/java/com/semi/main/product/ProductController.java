@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.semi.main.profile.ProfileService;
 import com.semi.main.util.Pager;
 
 @Controller
@@ -36,8 +37,10 @@ public class ProductController {
 		model.addAttribute("countp", countProduct);
 		Long countReview = productService.countReview(productDTO);
 		model.addAttribute("countr", countReview);
+		//판매자상품 리스트
 		List<ProductDTO> ar = productService.memberProList(productDTO);
 		model.addAttribute("list", ar);
+		//판매자후기 리스트
 		List<ProductReviewDTO> ar2 = productService.memberReviewList(productDTO);
 		model.addAttribute("review", ar2);
 		

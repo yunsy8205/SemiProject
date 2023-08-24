@@ -67,7 +67,6 @@
   		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
   	</select>
   	
-  	
   	<insert id="a"></insert>
   	<update id="b"></update>
   	<delete id="c"></delete>

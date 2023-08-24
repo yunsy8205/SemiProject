@@ -16,7 +16,44 @@
   		SELECT COUNT(PROSALE) FROM PRODUCT
   		WHERE USERNO=#{userNo}
   	</select>
+  	
+  	<select id="avgScore" parameterType="ProfileDTO" resultType="Double">
+  		SELECT AVG(SCORE) FROM REVIEW WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="memberProList" parameterType="ProfileDTO" resultMap="getResult">
+  		SELECT PRONO,PRONAME FROM PRODUCT WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="memberReviewList" parameterType="ProfileDTO" resultType="ProductReviewDTO">
+  		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
+  	</select>
  
+      <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="proHit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	  	
   	<insert id="a"></insert>
   	<update id="b"></update>
   	<delete id="c"></delete>
