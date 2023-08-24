@@ -67,6 +67,23 @@
   		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
   	</select>
   	
+  	<insert id="setAdd" parameterType="ProductDTO">
+  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCT
+  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+  		VALUES
+  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
+		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
+  	  </insert>
+  	  
+  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
+  		INSERT INTO PRODUCTIMAGE
+  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
+  	  </insert>
+  	
   	<insert id="a"></insert>
   	<update id="b"></update>
   	<delete id="c"></delete>
