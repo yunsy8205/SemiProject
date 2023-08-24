@@ -21,15 +21,17 @@ public class ProductDTO {
 	
 	private String userId;
 	
-	private List<ProductFileDTO> dtos;
+	private List<ProductFileDTO> fileDTOs;
 	
 	
 	
-	public List<ProductFileDTO> getDtos() {
-		return dtos;
+	
+	
+	public List<ProductFileDTO> getFileDTOs() {
+		return fileDTOs;
 	}
-	public void setDtos(List<ProductFileDTO> dtos) {
-		this.dtos = dtos;
+	public void setFileDTOs(List<ProductFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
 	}
 	public String getUserId() {
 		return userId;

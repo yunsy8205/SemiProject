@@ -23,8 +23,15 @@ public class ProductController {
 	@RequestMapping(value = "list",method = RequestMethod.GET)
 	public String getList(Pager pager,Model model) throws Exception{
 		List<ProductDTO> ar = productService.getList(pager);
+		
+		// 각 상품에 대한 이미지 리스트 가져오기
+        for (ProductDTO product : ar) {
+            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
+            product.setFileDTOs(fileList);
+        }
 		model.addAttribute("list",ar);
 		model.addAttribute("pager", pager);
+		
 		return "product/list";
 	}
 	

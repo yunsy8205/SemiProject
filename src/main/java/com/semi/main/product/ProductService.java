@@ -20,10 +20,16 @@ public class ProductService {
 	private FileManager fileManager;
 	
 	
+	public List<ProductFileDTO> getFileList(Long proNo) throws Exception {
+		
+		
+		return productDAO.getFileList(proNo);
+	}
+	
+	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		pager.makeRowNum();
-		//Long total = ProductDAO.getTotal(pager);
-		//pager.makePageNum(total);
+		pager.makePageNum(productDAO.getTotal(pager));
 		return productDAO.getList(pager);
 	}
 	
@@ -52,5 +58,7 @@ public class ProductService {
 		System.out.println(path);
 		return result;
 	}
+	
+		
 
 }

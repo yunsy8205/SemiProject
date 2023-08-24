@@ -9,7 +9,28 @@
 		 id의 역할 : 중복되면 안됨. --> 
 		  <mapper namespace="com.semi.main.product.ProductDAO">
 		  
-		  <select id="getListByCategory" parameterType="com.semi.main.util.Pager" resultType="ProductDTO">
+		  
+		
+		  
+		  <select id="getTotal" parameterType="Pager" resultType="Long">
+			  SELECT COUNT(PRONO)
+			  FROM PRODUCT P
+			  INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+			  WHERE P.PRONO > 0
+			  <choose>
+			    <when test="kind=='proName'">
+			      AND P.PRONAME LIKE '%'||#{search}||'%'
+			    </when>
+			    <when test="kind=='procontents'">
+			      AND P.PROCONTENTS LIKE '%'||#{search}||'%'
+			    </when>
+			    <otherwise>
+			      AND M.USERID LIKE '%'||#{search}||'%'
+			    </otherwise>
+			  </choose>
+			</select>
+		  
+		  <select id="getListByCategory" parameterType="Pager" resultType="ProductDTO">
 			    SELECT
 			        P.*,
 			        M.USERID
@@ -23,31 +44,33 @@
 			        P.CATNO = #{catNo}
 			</select>
 		  
+		<select id="getList" resultMap="getSelectResult" parameterType="Pager">
+		  SELECT *
+		  FROM (
+		    SELECT ROWNUM R, B.*
+		    FROM (
+		      SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+		      FROM PRODUCT P
+		      INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+		      LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+		      WHERE P.PRONO > 0
+		      <choose>
+		        <when test="kind=='proName'">
+		          AND P.PRONAME LIKE '%'||#{search}||'%'
+		        </when>
+		        <when test="kind=='procontents'">
+		          AND P.PROCONTENTS LIKE '%'||#{search}||'%'
+		        </when>
+		        <otherwise>
+		          AND M.USERID LIKE '%'||#{search}||'%'
+		        </otherwise>
+		      </choose>
+			    ) B
+			  )
+			  WHERE R BETWEEN #{startRow} AND #{lastRow}
+			</select>
 		  	
-		  <select id="getList" parameterType="com.semi.main.util.Pager" resultMap="getSelectResult">
-			<!-- SELECT
-		        P.*,
-		        M.USERID
-		    FROM
-		        PRODUCT P
-		    INNER JOIN
-		        MEMBER M
-		    ON
-		        P.USERNO = M.USERNO -->
-		         SELECT
-			        P.*,
-			        M.USERID,
-			        PI.FILENO,
-			        PI.ORIGINALNAME,
-			        PI.FILENAME
-			    FROM
-			        PRODUCT P
-			    INNER JOIN
-			        MEMBER M ON P.USERNO = M.USERNO
-			    LEFT JOIN
-			        PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
-				  	
-		  </select>
+		
 	
 	
 	<resultMap type="ProductDTO" id="getSelectResult">
@@ -65,7 +88,7 @@
 	        <id column="CATNO" property="catNo"/>
 	        Add other properties of CategoryDTO here
 	    </association> -->
-	    <collection property="dtos" javaType="List" ofType="ProductFileDTO">
+	    <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
 	        <id column="FILENO" property="fileNo"/>
 	        <result column="ORIGINALNAME" property="originalName"/>
 	        <result column="FILENAME" property="fileName"/>
@@ -73,22 +96,18 @@
 </resultMap>
 
 	
-	
-		  
-	 <!-- <resultMap type="ProductDTO" id="getSelectResult">
-  		<id column="PRONO" property="proNo"/>
-  		<result column="PRONAME" property="proName"/>
-  		<result column="USERNO" property="userNo"/>
-  		<result column="PROPRICE" property="proProce"/>
-  		<result column="PROCONTENTS" property="proContents"/>
-  		<result column="CREATEDATE" property="createDate"/>
-  		<result column="HIT" property="hit"/>
-  		<collection property="dtos" javaType="List" ofType="ProductFileDTO">
-  			<id column="FILENO" property="fileNo"/>
-  			<result column="ORIGINALNAME" property="originalName"/>
-  			<result column="FILENAME" property="fileName"/>
-  		</collection>	
-  	</resultMap> -->
+		
+		<resultMap id="productFileResultMap" type="ProductFileDTO">
+        <id property="fileNo" column="FILENO" />
+        <result property="originalName" column="ORIGINALNAME" />
+        <result property="fileName" column="FILENAME" />
+    	</resultMap>
+					  
+		<select id="getFileList" resultMap="productFileResultMap" parameterType="Long">
+        SELECT FILENO, ORIGINALNAME, FILENAME
+        FROM PRODUCTIMAGE
+        WHERE PRONO = #{proNo}
+    	</select>
   	
   		<insert id="setAdd" parameterType="ProductDTO">
   		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
@@ -106,5 +125,14 @@
   		INSERT INTO PRODUCTIMAGE
   		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
   	  </insert>
+  	  
+  	  <update id="setHitCount">
+		UPDATE
+			PRODUCT
+		SET
+			PROHIT = PROHIT + 1
+		WHERE
+			PRONO = #{proNo}
+		</update>
   	
 		  </mapper>

@@ -10,6 +10,12 @@
   	<typeAliases>
 			<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"/>
 			<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"/>
+			
+			<typeAlias type="com.semi.main.util.Pager" alias="Pager"/>
+			
+			<typeAlias type="java.lang.Long" alias="Long"/>
+			<typeAlias type="java.util.List" alias="List"/>
+			<typeAlias type="java.util.Map" alias="Map"/>
   		
   	</typeAliases>
   </configuration>
