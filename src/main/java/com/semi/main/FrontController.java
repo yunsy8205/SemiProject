@@ -9,7 +9,7 @@ public class FrontController {
 	
 	@RequestMapping(value="/*")
 	public String index() throws Exception{
-		
+		//test
 		
 		return "index";
 	}
