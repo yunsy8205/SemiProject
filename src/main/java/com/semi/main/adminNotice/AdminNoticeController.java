@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,11 @@ public class AdminNoticeController {
 	@Autowired
 	private AdminNoticeService adminNoticeService;
 	
+	@ModelAttribute("board") //reuestmapping 실행되기전에 실행되서 모델에다가 이름은:board value:notice
+	public String getBoardName() {
+		return "notice";
+	}
+	
 	//filedown
 	@GetMapping("fileDown")
 	public String getFileDown(AdminNoticeFileDTO adminNoticeFileDTO,Model model)throws Exception{
@@ -31,6 +37,7 @@ public class AdminNoticeController {
 		
 		return "fileManager";
 	}
+	
 	//list
 	@GetMapping("list")
 	public String getList(Pager pager, Model model)throws Exception {

@@ -23,44 +23,46 @@ import com.semi.main.file.FileDTO;
 public class FileManager extends AbstractView{
 	
 	//filedown
-	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("fileManager");
-		String b = (String)model.get("notice");
-		FileDTO fileDTO = (FileDTO)model.get("file");
-		
-		//1. 파일 경로준비
-		String path = "/resources/upload/"+b;
-		path = request.getSession().getServletContext().getRealPath(path);
-		
-		//2. 파일객체 생성
-		File file = new File(path, fileDTO.getFileName());
-		
-		//3. 총 파일의 크기
-		response.setContentLength((int)file.length());
-		
-		//4. 다운시 파일이름을 지정 및 인코딩 설정
-		String downName = fileDTO.getOriginalName();
-		downName = URLEncoder.encode(downName, "UTF-8");
-		
-		//5.header 정보 설정
-		response.setHeader("Content-Disposition", "attachment;fileName=\""+downName+"\"");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		
-		//6. 전송
-		FileInputStream is = new FileInputStream(file); //서버로 읽어들여라
-		OutputStream os = response.getOutputStream(); //
-		
-		FileCopyUtils.copy(is, os);
-		
-		//7. 자원해제 연결된 역순으로 해제 해야함
-		os.close();
-		is.close();
-		
-		
-	}
+
+		@Override
+		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
+				HttpServletResponse response) throws Exception {
+			// TODO Auto-generated method stub
+			
+			String b = (String)model.get("board");
+			FileDTO fileDTO = (FileDTO)model.get("file");
+			
+			//1. 파일 경로 준비
+			String path="/resources/upload/"+b;
+			System.out.println(path);
+			path=request.getSession().getServletContext().getRealPath(path);
+			
+			//2. File 객체 생성
+			File file = new File(path, fileDTO.getFileName());
+			
+			//3. 파일의 크기 설정
+			response.setContentLength((int)file.length());
+			
+			//4. 다운로드 이름 인코딩 
+			String downName = fileDTO.getOriginalName();
+			downName = URLEncoder.encode(downName, "UTF-8");
+			
+			//5. Header 정보 설정
+			response.setHeader("Content-Disposition", "attachment;fileName=\""+downName+"\"");
+			response.setHeader("Content-Transfer-Encoding", "binary");
+			
+			//6. 전송
+			FileInputStream is = new FileInputStream(file);
+			OutputStream os = response.getOutputStream();
+			
+			FileCopyUtils.copy(is, os);
+			
+			//7. 자원 해제
+			os.close();
+			is.close();
+			
+			
+		}
 		
 	
 	

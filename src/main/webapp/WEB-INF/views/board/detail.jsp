@@ -34,10 +34,6 @@
 		<tr>
 			<td colspan="4">${dto.contents} <br>
 			
- 		<c:forEach items="${dto.fileDTOs}" var="f">
-			<a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a>
-		</c:forEach>   
-		
 			</td>
 			
 		</tr>
@@ -45,7 +41,11 @@
 		
 		</tfoot>
 
+	 
 		</table>
+		<c:forEach items="${dto.fileDTOs}" var="f">
+			<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
+		</c:forEach> 
 
 		
 	
