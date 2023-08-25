@@ -55,16 +55,26 @@
   	</select>
   	
   	<select id="countReview" parameterType="ProductDTO" resultType="Long">
-  		SELECT COUNT(REVIEWNO)
-  		FROM REVIEW WHERE USERNO=#{userNo}
+  		SELECT COUNT(REVIEWNO) FROM REVIEW
+		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
   	
   	<select id="memberProList" parameterType="ProductDTO" resultMap="getResult">
-  		SELECT PRONO,PRONAME FROM PRODUCT WHERE USERNO=#{userNo}
+		<![CDATA[
+		SELECT PR.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
+  		(SELECT P.* FROM PRODUCT P 		
+  		WHERE USERNO=#{userNo} AND ROWNUM < 6
+  		)PR
+  		LEFT JOIN PRODUCTIMAGE PI
+  		ON (PR.PRONO=PI.PRONO)
+  		ORDER BY CREATEDATE DESC
+  		]]>
   	</select>
   	
-  	<select id="memberReviewList" parameterType="ProductDTO" resultType="com.semi.main.product.ProductReviewDTO">
-  		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
+  	<select id="memberReviewList" parameterType="ProductDTO" resultType="ProductReviewDTO">
+		SELECT R.*, M.USERID FROM REVIEW R
+		JOIN MEMBER M ON(R.USERNO=M.USERNO)
+		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
   	
   	<insert id="setAdd" parameterType="ProductDTO">

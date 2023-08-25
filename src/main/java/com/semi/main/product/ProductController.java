@@ -33,9 +33,10 @@ public class ProductController {
 	@GetMapping("detail")
 	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
 		
+		//판매상품 정보
 		productDTO = productService.getDetail(productDTO);
 		model.addAttribute("dto", productDTO);
-		System.out.println("userNo"+productDTO.getUserNo());
+		//판매자상품수, 판매자후기수
 		Long countProduct = productService.countProduct(productDTO);
 		model.addAttribute("countp", countProduct);
 		Long countReview = productService.countReview(productDTO);

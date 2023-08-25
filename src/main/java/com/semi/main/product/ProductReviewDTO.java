@@ -7,7 +7,15 @@ public class ProductReviewDTO {
 	private Long userNo;
 	private String contents;
 	private Integer score;
+	private String userId;
 	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public Long getReviewNo() {
 		return reviewNo;
 	}
@@ -38,7 +46,6 @@ public class ProductReviewDTO {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	
 	
 }
 
