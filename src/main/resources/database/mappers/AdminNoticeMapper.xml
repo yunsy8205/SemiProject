@@ -17,7 +17,7 @@
   	<!-- List -->
   	<select id="getList" resultType="AdminNoticeDTO">
   	
-  	SELECT USERID,TITLE,CREATEDATE,HIT
+  	SELECT BOARDNO,USERID,TITLE,CREATEDATE,HIT
   	FROM(SELECT ROWNUM R, B.* 
   		FROM(
   			SELECT N.*,M.USERID 
@@ -43,7 +43,42 @@
   	<!-- 파일 ADD -->
 	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
 		INSERT INTO NOTICEFILE VALUES (NOTICEFILE_SEQ.NEXTVAL,#{boardNo},#{originalName},#{fileName})
-	</insert>  	
+	</insert>  
+	
+	<!-- 파일 다운  -->
+	<select id="getFileDetail" parameterType="AdminNoticeFileDTO" resultType="AdminNoticeFileDTO">
+		SELECT FILENO, ORIGINALNAME, FILENAME
+		FROM NOTICEFILE
+		WHERE FILENO=#{fileNo}
+	</select>
+	
+	
+	<!-- detail -->	
+	<select id="getDetail" resultType="AdminNoticeDTO" parameterType="AdminNoticeDTO">
+		SELECT N.*,NF.*,M.USERID 
+		FROM NOTICE N LEFT JOIN NOTICEFILE NF
+		ON (N.BOARDNO = NF.BOARDNO)
+		JOIN MEMBER M
+		ON N.USERNO = M.USERNO
+		WHERE N.BOARDNO = #{boardNo}
+		
+	</select>
+	
+	<resultMap type="AdminNoticeDTO" id="getDetailResult">
+		<id column="BOARDNO" property="boardNo"/>
+		<result	column="USERNO" property="userNo"/>
+		<result	column="TITLE" property="title"/>
+		<result	column="CREATEDATE" property="createDate"/>
+		<result	column="MODIFYDATE" property="modifyDate"/>
+		<result	column="HIT" property="hit"/>
+		<result	column="CONTENTS" property="contents"/>
+		
+		<collection property="fileDTOs" javaType="List" ofType="AdminNoticeFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+	</resultMap>
   
   </mapper>
   

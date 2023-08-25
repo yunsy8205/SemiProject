@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<c:import url="../temp/bootstrap.jsp"></c:import>
+</head>
+<body>
+	<section class="container mt-5">
+	
+		<table class="table">
+		
+		<thead class="table-dark">
+			 <th>ID</th><th>TITLE</th><th>DATE</th><th>HIT</th>
+		</thead>
+		
+		<tbody class="table-light">
+			
+				<tr>
+					<td>${dto.userId}</td>
+					<td>${dto.title}</td>
+					<td>${dto.createDate}</td>
+					<td>${dto.hit}</td>
+				</tr>
+			
+		</tbody>
+		
+		<tfoot>
+		
+		<tr>
+			<td colspan="4">${dto.contents} <br>
+			
+ 		<c:forEach items="${dto.fileDTOs}" var="f">
+			<a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a>
+		</c:forEach>   
+		
+			</td>
+			
+		</tr>
+		
+		
+		</tfoot>
+
+		</table>
+
+		
+	
+	<a href="./list">list</a>
+	
+	
+
+
+</body>
+</html>

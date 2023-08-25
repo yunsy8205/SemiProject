@@ -22,7 +22,7 @@
 			<c:forEach items="${list}" var="d">
 				<tr>
 					<td>${d.userId}</td>
-					<td>${d.title}</td>
+					<td><a class="text-decoration-none" href="./detail?boardNo=${d.boardNo}">${d.title}</a></td>
 					<td>${d.createDate}</td>
 					<td>${d.hit}</td>
 				</tr>
@@ -55,6 +55,8 @@
 	
 	<a class="btn btn-primary me-2" style="float:right" href="./add">글등록</a>
 	</section>
+	
+	<a href="/">index</a>
 	
 	
 

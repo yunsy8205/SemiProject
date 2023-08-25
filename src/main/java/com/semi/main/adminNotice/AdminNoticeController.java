@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.board.BoardDTO;
+import com.semi.main.member.MemberDTO;
 import com.semi.main.util.Pager;
 
 @Controller
@@ -22,6 +23,15 @@ public class AdminNoticeController {
 	@Autowired
 	private AdminNoticeService adminNoticeService;
 	
+	//filedown
+	@GetMapping("fileDown")
+	public String getFileDown(AdminNoticeFileDTO adminNoticeFileDTO,Model model)throws Exception{
+		adminNoticeFileDTO = adminNoticeService.getFileDown(adminNoticeFileDTO);
+		model.addAttribute("file", adminNoticeFileDTO);
+		
+		return "fileManager";
+	}
+	//list
 	@GetMapping("list")
 	public String getList(Pager pager, Model model)throws Exception {
 		
@@ -34,6 +44,7 @@ public class AdminNoticeController {
 		
 	}
 	
+	//add
 	@GetMapping("add")
 	public String setAdd()throws Exception{
 		
@@ -42,11 +53,23 @@ public class AdminNoticeController {
 	
 	@PostMapping("add")
 	public String setAdd(AdminNoticeDTO adminNoticeDTO, MultipartFile[] files, HttpSession session, Model model)throws Exception{
-		adminNoticeDTO.setUserNo(1);
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		adminNoticeDTO.setUserNo(memberDTO.getUserNo());
+		
 		int result = adminNoticeService.setAdd(adminNoticeDTO, files, session);
 				
 		
 		return "board/add";
 	}
-
+	
+	//detail
+	@GetMapping("detail")
+	public String getDetail(AdminNoticeDTO adminNoticeDTO, Model model,HttpSession session)throws Exception{
+		
+		BoardDTO boardDTO = adminNoticeService.getDetail(adminNoticeDTO);
+		
+		model.addAttribute("dto", boardDTO);
+		
+		return "board/detail"; 
+	}
 }

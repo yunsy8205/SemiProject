@@ -43,6 +43,8 @@
 			<a class="btn btn-primary" href="/member/logout">로그아웃</a><br>
 			<a class="btn btn-primary" href="/member/mypage">마이페이지</a><br>
 	</c:if>
+	
+	<a href="./notice/list">list</a>
 		
 <%-- 		
 	<tbody>

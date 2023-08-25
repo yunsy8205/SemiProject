@@ -21,7 +21,7 @@
 				
 			<div class="mb-3">
 			<label for="userId" class="form-label">작성자</label>
-			<input type="text" class="form-control" id="userId" name="userId" >
+			<input type="text" class="form-control" id="userId" name="userId" value="${member.userId}">
 			</div>
 			
 			<div class="mb-3">

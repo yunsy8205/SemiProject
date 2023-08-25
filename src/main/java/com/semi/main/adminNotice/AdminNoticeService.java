@@ -22,6 +22,12 @@ public class AdminNoticeService implements BoardService{
 	@Autowired
 	private FileManager fileManager;
 
+	
+	//filedown
+	public AdminNoticeFileDTO getFileDown(AdminNoticeFileDTO adminNoticeFileDTO)throws Exception{
+		
+		return adminNoticeDAO.getFileDetail(adminNoticeFileDTO);
+	}
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
@@ -34,7 +40,7 @@ public class AdminNoticeService implements BoardService{
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		
-		return null;
+		return adminNoticeDAO.getDetail(boardDTO);
 	}
 
 	@Override
