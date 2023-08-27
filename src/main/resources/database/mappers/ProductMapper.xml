@@ -72,9 +72,14 @@
   	</select>
   	
   	<select id="memberReviewList" parameterType="ProductDTO" resultType="ProductReviewDTO">
-		SELECT R.*, M.USERID FROM REVIEW R
+		<![CDATA[
+		SELECT C.* FROM
+		(SELECT R.*, M.USERID FROM REVIEW R
 		JOIN MEMBER M ON(R.USERNO=M.USERNO)
 		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
+		ORDER BY REVIEWDATE DESC)C
+		WHERE ROWNUM < 6
+		]]>
   	</select>
   	
   	<insert id="setAdd" parameterType="ProductDTO">

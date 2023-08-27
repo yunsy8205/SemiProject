@@ -6,7 +6,7 @@
  
   <mapper namespace="com.semi.main.profile.ProfileDAO">
   	<select id="memberProfile" parameterType="ProfileDTO" resultType="ProfileDTO">
-  		SELECT M.*, P.ORIGINALFILENAME
+  		SELECT M.*, P.ORIGINALNAME
 		FROM MEMBER M LEFT JOIN PROFILE P
 		ON(M.USERNO=P.USERNO)
 		WHERE M.USERNO=#{userNo}
@@ -18,7 +18,8 @@
   	</select>
   	
   	<select id="avgScore" parameterType="ProfileDTO" resultType="Double">
-  		SELECT AVG(SCORE) FROM REVIEW WHERE USERNO=#{userNo}
+  		SELECT AVG(SCORE) FROM REVIEW
+  		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
   	
   	<select id="memberProList" parameterType="ProfileDTO" resultMap="getResult">

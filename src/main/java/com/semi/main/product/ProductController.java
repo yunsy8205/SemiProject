@@ -72,5 +72,9 @@ public class ProductController {
 		
 		return "commons/result";
 	}
-
+	
+	@GetMapping("index")
+	public String boot() throws Exception{
+		return "product/index";
+	}
 }

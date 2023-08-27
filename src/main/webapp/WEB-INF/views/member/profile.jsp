@@ -5,41 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 profile</title>
+<style>
+	.userImage{
+				
+				width: 100%;
+	            height: 90%;
+	            box-sizing: border-box;
+			}
+	.wrap{
+	            width: 1000px;
+	            height: 300px;
+	        }
+	#test1, #test2{ 
+	           
+	            height: 100%;
+	            box-sizing: border-box;
+	            float: left;
+	        }
+			
+	#test1{width: 30%;}
+	#test2{width: 70%;}
+	
+	#div1{
+		padding: 20px;
+	}
+	.bi{
+		color: rgb(252, 219, 3);
+	}
+</style>
+<c:import url="../temp/bootstrap.jsp"></c:import>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
-	<table>
-		<tr>
-			<th>회원사진</th>
-			<td>${dto.originalFileName}</td>
-
-		</tr>
-		<tr>
-			<th>회원아이디</th>
-			<td>${dto.userNo} ${dto.userId}</td>
-
-		</tr>
-		<tr>
-			<th>상품판매횟수</th>
-			<td>${countp}</td>
-
-		</tr>
-		<tr>
-			<th>택배발송횟수</th>
-			<td></td>
-
-		</tr>
-		<tr>
-			<th>소개글</th>
-			<td>${dto.intro}</td>
-
-		</tr>
-		<tr>
-			<th>별점</th>
-			<td>${score}</td>
-
-		</tr>
+<h1 class="mt-5 ms-5">회원 profile</h1>
+<div class="mt-3 mb-3 ms-5 wrap border">
+	<div id="test1">
+		회원사진<img class="userImage" src="../resources/upload/member/${f.originalName}" class="d-block w-100" alt="...">
+	</div>
+	<div id="test2">
+		<h3>${dto.userId}</h3>
+		<div>
+		<c:forEach var="i" begin="1" end="${score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-score}" step="1"><i class="bi bi-star"></i></c:forEach>
+		</div>
+		<span>상품판매횟수 : ${countp}</span><span id="div1">택배발송횟수 : </span>
+			<h5>소개글</h5>
+			<p>${dto.intro}</p>
+	</div>
+</div>
 		
-		<a href="./reviews?userNo=${dto.userNo}">후기</a>
+		<a class="btn btn-primary" href="./reviews?userNo=${dto.userNo}">후기</a>
+		
 		<c:choose>
 			<c:when test="${flag eq 'products'}">
 				

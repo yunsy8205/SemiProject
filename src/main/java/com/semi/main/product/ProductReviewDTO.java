@@ -6,10 +6,15 @@ public class ProductReviewDTO {
 	private Long proNo;
 	private Long userNo;
 	private String contents;
-	private Integer score;
+	private Double score;
 	private String userId;
 	
-	
+	public Double getScore() {
+		return score;
+	}
+	public void setScore(Double score) {
+		this.score = score;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -39,12 +44,6 @@ public class ProductReviewDTO {
 	}
 	public void setContents(String contents) {
 		this.contents = contents;
-	}
-	public Integer getScore() {
-		return score;
-	}
-	public void setScore(Integer score) {
-		this.score = score;
 	}
 	
 }

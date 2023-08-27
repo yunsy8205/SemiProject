@@ -56,12 +56,18 @@
 		.listfile{
 		float: left;
 		}
-        
+		
+		.bi{
+			color: rgb(252, 219, 3);
+		}
+		
 	</style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<c:import url="../temp/bootstrap.jsp"></c:import>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
-<h1 class="mt-5 text-center">상품 Detail Page</h1>
+
+<h1 class="mt-5 ms-5">상품 Detail Page</h1>
 	<div class="wrap mt-5 ms-5 border-bottom">
 		<div id="carouselExampleIndicators" class="test1 carousel slide">
 		  <div class="carousel-inner test1">
@@ -142,24 +148,24 @@
 						${d.proPrice}
 					</div>	
 					</c:forEach>
-					</div>
-			<div>판매자 후기수 : ${countr}</div>
+					</div><br>
+					<a class="mb-3 btn btn-primary" href="../profile/products?userNo=${dto.userNo}">판매자상품목록</a>
+			<div>판매자 후기수 : ${countr}</div><br>
 
-			<div>최근 후기목록</div>
+			<div>최근 후기목록</div><br>
 			<div>
 				<c:forEach items="${review}" var="r">
-					${r.userId}<br> 
+					${r.userId}<br>
+					<c:forEach var="i" begin="1" end="${r.score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${r.score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-r.score}" step="1"><i class="bi bi-star"></i></c:forEach> 
 					${r.score}<br> 
 					${r.contents}<br><br>
 				</c:forEach>
 			</div>
+			<a class="mb-3 btn btn-primary" href="../profile/reviews?userNo=${dto.userNo}">판매자후기목록</a><br>
 		 
 		</div>
 
 	</div>
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

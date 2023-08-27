@@ -12,13 +12,13 @@ public class ProfileDTO {
 	private String email;
 	private Date accountDate;
 	private String intro;
-	private String originalFileName;
+	private String originalName;
 
-	public String getOriginalFileName() {
-		return originalFileName;
+	public String getOriginalName() {
+		return originalName;
 	}
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
 	public Long getUserNo() {
 		return userNo;
