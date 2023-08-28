@@ -2,6 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	// 로그인 되어 있으면 메인페이지로 강제 이동
+	if (session.getAttribute("member") != null && session.getAttribute("member") != "") {
+		response.sendRedirect("/");
+	}
+	// 이전 페이지 기록
+    String referer = request.getHeader("member");
+    if(referer==null)referer = "/";
+%>
 <!DOCTYPE html>
 
 <html>
@@ -27,7 +36,7 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="pw" class="col-sm-2">ID</label>
+			<label for="pw" class="col-sm-2">PASSWORD</label>
 			<input type="password" name="userPw"  id="pw" value="" placeholder="비밀번호를 입력하세요">
 		</div>
 		

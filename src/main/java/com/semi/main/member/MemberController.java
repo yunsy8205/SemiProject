@@ -49,10 +49,11 @@ public class MemberController {
 		if(memberDTO != null && memberDTO.getStatusNo() != 0) {
 			session.setAttribute("member", memberDTO);
 			System.out.println("로그인 성공");
+			
 		} 
 		else if(memberDTO != null && memberDTO.getStatusNo() == 0){
 			session.setAttribute("member", memberDTO);
-			mv.addObject("msg", "탈퇴한 아이디입니다. 고객센터로 문의해주세요.");
+			mv.addObject("msg", "활동 정지중인 아이디입니다. 고객센터로 문의해주세요.");
 			mv.addObject("url", "login");
 			mv.setViewName("member/alert");
 			return mv;
