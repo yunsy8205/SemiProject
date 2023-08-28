@@ -29,27 +29,37 @@ public class ProfileController {
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
-		System.out.println("score:"+score);
 		model.addAttribute("flag", "products");
 		List<ProductDTO> ar = profileService.memberProList(profileDTO);
 		model.addAttribute("list", ar);
 		
-		return "member/profile";
+		return "profile/intro";
 	}
 	
 	@GetMapping("reviews")
-	public String ProfileReviews(ProfileDTO profileDTO, Model model) throws Exception{
+	public String profileReviews(ProfileDTO profileDTO, Model model) throws Exception{
 		profileDTO=profileService.memberProfile(profileDTO);
 		model.addAttribute("dto", profileDTO);
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
-		System.out.println("score:"+score);
 		model.addAttribute("flag", "reviews");
 		List<ProductReviewDTO> ar2 = profileService.memberReviewList(profileDTO);
 		model.addAttribute("list", ar2);
 		
-		return "member/profile";
+		return "profile/intro";
+	}
+	
+	@GetMapping("prolist")
+	public String proList(ProfileDTO profileDTO, Model model) throws Exception{
+		List<ProductDTO> ar = profileService.memberProList(profileDTO);
+		model.addAttribute("list", ar);
+		System.out.println("1");
+		for(ProductDTO a:ar) {
+			System.out.println(a.getProName());
+		}
+		model.addAttribute("flag", "products");
+		return "profile/result";
 	}
 }

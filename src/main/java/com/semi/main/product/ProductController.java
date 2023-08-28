@@ -35,6 +35,9 @@ public class ProductController {
 		
 		//판매상품 정보
 		productDTO = productService.getDetail(productDTO);
+		for(ProductFileDTO a:productDTO.getFileDTOs()) {
+			a.getOriginalName();
+		}
 		model.addAttribute("dto", productDTO);
 		//판매자상품수, 판매자후기수
 		Long countProduct = productService.countProduct(productDTO);

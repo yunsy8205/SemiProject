@@ -32,6 +32,7 @@
 	.bi{
 		color: rgb(252, 219, 3);
 	}
+	
 </style>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -52,30 +53,33 @@
 			<p>${dto.intro}</p>
 	</div>
 </div>
-		
-		<a class="btn btn-primary" href="./reviews?userNo=${dto.userNo}">후기</a>
-		
-		<c:choose>
-			<c:when test="${flag eq 'products'}">
-				
-					<h3>판매자상품목록</h3>
-					<div>
-			            <c:forEach items="${list}" var="d">
-							${d.proNo} ${d.proName}
-						</c:forEach>
-					</div>
+<div id="add" class="mt-3 ms-5" data-add-num="${dto.userNo}">
 
-			</c:when>
-			<c:otherwise>
-  				<h3>판매자후기목록</h3>
-					<div>
-			            <c:forEach items="${list}" var="d">
-							${d.reviewNo} ${d.contents} ${d.score}
-						</c:forEach>
-					</div>
-			</c:otherwise>
-		</c:choose>
-	 </table>
-	 
+</div>
+<script type="text/javascript">
+	let userNo=$('#add').attr("data-add-num");
+	
+	productsList(userNo);
+	
+	function productsList(userNo){
+	$.ajax({
+		type:"get",
+		url:"../profile/prolist",
+		data:{
+			userNo:userNo
+			//page:page
+		},
+		success:function(result){
+			$('#add').append(result);
+			//tp = $('#totalpage').attr('data-totalPage');
+			//let button='<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>';
+			
+			//$('#more').html(button);
+		},error:function(){
+			alert('관리자에게 문의');
+		}
+	})
+}
+</script>
 </body>
 </html>
