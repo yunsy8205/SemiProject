@@ -29,6 +29,11 @@ public class AdminNoticeDAO implements BoardDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+"getFileDetail",adminNoticeFileDTO);
 	}
+	
+	//fileDelete
+	public int setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setFileDelete",adminNoticeFileDTO);
+	}
 	//list
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -52,7 +57,7 @@ public class AdminNoticeDAO implements BoardDAO {
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 
 	@Override

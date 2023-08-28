@@ -46,6 +46,8 @@
 		<c:forEach items="${dto.fileDTOs}" var="f">
 			<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
 		</c:forEach> 
+		
+		<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
 
 		
 	

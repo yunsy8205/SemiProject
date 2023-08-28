@@ -64,6 +64,18 @@ public class FileManager extends AbstractView{
 			
 		}
 		
+
+		//filedelete
+		public Boolean fileDelete(FileDTO fileDTO, String path,HttpSession session )throws Exception{
+			
+			//1. 삭제할 폴더의 실제 경로
+			
+			path = session.getServletContext().getRealPath(path);
+			
+			File file = new File(path, fileDTO.getFileName());
+			return file.delete();
+			
+		}
 	
 	
 	

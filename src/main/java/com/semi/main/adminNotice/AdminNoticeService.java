@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.board.BoardDTO;
 import com.semi.main.board.BoardService;
+import com.semi.main.file.FileDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -21,13 +22,34 @@ public class AdminNoticeService implements BoardService{
 	
 	@Autowired
 	private FileManager fileManager;
-
+	
+	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
+		
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setFileName(path.substring(path.lastIndexOf("/")+1));
+		path = "/resources/upload/board/";
+		return fileManager.fileDelete(fileDTO, path, session);
+	}
+	
+	//imgup
+	public String setContentsImg(MultipartFile files, HttpSession session) throws Exception{
+		
+		String path ="/resources/upload/board/";
+		String fileName = fileManager.fileSave(path, session, files);
+		return path+fileName;
+	}
 	
 	//filedown
 	public AdminNoticeFileDTO getFileDown(AdminNoticeFileDTO adminNoticeFileDTO)throws Exception{
 		
 		return adminNoticeDAO.getFileDetail(adminNoticeFileDTO);
 	}
+	
+	//fileDelete
+	public int setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO)throws Exception{
+		return adminNoticeDAO.setFileDelete(adminNoticeFileDTO);
+	}
+	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
@@ -46,7 +68,7 @@ public class AdminNoticeService implements BoardService{
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		
-		String path = "/resources/upload/notice";
+		String path = "/resources/upload/notice/";
 		int result = adminNoticeDAO.setAdd(boardDTO);
 		
 		for(MultipartFile multipartFile: files) {
@@ -69,8 +91,24 @@ public class AdminNoticeService implements BoardService{
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
+		String path = "/resources/upload/notice/";
 		
-		return 0;
+		int result = adminNoticeDAO.setUpdate(boardDTO);
+		
+		for(MultipartFile multipartFile: files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(path, session, multipartFile);
+			AdminNoticeFileDTO adminNoticeFileDTO = new AdminNoticeFileDTO();
+			adminNoticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+			adminNoticeFileDTO.setFileName(fileName);
+			adminNoticeFileDTO.setBoardNo(boardDTO.getBoardNo());
+			result = adminNoticeDAO.setFileAdd(adminNoticeFileDTO);
+			
+		}
+		return adminNoticeDAO.setUpdate(boardDTO);
 	}
 
 	@Override

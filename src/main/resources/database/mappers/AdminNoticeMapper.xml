@@ -79,7 +79,17 @@
 			<result column="ORIGINALNAME" property="originalName"/>
 			<result column="FILENAME" property="fileName"/>
 		</collection>
-	</resultMap> 
+	</resultMap>
+	
+	<!-- update -->
+	<update id="setUpdate" parameterType="AdminNoticeDTO">
+		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents} WHERE BOARDNO=#{boardNo}
+	</update>
+	
+	<!--fileDelete  -->
+	<delete id="setFileDelete" parameterType="AdminNoticeFileDTO">
+		DELETE FROM NOTICEFILE WHERE FILENO=#{fileNo}
+	</delete>
   
   </mapper>
   

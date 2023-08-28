@@ -1,3 +1,4 @@
+
 package com.semi.main.adminNotice;
 
 import java.util.List;
@@ -27,6 +28,34 @@ public class AdminNoticeController {
 	@ModelAttribute("board") //reuestmapping 실행되기전에 실행되서 모델에다가 이름은:board value:notice
 	public String getBoardName() {
 		return "notice";
+	}
+	
+	//filedelete
+	@GetMapping("fileDelete")
+	public String setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO,Model model)throws Exception{
+		int result = adminNoticeService.setFileDelete(adminNoticeFileDTO);
+		model.addAttribute("result",result);
+		return "commons/ajaxResult";
+	}
+	
+	//imgdel
+	@PostMapping("setContentsImgDelete")
+	public String setContentsImgDelete(String path, HttpSession session,Model model)throws Exception{
+		boolean check = adminNoticeService.setContentsImgDelete(path, session);
+		model.addAttribute("result", check);
+		
+		return "commons/ajaxResult";
+		
+	}
+	
+	//imgupload
+	@PostMapping("setContentsImg")
+	public String setContentsImg(MultipartFile files, HttpSession session,Model model)throws Exception{
+		
+		String path = adminNoticeService.setContentsImg(files, session);
+		model.addAttribute("result",path);
+		
+		return "commons/ajaxResult";
 	}
 	
 	//filedown
@@ -59,11 +88,11 @@ public class AdminNoticeController {
 	}
 	
 	@PostMapping("add")
-	public String setAdd(AdminNoticeDTO adminNoticeDTO, MultipartFile[] files, HttpSession session, Model model)throws Exception{
+	public String setAdd(AdminNoticeDTO adminNoticeDTO, MultipartFile[] files1, HttpSession session, Model model)throws Exception{
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		adminNoticeDTO.setUserNo(memberDTO.getUserNo());
 		
-		int result = adminNoticeService.setAdd(adminNoticeDTO, files, session);
+		int result = adminNoticeService.setAdd(adminNoticeDTO, files1, session);
 				
 		
 		return "board/add";
@@ -75,8 +104,28 @@ public class AdminNoticeController {
 		
 		BoardDTO boardDTO = adminNoticeService.getDetail(adminNoticeDTO);
 		
+		
 		model.addAttribute("dto", boardDTO);
 		
 		return "board/detail"; 
+	}
+	
+	//update
+	@GetMapping("update")
+	public String getUpdate(AdminNoticeDTO adminNoticeDTO, Model model)throws Exception{
+		
+		BoardDTO boardDTO = adminNoticeService.getDetail(adminNoticeDTO);
+	
+		model.addAttribute("dto",boardDTO);
+		
+		return "board/update";
+	}
+	//update
+	@PostMapping("update")
+	public String getUpdate(AdminNoticeDTO adminNoticeDTO,MultipartFile[] files1,HttpSession session, Model model)throws Exception{
+		
+		int result = adminNoticeService.setUpdate(adminNoticeDTO, files1, session);
+		
+		return "redirect:./list";
 	}
 }
