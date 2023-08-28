@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +36,13 @@ public class ProductController {
 		
 		return "product/list";
 	}
+	
+	 @GetMapping("/category/{catNo}")
+	    public String getCategoryList(@PathVariable Long catNo, Model model) {
+	        List<ProductDTO> productList = productService.getListByCategory(catNo);
+	        model.addAttribute("productList", productList);
+	        return "product/categoryList"; // JSP page name in the "product" folder
+	    }
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String setAdd()throws Exception{

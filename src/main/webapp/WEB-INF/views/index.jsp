@@ -10,17 +10,21 @@
 	<meta charset="UTF-8">
 	<title>Home</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-	<style>
-		.card-num{
-			float: left;
-		}
-		.card{
-			float: left;
-		}
-		.card-body{
-			float: left;
-		}
-	</style>
+	 <style>
+        .product-card {
+            border: 20px solid;
+            padding: 10px;
+            margin: 20px;
+            display: inline-block;
+            width: 200px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+	
 </head>
 
 <body>
@@ -36,6 +40,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+   <li class="nav-item">
+    <a class="nav-link" href="../member/login">로그인</a>
   </li>
 </ul>
 <h1 class="text-center">
@@ -72,36 +79,63 @@
 
 
 
-		<table class="table table-dark table-hover">
-		<thead>
-			<th>번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th>
-		</thead>
-		<tbody>
-			<c:forEach items="${list}" var="d">
-			
-				<div>
-				<tr>
-				<td>${d.proNo}</td>
-					<td>
-                        <c:if test="${not empty d.dtos}">
-                            <img src="${pageContext.request.contextPath}/resources/upload/product/${d.dtos[0].fileName}" alt="">
-                        </c:if>
-                    </td>
-					
-					<td>${d.proName} </td>
-					<td>${d.userId} </td>
-					<td>${d.createDate} </td>
-					<td>${d.hit} </td>
-				</tr>
-				</div>
-				
-					
-			</c:forEach>			
-		</tbody>
-	</table>
-
-
+		<section class="container mt-5">
+        <h1 class="mb-3 text-center">Product List</h1>
+        <div class="row">
+            <c:forEach items="${list}" var="product">
+                <div class="col-md-3">
+                    <div class="product-card">
+                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image">
+                        <h4>${product.proName}</h4>
+                        <p>작성자: ${product.userId}</p>
+                        <p>${product.proContents}</p>
+                        <p>작성일: ${product.createDate}</p>
+                        <p>조회수: ${product.hit}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <nav aria-label="Page navigation example">
+			  <ul class="pagination">
+			  	<c:if test="${pager.pre}">
+				    <li class="page-item">
+				      <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+			    </c:if>
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			    	<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
+			    </c:forEach>
+			    <c:if test="${pager.next}">
+				    <li class="page-item">
+				      <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+			    </c:if>
+			  </ul>
+			</nav>
+		
+		<div class="input-group mb-3">
+		 <form action="./list" method="get" id="frm">
+		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
+		 	  	
+			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
+				  <option class="kind" value="proName">상품명</option>
+				  <option class="kind" value="proContents">상품설명</option>
+				  <option class="kind" value="userId">이름</option>
+			  </select>
+			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
+			   <div class="col-auto">
+			    <button type="submit" class="btn btn-primary">검색</button>
+			  </div>
+		  </form>
+		</div>
+</section>
+    </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="/resources/js/list.js"></script>
 </body>
 </html>

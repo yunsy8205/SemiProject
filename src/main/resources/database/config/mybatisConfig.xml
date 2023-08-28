@@ -10,6 +10,7 @@
   	<typeAliases>
 			<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"/>
 			<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"/>
+			<typeAlias type="com.semi.main.member.MemberDTO" alias="MemberDTO"/>
 			
 			<typeAlias type="com.semi.main.util.Pager" alias="Pager"/>
 			

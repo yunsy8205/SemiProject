@@ -3,6 +3,7 @@ package com.semi.main.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +50,11 @@ public class MemberController {
 		if(memberDTO != null && memberDTO.getStatusNo() != 0) {
 			session.setAttribute("member", memberDTO);
 			System.out.println("로그인 성공");
+			
 		} 
 		else if(memberDTO != null && memberDTO.getStatusNo() == 0){
 			session.setAttribute("member", memberDTO);
-			mv.addObject("msg", "탈퇴한 아이디입니다. 고객센터로 문의해주세요.");
+			mv.addObject("msg", "활동 정지중인 아이디입니다. 고객센터로 문의해주세요.");
 			mv.addObject("url", "login");
 			mv.setViewName("member/alert");
 			return mv;
@@ -74,5 +76,16 @@ public class MemberController {
 		return mv;
 		
 	}
-
+	
+	
+	/** 로그아웃 */
+	@GetMapping("logout")
+	public String logout(HttpSession session) throws Exception{
+		// 세션 비우기
+		session.invalidate();
+		
+		return "redirect:../";
+	}
+	
+	
 }

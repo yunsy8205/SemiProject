@@ -13,6 +13,8 @@
 <section class="container mt-5">
     <h1 class="mb-3 text-center">Product List</h1>
     <table class="table table-dark table-hover">
+    
+    
         <thead>
             <th>번호</th><th>이미지</th><th>제목</th><th>작성자</th><th>상품설명</th><th>작성일자</th><th>조회수</th>
         </thead>

@@ -30,18 +30,20 @@
 			  </choose>
 			</select>
 		  
-		  <select id="getListByCategory" parameterType="Pager" resultType="ProductDTO">
-			    SELECT
-			        P.*,
-			        M.USERID
-			    FROM
-			        PRODUCT P
-			    INNER JOIN
-			        MEMBER M
-			    ON
-			        P.USERNO = M.USERNO
-			    WHERE
-			        P.CATNO = #{catNo}
+		  <select id="getListByCategory" resultMap="getSelectResult" parameterType="Long">
+			    SELECT *
+			    FROM (
+			        SELECT ROWNUM R, B.*
+			        FROM (
+			            SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+			            FROM PRODUCT P
+			            INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+			            LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+			            WHERE P.PRONO > 0
+			            AND P.CATNO = #{catNo}
+			        ) B
+			    )
+			    WHERE R BETWEEN #{startRow} AND #{lastRow}
 			</select>
 		  
 		<select id="getList" resultMap="getSelectResult" parameterType="Pager">
@@ -58,7 +60,7 @@
 		        <when test="kind=='proName'">
 		          AND P.PRONAME LIKE '%'||#{search}||'%'
 		        </when>
-		        <when test="kind=='procontents'">
+		        <when test="kind=='proContents'">
 		          AND P.PROCONTENTS LIKE '%'||#{search}||'%'
 		        </when>
 		        <otherwise>
@@ -67,6 +69,7 @@
 		      </choose>
 			    ) B
 			  )
+			  
 			  WHERE R BETWEEN #{startRow} AND #{lastRow}
 			</select>
 		  	
@@ -109,7 +112,23 @@
         WHERE PRONO = #{proNo}
     	</select>
   	
-  		<insert id="setAdd" parameterType="ProductDTO">
+  	
+		  <insert id="setAdd" parameterType="ProductDTO">
+		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+		    </selectKey>
+		    INSERT INTO PRODUCT
+		    (PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+		    PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+		    VALUES
+		    (#{proNo}, #{catNo},
+		    (SELECT USERNO FROM MEMBER WHERE USERID = #{userId}),
+		    #{proName}, #{proPrice},
+		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
+		    #{proStatus}, 0, #{proSale})
+		</insert>
+		
+  		<!-- <insert id="setAdd" parameterType="ProductDTO">
   		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
   			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
@@ -119,7 +138,7 @@
   		VALUES
   		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
 		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
-  	  </insert>
+  	  </insert> -->
   	  
   	  <insert id="setFileAdd" parameterType="ProductFileDTO">
   		INSERT INTO PRODUCTIMAGE
