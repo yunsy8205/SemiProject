@@ -17,9 +17,9 @@ public class ProductDAO {
 	private final String NAMESPACE="com.semi.main.product.ProductDAO.";
 	
 	
-	public List<ProductDTO> getList(Pager pager) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE+"getList",pager);
+	public Long getTotal(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 
 
@@ -36,6 +36,32 @@ public class ProductDAO {
 	
 	public Long countReview(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"countReview",productDTO);
+	}
+	
+	public List<ProductDTO> getList(Pager pager) throws Exception {
+		
+		
+		return sqlSession.selectList(NAMESPACE+"getList",pager);
+	}
+	public List<ProductFileDTO> getFileList(Long proNo) throws Exception {
+			
+			
+			return sqlSession.selectList(NAMESPACE+"getFileList",proNo);
+	}
+
+	public int setAdd(ProductDTO productDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setAdd", productDTO);
+	}
+	
+	public int setFileAdd(ProductFileDTO productFileDTO)throws Exception{
+		
+		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
+	}
+	
+	public int setHitUpdate(ProductDTO productDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
