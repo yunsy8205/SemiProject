@@ -1,6 +1,7 @@
 package com.semi.main.profile;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,16 @@ public class ProfileDAO {
 		return sqlSession.selectOne(NAMESPACE+"avgScore", profileDTO);
 	}
 	
-	public List<ProductDTO> memberProList(ProfileDTO profileDTO)throws Exception {
-		return sqlSession.selectList(NAMESPACE+"memberProList", profileDTO);
+	public List<ProductDTO> memberProList(Map<String, Object> map)throws Exception {
+		return sqlSession.selectList(NAMESPACE+"memberProList", map);
 	}
 	
-	public List<ProductReviewDTO> memberReviewList(ProfileDTO profileDTO) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"memberReviewList", profileDTO);
+	public List<ProductReviewDTO> memberReviewList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberReviewList", map);
+	}
+	
+	//total
+	public Long getTotal(Map<String, Object> map)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
 	}
 }

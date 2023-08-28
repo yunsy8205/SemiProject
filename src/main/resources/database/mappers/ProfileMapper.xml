@@ -22,15 +22,26 @@
   		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
   	
-  	<select id="memberProList" parameterType="ProfileDTO" resultMap="getResult">
-  		SELECT * FROM PRODUCT P
-		JOIN PRODUCTIMAGE PI
-		ON(P.PRONO=PI.PRONO)
-		WHERE USERNO=#{userNo}
+  	<select id="memberProList" parameterType="Map" resultMap="getResult">
+		SELECT C.*, PI.* FROM
+		(SELECT B.* FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT * FROM PRODUCT WHERE USERNO=#{profileDTO.userNo} ORDER BY CREATEDATE DESC)A)B)C
+		LEFT JOIN PRODUCTIMAGE PI
+		ON(C.PRONO=PI.PRONO)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
   	
-  	<select id="memberReviewList" parameterType="ProfileDTO" resultType="ProductReviewDTO">
-  		SELECT * FROM REVIEW WHERE USERNO=#{userNo}
+  	<select id="memberReviewList" parameterType="Map" resultType="ProductReviewDTO">
+		SELECT * FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT R.*, M.USERID, P.FILENAME, PD.PRONAME FROM REVIEW R
+		JOIN MEMBER M ON(R.USERNO=M.USERNO)
+		LEFT JOIN PROFILE P ON(R.USERNO=P.USERNO)
+		LEFT JOIN PRODUCT PD ON(R.PRONO=PD.PRONO)
+		WHERE R.PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{profileDTO.userNo})
+		ORDER BY REVIEWDATE DESC)A)B
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
  
       <resultMap type="ProductDTO" id="getResult">
@@ -57,7 +68,10 @@
 		  		<result column="FILENAME" property="fileName"/>
 	  		</collection>
 	  	</resultMap>
-	  	
+	
+	<select id="getTotal" resultType="Long" parameterType="Map">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{profileDTO.userNo}
+  	</select>
   	<insert id="a"></insert>
   	<update id="b"></update>
   	<delete id="c"></delete>

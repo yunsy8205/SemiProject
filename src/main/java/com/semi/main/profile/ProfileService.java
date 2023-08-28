@@ -1,12 +1,15 @@
 package com.semi.main.profile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.semi.main.product.ProductDTO;
 import com.semi.main.product.ProductReviewDTO;
+import com.semi.main.util.Pager;
 
 @Service
 public class ProfileService {
@@ -26,11 +29,25 @@ public class ProfileService {
 		return profileDAO.avgScore(profileDTO);
 	}
 	
-	public List<ProductDTO> memberProList(ProfileDTO profileDTO)throws Exception {
-		return profileDAO.memberProList(profileDTO);
+	public List<ProductDTO> memberProList(ProfileDTO profileDTO, Pager pager)throws Exception {
+		pager.setPerPage(3L);
+		pager.makeRowNum();
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("profileDTO", profileDTO);
+		map.put("pager", pager);
+		Long total = profileDAO.getTotal(map);
+		pager.makePageNum(total);
+		return profileDAO.memberProList(map);
 	}
 	
-	public List<ProductReviewDTO> memberReviewList(ProfileDTO profileDTO) throws Exception{
-		return profileDAO.memberReviewList(profileDTO);
+	public List<ProductReviewDTO> memberReviewList(ProfileDTO profileDTO, Pager pager) throws Exception{
+		pager.setPerPage(3L);
+		pager.makeRowNum();
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("profileDTO", profileDTO);
+		map.put("pager", pager);
+		Long total = profileDAO.getTotal(map);
+		pager.makePageNum(total);
+		return profileDAO.memberReviewList(map);
 	}
 }

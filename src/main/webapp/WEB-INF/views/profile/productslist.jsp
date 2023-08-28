@@ -46,38 +46,59 @@
 	<div id="test2">
 		<h3>${dto.userId}</h3>
 		<div>
-		<c:forEach var="i" begin="1" end="${score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-score}" step="1"><i class="bi bi-star"></i></c:forEach>
+		<c:forEach var="i" begin="1" end="${score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:if test="${r.score%1<0.5}"><i class="bi bi-star"></i></c:if><c:forEach var="i" begin="1" end="${5-score}" step="1"><i class="bi bi-star"></i></c:forEach>
 		</div>
-		<span>상품판매횟수 : ${countp}</span><span id="div1">택배발송횟수 : </span>
+		<span>상품판매횟수 : </span><span id="div1">택배발송횟수 : </span>
 			<h5>소개글</h5>
 			<p>${dto.intro}</p>
 	</div>
 </div>
-<div id="add" class="mt-3 ms-5" data-add-num="${dto.userNo}">
+<div class="ms-5">
 
+	  <a class="btn btn-primary" href="./reviews?userNo=${dto.userNo}">후기목록</a>
+	
+	<div id="add" class="mt-3 ms-5" data-add-num="${dto.userNo}" >
+	</div>
+	<div id="more">
+	</div>
 </div>
 <script type="text/javascript">
 	let userNo=$('#add').attr("data-add-num");
+	let pageNum=1;
+	let tp=0;
+		
+	productsList(userNo,pageNum);
+
 	
-	productsList(userNo);
-	
-	function productsList(userNo){
+	function productsList(userNo,page){
 	$.ajax({
 		type:"get",
 		url:"../profile/prolist",
 		data:{
-			userNo:userNo
-			//page:page
+			userNo:userNo,
+			page:page
 		},
 		success:function(result){
 			$('#add').append(result);
-			//tp = $('#totalpage').attr('data-totalPage');
-			//let button='<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>';
+			tp = $('#totalpage').attr('data-totalPage');
+			let button='<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>';
 			
-			//$('#more').html(button);
+			$('#more').html(button);
 		},error:function(){
 			alert('관리자에게 문의');
 		}
+	})
+	
+		$('#more').on("click", "#moreButton", function(){
+		
+		if(pageNum>=tp){
+			alert('마지막 페이지');
+			return;
+		}
+		
+		pageNum++;
+		productsList(userNo,pageNum);
+	
 	})
 }
 </script>
