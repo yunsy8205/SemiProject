@@ -67,6 +67,7 @@
 		          AND M.USERID LIKE '%'||#{search}||'%'
 		        </otherwise>
 		      </choose>
+		      	ORDER BY P.CREATEDATE DESC
 			    ) B
 			  )
 			  

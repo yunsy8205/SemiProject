@@ -20,6 +20,9 @@ public class ProductDTO {
 	private int proSale;
 	private String catName;
 	private String userId;
+	private List<ProductFileDTO> fileDTOs;
+	
+	
 	
 	public String getUserId() {
 		return userId;
@@ -33,7 +36,7 @@ public class ProductDTO {
 	public void setCatName(String catName) {
 		this.catName = catName;
 	}
-	private List<ProductFileDTO> fileDTOs;
+	
 	
 	public List<ProductFileDTO> getFileDTOs() {
 		return fileDTOs;
