@@ -68,7 +68,7 @@
 <body>
 
 <h1 class="mt-5 ms-5">상품 Detail Page</h1>
-	<div class="wrap mt-5 ms-5 border-bottom">
+	<div class="wrap mt-5 ms-5 border-bottom" id="add" data-add-pnum="${dto.proNo}">
 		<div id="carouselExampleIndicators" class="test1 carousel slide">
 		  <div class="carousel-inner test1">
 			<c:forEach items="${dto.fileDTOs}" var="f">
@@ -101,12 +101,30 @@
 			</tr>
 			<tr>
 				<th>상품상태</th>
-				<td>${dto.proStatus}</td>
+				<td>
+				 <c:choose>
+				 	<c:when test="${dto.proStatus eq 0}">
+				 		중고상품
+				 	</c:when>
+				 	<c:otherwise>
+				 		새상품
+				 	</c:otherwise>
+				 </c:choose>
+				</td>
 	
 			</tr>
 			<tr>
 				<th>교환여부</th>
-				<td>${dto.exchange}</td>
+				<td>
+					<c:choose>
+				 	<c:when test="${dto.exchange eq 0}">
+				 		교환가능
+				 	</c:when>
+				 	<c:otherwise>
+				 		교환불가능
+				 	</c:otherwise>
+					</c:choose>
+				</td>
 	
 			</tr>
 			<tr>
@@ -117,10 +135,20 @@
 			<tr>
 				<th>카테고리</th>
 				<td>${dto.catName}</td>
-	
 			</tr>
-	 </table>
+	 </table>		
+	 <c:choose>
+	 	<c:when test="${member.userNo eq dto.userNo}">
+	 	
+	 	</c:when>
+	 	<c:otherwise>
+			 <button id="dibs" class="ms-3 my-3 btn btn-primary"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum">${dibsNum}</span></button>
+			 <button class="ms-3 my-3 btn btn-primary">톡</button>
+			 <button class="ms-3 my-3 btn btn-primary">바로구매</button>
+	 	</c:otherwise>
+	 </c:choose>
 		</div>
+
 	</div>
 	<div class="wrap2">
 		<div class="test4 ms-5">
@@ -165,7 +193,14 @@
 		 
 		</div>
 
-	</div>
+	</div> 
+	
 
+	<c:if test="${not empty member}">
+		<script src="../resources/js/detailLogin.js"></script>
+	</c:if>
+	<c:if test="${empty member}">
+		<script src="../resources/js/detailLogout.js"></script>	
+	</c:if>
 </body>
 </html>

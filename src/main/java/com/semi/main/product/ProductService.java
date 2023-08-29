@@ -76,5 +76,20 @@ public class ProductService {
 		System.out.println(path);
 		return result;
 	}
-
+	
+	public int dibsAdd(ProductDTO productDTO) throws Exception{
+		return productDAO.dibsAdd(productDTO);
+	}
+	
+	public int dibsDelete(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsDelete(productDTO);
+	}
+	
+	public ProductDTO dibsConfirm(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsConfirm(productDTO);
+	}
+	
+	public Long dibsNum(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsNum(productDTO);
+	}
 }

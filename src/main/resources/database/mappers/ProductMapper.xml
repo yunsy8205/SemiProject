@@ -98,6 +98,23 @@
   		INSERT INTO PRODUCTIMAGE
   		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
   	  </insert>
+  	  
+  	  <insert id="dibsAdd" parameterType="ProductDTO">
+  	  	INSERT INTO DIBS
+  	  	VALUES (#{proNo}, #{userNo}, SYSDATE)
+  	  </insert>
+  	  
+  	  <delete id="dibsDelete" parameterType="ProductDTO">
+  	  	DELETE DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
+  	  </delete>
+  	  
+  	  <select id="dibsConfirm" parameterType="ProductDTO" resultType="ProductDTO">
+  	  	SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
+  	  </select>
+  	  
+  	  <select id="dibsNum" parameterType="ProductDTO" resultType="Long">
+  	  	SELECT COUNT(PRONO) FROM DIBS WHERE PRONO=#{proNo}
+  	  </select>
   	
   	<insert id="a"></insert>
   	<update id="b"></update>

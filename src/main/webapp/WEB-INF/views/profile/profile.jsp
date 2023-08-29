@@ -54,53 +54,24 @@
 	</div>
 </div>
 <div class="ms-5">
+	<c:if test="${flag eq 'products'}">
+   		 <a class="btn btn-primary" href="./reviews?userNo=${dto.userNo}">후기목록</a>
+	</c:if>
+	<c:if test="${flag eq 'reviews'}">
+		<a class="btn btn-primary" href="./products?userNo=${dto.userNo}">상품목록</a>	
+	</c:if>
 
-	  <a class="btn btn-primary" href="./reviews?userNo=${dto.userNo}">후기목록</a>
 	
 	<div id="add" class="mt-3 ms-5" data-add-num="${dto.userNo}" >
 	</div>
 	<div id="more">
 	</div>
 </div>
-<script type="text/javascript">
-	let userNo=$('#add').attr("data-add-num");
-	let pageNum=1;
-	let tp=0;
-		
-	productsList(userNo,pageNum);
-
-	
-	function productsList(userNo,page){
-	$.ajax({
-		type:"get",
-		url:"../profile/prolist",
-		data:{
-			userNo:userNo,
-			page:page
-		},
-		success:function(result){
-			$('#add').append(result);
-			tp = $('#totalpage').attr('data-totalPage');
-			let button='<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>';
-			
-			$('#more').html(button);
-		},error:function(){
-			alert('관리자에게 문의');
-		}
-	})
-	
-		$('#more').on("click", "#moreButton", function(){
-		
-		if(pageNum>=tp){
-			alert('마지막 페이지');
-			return;
-		}
-		
-		pageNum++;
-		productsList(userNo,pageNum);
-	
-	})
-}
-</script>
+	<c:if test="${flag eq 'products'}">
+		<script src="../resources/js/profilepro.js"></script>
+	</c:if>
+	<c:if test="${flag eq 'reviews'}">
+		<script src="../resources/js/profilerev.js"></script>	
+	</c:if>
 </body>
 </html>

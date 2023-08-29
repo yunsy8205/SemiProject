@@ -55,4 +55,20 @@ public class ProductDAO {
 		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
 	}
 	
+	public int dibsAdd(ProductDTO productDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"dibsAdd", productDTO);
+	}
+	
+	public int dibsDelete(ProductDTO productDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"dibsDelete", productDTO);
+	}
+	
+	public ProductDTO dibsConfirm(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"dibsConfirm", productDTO);
+	}
+	
+	public Long dibsNum(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"dibsNum", productDTO);
+	}
+	
 }

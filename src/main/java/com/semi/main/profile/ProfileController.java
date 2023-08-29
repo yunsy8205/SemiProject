@@ -30,8 +30,9 @@ public class ProfileController {
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
+		model.addAttribute("flag", "products");
 		
-		return "profile/productslist";
+		return "profile/profile";
 	}
 	
 	@GetMapping("reviews")
@@ -42,8 +43,8 @@ public class ProfileController {
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
 		model.addAttribute("score", score);
-		System.out.println(score);
-		return "profile/reviewslist";
+		model.addAttribute("flag", "reviews");
+		return "profile/profile";
 	}
 	
 	@GetMapping("prolist")
@@ -54,7 +55,7 @@ public class ProfileController {
 		for(ProductDTO a:ar) {
 			System.out.println(a.getProName());
 		}
-		return "profile/result1";
+		return "commons/productresult";
 	}
 	
 	@GetMapping("revlist")
@@ -64,9 +65,10 @@ public class ProfileController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		for(ProductReviewDTO a:ar) {
+			System.out.println(a.getProName());
 			System.out.println(a.getContents());
 		}
 
-		return "profile/result2";
+		return "commons/reviewresult";
 	}
 }
