@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.util.Pager;
@@ -41,10 +42,25 @@ public class ProductController {
 		return "product/list";
 	}
 	
-	 @GetMapping("/category/{catNo}")
-	    public String getCategoryList(@PathVariable Long catNo, Model model) {
-	        List<ProductDTO> productList = productService.getListByCategory(catNo);
-	        model.addAttribute("productList", productList);
+	
+	
+		@RequestMapping(value = "/product/categoryList")
+		public String getCategoryList(Pager pager,Long catNo, Model model) throws Exception{
+		 System.out.println("컨트롤러 startRow: " + pager.getStartRow()); // 확인용 출력
+		 System.out.println("catNo: " + catNo); // 확인용 출력
+	        pager.setCatNo(catNo); // 카테고리 번호를 Pager에 설정
+	        List<ProductDTO> ar = productService.getListByCategory(pager);
+	        // 각 상품에 대한 이미지 리스트 가져오기
+	        for (ProductDTO product : ar) {
+	            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
+	            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
+	                ProductFileDTO firstFile = fileList.get(0);
+	                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
+	                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
+	            }
+	        }
+			model.addAttribute("list",ar);
+			model.addAttribute("pager", pager);
 	        return "product/categoryList"; // JSP page name in the "product" folder
 	    }
 	

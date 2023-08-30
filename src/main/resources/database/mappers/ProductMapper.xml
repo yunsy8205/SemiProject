@@ -30,21 +30,24 @@
 			  </choose>
 			</select>
 		  
-		  <select id="getListByCategory" resultMap="getSelectResult" parameterType="Long">
-			    SELECT *
-			    FROM (
-			        SELECT ROWNUM R, B.*
-			        FROM (
-			            SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
-			            FROM PRODUCT P
-			            INNER JOIN MEMBER M ON P.USERNO = M.USERNO
-			            LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
-			            WHERE P.PRONO > 0
-			            AND P.CATNO = #{catNo}
-			        ) B
-			    )
-			    WHERE R BETWEEN #{startRow} AND #{lastRow}
-			</select>
+		  <!-- 상품 카테고리별 리스트 가져오는 쿼리 -->
+	    <select id="getListByCategory" resultMap="getSelectResult" parameterType="Long">
+	        SELECT *
+	        FROM (
+	            SELECT ROWNUM R, B.*
+	            FROM (
+	                SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+	                FROM PRODUCT P
+	                INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+	                LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+	                WHERE P.PRONO > 0
+	                AND P.CATNO = #{catNo} <!-- 카테고리 번호 파라미터 -->
+	                ORDER BY P.CREATEDATE DESC
+	            ) B
+	        )
+	        WHERE R BETWEEN #{startRow} AND #{lastRow} <!-- 페이징 파라미터 -->
+	    </select>
+
 		  
 		<select id="getList" resultMap="getSelectResult" parameterType="Pager">
 		  SELECT *

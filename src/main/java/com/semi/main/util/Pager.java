@@ -30,6 +30,18 @@ public class Pager {
 	private boolean pre; 
 	
 	
+	
+	private Long catNo;
+	
+	
+	public Long getCatNo() {
+		return catNo;
+	}
+
+	public void setCatNo(Long catNo) {
+		this.catNo = catNo;
+	}
+
 	public boolean isPre() {
 		return pre;
 	}

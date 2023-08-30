@@ -49,8 +49,12 @@ public class ProductDAO {
 			return sqlSession.selectList(NAMESPACE+"getFileList",proNo);
 	}
 
-	public List<ProductDTO> getListByCategory(Long catNo) {
-		return sqlSession.selectList(NAMESPACE+"getListByCategory",catNo);
+	
+	
+	public List<ProductDTO> getListByCategory(Pager pager) {
+		
+		 System.out.println("startRow: " + pager.getStartRow()); // 확인용 출력
+		return sqlSession.selectList(NAMESPACE+"getListByCategory",pager);
 	}
 
 	public int setAdd(ProductDTO productDTO) throws Exception {

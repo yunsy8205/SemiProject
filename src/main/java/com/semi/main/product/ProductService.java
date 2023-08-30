@@ -33,8 +33,8 @@ public class ProductService {
 		return productDAO.getList(pager);
 	}
 	
-	public List<ProductDTO> getListByCategory(Long catNo) {
-        return productDAO.getListByCategory(catNo);
+	public List<ProductDTO> getListByCategory(Pager pager) {
+        return productDAO.getListByCategory(pager);
     }
 
 	
