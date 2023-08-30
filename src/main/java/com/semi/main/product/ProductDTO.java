@@ -16,11 +16,13 @@ public class ProductDTO {
 	private	Date modifyDate;
 	private	int	exchange;
 	private int proStatus;
-	private Long proHit;
+	private Long hit;
 	private int proSale;
 	private String catName;
 	private String userId;
 	private List<ProductFileDTO> fileDTOs;
+	
+	
 	
 	public String getUserId() {
 		return userId;
@@ -34,6 +36,7 @@ public class ProductDTO {
 	public void setCatName(String catName) {
 		this.catName = catName;
 	}
+	
 	
 	public List<ProductFileDTO> getFileDTOs() {
 		return fileDTOs;
@@ -107,11 +110,12 @@ public class ProductDTO {
 	public void setProStatus(int proStatus) {
 		this.proStatus = proStatus;
 	}
-	public Long getProHit() {
-		return proHit;
+	
+	public Long getHit() {
+		return hit;
 	}
-	public void setProHit(Long proHit) {
-		this.proHit = proHit;
+	public void setHit(Long hit) {
+		this.hit = hit;
 	}
 	public int getProSale() {
 		return proSale;
