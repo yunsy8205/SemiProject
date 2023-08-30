@@ -73,6 +73,8 @@ public class ProductDAO {
 	public int setHitUpdate(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
 	public int dibsAdd(ProductDTO productDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"dibsAdd", productDTO);
 	}

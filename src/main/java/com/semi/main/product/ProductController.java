@@ -51,11 +51,6 @@ public class ProductController {
 	        return "product/categoryList"; // JSP page name in the "product" folder
 	    }
 	
-	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String setAdd()throws Exception{
-		return "product/add";
-	}
-	
 	@GetMapping("detail")
 	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
 		

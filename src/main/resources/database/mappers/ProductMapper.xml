@@ -8,10 +8,7 @@
 		 <!--  
 		 id의 역할 : 중복되면 안됨. --> 
 		  <mapper namespace="com.semi.main.product.ProductDAO">
-		  
-		  
-		
-		  
+		    
 		  <select id="getTotal" parameterType="Pager" resultType="Long">
 			  SELECT COUNT(PRONO)
 			  FROM PRODUCT P
@@ -114,7 +111,7 @@
     	</select>
   	
   	
-		  <insert id="setAdd" parameterType="ProductDTO">
+		  <!-- <insert id="setAdd" parameterType="ProductDTO">
 		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
 		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
 		    </selectKey>
@@ -127,7 +124,7 @@
 		    #{proName}, #{proPrice},
 		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
 		    #{proStatus}, 0, #{proSale})
-		</insert>
+		</insert> -->
 		
   		<!-- <insert id="setAdd" parameterType="ProductDTO">
   		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
@@ -160,7 +157,7 @@
 		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
   	
-  	<select id="memberProList" parameterType="ProductDTO" resultMap="getResult">
+  	<select id="memberProList" parameterType="ProductDTO" resultMap="getSelectResult">
 		<![CDATA[
 		SELECT PR.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
   		(SELECT P.* FROM PRODUCT P 		
@@ -195,10 +192,10 @@
 		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
   	  </insert>
   	  
-  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
+  	  <!-- <insert id="setFileAdd" parameterType="ProductFileDTO">
   		INSERT INTO PRODUCTIMAGE
   		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
-  	  </insert>
+  	  </insert> -->
   	  
   	  <insert id="dibsAdd" parameterType="ProductDTO">
   	  	INSERT INTO DIBS
