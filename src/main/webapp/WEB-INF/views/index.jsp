@@ -69,10 +69,10 @@
 				<c:choose>
 					<c:when test="${not empty member}">
 						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/mypage">mypage</a></li>
+						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
+						<li class="nav-item text-white me-3"><a href="../my/login">로그인</a></li>
 						<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
