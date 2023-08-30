@@ -8,10 +8,7 @@
 		 <!--  
 		 id의 역할 : 중복되면 안됨. --> 
 		  <mapper namespace="com.semi.main.product.ProductDAO">
-		  
-		  
-		
-		  
+		    
 		  <select id="getTotal" parameterType="Pager" resultType="Long">
 			  SELECT COUNT(PRONO)
 			  FROM PRODUCT P
@@ -114,7 +111,7 @@
     	</select>
   	
   	
-		  <insert id="setAdd" parameterType="ProductDTO">
+		  <!-- <insert id="setAdd" parameterType="ProductDTO">
 		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
 		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
 		    </selectKey>
@@ -127,7 +124,7 @@
 		    #{proName}, #{proPrice},
 		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
 		    #{proStatus}, 0, #{proSale})
-		</insert>
+		</insert> -->
 		
   		<!-- <insert id="setAdd" parameterType="ProductDTO">
   		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
@@ -156,9 +153,66 @@
 		</update>
   	
   	<select id="countReview" parameterType="ProductDTO" resultType="Long">
-  		SELECT COUNT(REVIEWNO)
-  		FROM REVIEW WHERE USERNO=#{userNo}
+  		SELECT COUNT(REVIEWNO) FROM REVIEW
+		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
   	</select>
+  	
+  	<select id="memberProList" parameterType="ProductDTO" resultMap="getSelectResult">
+		<![CDATA[
+		SELECT PR.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
+  		(SELECT P.* FROM PRODUCT P 		
+  		WHERE USERNO=#{userNo} AND ROWNUM < 6
+  		)PR
+  		LEFT JOIN PRODUCTIMAGE PI
+  		ON (PR.PRONO=PI.PRONO)
+  		ORDER BY CREATEDATE DESC
+  		]]>
+  	</select>
+  	
+  	<select id="memberReviewList" parameterType="ProductDTO" resultType="ProductReviewDTO">
+		<![CDATA[
+		SELECT C.* FROM
+		(SELECT R.*, M.USERID FROM REVIEW R
+		JOIN MEMBER M ON(R.USERNO=M.USERNO)
+		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
+		ORDER BY REVIEWDATE DESC)C
+		WHERE ROWNUM < 6
+		]]>
+  	</select>
+  	
+  	<insert id="setAdd" parameterType="ProductDTO">
+  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCT
+  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+  		VALUES
+  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
+		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
+  	  </insert>
+  	  
+  	  <!-- <insert id="setFileAdd" parameterType="ProductFileDTO">
+  		INSERT INTO PRODUCTIMAGE
+  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
+  	  </insert> -->
+  	  
+  	  <insert id="dibsAdd" parameterType="ProductDTO">
+  	  	INSERT INTO DIBS
+  	  	VALUES (#{proNo}, #{userNo}, SYSDATE)
+  	  </insert>
+  	  
+  	  <delete id="dibsDelete" parameterType="ProductDTO">
+  	  	DELETE DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
+  	  </delete>
+  	  
+  	  <select id="dibsConfirm" parameterType="ProductDTO" resultType="ProductDTO">
+  	  	SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
+  	  </select>
+  	  
+  	  <select id="dibsNum" parameterType="ProductDTO" resultType="Long">
+  	  	SELECT COUNT(PRONO) FROM DIBS WHERE PRONO=#{proNo}
+  	  </select>
   	
   	<insert id="a"></insert>
   	<update id="b"></update>

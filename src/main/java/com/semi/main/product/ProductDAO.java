@@ -24,7 +24,6 @@ public class ProductDAO {
 
 
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
-		System.out.println(productDTO.getProNo());
 		productDTO= sqlSession.selectOne(NAMESPACE+"getDetail", productDTO);
 		
 		return productDTO;
@@ -53,6 +52,14 @@ public class ProductDAO {
 		return sqlSession.selectList(NAMESPACE+"getListByCategory",catNo);
 	}
 
+	public List<ProductDTO> memberProList(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberProList", productDTO);
+	}
+	
+	public List<ProductReviewDTO> memberReviewList(ProductDTO productDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"memberReviewList", productDTO);
+	}
+	
 	public int setAdd(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE+"setAdd", productDTO);
@@ -66,6 +73,22 @@ public class ProductDAO {
 	public int setHitUpdate(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public int dibsAdd(ProductDTO productDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"dibsAdd", productDTO);
+	}
+	
+	public int dibsDelete(ProductDTO productDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"dibsDelete", productDTO);
+	}
+	
+	public ProductDTO dibsConfirm(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"dibsConfirm", productDTO);
+	}
+	
+	public Long dibsNum(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"dibsNum", productDTO);
 	}
 	
 }

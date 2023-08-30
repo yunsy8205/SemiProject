@@ -65,5 +65,44 @@ public class ProductService {
 	}
 	
 		
-
+    //상품상세
+	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
+		return productDAO.getDetail(productDTO);
+	}
+	
+	//판매상품수
+	public Long countProduct(ProductDTO productDTO) throws Exception{
+		return productDAO.countProduct(productDTO);
+	}
+	
+	//후기수
+	public Long countReview(ProductDTO productDTO) throws Exception{
+		return productDAO.countReview(productDTO);
+	}
+	
+	//판매자상품목록
+	public List<ProductDTO> memberProList(ProductDTO productDTO) throws Exception{
+		return productDAO.memberProList(productDTO);
+	}
+	
+	//판매자후기목록
+	public List<ProductReviewDTO> memberReviewList(ProductDTO productDTO) throws Exception{
+		return productDAO.memberReviewList(productDTO);
+	}
+	
+	public int dibsAdd(ProductDTO productDTO) throws Exception{
+		return productDAO.dibsAdd(productDTO);
+	}
+	
+	public int dibsDelete(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsDelete(productDTO);
+	}
+	
+	public ProductDTO dibsConfirm(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsConfirm(productDTO);
+	}
+	
+	public Long dibsNum(ProductDTO productDTO)throws Exception{
+		return productDAO.dibsNum(productDTO);
+	}
 }

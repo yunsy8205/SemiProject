@@ -39,8 +39,8 @@ public class MemberController {
 		*/
 		
 		System.out.println("null인지 확인 :"+memberDTO);
-//		System.out.println("아이디 :"+memberDTO.getUserId());
-//		System.out.println("회원상태 :"+memberDTO.getStatusNo());
+		System.out.println("아이디 :"+memberDTO.getUserId());
+		System.out.println("회원상태 :"+memberDTO.getStatusNo());
 		
 		// request에 있는 파라미터를 session에 넣음
 		HttpSession session = request.getSession();
