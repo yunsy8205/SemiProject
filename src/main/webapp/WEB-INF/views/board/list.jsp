@@ -10,6 +10,7 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
 	<section class="container mt-5">
 	
 		<table class="table">

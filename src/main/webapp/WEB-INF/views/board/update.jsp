@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
 
 <section class="container mt-5">
 	
@@ -44,7 +45,7 @@
 				<button type="button" class="btn btn-outline-primary mb-2" id="fileAdd">File추가</button>
 			</div>
 			
-			<div id="div1">
+			<div >
 			<c:forEach items="${dto.fileDTOs}" var="f">
 				<span class="alert alert-primary me-2" role="alert" id="${f.fileNo}" >
 					첨부파일 : ${f.originalName}

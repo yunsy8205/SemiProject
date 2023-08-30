@@ -94,9 +94,17 @@ public class AdminNoticeController {
 		adminNoticeDTO.setUserNo(memberDTO.getUserNo());
 		
 		int result = adminNoticeService.setAdd(adminNoticeDTO, files1, session);
-				
 		
-		return "board/add";
+		String message = "등록 실패";
+
+		if (result > 0) {
+			message = "등록 성공";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "list");
+		return "commons/result";
+		
+		
 	}
 	
 	//detail
@@ -128,7 +136,14 @@ public class AdminNoticeController {
 		 
 		int result = adminNoticeService.setUpdate(adminNoticeDTO, files1, session);
 		 
-		return "redirect:./list";
+		String message = "등록 실패";
+
+		if (result > 0) {
+			message = "등록 성공";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "list");
+		return "commons/result";
 	}
 	//delete
 	@GetMapping("delete")

@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
 
 <section class="container mt-5">
 	
@@ -43,14 +44,16 @@
 				<button type="button" class="btn btn-outline-primary" id="fileAdd">File추가</button>
 			</div>
 			
-			<button class="btn btn-danger" type="submit" id="btn"><a href="./list">등록</a></button>
+			<button class="btn btn-danger" type="submit" id="btn" >등록</button>
+			
 			
 		</form>
 </section>			
 
-	
+
 	
 
+</script>
 
 <script src="../resources/js/file.js"></script>
 <script>

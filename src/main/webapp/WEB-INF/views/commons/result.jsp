@@ -11,9 +11,6 @@
 
 	
 	
-	
-	<a href="/">HOME</a>
-	
 <script type="text/javascript">
 	alert('${message}');
 	location.href="${url}";
