@@ -41,6 +41,18 @@
 		<![endif]-->
 
 		
+			
+			<style>
+		.product-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* Set the maximum height of the image */
+            object-fit: cover; /* Maintain aspect ratio and cover area */
+		}
+		
+	</style>
+			
+		
 
 
     </head>
@@ -247,7 +259,7 @@
 										<c:forEach var="product" items="${list}">
 											<div class="product">
 												<div class="product-img">
-													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="">
+													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
 													<div class="product-label">
 															<span class="new">NEW</span>
 													</div>
