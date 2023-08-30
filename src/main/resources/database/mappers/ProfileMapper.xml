@@ -56,7 +56,7 @@
 	  		<result column="MODIFYDATE" property="modifyDate"/>
 	  		<result column="EXCHANGE" property="exchange"/>
 	  		<result column="PROSTATUS" property="proStatus"/>
-	  		<result column="PROHIT" property="proHit"/>
+	  		<result column="PROHIT" property="hit"/>
 	  		<result column="PROSALE" property="proSale"/>
 	  		<result column="CATNAME" property="catName"/>
 	  		<result column="USERID" property="userId"/>
