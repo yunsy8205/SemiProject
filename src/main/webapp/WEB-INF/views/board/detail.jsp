@@ -48,6 +48,7 @@
 		</c:forEach> 
 		
 		<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
+		<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
 
 		
 	

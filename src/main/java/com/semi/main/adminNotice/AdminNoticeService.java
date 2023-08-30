@@ -23,6 +23,7 @@ public class AdminNoticeService implements BoardService{
 	@Autowired
 	private FileManager fileManager;
 	
+	//imgdelete
 	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
 		
 		FileDTO fileDTO = new FileDTO();
@@ -46,8 +47,16 @@ public class AdminNoticeService implements BoardService{
 	}
 	
 	//fileDelete
-	public int setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO)throws Exception{
-		return adminNoticeDAO.setFileDelete(adminNoticeFileDTO);
+	public int setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO,HttpSession session)throws Exception{
+		String path ="/resources/upload/notice/";
+		
+		adminNoticeFileDTO = adminNoticeDAO.getFileDetail(adminNoticeFileDTO);
+		boolean flag = fileManager.fileDelete(adminNoticeFileDTO, path, session);
+		
+		if(flag) {
+			return adminNoticeDAO.setFileDelete(adminNoticeFileDTO); //de 삭제
+		}
+		return 0;
 	}
 	
 	@Override
@@ -114,7 +123,12 @@ public class AdminNoticeService implements BoardService{
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		
-		return 0;
+		return adminNoticeDAO.setDelete(boardDTO);
+	}
+	
+	public int setHit(AdminNoticeDTO adminNoticeDTO) throws Exception {
+		
+		return adminNoticeDAO.setHit(adminNoticeDTO);
 	}
 	
 	

@@ -27,8 +27,11 @@ $("#fileList").on("click",".df", function(){
 $(".delets").each(function(i,e){
 
     let num = this.getAttribute("data-delete-num");
-
-    $(e).click(function(){
+    
+    
+    $(e).click(function(){  
+        console.log(e);
+        console.log(num);
 
         $.ajax({
             type:'GET',
@@ -39,41 +42,15 @@ $(".delets").each(function(i,e){
             success:function(result){
                 if(result.trim()=='1'){
 
-                    $(this).parent().remove();
+                    $("#"+num).remove();
+                    $(e).remove();
+                    
                 }
             },
             error:function(){
-
+                console.log("error");
             }
         })
     })
 })
 
-// for(del of delets){
-
-//     del.addEventListener("click", function(){
-
-//         let num = this.getAttribute("data-delete-num");
-//         let check =confirm("삭제시 복구 불가");
-
-//         if(check){
-
-//             fetch("./fileDelete?fileNum="+num, {
-//                 method:"get"
-//             })
-//             .then((result)=>{
-//                 return result.text()    
-//             })
-//             .then((r)=>{
-//                 if(r.trim()=='1'){
-
-//                     this.previousSibling.previousSibling.remove();
-//                     this.remove();
-//                     count--;
-                    
-//                 }
-//             })
-
-//         }
-//     })
-// }

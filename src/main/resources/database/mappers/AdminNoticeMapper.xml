@@ -8,10 +8,21 @@
 
   <mapper namespace="com.semi.main.adminNotice.AdminNoticeDAO">
   	
+  	
+  	<sql id="searchSql">
+		 	<if test="kind == 'title'">
+		 		AND	TITLE LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'contents'">
+		 		AND	CONTENTS LIKE '%'||#{search}||'%'
+		 	</if>
+  	</sql>
+  	
   	<!-- total  -->
   	<select id="getTotal" resultType="Long" >
   		SELECT COUNT(BOARDNO) FROM NOTICE
   		WHERE BOARDNO > 0
+  		<include refid="searchSql"/>
   	</select>
   	
   	<!-- List -->
@@ -24,6 +35,7 @@
   			FROM NOTICE N JOIN MEMBER M
   			ON N.USERNO = M.USERNO
   			WHERE BOARDNO > 0
+  			<include refid="searchSql"/>
   			ORDER BY BOARDNO DESC
   		
   		)B )
@@ -37,7 +49,7 @@
   		 	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
   			INSERT INTO NOTICE 
-  			VALUES(#{boardNo}, #{userNo},#{title},sysdate,sysdate,1,#{contents})
+  			VALUES(#{boardNo}, #{userNo},#{title},sysdate,sysdate,#{hit},#{contents})
   	</insert>
   	
   	<!-- 파일 ADD -->
@@ -90,6 +102,16 @@
 	<delete id="setFileDelete" parameterType="AdminNoticeFileDTO">
 		DELETE FROM NOTICEFILE WHERE FILENO=#{fileNo}
 	</delete>
+	
+	<!--delete  -->
+	<delete id="setDelete" parameterType="AdminNoticeDTO">
+		DELETE FROM NOTICE WHERE BOARDNO=#{boardNo}
+	</delete>
+	
+	<update id="setHit" parameterType="AdminNoticeDTO">
+		UPDATE NOTICE SET HIT = HIT +1
+		WHERE BOARDNO = #{boardNo}
+	</update>
   
   </mapper>
   

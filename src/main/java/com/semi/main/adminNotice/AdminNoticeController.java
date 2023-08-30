@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.util.Pager;
@@ -32,8 +33,8 @@ public class AdminNoticeController {
 	
 	//filedelete
 	@GetMapping("fileDelete")
-	public String setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO,Model model)throws Exception{
-		int result = adminNoticeService.setFileDelete(adminNoticeFileDTO);
+	public String setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO,HttpSession session, Model model)throws Exception{
+		int result = adminNoticeService.setFileDelete(adminNoticeFileDTO, session);
 		model.addAttribute("result",result);
 		return "commons/ajaxResult";
 	}
@@ -102,6 +103,7 @@ public class AdminNoticeController {
 	@GetMapping("detail")
 	public String getDetail(AdminNoticeDTO adminNoticeDTO, Model model,HttpSession session)throws Exception{
 		
+		adminNoticeService.setHit(adminNoticeDTO);
 		BoardDTO boardDTO = adminNoticeService.getDetail(adminNoticeDTO);
 		
 		
@@ -123,8 +125,15 @@ public class AdminNoticeController {
 	//update
 	@PostMapping("update")
 	public String getUpdate(AdminNoticeDTO adminNoticeDTO,MultipartFile[] files1,HttpSession session, Model model)throws Exception{
-		
+		 
 		int result = adminNoticeService.setUpdate(adminNoticeDTO, files1, session);
+		 
+		return "redirect:./list";
+	}
+	//delete
+	@GetMapping("delete")
+	public String setdelete(AdminNoticeDTO adminNoticeDTO)throws Exception{
+		int result = adminNoticeService.setDelete(adminNoticeDTO);
 		
 		return "redirect:./list";
 	}

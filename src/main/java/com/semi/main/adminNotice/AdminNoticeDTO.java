@@ -21,6 +21,9 @@ public class AdminNoticeDTO extends BoardDTO{
 	}
 
 	public Long getHit() {
+		if(this.hit ==null) {
+			this.hit =0L;
+		}
 		return hit;
 	}
 

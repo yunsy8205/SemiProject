@@ -18,7 +18,7 @@
 	
 		<form action="./update" method="post" id="frm" enctype="multipart/form-data">
 		
-			<input type="hidden" name="num" readonly="readonly"  value="${dto.boardNo}">
+			<input type="hidden" name="boardNo" readonly="readonly"  value="${dto.boardNo}">
 			
 			<div class="mb-3">
 			<label for="userId" class="form-label">작성자</label>
@@ -44,16 +44,16 @@
 				<button type="button" class="btn btn-outline-primary mb-2" id="fileAdd">File추가</button>
 			</div>
 			
-			<!-- <div>
+			<div id="div1">
 			<c:forEach items="${dto.fileDTOs}" var="f">
-				<span class="alert alert-primary me-2" role="alert">
+				<span class="alert alert-primary me-2" role="alert" id="${f.fileNo}" >
 					첨부파일 : ${f.originalName}
 				 </span>
-				 <span class="delets" data-delete-num="${f.fileNo}">x</span>
+			<span class="delets" data-delete-num="${f.fileNo}" >x</span>
 			</c:forEach>
-			</div> -->
+			</div>
 			
-			<button class="btn btn-danger mt-4" type="submit" id="btn">등록</button>
+			<button class="btn btn-danger mt-4" type="submit" id="btn">수정</button>
 			
 		</form>
 </section>			

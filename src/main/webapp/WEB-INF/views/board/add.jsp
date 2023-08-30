@@ -43,7 +43,7 @@
 				<button type="button" class="btn btn-outline-primary" id="fileAdd">File추가</button>
 			</div>
 			
-			<button class="btn btn-danger" type="submit" id="btn">등록</button>
+			<button class="btn btn-danger" type="submit" id="btn"><a href="./list">등록</a></button>
 			
 		</form>
 </section>			
