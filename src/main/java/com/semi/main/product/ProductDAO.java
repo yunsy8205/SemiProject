@@ -49,6 +49,10 @@ public class ProductDAO {
 			return sqlSession.selectList(NAMESPACE+"getFileList",proNo);
 	}
 
+	public List<ProductDTO> getListByCategory(Long catNo) {
+		return sqlSession.selectList(NAMESPACE+"getListByCategory",catNo);
+	}
+
 	public int setAdd(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE+"setAdd", productDTO);

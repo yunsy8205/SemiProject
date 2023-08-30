@@ -31,35 +31,29 @@
 				  <label for="pic" class="form-label">사진첨부</label>
 				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
 				</div>	
-				<div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>
-				<div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>
-				<div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>	
+				
 						
 				
 				<div id="fileList" class="my-5"></div>
 				<div class="mb-3">
 				  <label for="writer" class="form-label">작성자</label>
-				  <input type="text" name="userNo"  class="form-control" id="userNo">
+				  <input type="text" name="userId" readonly value="${member.userId}"  class="form-control" id="userId">
 				</div>
 				
                 <div class="mb-3">
                     <label for="proName" class="form-label">제목</label>
-                    <input type="text" name="proName" class="form-control" id="proName" placeholder="제목 입력">
+                    <input type="text" name="proName"  class="form-control" id="proName" placeholder="제목 입력">
                   </div>
+                  
+                  <label for="catNo">카테고리 선택:</label>
+				    <select id="catNo" name="catNo">
+				        <option value="1001">에어컨</option>
+				        <option value="1002">냉장고</option>
+				        <option value="1003">TV</option>
+				        <option value="1004">노트북</option>
+				    </select>
 
-                <div class="mb-3">
-                    <label for="title" class="form-label">카테고리</label>
-                    <input type="text" name="catNo" class="form-control" id="catNo" placeholder="카테고리">
-                  </div>
+               
                   <div class="mb-3">
                     <label for="proStatus" class="form-label">상태</label>
                     <input name="proStatus" id="proStatus0" type="radio" value="0" checked>

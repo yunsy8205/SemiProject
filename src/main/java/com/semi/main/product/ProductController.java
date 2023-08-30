@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,13 +29,24 @@ public class ProductController {
 		// 각 상품에 대한 이미지 리스트 가져오기
         for (ProductDTO product : ar) {
             List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-            product.setFileDTOs(fileList);
+            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
+                ProductFileDTO firstFile = fileList.get(0);
+                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
+                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
+            }
         }
 		model.addAttribute("list",ar);
 		model.addAttribute("pager", pager);
 		
 		return "product/list";
 	}
+	
+	 @GetMapping("/category/{catNo}")
+	    public String getCategoryList(@PathVariable Long catNo, Model model) {
+	        List<ProductDTO> productList = productService.getListByCategory(catNo);
+	        model.addAttribute("productList", productList);
+	        return "product/categoryList"; // JSP page name in the "product" folder
+	    }
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String setAdd()throws Exception{

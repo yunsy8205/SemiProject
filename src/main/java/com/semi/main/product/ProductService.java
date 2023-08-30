@@ -33,6 +33,11 @@ public class ProductService {
 		return productDAO.getList(pager);
 	}
 	
+	public List<ProductDTO> getListByCategory(Long catNo) {
+        return productDAO.getListByCategory(catNo);
+    }
+
+	
 	public int setAdd(ProductDTO productDTO,MultipartFile[] files, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		String path="/resources/upload/product/";
