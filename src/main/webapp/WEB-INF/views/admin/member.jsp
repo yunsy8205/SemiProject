@@ -21,12 +21,12 @@
 			<tbody>
 				<c:forEach items="${list}" var="m">
 					<tr>
-						<td>${m.userNo}</td><td>${m.userId}</td><td>
+						<td>${m.userNo}</td><td><a href="./memberdetail?userNo=${m.userNo}">${m.userId}</a></td><td>
 						<c:forEach items="${m.roles}" var="r">${r.grantName}</c:forEach> 
 						</td><td>${m.name}</td><td>${m.email}</td><td>${m.birth}</td>
 						<td>${m.address}</td><td>${m.phone}</td><td>${m.accountDate}</td><td>
-						<c:if test="${m.statusNo eq '0'}"><span>정지회원</span><button data-num="${m.userNo}" type="button" class="btn btn-danger b" data-status="${m.statusNo}">활동회원 변경</button></c:if>
-						<c:if test="${m.statusNo eq '1'}"><span>활동회원</span><button data-num="${m.userNo}" type="button" class="btn btn-secondary b" data-status="${m.statusNo}">중지회원 변경</button></c:if>
+						<c:if test="${m.statusNo eq '0'}"><span>정지</span><button data-num="${m.userNo}" type="button" class="ms-2 btn btn-danger b" data-status="${m.statusNo}">활동회원 변경</button></c:if>
+						<c:if test="${m.statusNo eq '1'}"><span>활동</span><button data-num="${m.userNo}" type="button" class="ms-2 btn btn-secondary b" data-status="${m.statusNo}">정지회원 변경</button></c:if>
 						</td> 
 					</tr>
 				</c:forEach>
@@ -89,14 +89,14 @@
 		if(statusNo>0){
 			$(this).text("활동회원 변경");
 			$(this).attr("data-status",0);
-			$(this).prev().text("정지회원");
-			$(this).attr("class","b btn btn-danger");
+			$(this).prev().text("정지");
+			$(this).attr("class","ms-2 b btn btn-danger");
 			
 		}else{
-			$(this).text("중지회원 변경");
+			$(this).text("정지회원 변경");
 			$(this).attr("data-status",1);
-			$(this).prev().text("활동회원");
-			$(this).attr("class","b btn btn-secondary");
+			$(this).prev().text("활동");
+			$(this).attr("class","ms-2 b btn btn-secondary");
 		}
 	}else{
 		alert("상태변경실패");

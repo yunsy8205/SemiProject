@@ -33,4 +33,11 @@ public class AdminController {
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	}
+	
+	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
+	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
+		memberDTO = adminService.memberDetail(memberDTO);
+		model.addAttribute("dto", memberDTO);
+		return "admin/memberdetail";
+	}
 }	

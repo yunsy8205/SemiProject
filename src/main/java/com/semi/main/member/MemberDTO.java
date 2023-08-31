@@ -33,6 +33,8 @@ public class MemberDTO {
 	
 	private List<RoleDTO> roles;
 	
+	private String fileName;
+	
 	/* getter and setter */
 	
 	public Long getUserNo() {
@@ -152,6 +154,16 @@ public class MemberDTO {
 
 	public void setRoles(List<RoleDTO> roles) {
 		this.roles = roles;
+	}
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 	

@@ -28,4 +28,8 @@ public class AdminDAO {
 	public int statusChange(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"statusChange", memberDTO);
 	}
+	
+	public MemberDTO memberDetail(MemberDTO memberDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberDetail", memberDTO);
+	}
 }

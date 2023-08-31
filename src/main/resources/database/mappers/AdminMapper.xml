@@ -45,6 +45,7 @@
 			<result column="zipcode" property="zipCode" />
 			<result column="refaddress" property="refAddress" />
 			<result column="detailaddress" property="detailAddress" />
+			<result column="FILENAME" property="fileName" />
 			
 			<collection property="roles" javaType="List" ofType="RoleDTO">
 				<id column="GRANTNO" property="grantNo" />
@@ -61,5 +62,14 @@
   		UPDATE MEMBER SET STATUSNO=#{statusNo}
   		WHERE USERNO=#{userNo}
   	</update>
+  	
+  	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME 
+		FROM MEMBER M LEFT JOIN MEMBERROLE MR
+		ON(M.USERNO=MR.USERNO)
+		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
+		LEFT JOIN PROFILE P ON(P.USERNO=M.USERNO)
+		WHERE M.USERNO=#{userNo}
+  	</select>
   	
   </mapper>

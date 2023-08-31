@@ -29,4 +29,8 @@ public class AdminService {
 		}
 		return adminDAO.statusChange(memberDTO);
 	}
+	
+	public MemberDTO memberDetail(MemberDTO memberDTO) throws Exception{
+		return adminDAO.memberDetail(memberDTO);
+	}
 }

@@ -13,45 +13,32 @@
 <body>
 	<section class="container mt-5">
 		<h1 class="text-center mb-5">회원정보관리</h1>
-			<table >
+			<table class="table table-bordered border-secondary">
 				<tr>
-					<th>회원번호</th><td>1</td>
+					<th>회원번호</th><td>${dto.userNo}</td><th>회원상태</th><td>
+					<c:if test="${dto.statusNo eq '0'}">정지</c:if>
+					<c:if test="${dto.statusNo eq '1'}">활동중</c:if>
+					</td>
 				</tr>
 				<tr>
-					<th>회원상태</th><td>1</td>
+					<th>권한</th><td><c:forEach items="${dto.roles}" var="r">${r.grantName}</c:forEach>
+					</td><th>가입일</th><td>${dto.accountDate}</td>
 				</tr>
 				<tr>
-					<th>ID</th><td>1</td>
+					<th>ID</th><td>${dto.userId}</td><th>PW</th><td>${dto.userPw}</td>
 				</tr>
 				<tr>
-					<th>PW</th><td>1</td>
+					<th>이름</th><td>${dto.name}</td><th>생년월일</th><td>${dto.birth}</td>
 				</tr>
 				<tr>
-					<th>이름</th><td>1</td>
+					<th>이메일</th><td>${dto.email}</td><th>전화번호</th><td>${dto.phone}</td>
 				</tr>
 				<tr>
-					<th>이메일</th><td>1</td>
-				</tr>
-				<tr>
-					<th>생년월일</th><td>1</td>
-				</tr>
-				<tr>
-					<th>주소</th><td>1</td>
-				</tr>
-				<tr>
-					<th>전화번호</th><td>1</td>
-				</tr>
-				<tr>
-					<th>가입일</th><td>1</td>
-				</tr>
-				<tr>
-					<th>소개글</th><td>1</td>
-				</tr>
-				<tr>
-					<th>우편번호</th><td>1</td>
+					<th>소개글</th><td colspan="3">${dto.intro}</td>
 				</tr>
 			</table>
+			
+			<a href="./memberdelete?userNO=${dto.userNo}" class="btn btn-danger">탈퇴</a><a href="./memberupdate?userNO=${dto.userNo}" class="ms-2 btn btn-danger">수정</a>
 	</section>
-
 </body>
 </html>
