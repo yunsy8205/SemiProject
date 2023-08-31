@@ -88,4 +88,15 @@ public class MemberController {
 	}
 	
 	
+	/** 회원가입 FORM 이동 */
+	@GetMapping("signUp")
+	public String setJoin() throws Exception{
+		
+		return "member/signUp";
+	}
+	
+	
+	
+	
+	
 }

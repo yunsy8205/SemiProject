@@ -74,8 +74,8 @@
 						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item text-white me-3"><a href="../my/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
+						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
+						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
