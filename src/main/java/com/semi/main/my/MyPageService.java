@@ -20,12 +20,11 @@ public class MyPageService {
 	private MyPageDAO myPageDAO;
 	@Autowired
 	private FileManager fileManager;
-	
+
 	
 	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ //회원수정 메서드
 		return myPageDAO.setMemberUpdate(memberDTO);
 	}
-	
 
 	
 	public String setContentsImg(MultipartFile file, HttpSession session) throws Exception {
@@ -42,8 +41,10 @@ public class MyPageService {
 		memberFileDTO.setUserNo(userNo);
 		memberFileDTO.setOriginalName(file.getOriginalFilename());
 		int result = myPageDAO.setFileJoin(memberFileDTO);
-		
+
+    
 		System.out.println(path+fileName+"아");
+
 //		--------
 		
 		

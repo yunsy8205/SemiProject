@@ -8,6 +8,7 @@
 
 <!-- login -->
 	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
+
 	SELECT M.*, R.*, P.*
 	FROM MEMBER M 
 	LEFT OUTER JOIN PROFILE P

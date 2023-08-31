@@ -33,7 +33,8 @@ public class MyPageController {
 		System.out.println(memberDTO.getName());
 		System.out.println(memberDTO.getMemberFileDTO()+"zz");
 //		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
-		
+
+
 	}
 	
 	

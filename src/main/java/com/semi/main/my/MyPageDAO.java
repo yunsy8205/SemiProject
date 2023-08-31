@@ -25,6 +25,7 @@ public class MyPageDAO {
 	
 	
 	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception{ //로그인 테스트로 나중에 삭제
+    
 		System.out.println(memberDTO.getUserId());
 		System.out.println(memberDTO.getUserPw());
 		

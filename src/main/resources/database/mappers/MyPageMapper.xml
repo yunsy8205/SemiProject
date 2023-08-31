@@ -6,8 +6,8 @@
  
   <mapper namespace="com.semi.main.my.MyPageDAO">
   		
-  		
-  		<insert id="setFileJoin" parameterType="MemberFileDTO"> <!-- 사진 수정용 -->
+ <!-- 사진 수정용 -->
+  		<insert id="setFileJoin" parameterType="MemberFileDTO"> 
   		<selectKey keyProperty="fileNo" resultType="Long" order="BEFORE">
 	  		SELECT PROFILE_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
