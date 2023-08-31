@@ -3,6 +3,7 @@ package com.semi.main.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,5 +76,16 @@ public class MemberController {
 		return mv;
 		
 	}
-
+	
+	
+	/** 로그아웃 */
+	@GetMapping("logout")
+	public String logout(HttpSession session) throws Exception{
+		// 세션 비우기
+		session.invalidate();
+		
+		return "redirect:../";
+	}
+	
+	
 }
