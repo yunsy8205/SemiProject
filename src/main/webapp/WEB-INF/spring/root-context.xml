@@ -11,7 +11,7 @@
 		<!-- 파일 하나 당 최대 크기를 의미함 -->
 		<property name="maxUploadSizePerFile" value="10485760"></property>
 		<!-- 첨부파일 전송 시 여러개 보낼때 사용 : 파일 다 합쳐서 100메가를 넘을 시 전송못하게 막아둠. -->
-		<property name="maxUploadSize" value="104857600"></property>
+		<property name="maxUploadSize" value="10485760000"></property>
 	</bean>
 		
 </beans>

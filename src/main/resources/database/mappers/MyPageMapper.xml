@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+  <mapper namespace="com.semi.main.my.MyPageDAO">
+  		
+  		<select id="getLogin" parameterType="MyPageDTO" resultMap="getLoginResult"><!-- 임시 로그인용으로 나중에 삭제 -->
+  			<!-- select * from member where userid=#{userId} and userpw=#{userPw} -->
+  			
+  			select * 
+  			from member m 
+  			left outer join
+  			profile p
+  			on m.userno = p.userno
+  			where userid=#{userId} and userpw=#{userPw}
+  		</select>
+  		
+  		<resultMap id="getLoginResult" type="MyPageDTO">
+			<id column="USERNO" property="userNo" />
+			<result column="userid" property="userId" />
+			<result column="userpw" property="userPw" />
+			<result column="name" property="name" />
+			<result column="email" property="email" />
+			<result column="birth" property="birth" />
+			<result column="address" property="address" />
+			<result column="phone" property="phone" />
+			<result column="accountdate" property="accountDate" />
+			<result column="intro" property="intro" />
+			<result column="statusNo" property="statusNo" />
+			<!-- 08/28 추가 -->
+			<result column="zipcode" property="zipCode" />
+			<result column="refaddress" property="refAddress" />
+			<result column="detailaddress" property="detailAddress" />
+			
+			
+			<association property="myPageFileDTO" javaType="MyPageFileDTO">
+				<id column="fileNo" property="fileNo" />
+				<result column="fileName" property="fileName" />
+				<result column="originalName" property="originalName" />
+			</association>
+		</resultMap>
+  		
+  		
+  		<insert id="setFileJoin" parameterType="MyPageFileDTO"> <!-- 사진 수정용 -->
+  		<selectKey keyProperty="fileNo" resultType="Long" order="BEFORE">
+	  		SELECT PROFILE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PROFILE 
+  		VALUES (#{fileNo}, #{userNo}, #{originalName}, #{fileName})
+	  	</insert>
+	  
+	  	
+	  	<!-- 회원수정 -->
+  	<update id="setMemberUpdate" parameterType="MyPageDTO">
+  		UPDATE MEMBER SET
+  		userpw=#{userPw}, NAME=#{name}, EMAIL=#{email}, BIRTH=#{birth}, 
+  		zipcode=#{zipCode}, address=#{address}, refaddress=#{refAddress}, 
+  		detailaddress=#{detailAddress}, phone=#{phone}, intro=#{intro}
+  		WHERE userid=#{userId}
+  	</update>
+  
+
+	<!-- 회원탈퇴 -->
+	<delete id="setDelete" parameterType="MyPageDTO">
+		DELETE FROM MEMBER
+		WHERE USERID=#{userId} AND USERPW=#{userPw}
+	</delete>
+	
+	
+	
+  </mapper>

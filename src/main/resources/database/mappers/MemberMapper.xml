@@ -7,12 +7,9 @@
 <mapper namespace="com.semi.main.member.MemberDAO">
 
 	<select id="getLogin" resultType="MemberDTO" parameterType="MemberDTO">
-	SELECT USERNO, USERID, USERPW, NAME, EMAIL, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, ADDRESS, PHONE
-			   ,TO_CHAR(ACCOUNTDATE, 'YYYY-MM-DD') AS ACCOUNTDATE, INTRO, STATUSNO
+	SELECT *
 	FROM MEMBER
-	WHERE USERID=#{userId} AND USERPW=#{userPw} 
+	WHERE USERID=#{userId} AND USERPW=#{userPw}
 	
 	</select>
-
-
 </mapper>
