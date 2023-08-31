@@ -6,10 +6,49 @@
   
 <mapper namespace="com.semi.main.member.MemberDAO">
 
-	<select id="getLogin" resultType="MemberDTO" parameterType="MemberDTO">
-	SELECT *
-	FROM MEMBER
-	WHERE USERID=#{userId} AND USERPW=#{userPw}
-	
+<!-- login -->
+	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
+	SELECT M.*, MR.*, R.*
+	FROM MEMBER M 
+	LEFT OUTER JOIN PROFILE P
+	ON (M.USERNO = P.USERNO)
+	LEFT OUTER JOIN MEMBERROLE MR
+	ON (M.USERNO = MR.USERNO)
+	LEFT OUTER JOIN ROLE R
+	ON (R.GRANTNO = MR.GRANTNO)
+	WHERE M.USERID = #{userId} AND USERPW=#{userPw}
 	</select>
+	
+<!-- JOIN Mapping -->	
+	<resultMap type="MemberDTO" id="getLoginResult">
+		<id column="USERNO" property="userNo" ></id>
+		<result column="USERID" property="userId"/>
+		<result column="USERPW" property="userPw"/>
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="BIRTH" property="birth"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="PHONE" property="phone"/>
+		<result column="ACCOUNTDATE" property="accountDate"/>
+		<result column="INTRO" property="intro"/>
+		<result column="STATUSNO" property="statusNo"/>
+		<result column="ZIPCODE" property="zipCode"/>
+		<result column="REFADDRESS" property="refAddress"/>
+		<result column="DETAILADDRESS" property="DetailAddress"/>
+		
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+		</association>
+		
+		<collection property="roles" javaType="List" ofType="RoleDTO">
+			<id column="GRANTNO" property="grantNo"/>
+			<result column="GRANTNAME" property="grantName"/>		
+		</collection>
+
+	</resultMap>
+	
+	
+	
 </mapper>
