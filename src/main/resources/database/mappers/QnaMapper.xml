@@ -5,14 +5,63 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <!--  
- id의 역할 : 중복되면 안됨. --> 
+
   <mapper namespace="com.semi.main.qna.QnaDAO">
  
-	<select id="getList" parameterType="QnaDTO" resultType="QnaDTO">
-		SELECT TITLE,STATUS
+ 	<!-- 내문의 LIST  -->
+	<select id="getMyList" parameterType="QnaDTO" resultType="QnaDTO">
+		SELECT BOARDNO,TITLE,CREATEDATE,STATUS
 		FROM QNA
 		WHERE USERNO=#{userNo}
 	</select>
+	
+ 	<!-- detail  -->
+	<select id="getDetail" resultMap="getDetailResult" resultType="QnaDTO">
+		SELECT Q.*,QF.*,M.USERID,K.KINDNAME
+		FROM QNA Q LEFT JOIN QNAFILE QF
+		ON (Q.BOARDNO = QF.BOARDNO)
+		JOIN MEMBER M
+		ON (Q.USERNO = M.USERNO)
+		JOIN KIND K
+		ON (Q.KINDNO = K.KINDNO)
+		WHERE Q.BOARDNO = #{boardNo}
+	</select>	
+	
+	<resultMap type="QnaDTO" id="getDetailResult">
+		<id column="BOARDNO" property="boardNo"/>
+		<result	column="USERNO" property="userNo"/>
+		<result	column="KINDNO" property="kindNo"/>
+		<result	column="TITLE" property="title"/>
+		<result	column="CREATEDATE" property="createDate"/>
+		<result	column="CONTENTS" property="contents"/>
+		<result	column="STATUS" property="status"/>
+		<result column="USERID" property="userId"/>
+		<result column="KINDNAME" property="kindName"/>
+		
+		<collection property="fileDTOs" javaType="List" ofType="QnaFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+	</resultMap>
+	
+	
+	<!-- ADD -->
+	<insert id="setAdd" parameterType="QnaDTO">
+		<selectKey keyProperty="boardNo" resultType="Long" order="BEFORE">
+			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+		 </selectKey>
+		INSERT INTO QNA
+		VALUES(#{boardNo},#{userNo},#{kindNo},#{title},sysdate,#{contents},default)	 
+	</insert>
+	
+	<!-- fileadd  -->
+	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
+		INSERT INTO QNAFILE VALUES (QNAFILE_SEQ.NEXTVAL,#{boardNo},#{originalName},#{fileName})
+	</insert>
+	
+		
+	
+  
   
   </mapper>

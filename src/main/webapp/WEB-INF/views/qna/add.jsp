@@ -17,23 +17,32 @@
 
 <section class="container mt-5">
 	
-		<form action="./update" method="post" id="frm" enctype="multipart/form-data">
+		<form action="./add" method="post" id="frm" enctype="multipart/form-data">
 		
-			<input type="hidden" name="boardNo" readonly="readonly"  value="${dto.boardNo}">
-			
+				
 			<div class="mb-3">
 			<label for="userId" class="form-label">작성자</label>
-			<input type="text" class="form-control" id="userId" name="userId" value="${member.userId}">
+			<input type="text" class="form-control" id="userId" name="userId" readonly="readonly" value="${member.userId}">
 			</div>
 			
 			<div class="mb-3">
+			 <label for="Default select example" class="form-label">유형</label>
+			  <select id="kind" name="kindNo" class="form-select form-control" aria-label="Default select example">
+				  <option class="kind" value="1">회원/계정</option>
+				  <option class="kind" value="2">오류/신고/제안</option>
+				  <option class="kind" value="3">거래문의</option>
+				  <option class="kind" value="4">기타</option>
+			  </select>
+			  </div>
+			
+			<div class="mb-3">
 			<label for="title" class="form-label">제목</label>
-			<input type="text" class="form-control" id="title" name="title" value="${dto.title}">
+			<input type="text" class="form-control" id="title" name="title" >
 			</div>
 			
 			<div class="mb-3">
 			<label for="contents" class="form-label">본문</label>
-			<textarea rows="" cols="" class="form-control" id="contents" name="contents" > ${dto.contents}</textarea>
+			<textarea rows="" cols="" class="form-control" id="contents" name="contents"></textarea>
 			</div>
 			
 			
@@ -42,28 +51,22 @@
 			<div id="fileList" class="my-5"></div>
 			
 			<div class="mb-3">
-				<button type="button" class="btn btn-outline-primary mb-2" id="fileAdd">File추가</button>
+				<button type="button" class="btn btn-outline-primary" id="fileAdd">File추가</button>
 			</div>
 			
-			<div >
-			<c:forEach items="${dto.fileDTOs}" var="f">
-				<span class="alert alert-primary me-2" role="alert" id="${f.fileNo}" >
-					첨부파일 : ${f.originalName}
-				 </span>
-			<span class="delets" data-delete-num="${f.fileNo}" >x</span>
-			</c:forEach>
-			</div>
+			<button class="btn btn-danger" type="submit" id="btn" >등록</button>
 			
-			<button class="btn btn-danger mt-4" type="submit" id="btn">수정</button>
 			
 		</form>
 </section>			
 
-	
+
 	
 
+</script>
 
 <script src="../resources/js/file.js"></script>
+
 
 </body>
 </html>

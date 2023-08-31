@@ -1,5 +1,19 @@
 package com.semi.main.qna;
 
-public class QnaFileDTO {
+import com.semi.main.file.FileDTO;
+
+public class QnaFileDTO extends FileDTO{
+	
+	private Long boardNo;
+
+	public Long getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(Long boardNo) {
+		this.boardNo = boardNo;
+	}
+	
+	
 
 }
