@@ -8,7 +8,7 @@
 
 <!-- login -->
 	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
-	SELECT M.*, MR.*, R.*
+	SELECT M.*, MR.*, R.*, P.*
 	FROM MEMBER M 
 	LEFT OUTER JOIN PROFILE P
 	ON (M.USERNO = P.USERNO)
@@ -17,6 +17,7 @@
 	LEFT OUTER JOIN ROLE R
 	ON (R.GRANTNO = MR.GRANTNO)
 	WHERE M.USERID = #{userId} AND USERPW=#{userPw}
+	order by p.fileno asc
 	</select>
 	
 <!-- JOIN Mapping -->	
@@ -34,7 +35,7 @@
 		<result column="STATUSNO" property="statusNo"/>
 		<result column="ZIPCODE" property="zipCode"/>
 		<result column="REFADDRESS" property="refAddress"/>
-		<result column="DETAILADDRESS" property="DetailAddress"/>
+		<result column="DETAILADDRESS" property="detailAddress"/>
 		
 		<association property="memberFileDTO" javaType="MemberFileDTO">
 			<id column="FILENO" property="fileNo"/>

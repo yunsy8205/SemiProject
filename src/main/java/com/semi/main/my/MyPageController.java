@@ -24,29 +24,16 @@ public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
 	
-	
-	
-	
-	
-	@RequestMapping(value = "login", method = RequestMethod.GET) //로그인 테스트용으로 나중에 삭제
-	public void getLogin() throws Exception{
-		
-	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST) //로그인 테스트용으로 나중에 삭제
-	public String getLogin(MemberDTO memberDTO, HttpSession session) throws Exception{
-		memberDTO = myPageService.getLogin(memberDTO);
-		if(memberDTO != null) {
-			session.setAttribute("member", memberDTO);
-		}
-		
-		return "redirect:/";
-	}
-	
 
 	
 	@GetMapping(value = "mypage") //마이페이지
-	public void myPage() throws Exception{
+	public void myPage(HttpSession session) throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
+		System.out.println(memberDTO.getName());
+		System.out.println(memberDTO.getMemberFileDTO()+"zz");
+		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
+		
+		
 		
 	}
 	

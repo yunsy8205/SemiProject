@@ -217,7 +217,6 @@
 			<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}" onerror="this.onerror-null; this.src='../resources/img/imgtest.jpeg';" width="200"; height="300">
 		</p>
 	</div>
-	${member.memberFileDTO.fileName} zzzz
 	<div id="section">
 		<p>${member.userId} 님</p>
 		<p>${member.email}</p>

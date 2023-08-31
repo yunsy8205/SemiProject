@@ -20,13 +20,6 @@ public class MyPageService {
 	private MyPageDAO myPageDAO;
 	@Autowired
 	private FileManager fileManager;
-	
-
-	
-	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception{ //로그인 삭제예정
-		return myPageDAO.getLogin(memberDTO);
-	}
-	
 
 	
 	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ //회원수정 메서드
@@ -49,6 +42,9 @@ public class MyPageService {
 		memberFileDTO.setUserNo(userNo);
 		memberFileDTO.setOriginalName(file.getOriginalFilename());
 		int result = myPageDAO.setFileJoin(memberFileDTO);
+		
+		
+		System.out.println(path+fileName + "아");
 //		--------
 		
 		
