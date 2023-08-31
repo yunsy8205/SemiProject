@@ -6,10 +6,26 @@
   
 <mapper namespace="com.semi.main.member.MemberDAO">
 
-	<select id="getLogin" resultType="MemberDTO" parameterType="MemberDTO">
-	SELECT *
-	FROM MEMBER
-	WHERE USERID=#{userId} AND USERPW=#{userPw}
-	
+<!-- login -->
+	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
+	SELECT M.*, MR.*, R.*
+	FROM MEMBER M 
+	LEFT OUTER JOIN PROFILE P
+	ON (M.USERNO = P.USERNO)
+	LEFT OUTER JOIN MEMBERROLE MR
+	ON (M.USERNO = MR.USERNO)
+	LEFT OUTER JOIN ROLE R
+	ON (R.GRANTNO = MR.GRANTNO)
+	WHERE M.USERID = #{userId} AND USERPW=#{userPw}
 	</select>
+	
+<!-- JOIN Mapping -->	
+	<resultMap type="MemberDTO" id="getLoginResult">
+		<id column=""></id>
+	
+	
+	</resultMap>
+	
+	
+	
 </mapper>
