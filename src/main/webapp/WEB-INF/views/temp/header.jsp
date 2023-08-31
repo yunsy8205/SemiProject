@@ -15,7 +15,7 @@
 		      		</c:if>
 					<c:if test="${empty member}">
 		      		<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-		      		<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
+		      		<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
 		      		</c:if>
             </ul>
         </div>

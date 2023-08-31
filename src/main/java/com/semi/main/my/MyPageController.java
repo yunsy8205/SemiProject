@@ -28,14 +28,15 @@ public class MyPageController {
 	
 	@GetMapping(value = "mypage") //마이페이지
 	public void myPage(HttpSession session) throws Exception{
+		
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
 		System.out.println(memberDTO.getName());
 		System.out.println(memberDTO.getMemberFileDTO()+"zz");
-		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
-		
-		
-		
+//		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
+
+
 	}
+	
 	
 	@GetMapping(value = "update") //정보수정
 	public void update() throws Exception{

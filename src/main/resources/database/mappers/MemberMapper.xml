@@ -8,7 +8,8 @@
 
 <!-- login -->
 	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
-	SELECT M.*, MR.*, R.*, P.*
+
+	SELECT M.*, R.*, P.*
 	FROM MEMBER M 
 	LEFT OUTER JOIN PROFILE P
 	ON (M.USERNO = P.USERNO)
@@ -17,7 +18,7 @@
 	LEFT OUTER JOIN ROLE R
 	ON (R.GRANTNO = MR.GRANTNO)
 	WHERE M.USERID = #{userId} AND USERPW=#{userPw}
-	order by p.fileno asc
+	ORDER BY P.FILENO ASC
 	</select>
 	
 <!-- JOIN Mapping -->	
