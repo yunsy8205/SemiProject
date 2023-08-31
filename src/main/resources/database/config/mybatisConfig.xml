@@ -11,6 +11,8 @@
 		<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.member.MemberDTO" alias="MemberDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.member.MemberFileDTO" alias="MemberFileDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductReviewDTO" alias="ProductReviewDTO"></typeAlias>
   		<typeAlias type="java.util.List" alias="List"></typeAlias>
   		<typeAlias type="java.lang.Long" alias="Long"></typeAlias>

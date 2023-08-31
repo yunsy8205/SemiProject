@@ -19,6 +19,7 @@ public class MemberDTO {
 	
 	private Date birth;
 	
+	//메인주소
 	private String address;
 	
 	private String phone;
@@ -30,8 +31,13 @@ public class MemberDTO {
 	private Long statusNo;
 	
 	// 주소 컬럼 추가
+	// 우편주소
 	private Long zipCode;
+	
+	// 참조주소
 	private String refAddress;
+	
+	// 상세주소
 	private String DetailAddress;
 	
 	
