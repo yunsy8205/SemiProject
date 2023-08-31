@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +23,14 @@ public class AdminController {
 	public String memberList(Pager pager, Model model) throws Exception{
 		List<MemberDTO> ar = adminService.memberList(pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		return "admin/member";
+	}
+	
+	@RequestMapping(value = "statusChange", method = RequestMethod.POST)
+	public String statusChange(MemberDTO memberDTO, Model model)throws Exception {
+		int result = adminService.statusChange(memberDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
 	}
 }	

@@ -29,11 +29,9 @@ public class MemberDTO {
 	
 	private Long statusNo;
 	
-	
 	/* JOIN절에 따른 추가 컬럼 */
 	
 	private List<RoleDTO> roles;
-
 	
 	/* getter and setter */
 	

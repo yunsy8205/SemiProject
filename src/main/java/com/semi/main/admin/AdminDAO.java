@@ -18,11 +18,14 @@ public class AdminDAO {
 	private final String NAMESPACE="com.semi.main.admin.AdminDAO.";
 	
 	public List<MemberDTO> memberList(Pager pager)throws Exception{
-		System.out.println("1");
 		return sqlSession.selectList(NAMESPACE+"memberList",pager);
 	}
 	
 	public Long getTotal(Pager pager)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
+	}
+	
+	public int statusChange(MemberDTO memberDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"statusChange", memberDTO);
 	}
 }

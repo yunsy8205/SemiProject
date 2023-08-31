@@ -19,5 +19,6 @@
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
   		<typeAlias type="com.semi.main.my.MyPageDTO" alias="MyPageDTO"/>
   		<typeAlias type="com.semi.main.my.MyPageFileDTO" alias="MyPageFileDTO"/>
+  		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"/>
   	</typeAliases>
   </configuration>
