@@ -87,6 +87,7 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+
 	
 	/** 회원가입 FORM 이동 */
 	@GetMapping("signUp")
@@ -96,7 +97,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
-	
 }
+
+
