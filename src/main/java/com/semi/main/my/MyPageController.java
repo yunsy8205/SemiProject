@@ -27,13 +27,7 @@ public class MyPageController {
 
 	
 	@GetMapping(value = "mypage") //마이페이지
-	public void myPage(HttpSession session) throws Exception{
-		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
-		System.out.println(memberDTO.getName());
-		System.out.println(memberDTO.getMemberFileDTO()+"zz");
-		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
-		
-		
+	public void myPage() throws Exception{
 		
 	}
 	
@@ -45,6 +39,8 @@ public class MyPageController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String setMemberUpdate(MemberDTO memberDTO, MultipartFile file,HttpSession session) throws Exception{
 		MemberDTO memberDTO2 = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
+		
+
 		
 		String userId = ((MemberDTO)session.getAttribute("member")).getUserId(); 
 		memberDTO.setUserNo(memberDTO2.getUserNo());
