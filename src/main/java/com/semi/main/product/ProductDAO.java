@@ -51,10 +51,10 @@ public class ProductDAO {
 
 	
 	
-	public List<ProductDTO> getListByCategory(Pager pager) {
+	public List<ProductDTO> getCategoryList(Pager pager) {
 		
-		 System.out.println("startRow: " + pager.getStartRow()); // 확인용 출력
-		return sqlSession.selectList(NAMESPACE+"getListByCategory",pager);
+		
+		return sqlSession.selectList(NAMESPACE+"getCategoryList",pager);
 	}
 
 	public int setAdd(ProductDTO productDTO) throws Exception {

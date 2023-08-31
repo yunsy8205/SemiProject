@@ -220,12 +220,12 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
-						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
-						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
-						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
-						<li><a href="./product/categoryList?catNo=1005">노트북</a></li>
-						<li><a href="./product/categoryList?catNo=1006">청소기</a></li>
+						<li><a href="/product/categoryList?catNo=1001">에어컨</a></li>
+						<li><a href="/product/categoryList?catNo=1002">냉장고</a></li>
+						<li><a href="/product/categoryList?catNo=1003">세탁기</a></li>
+						<li><a href="/product/categoryList?catNo=1004">TV</a></li>
+						<li><a href="/product/categoryList?catNo=1005">노트북</a></li>
+						<li><a href="/product/categoryList?catNo=1006">청소기</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -235,73 +235,92 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
-<section>
-          <!-- 카테고리 상품 리스트 출력 -->
-    <div class="product-list">
-        <c:forEach items="${list}" var="product" varStatus="status">
-            <div class="product-card">
-                <!-- 각 상품 카드 -->
-                <div class="product-item">
-                    <!-- 상품 이미지 표시 -->
-                    <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="Product Image" width="200" height="200">
-                    <!-- 상품 이름, 가격 등의 정보 표시 -->
-                    <p>${product.proName}</p>
-                    <p>${product.proPrice}</p>
-                    <p class="product-createDate">작성일: ${product.createDate}</p>
-                    <p class="product-hit">조회수: ${product.hit}</p>
+        <!-- 상품리스트 부분-->
+        <section class="container mt-5">
+            <div class="container">
+                <h1 class="mb-3 text-center">상품 목록</h1>
+                <div class="row">
+                    <c:forEach items="${list}" var="product" varStatus="status">
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <c:choose>
+                                    <c:when test="${not empty product.fileDTOs}">
+                                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="/resources/images/이미지없음.jpg" alt="" class="product-image">
+                                    </c:otherwise>
+                                </c:choose>
+                                <h4>${product.proName}</h4>
+                                <p class="product-content">${product.proContents}</p>
+                                <p>작성자: ${product.userId}</p>
+                                <p>작성일: ${product.createDate}</p>
+                                <p>조회수: ${product.hit}</p>
+                            </div>
+                        </div>
+                        <c:if test="${status.index % 3 == 2 || status.last}">
+                            </div><div class="row"> <!-- 3개 카드마다 row 닫고 새로운 row 열기 -->
+                        </c:if>
+                        <c:if test="${(status.index + 1) % 10 == 0 || status.last}">
+                            </div><div class="row"> <!-- 10개 카드마다 row 닫고 새로운 row 열기 -->
+                        </c:if>
+                    </c:forEach>
                 </div>
-                <!-- 한 줄에 5개씩 출력하기 위해 줄 바꿈 -->
-                <c:if test="${status.index % 5 == 4 || status.last}">
-                    <div class="clearfix"></div>
-                </c:if>
             </div>
-        </c:forEach>
-    </div>
-    <!-- ... (페이징 및 검색 부분) ... -->
-    	<nav aria-label="Page navigation example">
-			  <ul class="pagination">
-			  	<c:if test="${pager.pre}">
-				    <li class="page-item">
-				      <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			    	<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
-			    </c:forEach>
-			    <c:if test="${pager.next}">
-				    <li class="page-item">
-				      <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
-		
-		<div class="input-group mb-3">
-		 <form action="./list" method="get" id="frm">
-		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
-		 	  	
-			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
-				  <option class="kind" value="proName">상품명</option>
-				  <option class="kind" value="proContents">상품설명</option>
-				  <option class="kind" value="userId">이름</option>
-			  </select>
-			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
-			   <div class="col-auto">
-			    <button type="submit" class="btn btn-primary">검색</button>
-			  </div>
-		  </form>
-		</div>
-    
-    <button type="button" class="btn btn-danger"><a href="../product/add">상품등록</a></button>
-</div>
-<div>
-    <button type="button" class="btn btn-danger"><a href="../">홈</a></button>
-</div>
-</section>
+            <!-- ... (페이징 및 검색 부분) ... -->
+                <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                          <c:if test="${pager.pre}">
+                            <li class="page-item">
+                              <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                        </c:if>
+                        <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+                            <li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${pager.next && pager.lastNum < pager.totalPage && !empty list}">
+                            <li class="page-item">
+                                <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${!pager.next || pager.lastNum >= pager.totalPage}">
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </span>
+                            </li>
+                        </c:if>
+                      </ul>
+                    </nav>
+                
+                <div class="input-group mb-3">
+                 <form action="./categoryList" method="get" id="frm">
+                       <input type="hidden" value="${pager.page}" id="page" name="page">
+                       <input type="hidden" value="${catNo}" name="catNo">
+                           
+                      <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
+                          <option class="kind" value="proName">상품명</option>
+                          <option class="kind" value="proContents">상품설명</option>
+                          <option class="kind" value="userId">이름</option>
+                      </select>
+                      <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
+                       <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">검색</button>
+                      </div>
+                  </form>
+                </div>
+            
+            <button type="button" class="btn btn-danger"><a href="../product/add">상품등록</a></button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger"><a href="../">홈</a></button>
+        </div>
+        </section>
     
 
 

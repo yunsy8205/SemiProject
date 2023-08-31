@@ -49,8 +49,10 @@
 				    <select id="catNo" name="catNo">
 				        <option value="1001">에어컨</option>
 				        <option value="1002">냉장고</option>
-				        <option value="1003">TV</option>
-				        <option value="1004">노트북</option>
+				        <option value="1003">세탁기</option>
+						<option value="1004">TV</option>
+						<option value="1005">노트북</option>
+				        <option value="1006">세탁기</option>
 				    </select>
 
                

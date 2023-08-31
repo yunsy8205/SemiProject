@@ -33,8 +33,11 @@ public class ProductService {
 		return productDAO.getList(pager);
 	}
 	
-	public List<ProductDTO> getListByCategory(Pager pager) {
-        return productDAO.getListByCategory(pager);
+	public List<ProductDTO> getCategoryList(Pager pager) throws Exception{
+		
+		pager.makeRowNum();
+		pager.makePageNum(productDAO.getTotal(pager));
+        return productDAO.getCategoryList(pager);
     }
 
 	
@@ -43,8 +46,7 @@ public class ProductService {
 		String path="/resources/upload/product/";
 		
 		int result = productDAO.setAdd(productDTO);
-		 System.out.println("ProductDTO proNo: " + productDTO.getProNo()); // 디버깅 메시지 추가
-
+		
 		for(MultipartFile file:files) {
 			if(!file.isEmpty()) {
 				String fileName=fileManager.fileSave(path, session, file);

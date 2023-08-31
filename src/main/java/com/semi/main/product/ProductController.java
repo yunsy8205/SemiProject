@@ -24,7 +24,9 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "list",method = RequestMethod.GET)
-	public String getList(Pager pager,Model model) throws Exception{
+	public String getList(Pager pager,Model model,Long catNo) throws Exception{
+		System.out.println("컨트롤러 startRow: " + pager.getStartRow()); // 확인용 출력
+		 System.out.println("catNo: " + catNo); // 확인용 출력
 		List<ProductDTO> ar = productService.getList(pager);
 		
 		// 각 상품에 대한 이미지 리스트 가져오기
@@ -44,12 +46,12 @@ public class ProductController {
 	
 	
 	
-		@RequestMapping(value = "/product/categoryList")
+		@RequestMapping(value = "categoryList")
 		public String getCategoryList(Pager pager,Long catNo, Model model) throws Exception{
 		 System.out.println("컨트롤러 startRow: " + pager.getStartRow()); // 확인용 출력
 		 System.out.println("catNo: " + catNo); // 확인용 출력
 	        pager.setCatNo(catNo); // 카테고리 번호를 Pager에 설정
-	        List<ProductDTO> ar = productService.getListByCategory(pager);
+	        List<ProductDTO> ar = productService.getCategoryList(pager);
 	        // 각 상품에 대한 이미지 리스트 가져오기
 	        for (ProductDTO product : ar) {
 	            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
@@ -61,6 +63,7 @@ public class ProductController {
 	        }
 			model.addAttribute("list",ar);
 			model.addAttribute("pager", pager);
+			model.addAttribute("catNo", catNo);
 	        return "product/categoryList"; // JSP page name in the "product" folder
 	    }
 	
@@ -81,7 +84,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("message", message);
-		model.addAttribute("url", "list");
+		model.addAttribute("url", "/");
 		
 		return "commons/result";
 	}
