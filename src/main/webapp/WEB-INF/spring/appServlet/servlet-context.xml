@@ -26,7 +26,34 @@
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
 	
+	<!-- Interceptor 설정 -->
+<!-- 	<interceptors>
+		<interceptor>
+			<mapping path="member/*"/>
+			<beans:bean class="com.semi.main.interceptor.AppInterceptor"/>
+		</interceptor>
+	</interceptors>
+	 -->
 	<context:component-scan base-package="com.semi.main" />
+	
+	<!-- OAuth2 login -->
+	<beans:bean id="naverClientID" class="java.lang.String">
+		<beans:constructor-arg value="r6eVt2waeuOw7uHsH9OU"/>
+	</beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+		<beans:constructor-arg value="wLhCPAnFJX"/>
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:82/auth/naver/callback"/>
+	</beans:bean>
+<!-- 	<beans:bean id="naverSns" class="com.semi.main.auth.SNSValue">
+		<beans:constructor-arg value="naver"/>
+		<beans:constructor-arg ref="naverClientID"/>
+		<beans:constructor-arg ref="naverClientSecret"/>
+		<beans:constructor-arg ref="naverRedirectUrl"/>
+	</beans:bean> -->
+	
+	
 	
 	
 	

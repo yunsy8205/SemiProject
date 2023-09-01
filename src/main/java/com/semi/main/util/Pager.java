@@ -75,6 +75,7 @@ public class Pager {
 		this.startNum=(curBlock-1)*perBlock+1;
 		this.lastNum=curBlock*perBlock;
 		
+		
 		//이전 블럭 활성화 여부
 		if(curBlock>1) {
 			this.pre=true;
@@ -89,6 +90,7 @@ public class Pager {
 		if(!this.next) {
 			this.lastNum=totalPage;
 		}
+		
 	}
 	
 	public boolean isPre() {
@@ -206,5 +208,6 @@ public class Pager {
 	public void setSearch(String search) {
 		this.search = search;
 	}
+	
 
 }

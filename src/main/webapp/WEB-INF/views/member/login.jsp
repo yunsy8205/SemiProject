@@ -2,6 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	// 로그인 되어 있으면 메인페이지로 강제 이동
+	if (session.getAttribute("member") != null && session.getAttribute("member") != "") {
+		response.sendRedirect("/");
+	}
+	// 이전 페이지 기록
+    String referer = request.getHeader("member");
+    if(referer==null)referer = "/";
+%>
 <!DOCTYPE html>
 
 <html>
@@ -27,26 +36,49 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="pw" class="col-sm-2">ID</label>
+			<label for="pw" class="col-sm-2">PASSWORD</label>
 			<input type="password" name="userPw"  id="pw" value="" placeholder="비밀번호를 입력하세요">
 		</div>
 		
 		<div class="checkbox col-sm-offset-2">
-				<label><input type="checkbox" id="idSave" <c:if test="${cookie.id.value != null && cookie.id.value != ''}">checked</c:if>>아이디 저장</label> 
-				<label><input type="checkbox" id="idStateful" <c:if test="${cookie.idStateful.value != null && cookie.idStateful.value != ''}">checked</c:if>>로그인 상태유지</label>
-				<input type="hidden" name="idStateful" id="ids" value="" />
+			<span>
+				<label for="idSave">아이디 저장</label>
+				<input type="checkbox" id="idSave" name="idSave" autocapitalize="off" <c:if test="${cookie.id.value != null && cookie.id.value != ''}">checked</c:if>> 			
+			</span>
+			<span>
+				<label for="idStateful">로그인 상태유지</label>
+				<input type="checkbox" id="idStateful" autocapitalize="off" <c:if test="${cookie.idStateful.value != null && cookie.idStateful.value != ''}">checked</c:if>>
+				<input type="hidden" name="idStateful" id="ids" value="" />			
+			</span>
 		</div> 
 		
 	<div class="mb-3">
 		<button type="button" id="loginbtn" class="btn-book-a-table">로그인</button>
 	</div>
-	
-		
 	</fieldset>
    </form>
+   
+   <!-- 아이디 비번 찾기 및 회원가입 영역 -->
+   <div class="loginEtc">
+   		<a href="./findId" class="lnk_etc">아이디 찾기</a>
+   		<em class="divi"> | </em>
+   		<a href="./findPw" class="lnk_etc">비밀번호 찾기</a>
+   		<em class="divi"> | </em>
+   		<a href="./signUp" class="lnk_etc">회원가입</a>
+   </div>
+   
+   <!-- 소셜 로그인 영역 -->
+   <ul class="loginSocialLi" style="display:;">
+		<li class="oddCol "><a href="javascript:void(0);" id="FBLoginSub_aBtnNaverLogin" onClick="callNaverAuth('R');dfinerySnsLogIn('Naver');" class="btn_social"><span class="bWrap"><em class="ico_social ico_na bgMem"></em><em class="txt">네이버 아이디로 로그인</em></span></a>  </li>
+		<li class="evenCol"><a href="javascript:void(0);" id="FBLoginSub_aBtnKakaoLogin" onClick="callKakaoLogin();dfinerySnsLogIn('Kakao');" class="btn_social"><span class="bWrap"><em class="ico_social ico_ka bgMem"></em><em class="txt">카카오 아이디로 로그인</em></span></a>  </li>	
+	</ul>
+   
 </section>	
 
+	 <!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="/resources/js/login.js"></script>
+	
   
 </body>
 </html>

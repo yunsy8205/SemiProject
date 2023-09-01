@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+  <mapper namespace="com.semi.main.profile.ProfileDAO">
+  	<select id="memberProfile" parameterType="ProfileDTO" resultType="ProfileDTO">
+  		SELECT M.*, P.ORIGINALNAME
+		FROM MEMBER M LEFT JOIN PROFILE P
+		ON(M.USERNO=P.USERNO)
+		WHERE M.USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="countSaleProduct" parameterType="ProfileDTO" resultType="Long">
+  		SELECT COUNT(PROSALE) FROM PRODUCT
+  		WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<select id="avgScore" parameterType="ProfileDTO" resultType="Double">
+  		SELECT AVG(SCORE) FROM REVIEW
+  		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
+  	</select>
+  	
+  	<select id="memberProList" parameterType="Map" resultMap="getResult">
+		SELECT C.*, PI.* FROM
+		(SELECT B.* FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT * FROM PRODUCT WHERE USERNO=#{profileDTO.userNo} ORDER BY CREATEDATE DESC)A)B)C
+		LEFT JOIN PRODUCTIMAGE PI
+		ON(C.PRONO=PI.PRONO)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+  	
+  	<select id="memberReviewList" parameterType="Map" resultType="ProductReviewDTO">
+		SELECT * FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT RE.*, M.USERID, P.FILENAME, PD.PRONAME FROM REVIEW RE
+		JOIN MEMBER M ON(RE.USERNO=M.USERNO)
+		LEFT JOIN PROFILE P ON(RE.USERNO=P.USERNO)
+		LEFT JOIN PRODUCT PD ON(RE.PRONO=PD.PRONO)
+		WHERE RE.PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{profileDTO.userNo})
+		ORDER BY RE.REVIEWDATE DESC)A)B
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+ 
+      <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="proHit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	
+	<select id="getTotal" resultType="Long" parameterType="Map">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{profileDTO.userNo}
+  	</select>
+  	<insert id="a"></insert>
+  	<update id="b"></update>
+  	<delete id="c"></delete>
+  	
+  </mapper>

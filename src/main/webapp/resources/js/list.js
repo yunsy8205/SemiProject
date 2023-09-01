@@ -17,7 +17,6 @@ let data=ki.getAttribute("data-kind")
 
 for(m of move){
     m.addEventListener("click", function(){
-        
         page.value = this.getAttribute("data-num")
         frm.submit();
     });

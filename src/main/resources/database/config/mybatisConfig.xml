@@ -11,10 +11,8 @@
 		<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.member.MemberDTO" alias="MemberDTO"></typeAlias>
-  		
-  		<typeAlias type="java.util.List" alias="List"></typeAlias>
-  		<typeAlias type="java.lang.Long" alias="Long"></typeAlias>
-		<typeAlias type="com.semi.main.util.Pager" alias="Pager"/>
+
+
   		
   		<typeAlias type="com.semi.main.adminNotice.AdminNoticeFileDTO" alias="AdminNoticeFileDTO"/>
 		<typeAlias type="com.semi.main.adminNotice.AdminNoticeDTO" alias="AdminNoticeDTO"/>
@@ -23,4 +21,15 @@
 		<typeAlias type="com.semi.main.qna.QnaFileDTO" alias="QnaFileDTO"/>
 		
 	</typeAliases>
+
+  		<typeAlias type="com.semi.main.member.MemberFileDTO" alias="MemberFileDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.product.ProductReviewDTO" alias="ProductReviewDTO"></typeAlias>
+  		<typeAlias type="java.util.List" alias="List"></typeAlias>
+  		<typeAlias type="java.lang.Long" alias="Long"></typeAlias>
+  		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
+  		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
+  	</typeAliases>
+
   </configuration>

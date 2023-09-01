@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+  <mapper namespace="com.semi.main.my.MyPageDAO">
+  		
+ <!-- 사진 수정용 -->
+  		<insert id="setFileJoin" parameterType="MemberFileDTO"> 
+  		<selectKey keyProperty="fileNo" resultType="Long" order="BEFORE">
+	  		SELECT PROFILE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PROFILE 
+  		VALUES (#{fileNo}, #{userNo}, #{originalName}, #{fileName})
+	  	</insert>
+	  
+	  	
+	  	<!-- 회원수정 -->
+  	<update id="setMemberUpdate" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		userpw=#{userPw}, NAME=#{name}, EMAIL=#{email}, BIRTH=#{birth}, 
+  		zipcode=#{zipCode}, address=#{address}, refaddress=#{refAddress}, 
+  		detailaddress=#{detailAddress}, phone=#{phone}, intro=#{intro}
+  		WHERE userid=#{userId}
+  	</update>
+  
+
+	<!-- 회원탈퇴 -->
+	<delete id="setDelete" parameterType="MemberDTO">
+		DELETE FROM MEMBER
+		WHERE USERID=#{userId} AND USERPW=#{userPw}
+	</delete>
+
+	
+  </mapper>
