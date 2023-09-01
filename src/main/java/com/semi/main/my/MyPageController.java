@@ -27,13 +27,13 @@ public class MyPageController {
 
 	
 	@GetMapping(value = "mypage") //마이페이지
-	public void myPage(HttpSession session) throws Exception{
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO=(MemberDTO)session.getAttribute("member");
+	public void myPage(/* HttpSession session */) throws Exception{
+//		MemberDTO memberDTO = new MemberDTO();
+//		memberDTO=(MemberDTO)session.getAttribute("member");
 //		System.out.println(memberDTO.getUserId()+"?zzz");
 //		System.out.println(memberDTO.getEmail()+"?zzz");
 //		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"?zzz");
-		
+//		System.out.println(memberDTO.getAccountDate());
 	}
 	
 	@GetMapping(value = "update") //정보수정

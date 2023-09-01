@@ -300,6 +300,10 @@
 							
 							<div class="order-products">
 								<div class="order-col">
+									<div>회원가입일</div>
+									<div>${member.accountDate}</div>
+								</div>
+								<div class="order-col">
 									<div>판매횟수</div>
 									<div>?</div>
 								</div>
