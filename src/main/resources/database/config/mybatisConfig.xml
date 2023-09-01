@@ -20,8 +20,6 @@
 		<typeAlias type="com.semi.main.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.semi.main.qna.QnaFileDTO" alias="QnaFileDTO"/>
 		
-	</typeAliases>
-
   		<typeAlias type="com.semi.main.member.MemberFileDTO" alias="MemberFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductReviewDTO" alias="ProductReviewDTO"></typeAlias>
@@ -30,6 +28,8 @@
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
-  	</typeAliases>
+	</typeAliases>
+
+  	
 
   </configuration>
