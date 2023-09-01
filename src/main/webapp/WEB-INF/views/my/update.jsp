@@ -274,7 +274,7 @@
 						<div class="order-summary">
 							<div class="order-col">
 								<div><strong>이름</strong></div>
-								<div color:red;>*필수입력</div>
+								<div style="color:red">*필수입력</div>
 							</div>
 							<div class="order-products">
 								<div class="order-col-md-3">
@@ -285,7 +285,7 @@
 								
 								<div class="order-col">
 									<div><strong>비밀번호</strong></div>
-									<div><strong></strong></div>
+									<div style="color:red">*필수입력</div>
 								</div>
 							
 								<div class="order-col-md-3">
@@ -296,7 +296,7 @@
 								
 								<div class="order-col">
 									<div><strong>비밀번호 확인</strong></div>
-									<div><strong></strong></div>
+									<div style="color:red">*필수입력</div>
 								</div>
 							
 								<div class="order-col-md-3">
@@ -318,7 +318,7 @@
 								
 								<div class="order-col">
 									<div><strong>생일</strong></div>
-									<div><strong></strong></div>
+									<div style="color:red">*필수입력</div>
 								</div>
 							
 								<div class="order-col-md-3">
@@ -329,7 +329,7 @@
 								
 								<div class="order-col">
 									<div><strong>주소</strong></div>
-									<div><strong></strong></div>
+									<div style="color:red">*필수입력</div>
 								</div>
 							
 								<div class="order-col-md-3">
