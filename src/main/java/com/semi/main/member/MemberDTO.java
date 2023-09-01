@@ -46,8 +46,9 @@ public class MemberDTO {
 	
 	private List<RoleDTO> roles;
 	
-	private String fileName;
 	private MemberFileDTO memberFileDTO;
+	
+	private String fileName;
 	
 
 	
@@ -221,7 +222,5 @@ public class MemberDTO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
-	
 
 }

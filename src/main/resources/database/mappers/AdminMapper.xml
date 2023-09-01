@@ -46,7 +46,7 @@
 			<result column="refaddress" property="refAddress" />
 			<result column="detailaddress" property="detailAddress" />
 			<result column="FILENAME" property="fileName" />
-			
+	
 			<collection property="roles" javaType="List" ofType="RoleDTO">
 				<id column="GRANTNO" property="grantNo" />
 				<result column="GRANTNAME" property="grantName" />
@@ -64,7 +64,7 @@
   	</update>
   	
   	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
-		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME 
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME
 		FROM MEMBER M LEFT JOIN MEMBERROLE MR
 		ON(M.USERNO=MR.USERNO)
 		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)

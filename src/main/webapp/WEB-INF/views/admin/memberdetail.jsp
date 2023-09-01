@@ -27,7 +27,7 @@
 	<section class="container mt-5">
 		<h1 class="text-center mb-5">회원정보관리</h1>
 			<div id="image">
-				<img class="memberImage" src="../resources/upload/member/${f.originalName}" class="d-block w-100" alt="...">
+				<img class="memberImage" src="../resources/upload/member/${dto.fileName}" class="d-block w-100" alt="...">
 			</div>
 			<table class="table table-bordered border-secondary">
 				<tr>
