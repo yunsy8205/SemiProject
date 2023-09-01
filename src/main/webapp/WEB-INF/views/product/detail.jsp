@@ -64,6 +64,8 @@
 	</style>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<c:import url="../temp/header1.jsp"></c:import>
+
 </head>
 <body>
 
@@ -202,5 +204,6 @@
 	<c:if test="${empty member}">
 		<script src="../resources/js/detailLogout.js"></script>	
 	</c:if>
+<c:import url="../temp/footer1.jsp"></c:import>
 </body>
 </html>
