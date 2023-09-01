@@ -27,7 +27,12 @@ public class MyPageController {
 
 	
 	@GetMapping(value = "mypage") //마이페이지
-	public void myPage() throws Exception{
+	public void myPage(HttpSession session) throws Exception{
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO=(MemberDTO)session.getAttribute("member");
+//		System.out.println(memberDTO.getUserId()+"?zzz");
+//		System.out.println(memberDTO.getEmail()+"?zzz");
+//		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"?zzz");
 		
 	}
 	
@@ -52,12 +57,21 @@ public class MyPageController {
 		memberFileDTO.setFileName((String)session.getAttribute("newFileName"));
 		memberFileDTO.setUserNo(memberDTO.getUserNo());
 		memberFileDTO.setOriginalName(file.getOriginalFilename());
-		
 		memberDTO.setMemberFileDTO(memberFileDTO);
+		
+		
+//		System.out.println(file.getOriginalFilename()+"이건뭐지");
+//		System.out.println((String)session.getAttribute("newFileName")+"이건뭐지??");
+//		System.out.println(memberDTO2.getMemberFileDTO().getFileName()+"이건뭐지???");
 		
 		if(result>0) {
 			session.setAttribute("member", memberDTO); // 기존 멤버 정보를 새로운(수정한) 멤버 정보로 업데이트
 		}
+		
+		if((String)session.getAttribute("newFileName")==null){ //수정한 사진이 null이면 이전 세션 사진으로 저장
+			memberFileDTO.setFileName(memberDTO2.getMemberFileDTO().getFileName());
+		}
+		
 		return "redirect:./mypage";
 	}
 	

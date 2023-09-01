@@ -85,7 +85,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="../" class="logo">
                             <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
@@ -253,7 +253,7 @@
 				<!-- row -->
 				<div class="row">
 
-					<div class="col-md-7">
+					<div class="col-md-4">
 						<!-- Billing Details -->
 						<div class="billing-details">
 							
@@ -263,28 +263,41 @@
 								</p>
 							</div>
 							<div class="form-group">
-								${member.userId} 님 반갑습니다
+								${member.userId} 님
 							</div>
 							
-							<div class="form-group">
+							<%-- <div class="form-group">
 								<br><br>
 								<p>자기소개</p><br>
 								${member.intro}
-							</div>
+							</div> --%>
 						</div>
 						<!-- /Billing Details -->	
 					</div>
+					
+					<!-- Shiping Details -->
+						<div class="shiping-details">
+							<div class="section-title">
+								<h3 class="title">자기소개</h3>
+							</div>
+							<div class="input-checkbox">
+								
+									<span></span>
+									${member.intro}
+								
+								
+							</div>
+						</div>
+						<!-- /Shiping Details -->
+					
+					
+					
 
 					<!-- Order Details -->
-					<div class="col-md-5 order-details">
-						<div class="section-title text-center">
-							<h3 class="title">${member.userId} 님 반갑습니다</h3>
-						</div>
+					<div class="col-md-3 order-details">
+						
 						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
-								<div><strong>TOTAL</strong></div>
-							</div>
+							
 							<div class="order-products">
 								<div class="order-col">
 									<div>판매횟수</div>
@@ -295,7 +308,6 @@
 									<div>?</div>
 								</div>
 							</div>
-							
 						</div>
 						</div>
 						
