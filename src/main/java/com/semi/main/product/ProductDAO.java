@@ -30,6 +30,9 @@ public class ProductDAO {
 		return productDTO;
 	}
 	
+	
+	
+	
 	public Long countProduct(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"countProduct",productDTO);
 	}
@@ -37,6 +40,9 @@ public class ProductDAO {
 	public Long countReview(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"countReview",productDTO);
 	}
+	
+	
+	
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		
@@ -51,12 +57,21 @@ public class ProductDAO {
 
 	
 	
-	public List<ProductDTO> getCategoryList(Pager pager) {
+	public List<ProductDTO> getCategoryList(Pager pager) throws Exception{
 		
 		
 		return sqlSession.selectList(NAMESPACE+"getCategoryList",pager);
 	}
 
+	public List<ProductDTO> getConditionList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getConditionList",pager);
+	}
+	
+	
+	
+	
+	
+	
 	public int setAdd(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE+"setAdd", productDTO);

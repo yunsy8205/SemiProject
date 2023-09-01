@@ -2,7 +2,18 @@ package com.semi.main.util;
 
 
 public class Pager {
+	//최신순,인기순,저가순,고가순 정
+	private String condition;
 	
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+
 	//검색 관련
 	private String kind;
 	private String search;

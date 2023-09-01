@@ -26,21 +26,19 @@ public class FrontController {
 		List<ProductDTO> ar = productService.getList(pager);
 		for(ProductDTO productDTO: ar) {
 			String file=productDTO.getFileDTOs().get(0).getOriginalName();
-		
-		
-			//productDTO.getFileDTOs().get(0).setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
-			System.out.println(productDTO.getFileDTOs().get(0).getOriginalName());
 		}
-		// 각 상품에 대한 이미지 리스트 가져오기
-//        for (ProductDTO product : ar) {
-//            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-//            product.setFileDTOs(fileList);
-//        }
+		
+//			// 조건에 따라 정렬된 상품 리스트 가져오기
+//		    List<ProductDTO> conditionList = productService.getConditionList(pager);
+		    
+	
 		model.addAttribute("list",ar);
+//		model.addAttribute("conditionList", conditionList);
 		model.addAttribute("pager", pager);
 		
 		return "index";
 	}
 	
 	
-}
+	}
+	

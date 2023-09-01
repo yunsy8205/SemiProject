@@ -65,7 +65,17 @@ public class ProductService {
 		
 		return result;
 	}
+	//상품 조건별 리스
+	public List<ProductDTO> getConditionList(Pager pager) throws Exception{
+		pager.makeRowNum();
+		pager.makePageNum(productDAO.getTotal(pager));
+        return productDAO.getCategoryList(pager);
+	}
 	
+		//상품상세
+		public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
+			return productDAO.getDetail(productDTO);
+		}
 		
 
 }

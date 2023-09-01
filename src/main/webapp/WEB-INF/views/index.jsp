@@ -32,8 +32,7 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
 
-		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
-
+		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -50,12 +49,16 @@
             max-height: 200px; /* Set the maximum height of the image */
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
+		.dropdown-item:hover {
+			background-color: #007bff; 
+			color: #ffffff; 
+		}
 		
 	</style>
-			
+	
 		
 
-
+			
     </head>
 	<body>
 
@@ -70,7 +73,17 @@
 				<c:choose>
 					<c:when test="${not empty member}">
 						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/mypage">mypage</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle  me-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								마이페이지
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: #000000; color: #ffffff;">
+								<li><a class="dropdown-item" href="">내 상품</a></li>
+								<li><a class="dropdown-item" href="">찜한 상품</a></li>
+								<li><a class="dropdown-item" href="">고객센터</a></li>
+								<li><a class="dropdown-item" href="">계정 설정</a></li>
+							</ul>
+						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
@@ -78,6 +91,7 @@
 					</c:otherwise>
 				</c:choose>
 			</ul>
+			
 			
 			
 			
@@ -252,17 +266,7 @@
 
 					
 
-					<c:forEach var="product" items="${list}">
-					  <div class="product">
-					    <p class="product-name">${product.proName}</p>
-					    <h4 class="product-price">${product.proPrice}</h4>
-					    <div class="file-list">
-					      <c:forEach var="file" items="${product.fileDTOs}">
-					        <p>Original Name: ${file.originalName}, File Name: ${file.fileName}</p>
-					      </c:forEach>
-					    </div>
-					  </div>
-					</c:forEach>
+					
 					  
 					
 
@@ -282,15 +286,14 @@
 											      </c:forEach> --%>
 												
 													<img src="./resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
-													<div>
-													${product.fileDTOs["0"].originalName}</div>
+													
 													<div class="product-label">
 														<span class="new">NEW</span>
 													</div>
 												</div>
 												<div class="product-body">
 													<p class="product-name">${product.proName}</p>
-													<h3 class="product-contents"><a href="#">${product.proContents}</a></h3>
+													<h3 class="product-contents"><a href="./product/detail?proNo=${product.proNo}">${product.proContents}</a></h3>
 													<h4 class="product-price">${product.proPrice} </h4>
 													<p class="product-createDate">작성일: ${product.createDate}</p>
 													<p class="product-hit">조회수: ${product.hit}</p>
@@ -379,11 +382,12 @@
 							<h3 class="title">Top selling</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">최신순</a></li>
-									<li><a data-toggle="tab" href="#tab2">인기순</a></li>
-									<li><a data-toggle="tab" href="#tab2">저가순</a></li>
-									<li><a data-toggle="tab" href="#tab2">고가순</a></li>
+									<li class="active"><a data-toggle="tab" href="#tab2" data-condition="최신순">최신순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="인기순">인기순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="저가순">저가순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="고가순">고가순</a></li>
 								</ul>
+								
 							</div>
 						</div>
 					</div>
@@ -989,11 +993,45 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
+				<!-- index.html 또는 해당 페이지 상단에 추가 -->
+		<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> jQuery를 먼저 로드하세요.
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// 탭 클릭 이벤트
+				$('ul.section-tab-nav li a').click(function(event) {
+					event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+					
+					// 선택된 탭의 data-condition 값을 가져옵니다.
+					var condition = $(this).data('condition');
 		
+					// AJAX를 사용하여 서버에 조건값을 전달하고 상품 리스트를 불러옵니다.
+					$.ajax({
+						type: 'POST', // 또는 'GET', 서버에 요청 방식에 따라 변경
+						url: '/', // 실제 서버 엔드포인트 경로
+						data: { condition: condition }, // 서버로 전달할 데이터
+						success: function(response) {
+							// 서버에서 반환된 상품 리스트를 화면에 표시하거나 업데이트합니다.
+							// 예를 들어, 반환된 데이터를 이용하여 상품 목록을 동적으로 생성합니다.
+							// response 변수에 서버에서 받은 데이터가 들어 있습니다.
+							updateProductList(response);
+						},
+						error: function(error) {
+							console.error('에러 발생:', error);
+						}
+					});
+				});
+		
+				function updateProductList(productList) {
+					// productList를 사용하여 화면에 상품 리스트를 업데이트하는 코드를 작성합니다.
+					// 이 코드는 상품 목록을 동적으로 생성하거나 업데이트하는 방법에 따라 다를 수 있습니다.
+				}
+			});
+		</script>
 
 	
 
-
+ -->
 
 
 
@@ -1003,183 +1041,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- 세션을 flase 값으로 주면 세션을 사용하지 않겠다고 선언하는 의미라 주석처리함. -->
-<%@ page session="false" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Home</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-	 <style>
-		.product-card {
-			border: 1px solid #ccc;
-			padding: 10px;
-			margin: 10px;
-			width: 200px;
-		}
-		.product-image {
-            width: 100%;
-            height: auto;
-            max-height: 200px; /* Set the maximum height of the image */
-            object-fit: cover; /* Maintain aspect ratio and cover area */
-		}
-		
-	</style>
-	
-</head>
-
-<body>
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../product/add">상품등록</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../product/list">상품목록</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
-   <li class="nav-item">
-    <a class="nav-link" href="../member/login">로그인</a>
-  </li>
-</ul>
-<h1 class="text-center">
-	 INDEX PAGE
-</h1>
-
-<div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/resources/img/광고글1.jpg" class="d-block w-100" alt="a">
-    </div>
-    <div class="carousel-item">
-      <img src="/resources/img/광고글2.jpg" class="d-block w-100" alt="b">
-    </div>
-    <div class="carousel-item">
-      <img src="/resources/img/광고글3.jpg" class="d-block w-100" alt="c">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-
-<section class="container mt-5">
-	<div class="container">
-	<h1 class="mb-3 text-center">Product List</h1>
-	<div class="row">
-		<c:forEach items="${list}" var="product">
-			<div class="col-md-4">
-				<div class="product-card">
-					<c:choose>
-						<c:when test="${fn:length(product.fileDTOs) > 0}">
-							<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image">
-						</c:when>
-						<c:otherwise>
-							<img src="/resources/img/이미지없음.jpg" alt="" class="product-image">
-						</c:otherwise>
-					</c:choose>
-					<h4>${product.proName}</h4>
-					<p class="product-content">${product.proContents}</p>
-					<p>작성자: ${product.userId}</p>
-					<p>작성일: ${product.createDate}</p>
-					<p>조회수: ${product.hit}</p>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-</div>
-
-
-    	<nav aria-label="Page navigation example">
-			  <ul class="pagination">
-			  	<c:if test="${pager.pre}">
-				    <li class="page-item">
-				      <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			    	<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
-			    </c:forEach>
-			    <c:if test="${pager.next}">
-				    <li class="page-item">
-				      <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-			    </c:if>
-			  </ul>
-			</nav>
-		
-		<div class="input-group mb-3">
-		 <form action="./list" method="get" id="frm">
-		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
-		 	  	
-			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
-				  <option class="kind" value="proName">상품명</option>
-				  <option class="kind" value="proContents">상품설명</option>
-				  <option class="kind" value="userId">이름</option>
-			  </select>
-			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
-			   <div class="col-auto">
-			    <button type="submit" class="btn btn-primary">검색</button>
-			  </div>
-		  </form>
-		</div>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script src="/resources/js/list.js"></script>
-</body>
-</html>
- --%>

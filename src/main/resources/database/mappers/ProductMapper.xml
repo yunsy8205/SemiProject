@@ -11,6 +11,36 @@
 		  
 		  
 		
+		<select id="getConditionList" resultMap="getSelectResult" parameterType="Pager">
+		 SELECT *
+		  FROM (
+		    SELECT ROWNUM R, B.*
+		    FROM (
+		      SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+		      FROM PRODUCT P
+		      INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+		      LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+		      WHERE P.PRONO > 0
+		      <choose>
+		            <when test="condition == '최신순'">
+		               ORDER BY P.CREATEDATE DESC
+		            </when>
+		            <when test="condition == '인기순'">
+		                ORDER BY P.PROHIT DESC
+		            </when>
+		            <when test="condition == '저가순'">
+		                ORDER BY P.PROPRICE ASC
+		            </when>
+		            <when test="condition == '고가순'">
+		                ORDER BY P.PROPRICE DESC
+		            </when>
+		        </choose>
+		      	
+			    ) B
+			  )
+			  
+			  WHERE R BETWEEN #{startRow} AND #{lastRow}
+		</select>
 		  
 		  <select id="getTotal" parameterType="Pager" resultType="Long">
 			  SELECT COUNT(PRONO)
@@ -155,6 +185,18 @@
   		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
 		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
   	  </insert> -->
+  	  
+  	  
+  	  <select id="getDetail" parameterType="ProductDTO" resultMap="getSelectResult">
+  		SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P
+  		LEFT JOIN PRODUCTIMAGE PR
+  		ON (P.PRONO=PR.PRONO)
+  		JOIN CATEGORY C
+  		ON (P.CATNO = C.CATNO)
+  		JOIN MEMBER M
+  		ON (P.USERNO = M.USERNO)
+  		WHERE P.PRONO= #{proNo}
+  	</select>
   	  
   	  <insert id="setFileAdd" parameterType="ProductFileDTO">
   		INSERT INTO PRODUCTIMAGE
