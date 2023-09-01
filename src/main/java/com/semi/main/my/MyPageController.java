@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.main.member.MemberDTO;
+import com.semi.main.member.MemberFileDTO;
+
 @Controller
 @RequestMapping("/my/*")
 public class MyPageController {
@@ -21,31 +24,19 @@ public class MyPageController {
 	@Autowired
 	MyPageService myPageService;
 	
-	
-	
-	
-	
-	@RequestMapping(value = "login", method = RequestMethod.GET) //로그인 테스트용으로 나중에 삭제
-	public void getLogin() throws Exception{
-		
-	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST) //로그인 테스트용으로 나중에 삭제
-	public String getLogin(MyPageDTO myPageDTO, HttpSession session) throws Exception{
-		myPageDTO = myPageService.getLogin(myPageDTO);
-		if(myPageDTO != null) {
-			session.setAttribute("member", myPageDTO);
-		}
-		
-		return "redirect:/";
-	}
-	
 
 	
 	@GetMapping(value = "mypage") //마이페이지
-	public void myPage() throws Exception{
+	public void myPage(HttpSession session) throws Exception{
 		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
+		System.out.println(memberDTO.getName());
+		System.out.println(memberDTO.getMemberFileDTO()+"zz");
+//		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"zzz");
+
+
 	}
+	
 	
 	@GetMapping(value = "update") //정보수정
 	public void update() throws Exception{
@@ -53,30 +44,30 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String setMemberUpdate(MyPageDTO myPageDTO, MultipartFile file,HttpSession session) throws Exception{
-		MyPageDTO memberDTO2 = (MyPageDTO)session.getAttribute("member"); //기존 멤버 정보
+	public String setMemberUpdate(MemberDTO memberDTO, MultipartFile file,HttpSession session) throws Exception{
+		MemberDTO memberDTO2 = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
 		
-		String userId = ((MyPageDTO)session.getAttribute("member")).getUserId(); 
-		myPageDTO.setUserNo(memberDTO2.getUserNo());
-		myPageDTO.setUserId(userId);
+		String userId = ((MemberDTO)session.getAttribute("member")).getUserId(); 
+		memberDTO.setUserNo(memberDTO2.getUserNo());
+		memberDTO.setUserId(userId);
 		
-		int result = myPageService.setMemberUpdate(myPageDTO);
+		int result = myPageService.setMemberUpdate(memberDTO);
 		
-		MyPageFileDTO myPageFileDTO = new MyPageFileDTO();
-		myPageFileDTO.setFileName((String)session.getAttribute("newFileName"));
-		myPageFileDTO.setUserNo(myPageDTO.getUserNo());
-		myPageFileDTO.setOriginalName(file.getOriginalFilename());
+		MemberFileDTO memberFileDTO = new MemberFileDTO();
+		memberFileDTO.setFileName((String)session.getAttribute("newFileName"));
+		memberFileDTO.setUserNo(memberDTO.getUserNo());
+		memberFileDTO.setOriginalName(file.getOriginalFilename());
 		
-		myPageDTO.setMyPageFileDTO(myPageFileDTO);
+		memberDTO.setMemberFileDTO(memberFileDTO);
 		
 		if(result>0) {
-			session.setAttribute("member", myPageDTO); // 기존 멤버 정보를 새로운(수정한) 멤버 정보로 업데이트
+			session.setAttribute("member", memberDTO); // 기존 멤버 정보를 새로운(수정한) 멤버 정보로 업데이트
 		}
 		return "redirect:./mypage";
 	}
 	
 	@GetMapping(value = "list") // 내판매글/구매내역
-	public String list(MyPageDTO myPageDTO) throws Exception{
+	public String list(MemberDTO memberDTO) throws Exception{
 		return "./my/list";
 	}
 	
@@ -98,10 +89,10 @@ public class MyPageController {
 	}
 	
 	@PostMapping("delete")
-	public String setDelete(MyPageDTO myPageDTO, HttpSession session, Model model) throws Exception{ //회원탈퇴
-		MyPageDTO mem = (MyPageDTO)session.getAttribute("member");
+	public String setDelete(MemberDTO memberDTO, HttpSession session, Model model) throws Exception{ //회원탈퇴
+		MemberDTO mem = (MemberDTO)session.getAttribute("member");
 		String sessionPass = mem.getUserPw();
-		String pass = myPageDTO.getUserPw();
+		String pass = memberDTO.getUserPw();
 		
 		String message = "탈퇴 성공하셨습니다";
 		if(!(sessionPass.equals(pass))) {
@@ -111,7 +102,7 @@ public class MyPageController {
 		} else {
 		model.addAttribute("message", message);
 		model.addAttribute("url", "../");	
-		myPageService.setDelete(myPageDTO);
+		myPageService.setDelete(memberDTO);
 		session.invalidate();
 		}
 		
@@ -126,10 +117,10 @@ public class MyPageController {
 	}
 	
 	@PostMapping("check") //정보수정창
-	public String check(MyPageDTO myPageDTO, HttpSession session, Model model) throws Exception{
-		MyPageDTO mem = (MyPageDTO)session.getAttribute("member");
+	public String check(MemberDTO memberDTO, HttpSession session, Model model) throws Exception{
+		MemberDTO mem = (MemberDTO)session.getAttribute("member");
 		String sessionPass = mem.getUserPw();
-		String pass = myPageDTO.getUserPw();
+		String pass = memberDTO.getUserPw();
 		
 		System.out.println(sessionPass+"sessionPass");
 		System.out.println(pass+"pass");

@@ -1,23 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<c:import url="../temp/bootstrap.jsp"></c:import>
+<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!-- HEADER -->
-<header>
+		<title>Electro - HTML Ecommerce Template</title>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+
+		<!-- Slick -->
+		<link type="text/css" rel="stylesheet" href="/resources/css/slick.css"/>
+		<link type="text/css" rel="stylesheet" href="/resources/css/slick-theme.css"/>
+
+		<!-- nouislider -->
+		<link type="text/css" rel="stylesheet" href="/resources/css/nouislider.min.css"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" href="/resources/css/font-awesome.min.css">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+
+		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		
+			
+			<style>
+		.product-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px; /* Set the maximum height of the image */
+            object-fit: cover; /* Maintain aspect ratio and cover area */
+		}
+		
+	</style>
+</head>
+<body>
+<!-- <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option> -->
+  
+  <header>
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
             
-            <ul class="header-links pull-right">
-                <c:if test="${not empty member}">
-		      		<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-		      		<li class="nav-item text-white me-3"><a href="../member/mypage">mypage</a></li>
-		      		</c:if>
-					<c:if test="${empty member}">
-		      		<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-		      		<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-		      		</c:if>
-            </ul>
+			
+			<ul class="header-links pull-right">
+				<c:choose>
+					<c:when test="${not empty member}">
+						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
+						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
+						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+			
+			
+			
         </div>
     </div>
     <!-- /TOP HEADER -->
@@ -143,3 +207,9 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
+  <!-- -------------------------------------------------헤더----------------------------------------------- -->
+  <br><br><br><br><br><br><br><br><br>
+  
+  
+</body>
+</html>

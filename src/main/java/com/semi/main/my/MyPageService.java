@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.file.FileDTO;
+import com.semi.main.member.MemberDTO;
+import com.semi.main.member.MemberFileDTO;
 import com.semi.main.util.FileManager;
 
 @Service
@@ -18,19 +20,11 @@ public class MyPageService {
 	private MyPageDAO myPageDAO;
 	@Autowired
 	private FileManager fileManager;
-	
 
 	
-	public MyPageDTO getLogin(MyPageDTO myPageDTO) throws Exception{ //로그인 삭제예정
-		return myPageDAO.getLogin(myPageDTO);
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ //회원수정 메서드
+		return myPageDAO.setMemberUpdate(memberDTO);
 	}
-	
-
-	
-	public int setMemberUpdate(MyPageDTO myPageDTO) throws Exception{ //회원수정 메서드
-		return myPageDAO.setMemberUpdate(myPageDTO);
-	}
-	
 
 	
 	public String setContentsImg(MultipartFile file, HttpSession session) throws Exception {
@@ -40,13 +34,17 @@ public class MyPageService {
 		
 		
 //		-------
-		MyPageDTO mem = (MyPageDTO)session.getAttribute("member");
+		MemberDTO mem = (MemberDTO)session.getAttribute("member");
 		Long userNo = mem.getUserNo();
-		MyPageFileDTO myPageFileDTO = new MyPageFileDTO();
-		myPageFileDTO.setFileName(fileName);
-		myPageFileDTO.setUserNo(userNo);
-		myPageFileDTO.setOriginalName(file.getOriginalFilename());
-		int result = myPageDAO.setFileJoin(myPageFileDTO);
+		MemberFileDTO memberFileDTO = new MemberFileDTO();
+		memberFileDTO.setFileName(fileName);
+		memberFileDTO.setUserNo(userNo);
+		memberFileDTO.setOriginalName(file.getOriginalFilename());
+		int result = myPageDAO.setFileJoin(memberFileDTO);
+
+    
+		System.out.println(path+fileName+"아");
+
 //		--------
 		
 		
@@ -54,8 +52,8 @@ public class MyPageService {
 	}
 	
 	
-	public int setDelete(MyPageDTO myPageDTO) throws Exception{ //회원탈퇴
-		return myPageDAO.setDelete(myPageDTO);
+	public int setDelete(MemberDTO memberDTO) throws Exception{ //회원탈퇴
+		return myPageDAO.setDelete(memberDTO);
 	}
 	
 

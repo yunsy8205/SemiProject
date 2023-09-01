@@ -16,6 +16,8 @@ public class MemberService {
 	// login
 	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception{
 		
+		System.out.println(memberDTO.getUserId());
+		
 		return memberDAO.getLogin(memberDTO);
 	
 	}

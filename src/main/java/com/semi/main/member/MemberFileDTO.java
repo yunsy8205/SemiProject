@@ -1,8 +1,8 @@
-package com.semi.main.my;
+package com.semi.main.member;
 
 import com.semi.main.file.FileDTO;
 
-public class MyPageFileDTO extends FileDTO{
+public class MemberFileDTO extends FileDTO{
 
 	private Long userNo;
 
