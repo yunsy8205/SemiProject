@@ -109,39 +109,6 @@
         FROM PRODUCTIMAGE
         WHERE PRONO = #{proNo}
     	</select>
-  	
-  	
-		  <!-- <insert id="setAdd" parameterType="ProductDTO">
-		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
-		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
-		    </selectKey>
-		    INSERT INTO PRODUCT
-		    (PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
-		    PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
-		    VALUES
-		    (#{proNo}, #{catNo},
-		    (SELECT USERNO FROM MEMBER WHERE USERID = #{userId}),
-		    #{proName}, #{proPrice},
-		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
-		    #{proStatus}, 0, #{proSale})
-		</insert> -->
-		
-  		<!-- <insert id="setAdd" parameterType="ProductDTO">
-  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
-  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
-  		</selectKey>
-  		INSERT INTO PRODUCT
-  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
-  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
-  		VALUES
-  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
-		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
-  	  </insert> -->
-  	  
-  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
-  		INSERT INTO PRODUCTIMAGE
-  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
-  	  </insert>
   	  
   	  <update id="setHitCount">
 		UPDATE
@@ -152,6 +119,11 @@
 			PRONO = #{proNo}
 		</update>
   	
+  	<select id="countProduct" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{userNo}
+  	</select>
+
+  	
   	<select id="countReview" parameterType="ProductDTO" resultType="Long">
   		SELECT COUNT(REVIEWNO) FROM REVIEW
 		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
@@ -159,12 +131,12 @@
   	
   	<select id="memberProList" parameterType="ProductDTO" resultMap="getSelectResult">
 		<![CDATA[
-		SELECT PR.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
-  		(SELECT P.* FROM PRODUCT P 		
+		SELECT A.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
+  		(SELECT * FROM PRODUCT		
   		WHERE USERNO=#{userNo} AND ROWNUM < 6
-  		)PR
+  		)A
   		LEFT JOIN PRODUCTIMAGE PI
-  		ON (PR.PRONO=PI.PRONO)
+  		ON (A.PRONO=PI.PRONO)
   		ORDER BY CREATEDATE DESC
   		]]>
   	</select>
@@ -180,22 +152,36 @@
 		]]>
   	</select>
   	
-  	<insert id="setAdd" parameterType="ProductDTO">
-  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
-  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
-  		</selectKey>
-  		INSERT INTO PRODUCT
-  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
-  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
-  		VALUES
-  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
-		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
-  	  </insert>
+		<insert id="setAdd" parameterType="ProductDTO">
+		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+		    </selectKey>
+		    INSERT INTO PRODUCT
+		    (PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+		    PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+		    VALUES
+		    (#{proNo}, #{catNo},
+		    (SELECT USERNO FROM MEMBER WHERE USERID = #{userId}),
+		    #{proName}, #{proPrice},
+		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
+		    #{proStatus}, 0, #{proSale})
+		</insert>
   	  
-  	  <!-- <insert id="setFileAdd" parameterType="ProductFileDTO">
+  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
   		INSERT INTO PRODUCTIMAGE
   		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
-  	  </insert> -->
+  	  </insert>
+  	  
+  	  <select id="getDetail" parameterType="ProductDTO" resultMap="getSelectResult">
+  		SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P
+  		LEFT JOIN PRODUCTIMAGE PR
+  		ON (P.PRONO=PR.PRONO)
+  		JOIN CATEGORY C
+  		ON (P.CATNO = C.CATNO)
+  		JOIN MEMBER M
+  		ON (P.USERNO = M.USERNO)
+  		WHERE P.PRONO= #{proNo}
+  	</select>
   	  
   	  <insert id="dibsAdd" parameterType="ProductDTO">
   	  	INSERT INTO DIBS

@@ -110,19 +110,20 @@ public class ProductDTO {
 	public void setProStatus(int proStatus) {
 		this.proStatus = proStatus;
 	}
-	
-	public Long getHit() {
-		return hit;
-	}
-	public void setHit(Long hit) {
-		this.hit = hit;
-	}
+
 	public int getProSale() {
 		return proSale;
 	}
 	public void setProSale(int proSale) {
 		this.proSale = proSale;
 	}
+	public Long getHit() {
+		return hit;
+	}
+	public void setHit(Long hit) {
+		this.hit = hit;
+	}
+
 	
 	
 }
