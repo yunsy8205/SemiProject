@@ -33,4 +33,8 @@ public class AdminService {
 	public MemberDTO memberDetail(MemberDTO memberDTO) throws Exception{
 		return adminDAO.memberDetail(memberDTO);
 	}
+	
+	public int memberUpdate(MemberDTO memberDTO)throws Exception{
+		return adminDAO.memberUpdate(memberDTO);
+	}
 }

@@ -40,4 +40,17 @@ public class AdminController {
 		model.addAttribute("dto", memberDTO);
 		return "admin/memberdetail";
 	}
+	
+	@RequestMapping(value = "memberupdate", method = RequestMethod.GET)
+	public String memberUpdate(MemberDTO memberDTO, Model model) throws Exception{
+		memberDTO = adminService.memberDetail(memberDTO);
+		model.addAttribute("dto", memberDTO);
+		return "admin/memberupdate"; 
+	}
+	
+	@RequestMapping(value = "memberupdate", method = RequestMethod.POST)
+	public String memberUpdate(MemberDTO memberDTO) throws Exception{
+		int result = adminService.memberUpdate(memberDTO);
+		return "redirect:./memberdetail?userNo="+memberDTO.getUserNo(); 
+	}
 }	

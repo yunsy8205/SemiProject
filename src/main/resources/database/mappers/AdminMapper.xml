@@ -72,4 +72,13 @@
 		WHERE M.USERNO=#{userNo}
   	</select>
   	
+  	<update id="memberUpdate" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		STATUSNO=#{statusNo},
+  		USERPW=#{userPw},NAME=#{name},
+  		BIRTH=#{birth},EMAIL=#{email},
+  		PHONE=#{phone},INTRO=#{intro}
+  		WHERE USERNO=#{userNo}
+  	</update>
+  	
   </mapper>
