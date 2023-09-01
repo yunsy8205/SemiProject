@@ -48,6 +48,8 @@ public class MemberDTO {
 	
 	private MemberFileDTO memberFileDTO;
 	
+	private String fileName;
+	
 
 	
 	/* getter and setter */
@@ -210,7 +212,15 @@ public class MemberDTO {
 	public void setRoles(List<RoleDTO> roles) {
 		this.roles = roles;
 	}
-	
-	
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 }

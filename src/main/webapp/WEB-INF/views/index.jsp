@@ -266,7 +266,7 @@
 												</div>
 												<div class="product-body">
 													<p class="product-name">${product.proName}</p>
-													<h3 class="product-contents"><a href="#">${product.proContents}</a></h3>
+													<h3 class="product-contents"><a href="./product/detail?proNo=${product.proNo}">${product.proContents}</a></h3>
 													<h4 class="product-price">${product.proPrice} </h4>
 													<p class="product-createDate">작성일: ${product.createDate}</p>
                        								<p class="product-hit">조회수: ${product.hit}</p>

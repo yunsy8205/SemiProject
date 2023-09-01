@@ -28,8 +28,11 @@
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
+  		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"/>
+
 	</typeAliases>
 
   	
+
 
   </configuration>

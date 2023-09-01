@@ -5,29 +5,80 @@
  
   <mapper namespace="com.semi.main.admin.AdminDAO">
   <sql id="searchSql">
-  	WHERE USERNO>0
+  	WHERE M.USERNO>0
   		<if test="kind == 'userId'">
-  		AND USERID LIKE '%'||#{search}||'%'
+  		AND M.USERID LIKE '%'||#{search}||'%'
   		</if>
   		<if test="kind == 'email'">
-  		AND EMAIL LIKE '%'||#{search}||'%'
+  		AND M.EMAIL LIKE '%'||#{search}||'%'
   		</if>
   		<if test="kind == 'phone'">
-  		AND PHONE LIKE '%'||#{search}||'%'
+  		AND M.PHONE LIKE '%'||#{search}||'%'
   		</if>	
   </sql>
   	<insert id="a"></insert>
-  	<update id="b"></update>
   	<delete id="c"></delete>
   	
-  	<select id="memberList" resultType="MemberDTO">
-		SELECT * FROM MEMBER
-		<include refid="searchSql"></include> 		
+  	<select id="memberList" parameterType="Pager" resultMap="getResult">
+		SELECT B.* FROM
+		(SELECT A.*, ROWNUM R FROM
+		(SELECT M.*, RO.GRANTNO, RO.GRANTNAME FROM MEMBER M LEFT JOIN MEMBERROLE MR
+		ON(M.USERNO=MR.USERNO) LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
+		<include refid="searchSql"></include>
+		 ORDER BY M.USERNO)A)B
+		 WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
+  	<resultMap id="getResult" type="MemberDTO">
+			<id column="USERNO" property="userNo" />
+			<result column="userid" property="userId" />
+			<result column="userpw" property="userPw" />
+			<result column="name" property="name" />
+			<result column="email" property="email" />
+			<result column="birth" property="birth" />
+			<result column="address" property="address" />
+			<result column="phone" property="phone" />
+			<result column="accountdate" property="accountDate" />
+			<result column="intro" property="intro" />
+			<result column="statusNo" property="statusNo" />
+			<!-- 08/28 추가 -->
+			<result column="zipcode" property="zipCode" />
+			<result column="refaddress" property="refAddress" />
+			<result column="detailaddress" property="detailAddress" />
+			<result column="FILENAME" property="fileName" />
+	
+			<collection property="roles" javaType="List" ofType="RoleDTO">
+				<id column="GRANTNO" property="grantNo" />
+				<result column="GRANTNAME" property="grantName" />
+			</collection>
+		</resultMap>
+  	
   	<select id="getTotal" parameterType="Pager" resultType="Long">
-  		SELECT COUNT(USERNO) FROM MEMBER
+  		SELECT COUNT(USERNO) FROM MEMBER M
   		<include refid="searchSql"></include>
   	</select>
-  
+  	
+  	<update id="statusChange" parameterType="MemberDTO">
+  		UPDATE MEMBER SET STATUSNO=#{statusNo}
+  		WHERE USERNO=#{userNo}
+  	</update>
+  	
+  	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME
+		FROM MEMBER M LEFT JOIN MEMBERROLE MR
+		ON(M.USERNO=MR.USERNO)
+		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
+		LEFT JOIN PROFILE P ON(P.USERNO=M.USERNO)
+		WHERE M.USERNO=#{userNo}
+  	</select>
+  	
+  	<update id="memberUpdate" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		STATUSNO=#{statusNo},
+  		USERPW=#{userPw},NAME=#{name},
+  		BIRTH=#{birth},EMAIL=#{email},
+  		PHONE=#{phone},INTRO=#{intro}
+  		WHERE USERNO=#{userNo}
+  	</update>
+  	
   </mapper>
