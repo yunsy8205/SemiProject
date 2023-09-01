@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
 
@@ -22,6 +24,48 @@ public class QnaController {
 
 	@Autowired
 	private QnaService qnaService;
+	
+	@ModelAttribute("board") //reuestmapping 실행되기전에 실행되서 모델에다가 이름은:board value:notice
+	public String getBoardName() {
+		return "qna";
+	}
+	
+	//filedelete
+	@GetMapping("fileDelete")
+	public String setFileDelete(QnaFileDTO qnaFileDTO,HttpSession session, Model model)throws Exception{
+		int result = qnaService.setFileDelete(qnaFileDTO, session);
+		model.addAttribute("result",result);
+		return "commons/ajaxResult";
+	}
+	
+	//imgdel
+	@PostMapping("setContentsImgDelete")
+	public String setContentsImgDelete(String path, HttpSession session,Model model)throws Exception{
+		boolean check = qnaService.setContentsImgDelete(path, session);
+		model.addAttribute("result", check);
+		
+		return "commons/ajaxResult";
+		
+	}
+	
+	//imgupload
+	@PostMapping("setContentsImg")
+	public String setContentsImg(MultipartFile files, HttpSession session,Model model)throws Exception{
+		
+		String path = qnaService.setContentsImg(files, session);
+		model.addAttribute("result",path);
+		
+		return "commons/ajaxResult";
+	}
+	
+	//filedown
+	@GetMapping("fileDown")
+	public String getFileDown(QnaFileDTO qnaFileDTO,Model model)throws Exception{
+		qnaFileDTO = qnaService.getFileDown(qnaFileDTO);
+		model.addAttribute("file", qnaFileDTO);
+		
+		return "fileManager";
+	}
 	
 //myqnaList
 	@GetMapping("list")
@@ -65,10 +109,9 @@ public class QnaController {
 	
 	//detail
 	@GetMapping("detail")
-	public String getDtail(QnaDTO qnaDTO, Model model) throws Exception {
+	public String getDetail(QnaDTO qnaDTO, Model model) throws Exception {
 
 		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
-
 		
 			model.addAttribute("dto", boardDTO);
 

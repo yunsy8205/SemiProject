@@ -10,7 +10,7 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 </head>
 <body>
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/BoardHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
 		<table class="table">
@@ -70,11 +70,13 @@
 		  </form>
 		</div>
 	
+		<c:if test="${member.userId == '관리자1'}">
+			<a class="btn btn-primary me-2" style="float:right" href="./add">글등록</a>
+			</c:if>
 	
-	<a class="btn btn-primary me-2" style="float:right" href="./add">글등록</a>
 	</section>
 	
-	<a href="/">index</a>
+	
 	
 	
 

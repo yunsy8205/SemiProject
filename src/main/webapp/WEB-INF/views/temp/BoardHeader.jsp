@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 
 <!-- header  -->
 <header>
@@ -26,8 +26,8 @@
 					<li class="nav-item"><a class="nav-link active"
 						href="/notice/list">NOTICE</a></li>
 
-					<li class="nav-item"><a class="nav-link active"
-						href="/qna/list">QNA</a></li>
+					<li class="nav-item"><a class="nav-link active" data-id="${member}" id="qna"
+						href="#">QNA</a></li>
 
 
 				</ul>
@@ -36,3 +36,25 @@
 		</div>
 	</nav>
 </header>
+
+<script>
+	const qna = document.getElementById("qna");
+
+	qna.addEventListener("click", function(){
+
+		let num = this.getAttribute("data-id");
+		console.log(num);
+		if(!num){
+
+		alert("로그인하세요");
+		location.href="../member/login";
+		}else{
+
+			location.href="/qna/list";
+		}
+		
+	})
+
+</script>
+
+

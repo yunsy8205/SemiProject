@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/BoardHeader.jsp"></c:import>
 
 <section class="container mt-5">
 	

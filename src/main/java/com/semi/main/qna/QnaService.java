@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.board.BoardService;
+import com.semi.main.file.FileDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -21,6 +23,42 @@ public class QnaService implements BoardService{
 	
 	@Autowired
 	private FileManager fileManager;
+	
+	//imgdelete
+	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
+		
+		FileDTO fileDTO = new FileDTO();
+		fileDTO.setFileName(path.substring(path.lastIndexOf("/")+1));
+		path = "/resources/upload/board/";
+		return fileManager.fileDelete(fileDTO, path, session);
+	}
+		
+	//imgup
+	public String setContentsImg(MultipartFile files, HttpSession session) throws Exception{
+		
+		String path ="/resources/upload/board/";
+		String fileName = fileManager.fileSave(path, session, files);
+		return path+fileName;
+	}
+	
+	//filedown
+	public QnaFileDTO getFileDown(QnaFileDTO qnaFileDTO)throws Exception{
+		
+		return qnaDAO.getFileDetail(qnaFileDTO);
+	}
+	
+	//fileDelete
+	public int setFileDelete(QnaFileDTO qnaFileDTO,HttpSession session)throws Exception{
+		String path ="/resources/upload/notice/";
+		
+		qnaFileDTO = qnaDAO.getFileDetail(qnaFileDTO);
+		boolean flag = fileManager.fileDelete(qnaFileDTO, path, session);
+		
+		if(flag) {
+			return qnaDAO.setFileDelete(qnaFileDTO); //de 삭제
+		}
+		return 0;
+	}
 	
 	
 	public List<BoardDTO> getMyList(QnaDTO qnaDTO)throws Exception{

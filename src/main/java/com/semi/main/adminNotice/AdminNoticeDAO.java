@@ -42,6 +42,7 @@ public class AdminNoticeDAO implements BoardDAO {
 	}
 	
 
+	//detail
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub

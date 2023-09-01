@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<c:import url="../temp/header.jsp"></c:import>
+<c:import url="../temp/BoardHeader.jsp"></c:import>
 	<div class="container mt-5 pt-5">
 
 		<header>
@@ -41,8 +41,8 @@
 		<hr>
 		<footer>
 			<c:forEach items="${dto.fileDTOs}" var="f">
-			<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
-		</c:forEach> 
+				<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
+			</c:forEach> 
 			<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
 			<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
 		</footer>

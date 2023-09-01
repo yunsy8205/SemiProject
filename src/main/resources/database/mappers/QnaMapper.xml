@@ -56,12 +56,22 @@
 	</insert>
 	
 	<!-- fileadd  -->
-	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
+	<insert id="setFileAdd" parameterType="QnaFileDTO">
 		INSERT INTO QNAFILE VALUES (QNAFILE_SEQ.NEXTVAL,#{boardNo},#{originalName},#{fileName})
 	</insert>
 	
+		<!--fileDelete  -->
+	<delete id="setFileDelete" parameterType="QnaFileDTO">
+		DELETE FROM QNAFILE WHERE FILENO=#{fileNo}
+	</delete>
+	
+		<!-- 파일 다운  -->
+	<select id="getFileDetail" parameterType="QnaFileDTO" resultType="QnaFileDTO">
+		SELECT FILENO, ORIGINALNAME, FILENAME
+		FROM QNAFILE
+		WHERE FILENO=#{fileNo}
+	</select>
 		
 	
-  
   
   </mapper>

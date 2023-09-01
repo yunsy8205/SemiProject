@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDAO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.util.Pager;
@@ -27,6 +28,17 @@ public class QnaDAO implements BoardDAO{
 		
 		return sqlSession.insert(NAMESPACE+"setFileAdd", qnaFileDTO);
 	
+	}
+	
+	//filedown
+	public QnaFileDTO getFileDetail(QnaFileDTO qnaFileDTO)throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE+"getFileDetail",qnaFileDTO);
+	}
+	
+	//fileDelete
+	public int setFileDelete(QnaFileDTO qnaFileDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setFileDelete",qnaFileDTO);
 	}
 	
 	@Override
