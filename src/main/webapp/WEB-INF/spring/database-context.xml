@@ -34,7 +34,7 @@
 	<!-- 실제로 실행하는 bean(객체) 생성함.
 	SqlSessionTemplate 클래스에 기본생성자가 없어서 생성자를 호출해야 함.
 	생성자 호출함 : name으로 찾을 수 있다. -->
-	<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<bean class="org.mybatis.spring.SqlSessionTemplate" >
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 

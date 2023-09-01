@@ -29,43 +29,19 @@ public class Pager {
 	//false면 1번블럭 true면(1번블럭이아님)
 	private boolean pre; 
 	
-	
-	public boolean isPre() {
-		return pre;
-	}
-
-	public void setPre(boolean pre) {
-		this.pre = pre;
-	}
-
-	public boolean isNext() {
-		return next;
-	}
-
-	public void setNext(boolean next) {
-		this.next = next;
-	}
-
-
 	//다음블럭 활성화를 담는 블럭
-	//false면 마지막블럭 true면(마지막블럭이아님)
+		//false면 마지막블럭 true면(마지막블럭이아님)
 	private boolean next;//
+		
 	
-	public Long getStartNum() {
-		return startNum;
+	
+	public void makeRowNum() {
+		this.startRow=(this.getPage()-1)*this.getPerPage()+1;
+		this.lastRow=this.getPage()*this.getPerPage();
+		
 	}
-
-	public void setStartNum(Long startNum) {
-		this.startNum = startNum;
-	}
-
-	public Long getLastNum() {
-		return lastNum;
-	}
-
-	public void setLastNum(Long lastNum) {
-		this.lastNum = lastNum;
-	}
+	
+	
 
 	public void makePageNum(Long total) {
 		//130 -> 13
@@ -77,7 +53,7 @@ public class Pager {
 			this.totalPage++;
 		}
 		//2.전체 페이지수로 전체 block 수 구하기
-		long perBlock=5;
+		long perBlock=2;
 		
 		long totalBlock = this.totalPage/perBlock;
 		if(this.totalPage%perBlock !=0) {
@@ -117,6 +93,40 @@ public class Pager {
 		
 	}
 	
+	public boolean isPre() {
+		return pre;
+	}
+
+	public void setPre(boolean pre) {
+		this.pre = pre;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+
+	
+	public Long getStartNum() {
+		return startNum;
+	}
+
+	public void setStartNum(Long startNum) {
+		this.startNum = startNum;
+	}
+
+	public Long getLastNum() {
+		return lastNum;
+	}
+
+	public void setLastNum(Long lastNum) {
+		this.lastNum = lastNum;
+	}
+	
 	public Long getTotalPage() {
 		return totalPage;
 	}
@@ -128,12 +138,6 @@ public class Pager {
 	}
 
 
-
-	public void makeRowNum() {
-		this.startRow=(this.getPage()-1)*this.getPerPage()+1;
-		this.lastRow=this.getPage()*this.getPerPage();
-		
-	}
 	
 	
 	

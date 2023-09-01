@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 어떤 태그가 어떤 역할을 한다 : 스키마코드 필요함 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+  <mapper namespace="com.semi.main.adminNotice.AdminNoticeDAO">
+  	
+  	
+  	<sql id="searchSql">
+		 	<if test="kind == 'title'">
+		 		AND	TITLE LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'contents'">
+		 		AND	CONTENTS LIKE '%'||#{search}||'%'
+		 	</if>
+  	</sql>
+  	
+  	<!-- total  -->
+  	<select id="getTotal" resultType="Long" >
+  		SELECT COUNT(BOARDNO) FROM NOTICE
+  		WHERE BOARDNO > 0
+  		<include refid="searchSql"/>
+  	</select>
+  	
+  	<!-- List -->
+  	<select id="getList" resultType="AdminNoticeDTO">
+  	
+  	SELECT BOARDNO,USERID,TITLE,CREATEDATE,HIT
+  	FROM(SELECT ROWNUM R, B.* 
+  		FROM(
+  			SELECT N.*,M.USERID 
+  			FROM NOTICE N JOIN MEMBER M
+  			ON N.USERNO = M.USERNO
+  			WHERE BOARDNO > 0
+  			<include refid="searchSql"/>
+  			ORDER BY BOARDNO DESC
+  		
+  		)B )
+  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+  		  	
+  	</select>
+  	
+  	<!-- add  -->
+  	<insert id="setAdd" parameterType="AdminNoticeDTO">
+  		<selectKey keyProperty="boardNo" resultType="Long" order="BEFORE">
+  		 	SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  			INSERT INTO NOTICE 
+  			VALUES(#{boardNo}, #{userNo},#{title},sysdate,sysdate,#{hit},#{contents})
+  	</insert>
+  	
+  	<!-- 파일 ADD -->
+	<insert id="setFileAdd" parameterType="AdminNoticeFileDTO">
+		INSERT INTO NOTICEFILE VALUES (NOTICEFILE_SEQ.NEXTVAL,#{boardNo},#{originalName},#{fileName})
+	</insert>  
+	
+	<!-- 파일 다운  -->
+	<select id="getFileDetail" parameterType="AdminNoticeFileDTO" resultType="AdminNoticeFileDTO">
+		SELECT FILENO, ORIGINALNAME, FILENAME
+		FROM NOTICEFILE
+		WHERE FILENO=#{fileNo}
+	</select>
+	
+	
+	<!-- detail -->	
+	<select id="getDetail" resultMap="getDetailResult" parameterType="AdminNoticeDTO">
+		SELECT N.*,NF.*,M.USERID 
+		FROM NOTICE N LEFT JOIN NOTICEFILE NF
+		ON (N.BOARDNO = NF.BOARDNO)
+		JOIN MEMBER M
+		ON N.USERNO = M.USERNO
+		WHERE N.BOARDNO = #{boardNo}
+		
+	</select>
+	
+ 	<resultMap type="AdminNoticeDTO" id="getDetailResult">
+		<id column="BOARDNO" property="boardNo"/>
+		<result	column="USERNO" property="userNo"/>
+		<result	column="TITLE" property="title"/>
+		<result	column="CREATEDATE" property="createDate"/>
+		<result	column="MODIFYDATE" property="modifyDate"/>
+		<result	column="HIT" property="hit"/>
+		<result	column="CONTENTS" property="contents"/>
+		<result column="USERID" property="userId"/>
+			
+		<collection property="fileDTOs" javaType="List" ofType="AdminNoticeFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+	</resultMap>
+	
+	<!-- update -->
+	<update id="setUpdate" parameterType="AdminNoticeDTO">
+		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents} WHERE BOARDNO=#{boardNo}
+	</update>
+	
+	<!--fileDelete  -->
+	<delete id="setFileDelete" parameterType="AdminNoticeFileDTO">
+		DELETE FROM NOTICEFILE WHERE FILENO=#{fileNo}
+	</delete>
+	
+	<!--delete  -->
+	<delete id="setDelete" parameterType="AdminNoticeDTO">
+		DELETE FROM NOTICE WHERE BOARDNO=#{boardNo}
+	</delete>
+	
+	<update id="setHit" parameterType="AdminNoticeDTO">
+		UPDATE NOTICE SET HIT = HIT +1
+		WHERE BOARDNO = #{boardNo}
+	</update>
+  
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
