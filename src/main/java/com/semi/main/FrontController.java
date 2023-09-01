@@ -1,5 +1,6 @@
 package com.semi.main;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,18 @@ public class FrontController {
 	@RequestMapping(value="/*")
 	public String index(Pager pager,Model model) throws Exception{
 		List<ProductDTO> ar = productService.getList(pager);
+		for(ProductDTO productDTO: ar) {
+			String file=productDTO.getFileDTOs().get(0).getOriginalName();
 		
+		
+			//productDTO.getFileDTOs().get(0).setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
+			System.out.println(productDTO.getFileDTOs().get(0).getOriginalName());
+		}
 		// 각 상품에 대한 이미지 리스트 가져오기
-        for (ProductDTO product : ar) {
-            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-            product.setFileDTOs(fileList);
-        }
+//        for (ProductDTO product : ar) {
+//            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
+//            product.setFileDTOs(fileList);
+//        }
 		model.addAttribute("list",ar);
 		model.addAttribute("pager", pager);
 		

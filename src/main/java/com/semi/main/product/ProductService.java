@@ -62,7 +62,7 @@ public class ProductService {
 			}
 		}
 		
-		System.out.println(path);
+		
 		return result;
 	}
 	

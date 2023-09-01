@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -39,7 +40,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+		
 		
 			
 			<style>
@@ -57,7 +58,7 @@
 
     </head>
 	<body>
-		
+
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
@@ -249,6 +250,22 @@
 					</div>
 					<!-- /section title -->
 
+					
+
+					<c:forEach var="product" items="${list}">
+					  <div class="product">
+					    <p class="product-name">${product.proName}</p>
+					    <h4 class="product-price">${product.proPrice}</h4>
+					    <div class="file-list">
+					      <c:forEach var="file" items="${product.fileDTOs}">
+					        <p>Original Name: ${file.originalName}, File Name: ${file.fileName}</p>
+					      </c:forEach>
+					    </div>
+					  </div>
+					</c:forEach>
+					  
+					
+
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
@@ -259,11 +276,16 @@
 										<!-- product -->
 										<c:forEach var="product" items="${list}">
 											<div class="product">
-												<div class="product-img">
-													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
-
+												<div class="product-img">	
+												<%-- <c:forEach var="file" items="${product.fileDTOs}">
+											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
+											      </c:forEach> --%>
+												
+													<img src="./resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+													<div>
+													${product.fileDTOs["0"].originalName}</div>
 													<div class="product-label">
-															<span class="new">NEW</span>
+														<span class="new">NEW</span>
 													</div>
 												</div>
 												<div class="product-body">
@@ -271,7 +293,7 @@
 													<h3 class="product-contents"><a href="#">${product.proContents}</a></h3>
 													<h4 class="product-price">${product.proPrice} </h4>
 													<p class="product-createDate">작성일: ${product.createDate}</p>
-                       								<p class="product-hit">조회수: ${product.hit}</p>
+													<p class="product-hit">조회수: ${product.hit}</p>
 													<div class="product-btns">
 														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
 														<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -284,14 +306,13 @@
 										</c:forEach>
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
 								<!-- /tab -->
 							</div>
 						</div>
 					</div>
 					<!-- Products tab & slick -->
+
 				</div>
 				<!-- /row -->
 			</div>
@@ -968,6 +989,13 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
+		
+
+	
+
+
+
+
 
 	</body>
 </html>

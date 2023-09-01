@@ -29,15 +29,22 @@ public class ProductController {
 		 System.out.println("catNo: " + catNo); // 확인용 출력
 		List<ProductDTO> ar = productService.getList(pager);
 		
+		for(ProductDTO productDTO: ar) {
+			productDTO.getFileDTOs().get(0).setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
+			System.out.println(productDTO.getFileDTOs().get(0).getFileName());
+		}
+		
 		// 각 상품에 대한 이미지 리스트 가져오기
-        for (ProductDTO product : ar) {
-            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
-                ProductFileDTO firstFile = fileList.get(0);
-                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
-                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
-            }
-        }
+//        for (ProductDTO product : ar) {
+//            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
+//            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
+//                ProductFileDTO firstFile = fileList.get(0);
+//                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
+//                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
+//                firstFile.setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
+//                
+//            }
+//        }
 		model.addAttribute("list",ar);
 		model.addAttribute("pager", pager);
 		
