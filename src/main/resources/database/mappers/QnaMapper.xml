@@ -8,6 +8,24 @@
 
   <mapper namespace="com.semi.main.qna.QnaDAO">
  
+ 	<!-- 관리자 페이지 List -->
+ 	<select id="getList" parameterType="Pager" resultType="QnaDTO">
+ 	
+ 	SELECT BOARDNO,USERID,KINDNAME,TITLE,CREATEDATE,STATUS
+  	FROM(SELECT ROWNUM R, B.* 
+  		FROM(
+  			SELECT Q.*,M.USERID,K.KINDNAME
+  			FROM QNA Q JOIN MEMBER M
+  			ON Q.USERNO = M.USERNO
+  			JOIN KIND K
+  			ON Q.KINDNO = K.KINDNO
+  			WHERE BOARDNO > 0
+  			ORDER BY BOARDNO DESC
+  		
+  		)B )
+  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+ 	
+ 	</select>
  	<!-- 내문의 LIST  -->
 	<select id="getMyList" parameterType="QnaDTO" resultType="QnaDTO">
 		SELECT BOARDNO,TITLE,CREATEDATE,STATUS
