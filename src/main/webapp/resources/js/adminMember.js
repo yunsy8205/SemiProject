@@ -14,7 +14,6 @@
 			r=response.trim();
 		}
 	})
-	console.log(r);
 	if(r>0){
 		if(statusNo>0){
 			$(this).text("정지해제");
