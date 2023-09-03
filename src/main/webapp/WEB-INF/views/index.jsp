@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -31,15 +32,14 @@
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
 
-		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
-
+		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
+		
 		
 			
 			<style>
@@ -49,15 +49,19 @@
             max-height: 200px; /* Set the maximum height of the image */
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
+		.dropdown-item:hover {
+			background-color: #007bff; 
+			color: #ffffff; 
+		}
 		
 	</style>
-			
+	
 		
 
-
+			
     </head>
 	<body>
-		
+
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
@@ -69,7 +73,17 @@
 				<c:choose>
 					<c:when test="${not empty member}">
 						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle  me-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								마이페이지
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: #000000; color: #ffffff;">
+								<li><a class="dropdown-item" href="">내 상품</a></li>
+								<li><a class="dropdown-item" href="">찜한 상품</a></li>
+								<li><a class="dropdown-item" href="">고객센터</a></li>
+								<li><a class="dropdown-item" href="">계정 설정</a></li>
+							</ul>
+						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
@@ -77,6 +91,7 @@
 					</c:otherwise>
 				</c:choose>
 			</ul>
+			
 			
 			
 			
@@ -214,13 +229,14 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="../views/index">Home</a></li>
-						<li><a href="#">에어컨</a></li>
-						<li><a href="#">냉장고</a></li>
-						<li><a href="#">세탁기</a></li>
-						<li><a href="#">TV</a></li>
-						<li><a href="#">노트북</a></li>
-						<li><a href="#">청소기</a></li>
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
+
+						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
+						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
+						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
+						<li><a href="./product/categoryList?catNo=1005">노트북</a></li>
+						<li><a href="./product/categoryList?catNo=1006">청소기</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -248,6 +264,12 @@
 					</div>
 					<!-- /section title -->
 
+					
+
+					
+					  
+					
+
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
 						<div class="row">
@@ -258,10 +280,15 @@
 										<!-- product -->
 										<c:forEach var="product" items="${list}">
 											<div class="product">
-												<div class="product-img">
-													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+												<div class="product-img">	
+												<%-- <c:forEach var="file" items="${product.fileDTOs}">
+											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
+											      </c:forEach> --%>
+												
+													<img src="./resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+													
 													<div class="product-label">
-															<span class="new">NEW</span>
+														<span class="new">NEW</span>
 													</div>
 												</div>
 												<div class="product-body">
@@ -269,7 +296,7 @@
 													<h3 class="product-contents"><a href="./product/detail?proNo=${product.proNo}">${product.proContents}</a></h3>
 													<h4 class="product-price">${product.proPrice} </h4>
 													<p class="product-createDate">작성일: ${product.createDate}</p>
-                       								<p class="product-hit">조회수: ${product.hit}</p>
+													<p class="product-hit">조회수: ${product.hit}</p>
 													<div class="product-btns">
 														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
 														<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
@@ -282,14 +309,13 @@
 										</c:forEach>
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>
-									</div>
-									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
 								<!-- /tab -->
 							</div>
 						</div>
 					</div>
 					<!-- Products tab & slick -->
+
 				</div>
 				<!-- /row -->
 			</div>
@@ -297,7 +323,51 @@
 		</div>
 		<!-- /SECTION -->
 
-		
+		<!-- HOT DEAL SECTION -->
+		<div id="hot-deal" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="hot-deal">
+							<ul class="hot-deal-countdown">
+								<li>
+									<div>
+										<h3>02</h3>
+										<span>Days</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>10</h3>
+										<span>Hours</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>34</h3>
+										<span>Mins</span>
+									</div>
+								</li>
+								<li>
+									<div>
+										<h3>60</h3>
+										<span>Secs</span>
+									</div>
+								</li>
+							</ul>
+							<h2 class="text-uppercase">hot deal this week</h2>
+							<p>New Collection Up to 50% OFF</p>
+							<a class="primary-btn cta-btn" href="#">Shop now</a>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /HOT DEAL SECTION -->
 
 		<!-- SECTION -->
 		<div class="section">
@@ -312,11 +382,12 @@
 							<h3 class="title">Top selling</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab2">최신순</a></li>
-									<li><a data-toggle="tab" href="#tab2">인기순</a></li>
-									<li><a data-toggle="tab" href="#tab2">저가순</a></li>
-									<li><a data-toggle="tab" href="#tab2">고가순</a></li>
+									<li class="active"><a data-toggle="tab" href="#tab2" data-condition="최신순">최신순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="인기순">인기순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="저가순">저가순</a></li>
+									<li><a data-toggle="tab" href="#tab2" data-condition="고가순">고가순</a></li>
 								</ul>
+								
 							</div>
 						</div>
 					</div>
@@ -922,11 +993,50 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
+				<!-- index.html 또는 해당 페이지 상단에 추가 -->
+		<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> jQuery를 먼저 로드하세요.
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				// 탭 클릭 이벤트
+				$('ul.section-tab-nav li a').click(function(event) {
+					event.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+					
+					// 선택된 탭의 data-condition 값을 가져옵니다.
+					var condition = $(this).data('condition');
+		
+					// AJAX를 사용하여 서버에 조건값을 전달하고 상품 리스트를 불러옵니다.
+					$.ajax({
+						type: 'POST', // 또는 'GET', 서버에 요청 방식에 따라 변경
+						url: '/', // 실제 서버 엔드포인트 경로
+						data: { condition: condition }, // 서버로 전달할 데이터
+						success: function(response) {
+							// 서버에서 반환된 상품 리스트를 화면에 표시하거나 업데이트합니다.
+							// 예를 들어, 반환된 데이터를 이용하여 상품 목록을 동적으로 생성합니다.
+							// response 변수에 서버에서 받은 데이터가 들어 있습니다.
+							updateProductList(response);
+						},
+						error: function(error) {
+							console.error('에러 발생:', error);
+						}
+					});
+				});
+		
+				function updateProductList(productList) {
+					// productList를 사용하여 화면에 상품 리스트를 업데이트하는 코드를 작성합니다.
+					// 이 코드는 상품 목록을 동적으로 생성하거나 업데이트하는 방법에 따라 다를 수 있습니다.
+				}
+			});
+		</script>
+
+	
+
+ -->
+
+
 
 	</body>
 </html>
-
-
 
 
 

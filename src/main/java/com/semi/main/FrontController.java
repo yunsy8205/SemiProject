@@ -1,5 +1,6 @@
 package com.semi.main;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,21 @@ public class FrontController {
 	@RequestMapping(value="/*")
 	public String index(Pager pager,Model model) throws Exception{
 		List<ProductDTO> ar = productService.getList(pager);
+		for(ProductDTO productDTO: ar) {
+			String file=productDTO.getFileDTOs().get(0).getOriginalName();
+		}
 		
-		// 각 상품에 대한 이미지 리스트 가져오기
-        for (ProductDTO product : ar) {
-            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-            product.setFileDTOs(fileList);
-        }
+//			// 조건에 따라 정렬된 상품 리스트 가져오기
+//		    List<ProductDTO> conditionList = productService.getConditionList(pager);
+		    
+	
 		model.addAttribute("list",ar);
+//		model.addAttribute("conditionList", conditionList);
 		model.addAttribute("pager", pager);
 		
 		return "index";
 	}
 	
 	
-}
+	}
+	

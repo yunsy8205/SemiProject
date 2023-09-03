@@ -33,8 +33,11 @@ public class ProductService {
 		return productDAO.getList(pager);
 	}
 	
-	public List<ProductDTO> getListByCategory(Long catNo) {
-        return productDAO.getListByCategory(catNo);
+	public List<ProductDTO> getCategoryList(Pager pager) throws Exception{
+		
+		pager.makeRowNum();
+		pager.makePageNum(productDAO.getTotal(pager));
+        return productDAO.getCategoryList(pager);
     }
 
 	
@@ -43,8 +46,7 @@ public class ProductService {
 		String path="/resources/upload/product/";
 		
 		int result = productDAO.setAdd(productDTO);
-		 System.out.println("ProductDTO proNo: " + productDTO.getProNo()); // 디버깅 메시지 추가
-
+		
 		for(MultipartFile file:files) {
 			if(!file.isEmpty()) {
 				String fileName=fileManager.fileSave(path, session, file);
@@ -60,10 +62,20 @@ public class ProductService {
 			}
 		}
 		
-		System.out.println(path);
+		
 		return result;
 	}
+	//상품 조건별 리스
+	public List<ProductDTO> getConditionList(Pager pager) throws Exception{
+		pager.makeRowNum();
+		pager.makePageNum(productDAO.getTotal(pager));
+        return productDAO.getCategoryList(pager);
+	}
 	
+		//상품상세
+		public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
+			return productDAO.getDetail(productDTO);
+		}
 		
     //상품상세
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
