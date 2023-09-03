@@ -2,7 +2,18 @@ package com.semi.main.util;
 
 
 public class Pager {
+	//최신순,인기순,저가순,고가순 정
+	private String condition;
 	
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+
 	//검색 관련
 	private String kind;
 	private String search;
@@ -29,6 +40,36 @@ public class Pager {
 	//false면 1번블럭 true면(1번블럭이아님)
 	private boolean pre; 
 	
+	
+	
+	private Long catNo;
+	
+	
+	public Long getCatNo() {
+		return catNo;
+	}
+
+	public void setCatNo(Long catNo) {
+		this.catNo = catNo;
+	}
+
+	public boolean isPre() {
+		return pre;
+	}
+
+	public void setPre(boolean pre) {
+		this.pre = pre;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+
 	//다음블럭 활성화를 담는 블럭
 		//false면 마지막블럭 true면(마지막블럭이아님)
 	private boolean next;//

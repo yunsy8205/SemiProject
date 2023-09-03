@@ -8,7 +8,40 @@
 		 <!--  
 		 id의 역할 : 중복되면 안됨. --> 
 		  <mapper namespace="com.semi.main.product.ProductDAO">
-		    
+		  
+		  
+		
+		<select id="getConditionList" resultMap="getSelectResult" parameterType="Pager">
+		 SELECT *
+		  FROM (
+		    SELECT ROWNUM R, B.*
+		    FROM (
+		      SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+		      FROM PRODUCT P
+		      INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+		      LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+		      WHERE P.PRONO > 0
+		      <choose>
+		            <when test="condition == '최신순'">
+		               ORDER BY P.CREATEDATE DESC
+		            </when>
+		            <when test="condition == '인기순'">
+		                ORDER BY P.PROHIT DESC
+		            </when>
+		            <when test="condition == '저가순'">
+		                ORDER BY P.PROPRICE ASC
+		            </when>
+		            <when test="condition == '고가순'">
+		                ORDER BY P.PROPRICE DESC
+		            </when>
+		        </choose>
+		      	
+			    ) B
+			  )
+			  
+			  WHERE R BETWEEN #{startRow} AND #{lastRow}
+		</select>
+		  
 		  <select id="getTotal" parameterType="Pager" resultType="Long">
 			  SELECT COUNT(PRONO)
 			  FROM PRODUCT P
@@ -27,21 +60,36 @@
 			  </choose>
 			</select>
 		  
-		  <select id="getListByCategory" resultMap="getSelectResult" parameterType="Long">
-			    SELECT *
-			    FROM (
-			        SELECT ROWNUM R, B.*
-			        FROM (
-			            SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
-			            FROM PRODUCT P
-			            INNER JOIN MEMBER M ON P.USERNO = M.USERNO
-			            LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
-			            WHERE P.PRONO > 0
-			            AND P.CATNO = #{catNo}
-			        ) B
-			    )
-			    WHERE R BETWEEN #{startRow} AND #{lastRow}
-			</select>
+		  <!-- 상품 카테고리별 리스트 가져오는 쿼리 -->
+	    <select id="getCategoryList" resultMap="getSelectResult" parameterType="Pager">
+	        SELECT *
+		  FROM (
+		    SELECT ROWNUM R, B.*
+		    FROM (
+		      SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+		      FROM PRODUCT P
+		      INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+		      LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+		      WHERE P.PRONO > 0
+		      AND P.CATNO = #{catNo}
+		      <choose>
+		        <when test="kind=='proName'">
+		          AND P.PRONAME LIKE '%'||#{search}||'%'
+		        </when>
+		        <when test="kind=='proContents'">
+		          AND P.PROCONTENTS LIKE '%'||#{search}||'%'
+		        </when>
+		        <otherwise>
+		          AND M.USERID LIKE '%'||#{search}||'%'
+		        </otherwise>
+		      </choose>
+		      	ORDER BY P.CREATEDATE DESC
+			    ) B
+			  )
+			  
+			 WHERE R BETWEEN #{startRow} AND #{lastRow}
+	    </select>
+
 		  
 		<select id="getList" resultMap="getSelectResult" parameterType="Pager">
 		  SELECT *
@@ -85,9 +133,9 @@
 	    <result column="PROHIT" property="hit"/>
 	    <result column="PROSALE" property="proSale"/>
 	    <result column="USERID" property="userId"/>
-	    <!-- <association property="category" javaType="CategoryDTO">
+	    <!--  <association property="category" javaType="CategoryDTO">
 	        <id column="CATNO" property="catNo"/>
-	        Add other properties of CategoryDTO here
+	        <result column="CATNAME" property="catName"/>
 	    </association> -->
 	    <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
 	        <id column="FILENO" property="fileNo"/>
@@ -109,50 +157,9 @@
         FROM PRODUCTIMAGE
         WHERE PRONO = #{proNo}
     	</select>
-  	  
-  	  <update id="setHitCount">
-		UPDATE
-			PRODUCT
-		SET
-			PROHIT = PROHIT + 1
-		WHERE
-			PRONO = #{proNo}
-		</update>
   	
-  	<select id="countProduct" parameterType="ProductDTO" resultType="Long">
-  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{userNo}
-  	</select>
-
   	
-  	<select id="countReview" parameterType="ProductDTO" resultType="Long">
-  		SELECT COUNT(REVIEWNO) FROM REVIEW
-		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
-  	</select>
-  	
-  	<select id="memberProList" parameterType="ProductDTO" resultMap="getSelectResult">
-		<![CDATA[
-		SELECT A.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM
-  		(SELECT * FROM PRODUCT		
-  		WHERE USERNO=#{userNo} AND ROWNUM < 6
-  		)A
-  		LEFT JOIN PRODUCTIMAGE PI
-  		ON (A.PRONO=PI.PRONO)
-  		ORDER BY CREATEDATE DESC
-  		]]>
-  	</select>
-  	
-  	<select id="memberReviewList" parameterType="ProductDTO" resultType="ProductReviewDTO">
-		<![CDATA[
-		SELECT C.* FROM
-		(SELECT R.*, M.USERID FROM REVIEW R
-		JOIN MEMBER M ON(R.USERNO=M.USERNO)
-		WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo})
-		ORDER BY REVIEWDATE DESC)C
-		WHERE ROWNUM < 6
-		]]>
-  	</select>
-  	
-		<insert id="setAdd" parameterType="ProductDTO">
+		  <insert id="setAdd" parameterType="ProductDTO">
 		    <selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
 		        SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
 		    </selectKey>
@@ -166,11 +173,19 @@
 		    #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange},
 		    #{proStatus}, 0, #{proSale})
 		</insert>
+		
+  		<!-- <insert id="setAdd" parameterType="ProductDTO">
+  		<selectKey keyProperty="proNo" order="BEFORE" resultType="Long">
+  			SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO PRODUCT
+  		(PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS,
+  		PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE)
+  		VALUES
+  		(#{proNo},#{catNo},#{userNo},#{proName},#{proPrice},
+		#{proContents},#{proAmount},sysdate,sysdate,#{exchange},#{proStatus},0,#{proSale})
+  	  </insert> -->
   	  
-  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
-  		INSERT INTO PRODUCTIMAGE
-  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
-  	  </insert>
   	  
   	  <select id="getDetail" parameterType="ProductDTO" resultMap="getSelectResult">
   		SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P
@@ -183,22 +198,24 @@
   		WHERE P.PRONO= #{proNo}
   	</select>
   	  
-  	  <insert id="dibsAdd" parameterType="ProductDTO">
-  	  	INSERT INTO DIBS
-  	  	VALUES (#{proNo}, #{userNo}, SYSDATE)
+  	  <insert id="setFileAdd" parameterType="ProductFileDTO">
+  		INSERT INTO PRODUCTIMAGE
+  		VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
   	  </insert>
   	  
-  	  <delete id="dibsDelete" parameterType="ProductDTO">
-  	  	DELETE DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
-  	  </delete>
-  	  
-  	  <select id="dibsConfirm" parameterType="ProductDTO" resultType="ProductDTO">
-  	  	SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
-  	  </select>
-  	  
-  	  <select id="dibsNum" parameterType="ProductDTO" resultType="Long">
-  	  	SELECT COUNT(PRONO) FROM DIBS WHERE PRONO=#{proNo}
-  	  </select>
+  	  <update id="setHitCount">
+		UPDATE
+			PRODUCT
+		SET
+			PROHIT = PROHIT + 1
+		WHERE
+			PRONO = #{proNo}
+		</update>
+  	
+  	<select id="countReview" parameterType="ProductDTO" resultType="Long">
+  		SELECT COUNT(REVIEWNO)
+  		FROM REVIEW WHERE USERNO=#{userNo}
+  	</select>
   	
   	<insert id="a"></insert>
   	<update id="b"></update>
