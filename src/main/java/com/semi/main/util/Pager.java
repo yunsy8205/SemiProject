@@ -53,21 +53,7 @@ public class Pager {
 		this.catNo = catNo;
 	}
 
-	public boolean isPre() {
-		return pre;
-	}
-
-	public void setPre(boolean pre) {
-		this.pre = pre;
-	}
-
-	public boolean isNext() {
-		return next;
-	}
-
-	public void setNext(boolean next) {
-		this.next = next;
-	}
+	
 
 
 	//다음블럭 활성화를 담는 블럭

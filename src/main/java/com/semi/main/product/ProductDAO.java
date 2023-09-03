@@ -62,6 +62,11 @@ public class ProductDAO {
 		return sqlSession.selectList(NAMESPACE+"getCategoryList",pager);
 	}
 
+	public List<ProductDTO> getConditionList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getConditionList",pager);
+	}
+	
+	
 	public List<ProductDTO> memberProList(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"memberProList", productDTO);
 	}
@@ -69,6 +74,8 @@ public class ProductDAO {
 	public List<ProductReviewDTO> memberReviewList(ProductDTO productDTO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"memberReviewList", productDTO);
 	}
+	
+	
 	
 	public int setAdd(ProductDTO productDTO) throws Exception {
 		// TODO Auto-generated method stub

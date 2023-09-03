@@ -27,28 +27,17 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "list",method = RequestMethod.GET)
-	public String getList(Pager pager,Model model,Long catNo) throws Exception{
-		System.out.println("컨트롤러 startRow: " + pager.getStartRow()); // 확인용 출력
-		 System.out.println("catNo: " + catNo); // 확인용 출력
+	public String getList(Pager pager,Model model,Long catNo,String condition) throws Exception{
+	
+		 // condition 값을 Pager 객체에 설정
+	    pager.setCondition(condition);
+
 		List<ProductDTO> ar = productService.getList(pager);
+	
 		
-//		for(ProductDTO productDTO: ar) {
-//			productDTO.getFileDTOs().get(0).setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
-//			System.out.println(productDTO.getFileDTOs().get(0).getFileName());
-//		}
 		
-		// 각 상품에 대한 이미지 리스트 가져오기
-//        for (ProductDTO product : ar) {
-//            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-//            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
-//                ProductFileDTO firstFile = fileList.get(0);
-//                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
-//                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
-//                firstFile.setOriginalName("d033fecd-03a2-4809-96f8-de2ab4c02bc5_세탁기.jpg");
-//                
-//            }
-//        }
 		model.addAttribute("list",ar);
+		 model.addAttribute("condition", condition); // 현재 선택된 조건
 		model.addAttribute("pager", pager);
 		
 		return "product/list";
@@ -57,11 +46,13 @@ public class ProductController {
 	
 	
 		@RequestMapping(value = "categoryList")
-		public String getCategoryList(Pager pager,Long catNo, Model model) throws Exception{
-		 System.out.println("컨트롤러 startRow: " + pager.getStartRow()); // 확인용 출력
-		 System.out.println("catNo: " + catNo); // 확인용 출력
-	        pager.setCatNo(catNo); // 카테고리 번호를 Pager에 설정
+		public String getCategoryList(Pager pager,Long catNo, Model model,String condition) throws Exception{
+		    // Pager 클래스에 조건(condition) 및 카테고리(catNo)를 설정합니다.
+		    pager.setCondition(condition); // 최신순, 인기순, 저가순, 고가순 중 어떤 조건으로 리스트를 가져올지 설정합니다.
+		    pager.setCatNo(catNo); // 카테고리 번호를 설정합니다.
+
 	        List<ProductDTO> ar = productService.getCategoryList(pager);
+	      
 	        // 각 상품에 대한 이미지 리스트 가져오기
 	        for (ProductDTO product : ar) {
 	            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
@@ -74,6 +65,7 @@ public class ProductController {
 			model.addAttribute("list",ar);
 			model.addAttribute("pager", pager);
 			model.addAttribute("catNo", catNo);
+			model.addAttribute("condition", condition); // 현재 선택된 조건 (예: 최신순, 인기순 등)
 	        return "product/categoryList"; // JSP page name in the "product" folder
 	    }
 	
@@ -126,33 +118,7 @@ public class ProductController {
 		
 		return "commons/result";
 	}
-	@GetMapping("detail")
-	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
-		
-		//판매상품 정보
-		productDTO = productService.getDetail(productDTO);
-		for(ProductFileDTO a:productDTO.getFileDTOs()) {
-			a.getOriginalName();
-		}
-		model.addAttribute("dto", productDTO);
-//		//판매자상품수, 판매자후기수
-//		Long countProduct = productService.countProduct(productDTO);
-//		model.addAttribute("countp", countProduct);
-//		Long countReview = productService.countReview(productDTO);
-//		model.addAttribute("countr", countReview);
-//		//판매자상품 리스트
-//		List<ProductDTO> ar = productService.memberProList(productDTO);
-//		model.addAttribute("list", ar);
-//		//판매자후기 리스트
-//		List<ProductReviewDTO> ar2 = productService.memberReviewList(productDTO);
-//		model.addAttribute("review", ar2);
-//		
-//		//dibsNum
-//		Long dibsNum = productService.dibsNum(productDTO);
-//		model.addAttribute("dibsNum", dibsNum);
-//		
-		return "product/detail";
-	}
+	
 	
 	@GetMapping("index")
 	public String boot() throws Exception{
