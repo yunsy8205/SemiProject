@@ -21,9 +21,16 @@ public class ProductDTO {
 	private String catName;
 	private String userId;
 	private List<ProductFileDTO> fileDTOs;
+	private CategoryDTO category;
 	
 	
 	
+	public CategoryDTO getCategory() {
+		return category;
+	}
+	public void setCategory(CategoryDTO category) {
+		this.category = category;
+	}
 	public String getUserId() {
 		return userId;
 	}

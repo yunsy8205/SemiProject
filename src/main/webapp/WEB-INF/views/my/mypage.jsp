@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!DOCTYPE html>
+
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
@@ -38,9 +40,7 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		
-			
-			<style>
+	<style>
 		.product-image {
             width: 100%;
             height: auto;
@@ -48,9 +48,9 @@
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
 	</style>
-	
-</head>
-<body>    
+    </head>
+	<body>
+<!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
     <div id="top-header">
@@ -66,6 +66,7 @@
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
 						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
+
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -85,7 +86,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="../" class="logo">
                             <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
@@ -197,39 +198,138 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
-	
-	<div id="nav">
+
+<!-- ------------------------------------------------------------------------------------------- -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li><a href="../">Home</a></li>
+						<li class="active"><a href="./mypage">MY PAGE</a></li>
+						<li><a href="./check">내 정보 수정</a></li>
+						<li><a href="./list">내 판매글/구매내역/후기</a></li>
+						<li><a href="#">내 찜 목록</a></li>
+						<li><a href="#">택배조회</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="./delete">회원탈퇴</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+<!-- ------------------------------------------------------------------------------------------- -->
+
 		
-		<ul>
-		<li><a href="./mypage">마이페이지</a></li><br><br>
-		  <li><a href="./check">정보수정</a></li><br><br>
-		  <li><a href="./list">내판매글/구매내역/후기</a></li><br><br>
-		  <li>내 찜 목록</li><br><br>
-		  <li>택배조회</li><br><br>
-		  <li><a href="./management">상품관리</a></li><br><br>
-		  <li><a href="./delete">회원탈퇴</a></li>
-		</ul>
-	</div>
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">MY PAGE</h3>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
 	
-	<div id="section">
-	<p>마이페이지</p>
-		<p>
-			<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}" onerror="this.onerror-null; this.src='../resources/img/imgtest.jpeg';" width="200"; height="300">
-		</p>
-	</div>
-	<div id="section">
-		<p>${member.userId} 님</p>
-		<p>${member.email}</p>
+<!-- ------------------------------------------------------------------------------------------- -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-4">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							
+							<div class="form-group">
+								<p>
+								<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}" onerror="this.onerror-null; this.src='../resources/img/imgtest.jpeg';" width="300" height="300">
+								</p>
+							</div>
+							<div class="form-group">
+								${member.userId} 님
+							</div>
+							
+							<%-- <div class="form-group">
+								<br><br>
+								<p>자기소개</p><br>
+								${member.intro}
+							</div> --%>
+						</div>
+						<!-- /Billing Details -->	
+					</div>
+					
+					<!-- Shiping Details -->
+						<div class="shiping-details">
+							<div class="section-title">
+								<h3 class="title">자기소개</h3>
+							</div>
+							<div class="input-checkbox">
+								
+									<span></span>
+									${member.intro}
+								
+								
+							</div>
+						</div>
+						<!-- /Shiping Details -->
+					
+					
+					
+
+					<!-- Order Details -->
+					<div class="col-md-3 order-details">
+						
+						<div class="order-summary">
+							
+							<div class="order-products">
+								<div class="order-col">
+									<div>회원가입일</div>
+									<div>${member.accountDate}</div>
+								</div>
+								<div class="order-col">
+									<div>판매횟수</div>
+									<div>?</div>
+								</div>
+								<div class="order-col">
+									<div>구매횟수</div>
+									<div>?</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						
+					</div>
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+<!-- ------------------------------------------------------------------------------------------- -->
 		
-		<p>자기소개 : ${member.intro}</p>
-		
-		<p>판매횟수 : </p>
-		<p>구매횟수 : </p>
-	</div>
-	
-	
-	
-	<footer id="footer">
+
+		<!-- FOOTER -->
+		<footer id="footer">
 			<!-- top footer -->
 			<div class="section">
 				<!-- container -->
@@ -322,6 +422,17 @@
 			</div>
 			<!-- /bottom footer -->
 		</footer>
-    
-</body>
+		<!-- /FOOTER -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+		<!-- jQuery Plugins -->
+		<script src="/resources/js/jquery.min.js"></script>
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<script src="/resources/js/slick.min.js"></script>
+		<script src="/resources/js/nouislider.min.js"></script>
+		<script src="/resources/js/jquery.zoom.min.js"></script>
+		<script src="/resources/js/main.js"></script>
+
+	</body>
 </html>
+
