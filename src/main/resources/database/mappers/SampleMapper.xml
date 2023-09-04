@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 어떤 태그가 어떤 역할을 한다 : 스키마코드 필요함 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <!--  
  id의 역할 : 중복되면 안됨. --> 
-  <mapper namespace="sample">
+  <mapper namespace="com.semi.main.payment.PaymentDAO">
   	<insert id="a"></insert>
   	<update id="b"></update>
   	<delete id="c"></delete>
