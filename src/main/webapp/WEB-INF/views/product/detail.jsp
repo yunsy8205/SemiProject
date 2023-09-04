@@ -146,7 +146,7 @@
 	 	<c:otherwise>
 			 <button id="dibs" class="ms-3 my-3 btn btn-primary"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum">${dibsNum}</span></button>
 			 <button class="ms-3 my-3 btn btn-primary">톡</button>
-			 <button class="ms-3 my-3 btn btn-primary">바로구매</button>
+			 <button class="ms-3 my-3 btn btn-primary" href="../payment/paymentadd?proNo=${dto.proNo}">바로구매</button>
 	 	</c:otherwise>
 	 </c:choose>
 		</div>
