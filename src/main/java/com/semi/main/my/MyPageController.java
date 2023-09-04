@@ -1,5 +1,6 @@
 package com.semi.main.my;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,11 @@ public class MyPageController {
 	@GetMapping(value = "mypage") //마이페이지
 
 
-	public void myPage(/* HttpSession session */) throws Exception{
-//		MemberDTO memberDTO = new MemberDTO();
-//		memberDTO=(MemberDTO)session.getAttribute("member");
-//		System.out.println(memberDTO.getUserId()+"?zzz");
-//		System.out.println(memberDTO.getEmail()+"?zzz");
-//		System.out.println(memberDTO.getMemberFileDTO().getFileName()+"?zzz");
-//		System.out.println(memberDTO.getAccountDate());
+	public void myPage(HttpSession session) throws Exception{
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO=(MemberDTO)session.getAttribute("member");
+		System.out.println(memberDTO.getUserId()+"?zzz");
+		System.out.println(memberDTO.getAccountDate());
 
 	}
 	
@@ -55,6 +54,9 @@ public class MyPageController {
 		memberDTO.setUserNo(memberDTO2.getUserNo());
 		memberDTO.setUserId(userId);
 		
+		Date userAccountDate = ((MemberDTO)session.getAttribute("member")).getAccountDate(); // update 후 회원가입일 null값 떠서 insert용으로 선언
+		
+		
 		int result = myPageService.setMemberUpdate(memberDTO);
 		
 		MemberFileDTO memberFileDTO = new MemberFileDTO();
@@ -70,6 +72,7 @@ public class MyPageController {
 		
 		if(result>0) {
 			session.setAttribute("member", memberDTO); // 기존 멤버 정보를 새로운(수정한) 멤버 정보로 업데이트
+			memberDTO.setAccountDate(userAccountDate); // 업데이트됐을때 회원가입일 insert
 		}
 		
 		if((String)session.getAttribute("newFileName")==null){ //수정한 사진이 null이면 이전 세션 사진으로 저장
