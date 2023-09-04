@@ -17,7 +17,7 @@
           			<a class="nav-link active" href="#">결제관리</a>
         		</li>
         		<li class="nav-item">
-          			<a a class="nav-link active" href="#">신고관리</a>
+          			<a a class="nav-link active" href="/admin/report">신고관리</a>
 			     </li>
 			     <li class="nav-item">
           			<a a class="nav-link active" href="#">1대1 문의</a>

@@ -80,7 +80,7 @@ public class Pager {
 			this.totalPage++;
 		}
 		//2.전체 페이지수로 전체 block 수 구하기
-		long perBlock=2;
+		long perBlock=5;
 		
 		long totalBlock = this.totalPage/perBlock;
 		if(this.totalPage%perBlock !=0) {

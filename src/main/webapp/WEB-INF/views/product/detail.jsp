@@ -64,6 +64,8 @@
 	</style>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<c:import url="../temp/header1.jsp"></c:import>
+
 </head>
 <body>
 
@@ -144,7 +146,7 @@
 	 	<c:otherwise>
 			 <button id="dibs" class="ms-3 my-3 btn btn-primary"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum">${dibsNum}</span></button>
 			 <button class="ms-3 my-3 btn btn-primary">톡</button>
-			 <button class="ms-3 my-3 btn btn-primary">바로구매</button>
+			 <button class="ms-3 my-3 btn btn-primary" href="../payment/paymentadd?proNo=${dto.proNo}">바로구매</button>
 	 	</c:otherwise>
 	 </c:choose>
 		</div>
@@ -202,5 +204,6 @@
 	<c:if test="${empty member}">
 		<script src="../resources/js/detailLogout.js"></script>	
 	</c:if>
+<c:import url="../temp/footer1.jsp"></c:import>
 </body>
 </html>

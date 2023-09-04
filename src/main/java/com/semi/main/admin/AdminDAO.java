@@ -1,6 +1,7 @@
 package com.semi.main.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,27 @@ public class AdminDAO {
 	
 	public int memberUpdate(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"memberUpdate", memberDTO);
+	}
+	
+	public int reportAdd(Map<String, Object> map)throws Exception{
+		return sqlSession.insert(NAMESPACE+"reportAdd", map);
+	}
+	
+	public int setFileAdd(ReportFileDTO reportFileDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setFileAdd", reportFileDTO);
+				
+	}
+	
+	public List<ReportDTO> reportList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"reportList", pager);
+	}
+	
+	public Long reportTotal(Pager pager)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"reportTotal", pager);
+	}
+	
+	public int reportStatus(ReportDTO reportDTO)throws Exception{
+		System.out.println("확인여부");
+		return sqlSession.update(NAMESPACE+"reportStatus", reportDTO);
 	}
 }
