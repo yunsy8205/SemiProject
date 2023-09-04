@@ -72,10 +72,7 @@ public class ProductService {
         return productDAO.getCategoryList(pager);
 	}
 	
-		//상품상세
-		public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
-			return productDAO.getDetail(productDTO);
-		}
+		
 		
     //상품상세
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
