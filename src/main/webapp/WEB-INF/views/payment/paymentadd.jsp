@@ -58,7 +58,7 @@
 					<!-- Order Details -->
 					<div class="col-md-5 order-details">
 						<div class="section-title text-center">
-							<h3 class="title" id="order" data-name="${dto.proName}" data-price="${dto.proPrice}"
+							<h3 class="title" id="order" data-name="${dto.proName}" data-price="100"
 							>Your Order</h3>
 						</div>
 						<div class="order-summary">
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 						
-						<a href="#" id="btn" onclick="requestPay()" class="primary-btn order-submit">Place order</a>
+						<button type="button" href="#" id="btn" class="primary-btn order-submit">Place order</button>
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -103,17 +103,16 @@
    	  let name=$('#member').attr('data-name');
 		
    	  let phone=$('#member').attr('data-phone');
-
-		$('#btn').click(function(){
-			requestPay();
-		})
    	  
+   	  $('#btn').click(function(){
+   		requestPay();
+   	  })
       
       function requestPay() {
         IMP.request_pay(
           {
             pg: "html5_inicis",
-            pay_method: "trans",
+            pay_method: "card",
             merchant_uid: 3456+new Date().getTime(),//가맹점 주문번호
             name: proName,//상품명
             amount: proPrice,//가격
@@ -123,14 +122,34 @@
 
           },
           function (rsp) {
-        	  if (rsp.success) {
-                  console.log(rsp);
-              } else {
-                  console.log(rsp);
-              }
-            // callback
-            //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+        	  console.log("여기까지 완료");
+        	  //rsp는 success(결제 성공 여부), paid_amount(결제된 금액), imp_uid(아임포트 거래 고유 번호) 등을 담고 있는 객체
+        	    if (rsp.success) {
+        	      // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+        	      // jQuery로 HTTP 요청
+        	       let msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+        	      
+			        jQuery.ajax({
+        	        url: "{서버의 결제 정보를 받는 가맹점 endpoint}", 
+        	        method: "POST",
+        	        headers: { "Content-Type": "application/json" },
+        	        data: {
+        	          imp_uid: rsp.imp_uid,            // 결제 고유번호
+        	          merchant_uid: rsp.merchant_uid   // 주문번호
+        	        }
+        	      }).done(function (data) {
+        	        // 가맹점 서버 결제 API 성공시 로직
+        	      })
+        	    } else {
+        	      alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+        	    }
+        	    alert(msg);
           }
+
         );
       }
     </script>
