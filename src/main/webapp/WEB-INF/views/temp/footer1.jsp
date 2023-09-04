@@ -55,15 +55,9 @@
 	</style>
 </head>
 <body>
-<!-- <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option> -->
-  
- 
-  
-  <footer id="footer">
+
+<!-- FOOTER -->
+		<footer id="footer">
 			<!-- top footer -->
 			<div class="section">
 				<!-- container -->
@@ -156,6 +150,16 @@
 			</div>
 			<!-- /bottom footer -->
 		</footer>
-</select>
+		<!-- /FOOTER -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+		<!-- jQuery Plugins -->
+		<script src="/resources/js/jquery.min.js"></script>
+		<script src="/resources/js/bootstrap.min.js"></script>
+		<script src="/resources/js/slick.min.js"></script>
+		<script src="/resources/js/nouislider.min.js"></script>
+		<script src="/resources/js/jquery.zoom.min.js"></script>
+		<script src="/resources/js/main.js"></script>
+
 </body>
 </html>

@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <c:import url="../temp/bootstrap.jsp"></c:import>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -49,8 +51,10 @@
 				    <select id="catNo" name="catNo">
 				        <option value="1001">에어컨</option>
 				        <option value="1002">냉장고</option>
-				        <option value="1003">TV</option>
-				        <option value="1004">노트북</option>
+				        <option value="1003">세탁기</option>
+						<option value="1004">TV</option>
+						<option value="1005">노트북</option>
+				        <option value="1006">세탁기</option>
 				    </select>
 
                
