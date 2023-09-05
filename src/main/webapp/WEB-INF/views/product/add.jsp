@@ -54,7 +54,7 @@
 				        <option value="1003">세탁기</option>
 						<option value="1004">TV</option>
 						<option value="1005">노트북</option>
-				        <option value="1006">세탁기</option>
+				        <option value="1006">청소기</option>
 				    </select>
 
                

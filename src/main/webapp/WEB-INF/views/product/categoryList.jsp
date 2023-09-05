@@ -272,7 +272,7 @@
         <!-- 상품리스트 부분-->
         <section class="container mt-5">
             <div class="container">
-                <h1 class="mb-3 text-center">상품 목록</h1>
+                
                 <div class="row">
                     <c:forEach items="${list}" var="product" varStatus="status">
                         <div class="col-md-4">
@@ -348,11 +348,7 @@
                   </form>
                 </div>
             
-            <button type="button" class="btn btn-danger"><a href="../product/add">상품등록</a></button>
-        </div>
-        <div>
-            <button type="button" class="btn btn-danger"><a href="../">홈</a></button>
-        </div>
+          
         </section>
     	</div>
 				<!-- /row -->

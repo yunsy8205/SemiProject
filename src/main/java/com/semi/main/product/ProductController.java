@@ -70,10 +70,11 @@ public class ProductController {
 	    }
 	
 	@GetMapping("detail")
-	public String getDetail(ProductDTO productDTO, Model model) throws Exception{
+	public String getDetail(ProductDTO productDTO, Model model,Long proHit) throws Exception{
 		
 		//판매상품 정보
 		productDTO = productService.getDetail(productDTO);
+		productService.setHitCount(productDTO.getProNo());
 		for(ProductFileDTO a:productDTO.getFileDTOs()) {
 			a.getOriginalName();
 		}
@@ -93,6 +94,7 @@ public class ProductController {
 		//dibsNum
 		Long dibsNum = productService.dibsNum(productDTO);
 		model.addAttribute("dibsNum", dibsNum);
+		
 		
 		return "product/detail";
 	}

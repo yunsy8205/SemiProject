@@ -67,6 +67,10 @@
    		<a href="./signUp" class="lnk_etc">회원가입</a>
    </div>
    
+   
+  	<div>
+  		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=cd934c1bfa1d419ececfe6e1e1ef9624&redirect_uri=http://localhost:82/member/login"></a>
+  	</div>
    <!-- 소셜 로그인 영역 -->
    <ul class="loginSocialLi" style="display:;">
 		<li class="oddCol "><a href="javascript:void(0);" id="FBLoginSub_aBtnNaverLogin" onClick="callNaverAuth('R');dfinerySnsLogIn('Naver');" class="btn_social"><span class="bWrap"><em class="ico_social ico_na bgMem"></em><em class="txt">네이버 아이디로 로그인</em></span></a>  </li>
