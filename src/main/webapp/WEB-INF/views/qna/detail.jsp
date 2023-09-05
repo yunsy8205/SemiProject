@@ -13,7 +13,9 @@
     width: 1000px;
   }
 </style>
+
 </head>
+
 <body>
 <c:import url="../temp/BoardHeader.jsp"></c:import>
 	<div class="container mt-5 pt-5">

@@ -15,10 +15,20 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	
-	
+	<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
 	
 	<dependencies>	
-	
+	<!-- import  -->
+	<dependency>
+  <groupId>com.github.iamport</groupId>
+  <artifactId>iamport-rest-client-java</artifactId>
+  <version>0.2.14</version>
+</dependency>
 	<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
 		<dependency>
 		    <groupId>javax.annotation</groupId>

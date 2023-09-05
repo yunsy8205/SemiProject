@@ -28,6 +28,10 @@
 							<div class="section-title">
 								<h3 class="title">결제하기</h3>
 							</div>
+							<div class="form-group">
+								상품이름
+								<input class="input" type="text" name="last-name" readonly="readonly" value="${dto.proName}">
+							</div>
 							<div class="form-group" id="member" data-email="${member.email}" data-name="${member.name}"
 							data-phone="${member.phone}" data-address="${member.address}" data-code="${member.zipCode}">
 								배송지
@@ -68,8 +72,8 @@
 							</div>
 							<div class="order-products">
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
+									<div>${dto.proName}</div>
+									<div>${dto.proPrice}</div>
 								</div>
 							</div>
 							<div class="order-col">
@@ -93,46 +97,70 @@
 		<!-- /SECTION -->
 <c:import url="../temp/footer1.jsp"></c:import>
     <script>
-      var IMP = window.IMP;
-      IMP.init("imp50730076");
+      let IMP = window.IMP;
+      IMP.init("imp48226253");
  		
       let proName=$('#order').attr("data-name");
-      console.log(proName);
+  
    	  let proPrice=$('#order').attr('data-price');
-   	  console.log(proPrice);
+   	 
    	  let name=$('#member').attr('data-name');
 		
    	  let phone=$('#member').attr('data-phone');
 
-		$('#btn').click(function(){
-			requestPay();
-		})
-   	  
-      
+	
       function requestPay() {
         IMP.request_pay(
           {
-            pg: "html5_inicis",
-            pay_method: "trans",
+            pg: "html5_inicis.INIBillTst",
+            pay_method: "card",
             merchant_uid: 3456+new Date().getTime(),//가맹점 주문번호
             name: proName,//상품명
             amount: proPrice,//가격
-
             buyer_name: name,//구매자
             buyer_tel: phone,//구매자 번호
 
           },
-          function (rsp) {
-        	  if (rsp.success) {
-                  console.log(rsp);
-              } else {
-                  console.log(rsp);
-              }
-            // callback
-            //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-          }
-        );
-      }
+          function(rsp) {
+
+			
+
+			if(rsp.success){
+
+			console.log(rsp);
+			// 결제검증
+			$.ajax({
+	        	type : "POST",
+	        	url : "/payment/verifyIamport/" + rsp.imp_uid 
+				
+			
+
+	        }).done(function(data) {
+	        	
+	        	console.log(data);
+	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+	        	if(rsp.paid_amount == data.response.amount){
+		        	alert("결제 및 결제검증완료");
+	        	} else {
+	        		alert("결제 실패");
+					
+	        	}
+
+	        });
+
+			
+			}else{
+
+				alert("결제실패" + rsp.error_msg);
+			}
+
+
+
+
+
+		});
+	}
+    
     </script>
 </body>
 </html>
