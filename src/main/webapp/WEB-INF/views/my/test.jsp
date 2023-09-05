@@ -263,6 +263,31 @@
             <button type="submit" class="btn btn-default">조회하기</button>
         </form>
 
+
+<br><br>
+
+
+<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank">배송조회</a>
+<a href="https://apis.tracker.delivery/carriers/kr.epost/tracks/1111111111111" target="_blank">json</a>
+<a href="/resources/js/test.json" target="_blank">test</a>
+
+
+<div class="Box">
+        <div class="InputBox">
+            <h3>배송 API TEST</h3>
+            <form id="searchForm" class="InputForm">
+                <input id="trackNum" type="number" placeholder="송장번호">
+                <select id="carrierList"></select>
+                <button id="searchButton" type="button" target="_blank">조회</button>
+            </form>
+        </div>
+        <div class="OutputBox">
+            <textarea id="responseData" cols="20" rows="10"></textarea>
+        </div>
+    </div>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+	
 <!-- ------------------------------------------------------------------------------------------- -->
 		
 
@@ -406,7 +431,7 @@
 			
 			                $.ajax({
 			                    type: "get",
-			                    url: "https://apis.tracker.delivery/carriers/" + selectedCarrier + "/tracks/" + trackNum,
+			                    url: "https://tracker.delivery/#/" + selectedCarrier + "/tracks/" + trackNum,
 			                    data: "",
 			                    dataType: 'json',
 			                    success: function(data) {
@@ -426,6 +451,7 @@
 			            });
 			        });
 			    </script>
+			    
 	</body>
 </html>
 
