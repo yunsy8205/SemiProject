@@ -19,6 +19,8 @@ import com.semi.main.member.MemberDTO;
 import com.semi.main.profile.ProfileService;
 import com.semi.main.util.Pager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {

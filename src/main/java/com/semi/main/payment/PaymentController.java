@@ -17,6 +17,7 @@ import com.semi.main.product.ProductDTO;
 import com.semi.main.product.ProductService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
@@ -26,6 +27,9 @@ public class PaymentController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private PaymentService paymentService;
 	
 	private IamportClient api;
 	
@@ -45,8 +49,16 @@ public class PaymentController {
 	@RequestMapping(value="/verifyIamport/{imp_uid}", method = RequestMethod.POST)
 	public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session, @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException
 	{	
-			return api.paymentByImpUid(imp_uid);
+		paymentService.paySuccess(imp_uid);
+		return api.paymentByImpUid(imp_uid);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/verifyIamport/cancel/{imp_uid}", method = RequestMethod.POST)
+	public IamportResponse<Payment> paymentCancelByImpUid(Model model, Locale locale, HttpSession session, @PathVariable(value= "imp_uid") CancelData imp_uid) throws IamportResponseException, IOException
+	{	
 		
+		return api.cancelPaymentByImpUid(imp_uid);
 	}
 
 	

@@ -124,10 +124,9 @@
           function(rsp) {
 
 			
-
 			if(rsp.success){
-
-			console.log(rsp);
+				console.log("rsp info : ");
+				console.log(rsp);
 			// 결제검증
 			$.ajax({
 	        	type : "POST",
@@ -136,11 +135,12 @@
 			
 
 	        }).done(function(data) {
-	        	
+	        	console.log("data info : ");
 	        	console.log(data);
 	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
 	        	if(rsp.paid_amount == data.response.amount){
-		        	alert("결제 및 결제검증완료");
+		        	alert("결제 및 결제검증완료 " + rsp.merchant_uid);
+		        	
 	        	} else {
 	        		alert("결제 실패");
 					
