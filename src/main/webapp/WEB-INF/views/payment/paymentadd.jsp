@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>Sample Payment</title>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <c:import url="../temp/bootstrap.jsp"></c:import>
@@ -101,17 +102,28 @@
    	  let proPrice=$('#order').attr('data-price');
    	  console.log(proPrice);
    	  let name=$('#member').attr('data-name');
-		
    	  let phone=$('#member').attr('data-phone');
    	  
    	  $('#btn').click(function(){
    		requestPay();
    	  })
-      
-      function requestPay() {
-        IMP.request_pay(
-          {
-            pg: "html5_inicis",
+
+   	  $.ajax({
+   		  type: "post",
+   		  url: "https://api.iamport.kr/payments/prepare",
+   		contentType:application/json, 
+   		async: true,
+   		data:
+   			merchant_uid: 3456+new Date().getTime(), // 가맹점 주문번호
+   			amount: 1000, // 결제 예정금액
+   		  },success:function(result){
+   			  console.log(result);
+   		  }
+   		});
+  	  
+     function requestPay() {
+        IMP.request_pay({
+            pg: "html5_inicis.INIBillTst",
             pay_method: "card",
             merchant_uid: 3456+new Date().getTime(),//가맹점 주문번호
             name: proName,//상품명
@@ -120,38 +132,30 @@
             buyer_name: name,//구매자
             buyer_tel: phone,//구매자 번호
 
-          },
-          function (rsp) {
-        	  console.log("여기까지 완료");
+          },function (rsp) {
         	  //rsp는 success(결제 성공 여부), paid_amount(결제된 금액), imp_uid(아임포트 거래 고유 번호) 등을 담고 있는 객체
-        	    if (rsp.success) {
-        	      // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-        	      // jQuery로 HTTP 요청
-        	       let msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-        	      
-			        jQuery.ajax({
-        	        url: "{서버의 결제 정보를 받는 가맹점 endpoint}", 
-        	        method: "POST",
-        	        headers: { "Content-Type": "application/json" },
-        	        data: {
-        	          imp_uid: rsp.imp_uid,            // 결제 고유번호
-        	          merchant_uid: rsp.merchant_uid   // 주문번호
-        	        }
-        	      }).done(function (data) {
-        	        // 가맹점 서버 결제 API 성공시 로직
-        	      })
-        	    } else {
-        	      alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-        	    }
-        	    alert(msg);
-          }
 
-        );
+        	  
+        	  //결제검증
+        	  $.ajax({
+	        	type : "POST",
+	        	url : "/payment/verifyIamport/" + rsp.imp_uid 
+	        }).done(function(data) {
+	        	
+	        	console.log(data);
+	        	
+	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+	        	if(rsp.paid_amount == data.response.amount){
+	        		console.log(rsp.paid_amount);
+	        		console.log(data.response.amount);
+		        	alert("결제 및 결제검증완료");
+	        	} else {
+	        		alert("결제 실패");
+	        	}
+          });
+          });
       }
+
     </script>
 </body>
 </html>
