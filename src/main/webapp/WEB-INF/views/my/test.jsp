@@ -266,12 +266,6 @@
 
 <br><br>
 
-
-<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank">배송조회</a>
-<a href="https://apis.tracker.delivery/carriers/kr.epost/tracks/1111111111111" target="_blank">json</a>
-<a href="/resources/js/test.json" target="_blank">test</a>
-
-
 <div class="Box">
         <div class="InputBox">
             <h3>배송 API TEST</h3>
@@ -281,13 +275,29 @@
                 <button id="searchButton" type="button" target="_blank">조회</button>
             </form>
         </div>
-        <div class="OutputBox">
-            <textarea id="responseData" cols="20" rows="10"></textarea>
-        </div>
     </div>
 
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank">배송조회</a>
+<a href="https://apis.tracker.delivery/carriers/kr.epost/tracks/1111111111111" target="_blank">json</a>
+<a href="/resources/js/test.json" target="_blank">test</a>
+
+	<br><br><br><br>
 	
+	<textarea rows="5" cols="30" id="msgArea">
+	</textarea> //채팅 내용 올라갈 화면
+	<br> 메시지 : <input type="text" id="chatMsg"> //메시지 보내는 부분
+	<br> 상대 아이디 : <input type="text" id="targetUser"> // 채팅 상대 아이디 작성 부분
+	<br>
+	<input type="button" value="전송" id="btnSend">
+	<br><br><br><br>
+	
+	
+<!-- 유튜브 링크가 없는 iframe -->
+<button type="button" onclick="location.href='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617'" target="_blank">1대1 채팅</button>
+<!-- <iframe src='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' width='396' height='736'></iframe>
+ -->
+
+                    
 <!-- ------------------------------------------------------------------------------------------- -->
 		
 
