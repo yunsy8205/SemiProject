@@ -70,7 +70,7 @@
    <!-- cd934c1bfa1d419ececfe6e1e1ef9624
    http://localhost:82/member/kakao/kakaoLogin -->
 <div>
-	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=cd934c1bfa1d419ececfe6e1e1ef9624&redirect_uri=http://localhost:82/kakao/callback">
+	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d5aa1769209cd0342601e6c69c838176&redirect_uri=http://localhost:82/kakao/callback">
 			 <img src="/resources/img/kakao_login_medium_wide.png">
 	</a>
 
