@@ -160,8 +160,6 @@ public class MyPageController {
 	
 	@GetMapping("test")
 	public void test() throws Exception{
-		EchoHandler ec = new EchoHandler();
-		String a =ec.test();
-		System.out.println(a + "zz");
+	
 	}
 }

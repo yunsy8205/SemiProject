@@ -254,9 +254,17 @@
 		      
 	<br><br><br><br>
 	
-	<input type="text" id="message" />
-	<input type="button" id="sendBtn" value="submit"/>
-	<div id="messageArea"></div>
+	 <div>
+        <input type="text" id="sender" value="${sessionScope.member.userId}" style="display: none;">
+        <input type="text" id="messageinput">
+    </div>
+    <div>
+        <button type="button" onclick="openSocket();">Open</button>
+        <button type="button" onclick="send();">Send</button>
+        <button type="button" onclick="closeSocket();">Close</button>
+    </div>
+    <!-- Server responses get written here -->
+    <div id="messages"></div>
 
 	<br><br><br><br>
 	
@@ -377,33 +385,43 @@
 
 			    
 <script type="text/javascript">
-
-	var id = "<c:out value='${member.userId}'/>" + "님 : ";
-
-	$("#sendBtn").click(function() {
-		console.log("zz");
-		sendMessage();
-		$('#message').val('')
-	});
-
-	let sock = new SockJS("http://localhost:82/my/test/");
-	sock.onmessage = onMessage;
-	sock.onclose = onClose;
-	// 메시지 전송
-	function sendMessage() {
-		sock.send($("#message").val());
-	}
-	// 서버로부터 메시지를 받았을 때
-	function onMessage(msg) {
-		var data = id + msg.data;
-		$("#messageArea").append(data + "<br/>");
-	}
-	// 서버와 연결을 끊었을 때
-	function onClose(evt) {
-		$("#messageArea").append("연결 끊김");
-
-	}
-</script>
+        var ws;
+        var messages=document.getElementById("messages");
+        
+        function openSocket(){
+            if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+                writeResponse("WebSocket is already opened.");
+                return;
+            }
+            //웹소켓 객체 만드는 코드
+            ws=new WebSocket("ws://192.168.9.17:82/my/test");
+            
+            ws.onopen=function(event){
+                if(event.data===undefined) return;
+                
+                writeResponse(event.data);
+            };
+            ws.onmessage=function(event){
+                writeResponse(event.data);
+            };
+            ws.onclose=function(event){
+                writeResponse("Connection closed");
+            }
+        }
+        
+        function send(){
+            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
+            ws.send(text);
+            text="";
+        }
+        
+        function closeSocket(){
+            ws.close();
+        }
+        function writeResponse(text){
+            messages.innerHTML+="<br/>"+text;
+        }
+  </script>
   
 	</body>
 </html>
