@@ -2,6 +2,7 @@ package com.semi.main.payment;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,58 +10,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.semi.main.product.ProductDTO;
 import com.semi.main.product.ProductService;
+import com.semi.main.util.PayService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 @Controller
 @RequestMapping("/payment/*")
 public class PaymentController {
-	
-	@Autowired
-	private ProductService productService;
-	
-	@Autowired
-	private PaymentService paymentService;
-	
-	private IamportClient api;
-	
-	public PaymentController() {
-		this.api = new IamportClient("0423121332258201","gucymO3pfPTz2um1RFankOgQlBdMynAnTuxxjh8mXDFLYhLjcC5XZjhZ1UD39Dgpv0aFfphzsR1RYlvK");
-	}
-	
-	@RequestMapping(value = "paymentadd", method = RequestMethod.GET)
-	public String paymentAdd(ProductDTO productDTO, Model model) throws Exception{
-		productDTO = productService.getDetail(productDTO);
-		System.out.println(productDTO.getProName());
-		model.addAttribute("dto", productDTO);
-		return "payment/paymentadd";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/verifyIamport/{imp_uid}", method = RequestMethod.POST)
-	public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session, @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException
-	{	
-		paymentService.paySuccess(imp_uid);
-		return api.paymentByImpUid(imp_uid);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/verifyIamport/cancel/{imp_uid}", method = RequestMethod.POST)
-	public IamportResponse<Payment> paymentCancelByImpUid(Model model, Locale locale, HttpSession session, @PathVariable(value= "imp_uid") CancelData imp_uid) throws IamportResponseException, IOException
-	{	
-		
-		return api.cancelPaymentByImpUid(imp_uid);
-	}
-
-	
+   private final String REST_API_KEY = "0423121332258201";
+   private final String REST_API_SECRET = "gucymO3pfPTz2um1RFankOgQlBdMynAnTuxxjh8mXDFLYhLjcC5XZjhZ1UD39Dgpv0aFfphzsR1RYlvK";
+   
+   @Autowired
+   private ProductService productService;
+   
+  
+   @RequestMapping(value = "paymentadd", method = RequestMethod.GET)
+   public String paymentAdd(ProductDTO productDTO, Model model) throws Exception{
+      productDTO = productService.getDetail(productDTO);
+      System.out.println(productDTO.getProName());
+      model.addAttribute("dto", productDTO);
+      return "payment/paymentadd";
+   }
+  
+   
+   @ResponseBody
+   @RequestMapping(value="/success", method = RequestMethod.POST)
+   public IamportResponse<Payment> paymentByImpUid(@RequestBody PaymentDTO paymentDTO, Model model, HttpSession session) throws Exception
+   {   
+         PayService payService = new PayService();
+         String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
+         Map<String, String> paymentInfo = payService.paymentInfo(token, paymentDTO.getUid());
+         
+         String amount = paymentInfo.get("amount"); // 결제된 금액
+         
+         if(Integer.parseInt(amount) == paymentDTO.getProPrice()) { // 검증 성공
+            System.out.println("검증 성공!");
+            // 데이터 저장 및 처리
+         }else { // 검증 실패(결제된 금액과 실제 계산되어야 할 금액이 다른 경우)
+            // 취소 처리...
+            System.out.println("검증 실패");
+         }
+         
+         return null;
+   }
 }
-	

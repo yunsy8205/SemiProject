@@ -14,7 +14,7 @@ public class PaymentService {
 		return uid;
 	}
 	
-	public String payCancel (String uid) {
+	public String payString(String uid) {
 		
 		return uid;
 	}
