@@ -53,5 +53,8 @@
 	</resultMap>
 	
 	
+	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+  		SELECT * FROM MEMBER WHERE EMAIL=#{email}
+  	</select>
 	
 </mapper>

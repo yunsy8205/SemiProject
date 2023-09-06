@@ -67,18 +67,28 @@
    		<a href="./signUp" class="lnk_etc">회원가입</a>
    </div>
    
+   <!-- cd934c1bfa1d419ececfe6e1e1ef9624
+   http://localhost:82/member/kakao/kakaoLogin -->
+<div>
+	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d5aa1769209cd0342601e6c69c838176&redirect_uri=http://localhost:82/kakao/callback">
+			 <img src="/resources/img/kakao_login_medium_wide.png">
+	</a>
+
+            </div>	  
    <!-- 소셜 로그인 영역 -->
    <ul class="loginSocialLi" style="display:;">
 		<li class="oddCol "><a href="javascript:void(0);" id="FBLoginSub_aBtnNaverLogin" onClick="callNaverAuth('R');dfinerySnsLogIn('Naver');" class="btn_social"><span class="bWrap"><em class="ico_social ico_na bgMem"></em><em class="txt">네이버 아이디로 로그인</em></span></a>  </li>
 		<li class="evenCol"><a href="javascript:void(0);" id="FBLoginSub_aBtnKakaoLogin" onClick="callKakaoLogin();dfinerySnsLogIn('Kakao');" class="btn_social"><span class="bWrap"><em class="ico_social ico_ka bgMem"></em><em class="txt">카카오 아이디로 로그인</em></span></a>  </li>	
 	</ul>
    
-</section>	
-
+	
 	 <!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="/resources/js/login.js"></script>
-	
-  
+	<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 </body>
 </html>
+
+

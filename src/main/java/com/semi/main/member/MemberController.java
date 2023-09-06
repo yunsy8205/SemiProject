@@ -3,12 +3,17 @@ package com.semi.main.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.ibatis.session.SqlSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -17,6 +22,10 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	
+	
+	
 	
 	/** 로그인 FORM 이동 */
 	@GetMapping("login")
