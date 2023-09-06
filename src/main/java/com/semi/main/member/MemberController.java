@@ -54,7 +54,7 @@ public class MemberController {
 		// request에 있는 파라미터를 session에 넣음
 		HttpSession session = request.getSession();
 		
-		System.out.println("컨트롤러 로그인 상태 여부 ===========================");
+//		System.out.println("컨트롤러 로그인 상태 여부 ===========================");
 		
 		if(memberDTO != null && memberDTO.getStatusNo() != 0) {
 			session.setAttribute("member", memberDTO);
