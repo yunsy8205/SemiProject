@@ -14,6 +14,7 @@ import com.semi.main.product.ProductService;
 import com.semi.main.util.Pager;
 
 @Controller
+@RequestMapping("/*")
 public class FrontController {
 	
 	@Autowired
@@ -21,7 +22,7 @@ public class FrontController {
 
 
 	
-	@RequestMapping(value="/*")
+	@RequestMapping(value="")
 	public String index(Pager pager,Model model) throws Exception{
 		List<ProductDTO> ar = productService.getList(pager);
 		for(ProductDTO productDTO: ar) {

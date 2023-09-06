@@ -107,7 +107,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
@@ -117,14 +117,17 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select name="kind" id="k" class="input-select" data-kind="${pager.kind}" aria-label="Default select example">
+                        <form action="/product/list" method="GET">
+                            <select name="kind" id="k" class="input-select" aria-label="Default select example">
                                 <option class="kind" value="proName">상품명</option>
                                 <option class="kind" value="proContents">상품설명</option>
                                 <option class="kind" value="userId">이름</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+                            <button type="submit" class="search-btn">검색</button>
+
+                            <!-- <input class="input" type="text" name="query" placeholder="Search here">
+                            <button type="submit" class="search-btn">Search</button> -->
                         </form>
                     </div>
                 </div>
@@ -234,7 +237,7 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="/product/categoryList?catNo=1001">에어컨</a></li>
+						<li ><a href="/product/categoryList?catNo=1001">에어컨</a></li>
 						<li><a href="/product/categoryList?catNo=1002">냉장고</a></li>
 						<li><a href="/product/categoryList?catNo=1003">세탁기</a></li>
 						<li><a href="/product/categoryList?catNo=1004">TV</a></li>
@@ -275,7 +278,7 @@
                 
                 <div class="row">
                     <c:forEach items="${list}" var="product" varStatus="status">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="product-card">
                                 <c:choose>
                                     <c:when test="${not empty product.fileDTOs}">
@@ -293,7 +296,7 @@
                                 <p>조회수: ${product.hit}</p>
                             </div>
                         </div>
-                        <c:if test="${status.index % 3 == 2 || status.last}">
+                        <c:if test="${status.index % 6 == 5 || status.last}">
                         </div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
 
                         </c:if>

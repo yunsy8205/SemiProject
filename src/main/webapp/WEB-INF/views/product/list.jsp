@@ -107,7 +107,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
@@ -276,7 +276,7 @@
 				<div class="container">
 					<div class="row">
 						<c:forEach items="${list}" var="product" varStatus="status">
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<div class="product-card">
 									<c:choose>
 										<c:when test="${not empty product.fileDTOs}">
@@ -294,35 +294,43 @@
 									<p>조회수: ${product.hit}</p>
 								</div>
 							</div>
-							<c:if test="${status.index % 3 == 2 || status.last}">
-							</div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
+							<c:if test="${status.index % 6 == 5 || status.last}">
+							</div></div><div class="row"> 
 
 							</c:if>
 						</c:forEach>
 					</div>
 				</div>
-				<!-- 페이징 및 검색 부분 -->
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
+				  <!-- ... (페이징 및 검색 부분) ... -->
+				  <nav aria-label="Page navigation example">
+					<ul class="pagination">
 						<c:if test="${pager.pre}">
-							<li class="page-item">
-								<a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-						</c:if>
-						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
-						</c:forEach>
-						<c:if test="${pager.next}">
-							<li class="page-item">
-								<a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</c:if>
+						  <li class="page-item">
+							<a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
+							  <span aria-hidden="true">&laquo;</span>
+							</a>
+						  </li>
+					  </c:if>
+					  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						  <li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
+					  </c:forEach>
+					  <c:if test="${pager.next && pager.lastNum < pager.totalPage && !empty list}">
+						  <li class="page-item">
+							  <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
+								  <span aria-hidden="true">&raquo;</span>
+							  </a>
+						  </li>
+					  </c:if>
+
+					  <c:if test="${!pager.next || pager.lastNum >= pager.totalPage}">
+						  <li class="page-item disabled">
+							  <span class="page-link" aria-label="Next">
+								  <span aria-hidden="true">&raquo;</span>
+							  </span>
+						  </li>
+					  </c:if>
 					</ul>
-				</nav>
+				  </nav>
 			
 				<!-- 검색 부분 -->
 				<div class="input-group mb-3">

@@ -73,7 +73,7 @@ public class KakaoController {
  			//4. 세션에 저장
  			System.out.println("기존 정보 있음");
  			session.setAttribute("member", memberDTO2);				
- 			return "/index";
+ 			return "redirect:/";
  		}else {
  			System.out.println("기존 정보 없음");
  			session.setAttribute("kakaoMember", memberDTO);
