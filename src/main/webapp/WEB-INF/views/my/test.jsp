@@ -48,6 +48,10 @@
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
 	</style>
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
     </head>
 	<body>
 <!-- HEADER -->
@@ -87,7 +91,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="../" class="logo">
-                            <img src="/resources/img/logo.png" alt="">
+                            <img src="/resources/img/logotest6.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -236,7 +240,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">배송조회 테스트</h3>
+						<h3 class="breadcrumb-header">테스트용</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -247,47 +251,22 @@
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 
-		        <form action="http://info.sweettracker.co.kr/tracking/5" method="post">
-            <div class="form-group">
-              <label for="t_key">API key</label>
-              <input type="text" class="form-control" id="t_key" name="t_key" value="" placeholder="제공받은 APIKEY">
-            </div>
-            <div class="form-group">
-              <label for="t_code">택배사 코드</label>
-              <input type="text" class="form-control" name="t_code" id="t_code" placeholder="택배사 코드">
-            </div>
-            <div class="form-group">
-              <label for="t_invoice">운송장 번호</label>
-              <input type="text" class="form-control" name="t_invoice" id="t_invoice" placeholder="운송장 번호">
-            </div>
-            <button type="submit" class="btn btn-default">조회하기</button>
-        </form>
-
-
-<br><br>
-
-
-<a href="https://tracker.delivery/#/kr.epost/1111111111111" target="_blank">배송조회</a>
-<a href="https://apis.tracker.delivery/carriers/kr.epost/tracks/1111111111111" target="_blank">json</a>
-<a href="/resources/js/test.json" target="_blank">test</a>
-
-
-<div class="Box">
-        <div class="InputBox">
-            <h3>배송 API TEST</h3>
-            <form id="searchForm" class="InputForm">
-                <input id="trackNum" type="number" placeholder="송장번호">
-                <select id="carrierList"></select>
-                <button id="searchButton" type="button" target="_blank">조회</button>
-            </form>
-        </div>
-        <div class="OutputBox">
-            <textarea id="responseData" cols="20" rows="10"></textarea>
-        </div>
-    </div>
-
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+		      
+	<br><br><br><br>
 	
+	<input type="text" id="message" />
+	<input type="button" id="sendBtn" value="submit"/>
+	<div id="messageArea"></div>
+
+	<br><br><br><br>
+	
+	
+<!-- 유튜브 링크가 없는 iframe -->
+<button type="button" onclick="location.href='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617'" target="_blank">1대1 채팅</button>
+<!-- <iframe src='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' width='396' height='736'></iframe>
+ -->
+
+                    
 <!-- ------------------------------------------------------------------------------------------- -->
 		
 
@@ -396,62 +375,36 @@
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
 
-
-			<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-			    <script>
-			        const selectBox = document.getElementById("carrierList");
-			        const responseData = document.getElementById("responseData");
-			
-			        $.ajax({
-			            type: "get",
-			            url: "https://apis.tracker.delivery/carriers",
-			            data: "",
-			            dataType: 'json',
-			            success: function(data) {
-			                console.log(data);
-			                for(let i = 0; i < data.length; i++){
-			                    let carrierData = document.createElement("option");
-			                    carrierData.text = data[i].name;
-			                    carrierData.value = data[i].id;
-			                    selectBox.options.add(carrierData);    
-			                }    
-			            },
-			            error: function(request, status, error) {
-			                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			            }
-			        });
-			
-			
-			        $(function(){
-			            $('#searchButton').on("click",function(){
-			                let selectedCarrier = document.getElementById("carrierList").value;
-			                let trackNum = document.getElementById("trackNum").value;
-			                console.log(selectedCarrier);
-			                console.log(trackNum);
-			
-			                $.ajax({
-			                    type: "get",
-			                    url: "https://tracker.delivery/#/" + selectedCarrier + "/tracks/" + trackNum,
-			                    data: "",
-			                    dataType: 'json',
-			                    success: function(data) {
-			                        console.log(data);
-			                        let string = '';
-			                        string += "From:" + JSON.stringify(data.from.name) + "\r\n"; 
-			                        string += "State:" + JSON.stringify(data.state.text) + "\r\n"; 
-			                        string += "To:" + JSON.stringify(data.to.name) + "\r\n"; 
-			                        
-			                        console.log(string);
-			                        responseData.innerHTML = string;
-			                    },
-			                    error: function(request, status, error) {
-			                        console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			                    }
-			                });
-			            });
-			        });
-			    </script>
 			    
+<script type="text/javascript">
+
+	var id = "<c:out value='${member.userId}'/>" + "님 : ";
+
+	$("#sendBtn").click(function() {
+		console.log("zz");
+		sendMessage();
+		$('#message').val('')
+	});
+
+	let sock = new SockJS("http://localhost:82/my/test/");
+	sock.onmessage = onMessage;
+	sock.onclose = onClose;
+	// 메시지 전송
+	function sendMessage() {
+		sock.send($("#message").val());
+	}
+	// 서버로부터 메시지를 받았을 때
+	function onMessage(msg) {
+		var data = id + msg.data;
+		$("#messageArea").append(data + "<br/>");
+	}
+	// 서버와 연결을 끊었을 때
+	function onClose(evt) {
+		$("#messageArea").append("연결 끊김");
+
+	}
+</script>
+  
 	</body>
 </html>
 

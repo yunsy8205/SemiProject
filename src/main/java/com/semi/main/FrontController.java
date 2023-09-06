@@ -26,7 +26,7 @@ public class FrontController {
 	public String index(Pager pager,Model model) throws Exception{
 		List<ProductDTO> ar = productService.getList(pager);
 		for(ProductDTO productDTO: ar) {
-			String file=productDTO.getFileDTOs().get(0).getOriginalName();
+//			String file=productDTO.getFileDTOs().get(0).getOriginalName();
 		}
 		
 //			// 조건에 따라 정렬된 상품 리스트 가져오기
