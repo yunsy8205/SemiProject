@@ -78,6 +78,12 @@ public class ProductService {
 	public ProductDTO getDetail(ProductDTO productDTO) throws Exception{
 		return productDAO.getDetail(productDTO);
 	}
+	//조회수 증
+	public int setHitCount(Long proNo) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.setHitCount(proNo);
+	}
+	
 	
 	//판매상품수
 	public Long countProduct(ProductDTO productDTO) throws Exception{
