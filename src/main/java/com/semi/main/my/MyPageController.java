@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
@@ -158,6 +160,8 @@ public class MyPageController {
 	
 	@GetMapping("test")
 	public void test() throws Exception{
-		
+		EchoHandler ec = new EchoHandler();
+		String a =ec.test();
+		System.out.println(a + "zz");
 	}
 }
