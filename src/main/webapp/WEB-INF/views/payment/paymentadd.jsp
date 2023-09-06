@@ -83,7 +83,12 @@
 							</div>
 						</div>
 						
-						<button type="button" href="#" id="btn" class="primary-btn order-submit">Place order</button>
+						<button type="button" id="btn" class="primary-btn order-submit">Place order</button>
+						
+						<form action="./delete" method="post">
+						<button type="submit" id="del" class="primary-btn order-submit">결제 취소</button>
+						</form>
+						
 					</div>
 					<!-- /Order Details -->
 				</div>
@@ -96,84 +101,55 @@
     <script>
 
       let proName=$('#order').attr("data-name");
-      console.log(proName);
+      
    	  let proPrice=$('#order').attr('data-price');
    	  console.log(proPrice);
    	  let name=$('#member').attr('data-name');
    	  let phone=$('#member').attr('data-phone');
+   	  let uid= 3456+new Date().getTime();
    	  
    	  $('#btn').click(function(){
-   		requestPay();
-   	  })
+		requestPay();
+   	  });
+   	  
+   	function requestPay() {
+   		var uid = '';
+   	    IMP.init('imp50730076');
+   	    IMP.request_pay({
+   	        pg: "nice.iamport00m",
+   	        pay_method: "card",
+   	        merchant_uid: uid,//가맹점 주문번호
+   	        name: proName,//상품명
+   	        amount: proPrice,//가격
 
-   	  function requestPay() {
-    // IMP.request_pay(param, callback) 결제창 호출
-    var uid = '';
-    IMP.init('imp50730076');
-    IMP.request_pay({
-        pg: "html5_inicis.INIBillTst",
-        pay_method: "card",
-        merchant_uid: 3456+new Date().getTime(),//가맹점 주문번호
-        name: proName,//상품명
-        amount: proPrice,//가격
-
-        buyer_name: name,//구매자
-        buyer_tel: phone,//구매자 번호
-
-      }, function (rsp) { // callback
-        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-        	//rsp는 success(결제 성공 여부), paid_amount(결제된 금액), imp_uid(아임포트 거래 고유 번호) 등을 담고 있는 객체
-        	uid = rsp.imp_uid;
-            
-      		// 결제검증
-            $.ajax({
-                url: '/order/verify_iamport/' + rsp.imp_uid,
-                type: 'post'
-            }).done(function(data) {
-                // 결제를 요청했던 금액과 실제 결제된 금액이 같으면 해당 주문건의 결제가 정상적으로 완료된 것으로 간주한다.
-                if (cdPay.textContent == data.response.amount) {
-                    // jQuery로 HTTP 요청
-                    // 주문정보 생성 및 테이블에 저장 
-		        	
-                        // 데이터를 json으로 보내기 위해 바꿔준다.
-                        data = JSON.stringify({
-                           
-                            "paymentNo" : rsp.merchant_uid,
-                            "proName": proName,//상품명
-                            "proPrice": rsp.paid_amount,//가격
-                            "proName" : rsp.name,
-                            "name": name,//구매자
-                            "Phone": phone,//구매자 번호
-                            "imp_uid" : rsp.imp_uid
-
-                        });
-					
-                        $.ajax({
-                            url: "/order/complete", 
-                            type: "POST",
-                            dataType: 'json',
-                            contentType: 'application/json',
-                            data : data
-                        })
-                        .done(function(res) {
-                            if (res > 0) {
-                                swal('주문정보 저장 성공')
-                                createPayInfo(uid);
-                            }
-                            else {
-                                swal('주문정보 저장 실패');
-                            }
-                        })
-                }
-                else {
-                    alert('결제 실패');
-                }
-            })
-            } else {
-                swal("결제에 실패하였습니다.","에러 내용: " +  rsp.error_msg,"error");
-            }
-        });
-}
+   	        buyer_name: name,//구매자
+   	        buyer_tel: phone//구매자 번호
+   	    }, function(rsp){
+   	    	if(rsp.success){
+	   	    	let payData = new Object();
+	      		payData.uid = rsp.imp_uid;
+	      		payData.proPrice = proPrice;
+	      		payData.proName = proName;
+	      		payData.name = name;
+	      		payData.phone = phone;
+	      		
+	      		$.ajax({
+					url:"/payment/success",
+					method:"POST",
+					headers:{ "Content-Type":"application/json" },
+					data:JSON.stringify(payData),
+					success:function(result){
+						console.log(result);
+					},
+					error:function(error){
+						alert("관리자에게 문의하세요.");
+					}
+				});
+   	    	}else{
+   	    		alert("결제 실패");
+   	    	}
+   	    });
+   	}
 
     </script>
 </body>
