@@ -162,4 +162,9 @@ public class MyPageController {
 	public void test() throws Exception{
 	
 	}
+	
+	@GetMapping("test2")
+	public void test2() throws Exception{
+	
+	}
 }

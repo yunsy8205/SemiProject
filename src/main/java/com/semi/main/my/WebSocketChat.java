@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.websocket.RemoteEndpoint.Basic;
 
 @Controller
-@ServerEndpoint(value="/my/test")
+@ServerEndpoint(value="/my/test2")
 public class WebSocketChat {
 	private static final List<Session> sessionList=new ArrayList<Session>();;
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
