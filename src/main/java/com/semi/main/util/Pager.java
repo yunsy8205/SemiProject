@@ -185,7 +185,7 @@ public class Pager {
 
 	public Long getPerPage() {
 		if(this.perPage==null) {
-			this.perPage=10L;
+			this.perPage=30L;
 		}
 		return perPage;
 	}
