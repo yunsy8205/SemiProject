@@ -42,21 +42,12 @@
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
+							<c:forEach items="${dto.fileDTOs}" var="f">
 							<div class="product-preview">
-								<img src="./img/product01.png" alt="">
+								<img src="../resources/upload/product/${f.originalName}" alt="">
 							</div>
+							</c:forEach>
 
-							<div class="product-preview">
-								<img src="./img/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/product08.png" alt="">
-							</div>
 						</div>
 					</div>
 					<!-- /Product main img -->
@@ -64,25 +55,15 @@
 					<!-- Product thumb imgs -->
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
-							<div class="product-preview">
-								<img src="./img/product01.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/product03.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/product06.png" alt="">
-							</div>
-
-							<div class="product-preview">
-								<img src="./img/product08.png" alt="">
-							</div>
+													<c:forEach items="${dto.fileDTOs}" var="f">
+								<div class="product-preview">
+									<img src="../resources/upload/product/${f.originalName}" alt="">
+								</div>
+							</c:forEach>
 						</div>
 					</div>
 					<!-- /Product thumb imgs -->
-
+					
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
@@ -97,59 +78,34 @@
 							</div>
                         </div>
                         <div class="mt-2">
-                        
-             			<span class=""><i class="fa fa-heart-o mr-2"></i>상품상태</span>
-             			<span class="span ms-5">
-	             			<c:choose>
-						 	    <c:when test="${dto.proStatus eq 0}">
-						 			중고상품
-						 	    </c:when>
-						 	    <c:otherwise>
-						 			새상품
-						 	    </c:otherwise>
-					        </c:choose>
-             			</span>
+	             			<span><i class="fa fa-heart-o me-2"></i>상품상태</span>
+	             			<span class="span ms-5">
+		             			<c:choose>
+							 	    <c:when test="${dto.proStatus eq 0}">
+							 			중고상품
+							 	    </c:when>
+							 	    <c:otherwise>
+							 			새상품
+							 	    </c:otherwise>
+						        </c:choose>
+	             			</span>
                         </div>
-                        
                         <div class="mt-2">
-                        <span><i class="fa fa-heart-o mr-2"></i>교환여부</span>
-             			<span class="span ms-5">
-	             			<c:choose>
-					 	        <c:when test="${dto.exchange eq 0}">
-					 		    	교환가능
-					 	        </c:when>
-					 	        <c:otherwise>
-					 		    	교환불가능
-					 	        </c:otherwise>
-					        </c:choose>
-             			</span>
+	                        <span><i class="fa fa-heart-o me-2"></i>교환여부</span>
+	             			<span class="span ms-5">
+		             			<c:choose>
+						 	        <c:when test="${dto.exchange eq 0}">
+						 		    	교환가능
+						 	        </c:when>
+						 	        <c:otherwise>
+						 		    	교환불가능
+						 	        </c:otherwise>
+						        </c:choose>
+	             			</span>
                         </div>
-                        
-   
-	
-								<li><a href="#">Accessories</a></li>
-							</ul>
-
-						<div><i class="fa fa-heart-o"></i>
-						<tr>
-				<th>상품상태</th>
-				<td>
-				 <c:choose>
-				 	<c:when test="${dto.proStatus eq 0}">
-				 		중고상품
-				 	</c:when>
-				 	<c:otherwise>
-				 		새상품
-				 	</c:otherwise>
-				 </c:choose>
-				</td>
-	
-			</tr>
-						</div>
-
-
-		
-
+                        <div class="mt-5">
+                        <button>찜</button><button class="ms-5">톡</button><button class="ms-5">바로구매</button>
+                        </div>
 						</div>
 					</div>
 					<!-- /Product details -->
@@ -372,146 +328,9 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
+		<!-- </div> -->
 		<!-- /SECTION -->
 
-		<!-- Section -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-12">
-						<div class="section-title text-center">
-							<h3 class="title">Related Products</h3>
-						</div>
-					</div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product01.png" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product02.png" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<div class="clearfix visible-sm visible-xs"></div>
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product03.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="./img/product04.png" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /Section -->
 	<c:if test="${not empty member}">
 		<script src="../resources/js/detailLogin.js"></script>
 	</c:if>
