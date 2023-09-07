@@ -20,8 +20,12 @@ public class QnaDAO implements BoardDAO{
 	final private String NAMESPACE= "com.semi.main.qna.QnaDAO.";
 	
 	public List<BoardDTO> getMyList(QnaDTO qnaDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE+"getMyList",qnaDTO);
+	}
+	
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getList",pager);
 	}
 	
 	public int setFileAdd(QnaFileDTO qnaFileDTO) throws Exception{
@@ -64,14 +68,10 @@ public class QnaDAO implements BoardDAO{
 	@Override
 	public Long getTotal(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getTotal",pager);
 	}
 
-	@Override
-	public List<BoardDTO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	
 

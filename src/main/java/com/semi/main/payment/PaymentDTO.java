@@ -1,32 +1,71 @@
 package com.semi.main.payment;
 
+import java.sql.Date;
+
 public class PaymentDTO {
    
-   private Long paymentNo;
-   private String proName;
-   private Long proPrice;
-   private String name;
-   private String phone;
-   private String uid;
+	private String paymentNo;
+	   private String proName;
+	   private Long totalPrice;
+	   private String name;
+	   private String phone;
+	   private String uidNo;
+	   private Long userNo;
+	   private Long proNo;
+	   private Integer StatusNo;
+	   private Date paymentDate;
+	   private String reason;
    
-   public Long getPaymentNo() {
-      return paymentNo;
+   public Long getUserNo() {
+      return userNo;
    }
-   public void setPaymentNo(Long paymentNo) {
-      this.paymentNo = paymentNo;
+   public Long getTotalPrice() {
+	return totalPrice;
+}
+public void setTotalPrice(Long totalPrice) {
+	this.totalPrice = totalPrice;
+}
+public Integer getStatusNo() {
+	return StatusNo;
+}
+public void setStatusNo(Integer statusNo) {
+	StatusNo = statusNo;
+}
+public Date getPaymentDate() {
+	return paymentDate;
+}
+public void setPaymentDate(Date paymentDate) {
+	this.paymentDate = paymentDate;
+}
+public String getReason() {
+	return reason;
+}
+public void setReason(String reason) {
+	this.reason = reason;
+}
+public void setUserNo(Long userNo) {
+      this.userNo = userNo;
    }
-   public String getProName() {
+   public Long getProNo() {
+      return proNo;
+   }
+   public void setProNo(Long proNo) {
+      this.proNo = proNo;
+   }
+  
+   public String getPaymentNo() {
+	return paymentNo;
+}
+public void setPaymentNo(String paymentNo) {
+	this.paymentNo = paymentNo;
+}
+public String getProName() {
       return proName;
    }
    public void setProName(String proName) {
       this.proName = proName;
    }
-   public Long getProPrice() {
-      return proPrice;
-   }
-   public void setProPrice(Long proPrice) {
-      this.proPrice = proPrice;
-   }
+  
    public String getName() {
       return name;
    }
@@ -39,11 +78,11 @@ public class PaymentDTO {
    public void setPhone(String phone) {
       this.phone = phone;
    }
-   public String getUid() {
-      return uid;
-   }
-   public void setUid(String uid) {
-      this.uid = uid;
-   }
-
+public String getUidNo() {
+	return uidNo;
+}
+public void setUidNo(String uidNo) {
+	this.uidNo = uidNo;
+}
+ 
 }

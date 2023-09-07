@@ -67,7 +67,8 @@ public class QnaController {
 		return "fileManager";
 	}
 	
-//myqnaList
+
+	//myqnaList
 	@GetMapping("list")
 	public String getMyList(QnaDTO qnaDTO, Model model, HttpSession session)throws Exception{
 		

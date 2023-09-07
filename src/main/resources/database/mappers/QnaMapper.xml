@@ -8,6 +8,33 @@
 
   <mapper namespace="com.semi.main.qna.QnaDAO">
  
+ 	<sql id="searchSql">
+ 			<if test="kind == 'userId'">
+		 		AND	M.USERID LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'kinName'">
+		 		AND	K.KINDNAME LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'title'">
+		 		AND	TITLE LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'contents'">
+		 		AND	CONTENTS LIKE '%'||#{search}||'%'
+		 	</if>
+  	</sql>
+ 
+ 	<!-- total -->
+ 	<select id="getTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(BOARDNO) 
+  		FROM QNA Q JOIN MEMBER M
+  			ON Q.USERNO = M.USERNO
+  			JOIN KIND K
+  			ON Q.KINDNO = K.KINDNO
+  		WHERE BOARDNO > 0
+  		<include refid="searchSql"/>
+  	
+  	</select>
+ 
  	<!-- 관리자 페이지 List -->
  	<select id="getList" parameterType="Pager" resultType="QnaDTO">
  	
@@ -20,6 +47,7 @@
   			JOIN KIND K
   			ON Q.KINDNO = K.KINDNO
   			WHERE BOARDNO > 0
+  			<include refid="searchSql"/>
   			ORDER BY BOARDNO DESC
   		
   		)B )

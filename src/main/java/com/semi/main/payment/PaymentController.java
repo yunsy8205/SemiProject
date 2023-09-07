@@ -32,7 +32,9 @@ public class PaymentController {
    @Autowired
    private ProductService productService;
    
-  
+   @Autowired
+   private PaymentService paymentService;
+   
    @RequestMapping(value = "paymentadd", method = RequestMethod.GET)
    public String paymentAdd(ProductDTO productDTO, Model model) throws Exception{
       productDTO = productService.getDetail(productDTO);
@@ -40,26 +42,48 @@ public class PaymentController {
       model.addAttribute("dto", productDTO);
       return "payment/paymentadd";
    }
-  
    
+      
    @ResponseBody
-   @RequestMapping(value="/success", method = RequestMethod.POST)
-   public IamportResponse<Payment> paymentByImpUid(@RequestBody PaymentDTO paymentDTO, Model model, HttpSession session) throws Exception
+   @RequestMapping(value="paymentadd", method = RequestMethod.POST)
+   public int paymentAdd(@RequestBody PaymentDTO paymentDTO) throws Exception
    {   
          PayService payService = new PayService();
          String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
-         Map<String, String> paymentInfo = payService.paymentInfo(token, paymentDTO.getUid());
+         Map<String, String> paymentInfo = payService.paymentInfo(token, paymentDTO.getUidNo());
          
          String amount = paymentInfo.get("amount"); // 결제된 금액
          
-         if(Integer.parseInt(amount) == paymentDTO.getProPrice()) { // 검증 성공
+         if(Integer.parseInt(amount) == paymentDTO.getTotalPrice()) { // 검증 성공
             System.out.println("검증 성공!");
-            // 데이터 저장 및 처리
+            paymentService.paymentAdd(paymentDTO);
+            
          }else { // 검증 실패(결제된 금액과 실제 계산되어야 할 금액이 다른 경우)
             // 취소 처리...
             System.out.println("검증 실패");
+            payService.paymentCancel(token, paymentDTO.getUidNo(), amount, "결제금액 오류");
+            
+            return 0;
          }
          
-         return null;
+         return 1;
+   }
+   
+   
+   @RequestMapping(value="delete", method = RequestMethod.POST)
+   public String paymentDelete() throws Exception
+   {
+      PayService payService = new PayService();
+      String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
+      
+      Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_608353866775");
+      
+      String amount = paymentInfo.get("amount");
+      
+      int result=payService.paymentCancel(token, "imp_608353866775", amount, "단순변심");
+      System.out.println("삭제 성공");
+      System.out.println(result);
+      return "commons/ajaxResult";
+   
    }
 }
