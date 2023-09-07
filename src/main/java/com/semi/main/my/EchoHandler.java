@@ -25,21 +25,13 @@ public class EchoHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("Connect");
 		
-//		HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
-//	    MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("member");
-//		System.out.println(memberDTO.getUserId()+"zzz?");
-//		System.out.println(session.getAttributes()+"zzz?");
-//		System.out.println(session.getAttributes().get("member")+"zzz?");
-//		System.out.println(session.getAttributes().get("userId")+"zzzz?");
-		
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO = (MemberDTO)session.getAttributes().get("member");
 		System.out.println(memberDTO.getUserId()+"이건뭐야 ㅋ");
-//		list.add(session);
 		map.put(memberDTO.getUserId(), session);
 		
 		for(WebSocketSession s : map.values()) {
-			s.sendMessage(new TextMessage("["+memberDTO.getUserId() + "님이 입장했습니다.]"));			
+			s.sendMessage(new TextMessage("[" + memberDTO.getUserId() + "님이 입장했습니다.]"));			
 		}
 		
 	}
@@ -48,9 +40,7 @@ public class EchoHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = (MemberDTO)session.getAttributes().get("member");
-		System.out.println(memberDTO.getUserId()+"이건뭐야");
-		
+		memberDTO = (MemberDTO)session.getAttributes().get("member");		
 		
 		System.out.println(session.getId());
 		System.out.println(message.getPayload());
@@ -63,11 +53,7 @@ public class EchoHandler extends TextWebSocketHandler{
 			map.get(ite.next()).sendMessage(msg);
 		}
 		
-		//		session.sendMessage(msg);
-		
-//		for(WebSocketSession sess:list) {
-//			sess.sendMessage(msg);			
-//		}
+
 	}
 	
 	@Override
