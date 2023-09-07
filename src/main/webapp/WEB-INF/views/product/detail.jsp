@@ -4,64 +4,6 @@
 <html >
 <head>
 	<title>상품 Detail Page</title>
-	<style>
-			
-		.proImage{
-			
-			width: 100%;
-            height: 90%;
-            box-sizing: border-box;
-		}
-		
-		.wrap{
-            
-            width: 1000px;
-            height: 300px;
-        }
-		
-		.test1, .test2, .test3{ 
-           
-            height: 100%;
-            box-sizing: border-box;
-            float: left;/*밑으로 붙었던 width 30% 박스를 옆으로 붙여줌*/
-        }
-		
-		.test1{width: 30%;}
-		.test2{width: 10%;}
-        .test3{width: 55%;}
-        
-        .wrap2{
-            
-            width: 1000px;
-            height: 600px;
-        }
-		
-		.test4, .test5{ 
-           
-            height: %;
-            box-sizing: border-box;
-            float: left;/*밑으로 붙었던 박스를 옆으로 붙여줌*/
-        }
-		
-		.test4{width: 60%;}
-		.test5{width: 30%;}
-		
-		.image{
-			
-			width: 50px;
-            height: 50px;
-            box-sizing: border-box;
-		}
-		
-		.listfile{
-		float: left;
-		}
-		
-		.bi{
-			color: rgb(252, 219, 3);
-		}
-		
-	</style>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <c:import url="../temp/header1.jsp"></c:import>
@@ -69,39 +11,127 @@
 </head>
 <body>
 
-<h1 class="mt-5 ms-5">상품 Detail Page</h1>
-	<div class="wrap mt-5 ms-5 border-bottom" id="add" data-add-pnum="${dto.proNo}">
-		<div id="carouselExampleIndicators" class="test1 carousel slide">
-		  <div class="carousel-inner test1">
-			<c:forEach items="${dto.fileDTOs}" var="f">
-			    <div class="carousel-item active test1">
-			      <img class="proImage" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
-			    </div>
-			</c:forEach>
-		  </div>
-		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Next</span>
-		  </button>
+<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">All Categories</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Headphones</a></li>
+							<li class="active">Product name goes here</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
 		</div>
-		<div class="test2"></div>
-		<div class="test3">
-		<table>
-			<tr>
-				<th>상품이름</th>
-				<td>${dto.proName}</td>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							<div class="product-preview">
+								<img src="./img/product01.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product03.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product06.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product08.png" alt="">
+							</div>
+						</div>
+					</div>
+					<!-- /Product main img -->
+
+					<!-- Product thumb imgs -->
+					<div class="col-md-2  col-md-pull-5">
+						<div id="product-imgs">
+							<div class="product-preview">
+								<img src="./img/product01.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product03.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product06.png" alt="">
+							</div>
+
+							<div class="product-preview">
+								<img src="./img/product08.png" alt="">
+							</div>
+						</div>
+					</div>
+					<!-- /Product thumb imgs -->
+
+					<!-- Product details -->
+					<div class="col-md-5">
+						<div class="product-details">
+							<div class="border-bottom">
+							
+								<h4 class="product-name">${dto.proName}</h4>
+								<div>
+								</div>
+								<div>
+									<h1 class="product-price">${dto.proPrice}원</h1>
+								</div>
+							</div>
+                        </div>
+                        <div class="mt-2">
+                        
+             			<span class=""><i class="fa fa-heart-o mr-2"></i>상품상태</span>
+             			<span class="span ms-5">
+	             			<c:choose>
+						 	    <c:when test="${dto.proStatus eq 0}">
+						 			중고상품
+						 	    </c:when>
+						 	    <c:otherwise>
+						 			새상품
+						 	    </c:otherwise>
+					        </c:choose>
+             			</span>
+                        </div>
+                        
+                        <div class="mt-2">
+                        <span><i class="fa fa-heart-o mr-2"></i>교환여부</span>
+             			<span class="span ms-5">
+	             			<c:choose>
+					 	        <c:when test="${dto.exchange eq 0}">
+					 		    	교환가능
+					 	        </c:when>
+					 	        <c:otherwise>
+					 		    	교환불가능
+					 	        </c:otherwise>
+					        </c:choose>
+             			</span>
+                        </div>
+                        
+   
 	
-			</tr>
-			<tr>
-				<th>상품가격</th>
-				<td>${dto.proPrice}</td>
-	
-			</tr>
-			<tr>
+								<li><a href="#">Accessories</a></li>
+							</ul>
+
+						<div><i class="fa fa-heart-o"></i>
+						<tr>
 				<th>상품상태</th>
 				<td>
 				 <c:choose>
@@ -115,89 +145,373 @@
 				</td>
 	
 			</tr>
-			<tr>
-				<th>교환여부</th>
-				<td>
-					<c:choose>
-				 	<c:when test="${dto.exchange eq 0}">
-				 		교환가능
-				 	</c:when>
-				 	<c:otherwise>
-				 		교환불가능
-				 	</c:otherwise>
-					</c:choose>
-				</td>
-	
-			</tr>
-			<tr>
-				<th>배송비</th>
-				<td></td>
-	
-			</tr>
-			<tr>
-				<th>카테고리</th>
-				<td>${dto.catName}</td>
-			</tr>
-	 </table>		
-	 <c:choose>
-	 	<c:when test="${member.userNo eq dto.userNo}">
-	 	
-	 	</c:when>
-	 	<c:otherwise>
-			 <button id="dibs" class="ms-3 my-3 btn btn-primary"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum">${dibsNum}</span></button>
-			 <button class="ms-3 my-3 btn btn-primary">톡</button>
-			 <button class="ms-3 my-3 btn btn-primary" href="../payment/paymentadd?proNo=${dto.proNo}">바로구매</button>
-	 	</c:otherwise>
-	 </c:choose>
-		</div>
+						</div>
 
-	</div>
-	<div class="wrap2">
-		<div class="test4 ms-5">
-				<h5>상품정보</h5>
-				<p>${dto.proContents}</p>
-		</div>
-		<div class="test5">
-		<p>판매자아이디 : ${dto.userId}</p>
 
-		<p>판매상품수 : ${countp}</p>
-				<h7>최근 판매상품목록</h7>
-					<div>
-					<c:forEach items="${list}" var="d">
-					<c:set var="flag" value="true"/>
-					<div>
-						<c:forEach items="${d.fileDTOs}" var="f">
-							<c:if test="${flag?true:false}">
-								<img class="image" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
-										
-								<c:set var="flag" value="false"/>
-							</c:if>
-						</c:forEach>
+		
+
+						</div>
 					</div>
-					<div>					
-						${d.proPrice}
-					</div>	
-					</c:forEach>
-					</div><br>
-					<a class="mb-3 btn btn-primary" href="../profile/products?userNo=${dto.userNo}">판매자상품목록</a>
-			<div>판매자 후기수 : ${countr}</div><br>
+					<!-- /Product details -->
 
-			<div>최근 후기목록</div><br>
-			<div>
-				<c:forEach items="${review}" var="r">
-					${r.userId}<br>
-					<c:forEach var="i" begin="1" end="${r.score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${r.score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-r.score}" step="1"><i class="bi bi-star"></i></c:forEach> 
-					${r.score}<br> 
-					${r.contents}<br><br>
-				</c:forEach>
+					<!-- Product tab -->
+					<div class="col-md-12">
+						<div id="product-tab">
+							<!-- product tab nav -->
+							<ul class="tab-nav">
+								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+								<li><a data-toggle="tab" href="#tab2">Details</a></li>
+								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+							</ul>
+							<!-- /product tab nav -->
+
+							<!-- product tab content -->
+							<div class="tab-content">
+								<!-- tab1  -->
+								<div id="tab1" class="tab-pane fade in active">
+									<div class="row">
+										<div class="col-md-12">
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										</div>
+									</div>
+								</div>
+								<!-- /tab1  -->
+
+								<!-- tab2  -->
+								<div id="tab2" class="tab-pane fade in">
+									<div class="row">
+										<div class="col-md-12">
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										</div>
+									</div>
+								</div>
+								<!-- /tab2  -->
+
+								<!-- tab3  -->
+								<div id="tab3" class="tab-pane fade in">
+									<div class="row">
+										<!-- Rating -->
+										<div class="col-md-3">
+											<div id="rating">
+												<div class="rating-avg">
+													<span>4.5</span>
+													<div class="rating-stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+													</div>
+												</div>
+												<ul class="rating">
+													<li>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: 80%;"></div>
+														</div>
+														<span class="sum">3</span>
+													</li>
+													<li>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div style="width: 60%;"></div>
+														</div>
+														<span class="sum">2</span>
+													</li>
+													<li>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div></div>
+														</div>
+														<span class="sum">0</span>
+													</li>
+													<li>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div></div>
+														</div>
+														<span class="sum">0</span>
+													</li>
+													<li>
+														<div class="rating-stars">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+														</div>
+														<div class="rating-progress">
+															<div></div>
+														</div>
+														<span class="sum">0</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<!-- /Rating -->
+
+										<!-- Reviews -->
+										<div class="col-md-6">
+											<div id="reviews">
+												<ul class="reviews">
+													<li>
+														<div class="review-heading">
+															<h5 class="name">John</h5>
+															<p class="date">27 DEC 2018, 8:0 PM</p>
+															<div class="review-rating">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o empty"></i>
+															</div>
+														</div>
+														<div class="review-body">
+															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+														</div>
+													</li>
+													<li>
+														<div class="review-heading">
+															<h5 class="name">John</h5>
+															<p class="date">27 DEC 2018, 8:0 PM</p>
+															<div class="review-rating">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o empty"></i>
+															</div>
+														</div>
+														<div class="review-body">
+															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+														</div>
+													</li>
+													<li>
+														<div class="review-heading">
+															<h5 class="name">John</h5>
+															<p class="date">27 DEC 2018, 8:0 PM</p>
+															<div class="review-rating">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o empty"></i>
+															</div>
+														</div>
+														<div class="review-body">
+															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+														</div>
+													</li>
+												</ul>
+												<ul class="reviews-pagination">
+													<li class="active">1</li>
+													<li><a href="#">2</a></li>
+													<li><a href="#">3</a></li>
+													<li><a href="#">4</a></li>
+													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+												</ul>
+											</div>
+										</div>
+										<!-- /Reviews -->
+
+										<!-- Review Form -->
+										<div class="col-md-3">
+											<div id="review-form">
+												<form class="review-form">
+													<input class="input" type="text" placeholder="Your Name">
+													<input class="input" type="email" placeholder="Your Email">
+													<textarea class="input" placeholder="Your Review"></textarea>
+													<div class="input-rating">
+														<span>Your Rating: </span>
+														<div class="stars">
+															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+															<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+															<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+														</div>
+													</div>
+													<button class="primary-btn">Submit</button>
+												</form>
+											</div>
+										</div>
+										<!-- /Review Form -->
+									</div>
+								</div>
+								<!-- /tab3  -->
+							</div>
+							<!-- /product tab content  -->
+						</div>
+					</div>
+					<!-- /product tab -->
+				</div>
+				<!-- /row -->
 			</div>
-			<a class="mb-3 btn btn-primary" href="../profile/reviews?userNo=${dto.userNo}">판매자후기목록</a><br>
-		 
+			<!-- /container -->
 		</div>
+		<!-- /SECTION -->
 
-	</div> 
-	
+		<!-- Section -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
 
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<h3 class="title">Related Products</h3>
+						</div>
+					</div>
+
+					<!-- product -->
+					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="./img/product01.png" alt="">
+								<div class="product-label">
+									<span class="sale">-30%</span>
+								</div>
+							</div>
+							<div class="product-body">
+								<p class="product-category">Category</p>
+								<h3 class="product-name"><a href="#">product name goes here</a></h3>
+								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<div class="product-rating">
+								</div>
+								<div class="product-btns">
+									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							</div>
+						</div>
+					</div>
+					<!-- /product -->
+
+					<!-- product -->
+					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="./img/product02.png" alt="">
+								<div class="product-label">
+									<span class="new">NEW</span>
+								</div>
+							</div>
+							<div class="product-body">
+								<p class="product-category">Category</p>
+								<h3 class="product-name"><a href="#">product name goes here</a></h3>
+								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<div class="product-rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="product-btns">
+									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							</div>
+						</div>
+					</div>
+					<!-- /product -->
+
+					<div class="clearfix visible-sm visible-xs"></div>
+
+					<!-- product -->
+					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="./img/product03.png" alt="">
+							</div>
+							<div class="product-body">
+								<p class="product-category">Category</p>
+								<h3 class="product-name"><a href="#">product name goes here</a></h3>
+								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<div class="product-rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+								<div class="product-btns">
+									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							</div>
+						</div>
+					</div>
+					<!-- /product -->
+
+					<!-- product -->
+					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="./img/product04.png" alt="">
+							</div>
+							<div class="product-body">
+								<p class="product-category">Category</p>
+								<h3 class="product-name"><a href="#">product name goes here</a></h3>
+								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+								<div class="product-rating">
+								</div>
+								<div class="product-btns">
+									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							</div>
+						</div>
+					</div>
+					<!-- /product -->
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /Section -->
 	<c:if test="${not empty member}">
 		<script src="../resources/js/detailLogin.js"></script>
 	</c:if>

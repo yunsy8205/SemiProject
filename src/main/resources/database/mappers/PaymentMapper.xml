@@ -5,7 +5,8 @@
   
     <mapper namespace="com.semi.main.payment.PaymentDAO">
   	<insert id="paymentAdd" parameterType="PaymentDTO">
-  		INSERT INTO PAYMENT (PAYMENTNO, USERNO, PRONO, STATUSNO, UIDNO, PAYMENTDATE, TOTALPRICE, NAME, PRONAME)VALUES (PAYMENT_SEQ.NEXTVAL, #{userNo}, #{proNo}, 1, #{uid}, SYSDATE, #{proPrice}, #{name}, #{proName})
+  		INSERT INTO PAYMENT (PAYMENTNO, USERNO, PRONO, STATUSNO, UIDNO, PAYMENTDATE, TOTALPRICE, NAME, PRONAME)
+  		VALUES (#{paymentNo}, #{userNo}, #{proNo}, 1, #{uidNo}, SYSDATE, #{totalPrice}, #{name}, #{proName})
   	</insert>
   	
   	<update id="b"></update>

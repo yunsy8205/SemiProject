@@ -48,40 +48,44 @@ public class PaymentController {
 	@RequestMapping(value="paymentadd", method = RequestMethod.POST)
 	public int paymentAdd(@RequestBody PaymentDTO paymentDTO) throws Exception
 	{	
+			System.out.println("결제2");
 			PayService payService = new PayService();
 			String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
-			Map<String, String> paymentInfo = payService.paymentInfo(token, paymentDTO.getUid());
+			Map<String, String> paymentInfo = payService.paymentInfo(token, paymentDTO.getUidNo());
 			
 			String amount = paymentInfo.get("amount"); // 결제된 금액
 			
-			if(Integer.parseInt(amount) == paymentDTO.getProPrice()) { // 검증 성공
+			int result=0;
+			if(Integer.parseInt(amount) == paymentDTO.getTotalPrice()) { // 검증 성공
 				System.out.println("검증 성공!");
-				paymentService.paymentAdd(paymentDTO);
+				result = paymentService.paymentAdd(paymentDTO);
 				
 			}else { // 검증 실패(결제된 금액과 실제 계산되어야 할 금액이 다른 경우)
-				// 취소 처리...
+				// 취소 처리
 				System.out.println("검증 실패");
-				payService.paymentCancel(token, paymentDTO.getUid(), amount, "결제금액 오류");
+				result = payService.paymentCancel(token, paymentDTO.getUidNo(), amount, "결제금액 오류");
 				
-				return 0;
+				return result;
 			}
 			
-			return 1;
+			return result;
 	}
 	
 	
 	@RequestMapping(value="delete", method = RequestMethod.POST)
-	public int paymentDelete() throws Exception
+	public String paymentDelete() throws Exception
 	{
 		PayService payService = new PayService();
 		String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
-		Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_");
+		
+		Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_608353866775");
 		
 		String amount = paymentInfo.get("amount");
 		
-		int result=payService.paymentCancel(token, "imp_", amount, "단순 변심");
+		int result=payService.paymentCancel(token, "imp_608353866775", amount, "단순변심");
 		System.out.println("삭제 성공");
-		return result;
+		System.out.println(result);
+		return "commons/ajaxResult";
 	
 	}
 }

@@ -67,8 +67,8 @@
 							</div>
 						</div>
 						
-						<button class="primary-btn order-submit" id="btn">결제하기</button>
-								
+						<button type="button" class="primary-btn order-submit" id="btn">결제하기</button>
+						
 					</div>
 					<!-- /Order Details -->
 						</div>
@@ -86,36 +86,39 @@
 
       let proName=$('#order').attr("data-name");
       let proNo=$('#order').attr("data-proNo");
-   	  let proPrice=$('#order').attr('data-price');
-   	  let userNo=$('#member').attr('data-no');
-   	  let name=$('#member').attr('data-name');
-   	  let phone=$('#member').attr('data-phone');
+      let totalPrice=$('#order').attr('data-price');
+      let userNo=$('#member').attr('data-no');
+      let name=$('#member').attr('data-name');
+      let phone=$('#member').attr('data-phone');
+
    	  
    	  $('#btn').click(function(){
 		requestPay();
    	  });
    	  
-   	function requestPay() {
-   	    IMP.init('imp50730076');
-   	    IMP.request_pay({
-   	        pg: "nice.iamport00m",
-   	        pay_method: "card",
-   	        merchant_uid: "merchant_"+new Date().getTime(),//가맹점 주문번호
-   	        name: proName,//상품명
-   	        amount: proPrice,//가격
+   	 function requestPay() {
+         IMP.init('imp50730076');
+         IMP.request_pay({
+             pg: "nice.iamport00m",
+             pay_method: "card",
+             merchant_uid: "goodee_"+new Date().getTime(),//가맹점 주문번호
+             name: proName,//상품명
+             amount: totalPrice,//가격
+             buyer_name: name,//구매자
+             buyer_tel: phone//구매자 번호
 
-   	        buyer_name: name,//구매자
-   	        buyer_tel: phone//구매자 번호
    	    }, function(rsp){
-   	    	if(rsp.success){
-	   	    	let payData = new Object();
-	      		payData.uid = rsp.imp_uid;
-	      		payData.proPrice = proPrice;
-	      		payData.proName = proName;
-	      		payData.name = name;
-	      		payData.phone = phone;
-	      		payData.proNo = proNo;
-	      		payData.userNo = userNo;
+             if(rsp.success){
+          
+                let payData = new Object();
+               payData.uidNo = rsp.imp_uid;
+               payData.totalPrice = totalPrice;
+               payData.proName = proName;
+               payData.name = name;
+               payData.phone = phone;
+               payData.proNo = proNo;
+               payData.userNo = userNo;
+               payData.paymentNo = rsp.merchant_uid;
 	      		
 	      		$.ajax({
 					url:"/payment/paymentadd",
@@ -130,7 +133,7 @@
 					}
 				});
 	      		
-	      		window.location.href = '../';
+	      		//window.location.href = '../';
    	    	}else{
    	    		alert("결제 실패");
    	    	}
