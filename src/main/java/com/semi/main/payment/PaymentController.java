@@ -32,6 +32,9 @@ public class PaymentController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private PaymentService paymentService;
+	
 	@RequestMapping(value = "paymentadd", method = RequestMethod.GET)
 	public String paymentAdd(ProductDTO productDTO, Model model) throws Exception{
 		productDTO = productService.getDetail(productDTO);
@@ -42,7 +45,7 @@ public class PaymentController {
 	
 		
 	@ResponseBody
-	@RequestMapping(value="success", method = RequestMethod.POST)
+	@RequestMapping(value="paymentadd", method = RequestMethod.POST)
 	public int paymentAdd(@RequestBody PaymentDTO paymentDTO) throws Exception
 	{	
 			PayService payService = new PayService();
@@ -53,7 +56,8 @@ public class PaymentController {
 			
 			if(Integer.parseInt(amount) == paymentDTO.getProPrice()) { // 검증 성공
 				System.out.println("검증 성공!");
-				// 데이터 저장 및 처리
+				paymentService.paymentAdd(paymentDTO);
+				
 			}else { // 검증 실패(결제된 금액과 실제 계산되어야 할 금액이 다른 경우)
 				// 취소 처리...
 				System.out.println("검증 실패");
@@ -71,11 +75,11 @@ public class PaymentController {
 	{
 		PayService payService = new PayService();
 		String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
-		Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_174214043661");
+		Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_");
 		
 		String amount = paymentInfo.get("amount");
 		
-		int result=payService.paymentCancel(token, "imp_174214043661", amount, "단순 변심");
+		int result=payService.paymentCancel(token, "imp_", amount, "단순 변심");
 		System.out.println("삭제 성공");
 		return result;
 	
