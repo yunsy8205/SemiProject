@@ -25,7 +25,7 @@ public class WebSocketChat {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
     public WebSocketChat() {
         // TODO Auto-generated constructor stub
-        System.out.println("웹소켓(서버) 객체생성");
+        System.out.println("�쎒�냼耳�(�꽌踰�) 媛앹껜�깮�꽦");
     }
     
     @RequestMapping(value="/my/chat")
@@ -46,7 +46,7 @@ public class WebSocketChat {
         sessionList.add(session);
     }
     /*
-     * 모든 사용자에게 메시지를 전달한다.
+     * 紐⑤뱺 �궗�슜�옄�뿉寃� 硫붿떆吏�瑜� �쟾�떖�븳�떎.
      * @param self
      * @param message
      */
@@ -66,8 +66,9 @@ public class WebSocketChat {
     public void onMessage(String message,Session session) {
         logger.info("Message From "+message.split(",")[1] + ": "+message.split(",")[0]);
         try {
+        	
             final Basic basic=session.getBasicRemote();
-            basic.sendText("to : "+message);
+            basic.sendText(message.split(",")[1] + " : "+message);
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

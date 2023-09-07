@@ -410,7 +410,7 @@
         }
         
         function send(){
-            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
+            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value+""+ "님";
             ws.send(text);
             text="";
         }
