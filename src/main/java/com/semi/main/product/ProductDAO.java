@@ -18,7 +18,7 @@ public class ProductDAO {
 	
 	
 	public Long getTotal(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 

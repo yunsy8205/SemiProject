@@ -30,6 +30,8 @@ public class ProductService {
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		pager.makePageNum(productDAO.getTotal(pager));
+		
+	    // 나머지 Pager 속성도 확인할 수 있습니다.
 		return productDAO.getList(pager);
 	}
 	
