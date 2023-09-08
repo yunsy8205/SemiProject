@@ -114,4 +114,8 @@ public class ProductService {
 	public Long dibsNum(ProductDTO productDTO)throws Exception{
 		return productDAO.dibsNum(productDTO);
 	}
+	
+	public Long imageCount(ProductDTO productDTO)throws Exception{
+		return productDAO.imageCount(productDTO);
+	}
 }

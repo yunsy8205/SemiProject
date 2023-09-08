@@ -108,4 +108,8 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE+"dibsNum", productDTO);
 	}
 	
+	public Long imageCount(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"imageCount", productDTO);
+	}
+	
 }
