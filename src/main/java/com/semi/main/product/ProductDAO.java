@@ -18,7 +18,7 @@ public class ProductDAO {
 	
 	
 	public Long getTotal(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 
@@ -85,6 +85,9 @@ public class ProductDAO {
 	public int setFileAdd(ProductFileDTO productFileDTO)throws Exception{
 		
 		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
+	}
+	public int setUpdate(ProductDTO productDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate", productDTO);
 	}
 	
 	public int setHitCount(Long proNo) throws Exception {

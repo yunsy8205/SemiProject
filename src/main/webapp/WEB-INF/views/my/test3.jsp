@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:url var="root" value="/"></c:url>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -48,10 +48,9 @@
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
 	</style>
-	
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+	
+	
     </head>
 	<body>
 <!-- HEADER -->
@@ -69,8 +68,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-
+						<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -91,7 +89,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="../" class="logo">
-                            <img src="/resources/img/logotest6.png" alt="">
+                            <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -215,8 +213,8 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
-						<li><a href="./check">내 정보 수정</a></li>
-						<li class="active"><a href="./list">내 판매글/구매내역/후기</a></li>
+						<li class="active"><a href="./check">내 정보 수정</a></li>
+						<li><a href="./list">내 판매글/구매내역/후기</a></li>
 						<li><a href="#">내 찜 목록</a></li>
 						<li><a href="#">택배조회</a></li>
 						<li><a href="#">상품관리</a></li>
@@ -240,7 +238,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">테스트용</h3>
+						<h3 class="breadcrumb-header">내 정보 수정</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -250,32 +248,46 @@
 		<!-- /BREADCRUMB -->
 	
 <!-- ------------------------------------------------------------------------------------------- -->
-
-		      
-	<br><br><br><br>
 	
-	 <div>
-        <input type="text" id="sender" value="${sessionScope.member.userId}" style="display: none;">
-        <input type="text" id="messageinput">
-    </div>
-    <div>
-        <button type="button" onclick="openSocket();">Open</button>
-        <button type="button" onclick="send();">Send</button>
-        <button type="button" onclick="closeSocket();">Close</button>
-    </div>
-    <!-- Server responses get written here -->
-    <div id="messages"></div>
+	<!-- SECTION -->
+	<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
 
-	<br><br><br><br>
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">채팅</h3>
+							</div>
+							<div class="form-group" id="target">
+							</div>
+							<div class="form-group">
+								<input class="input" id="message"/><button>전송</button>
+							</div>
+							
+							<div class="form-group">
+								
+							</div>
+						</div>
+						<!-- /Billing Details -->
+
+						
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		</div>
+		<!-- /SECTION -->
+		
 	
 	
-<!-- 유튜브 링크가 없는 iframe -->
-<button type="button" onclick="location.href='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617'" target="_blank">1대1 채팅</button>
-<!-- <iframe src='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' width='396' height='736'></iframe>
- -->
-
-                    
-<!-- ------------------------------------------------------------------------------------------- -->
+	
+	
+	<!-- ------------------------------------------------------------------------------------------- -->
 		
 
 		<!-- FOOTER -->
@@ -382,47 +394,26 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
+    
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 
-			    
-<script type="text/javascript">
-        var ws;
-        var messages=document.getElementById("messages");
-        
-        function openSocket(){
-            if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
-                writeResponse("WebSocket is already opened.");
-                return;
-            }
-            //웹소켓 객체 만드는 코드
-            ws=new WebSocket("ws://localhost:82/my/test2");
-            
-            ws.onopen=function(event){
-                if(event.data===undefined) return;
-                
-                writeResponse(event.data);
-            };
-            ws.onmessage=function(event){
-                writeResponse(event.data);
-            };
-            ws.onclose=function(event){
-                writeResponse("Connection closed");
-            }
-        }
-        
-        function send(){
-            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value+""+ "님";
-            ws.send(text);
-            text="";
-        }
-        
-        function closeSocket(){
-            ws.close();
-        }
-        function writeResponse(text){
-            messages.innerHTML+="<br/>"+text;
-        }
-  </script>
-  
-	</body>
+	<script type="text/javascript">
+	var sock=new SockJS("${root}my/test3");
+	sock.onmessage=function(msg){
+		console.log(msg.data);
+		
+		$('#target').append(msg.data+"<br/>");
+	};
+	
+	
+	$(function(){
+		$('button').click(function(){
+
+			sock.send($('#message').val());
+			
+			$('#message').val('')
+		});
+	});
+	</script>
+</body>
 </html>
-

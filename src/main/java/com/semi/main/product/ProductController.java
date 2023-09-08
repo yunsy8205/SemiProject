@@ -31,13 +31,24 @@ public class ProductController {
 	
 		 // condition 값을 Pager 객체에 설정
 	    pager.setCondition(condition);
+	
+	   
 
 		List<ProductDTO> ar = productService.getList(pager);
-	
+//		System.out.println("Controller Pager: " + pager);
+//		System.out.println("startNum Pager: " + pager.getStartNum());
+//		System.out.println("lastNum Pager: " + pager.getLastNum());
+//		System.out.println("total: " + pager.getTotalPage());
+//		System.out.println("startRow Pager: " + pager.getStartRow());
+//		System.out.println("LastRow Pager: " + pager.getLastRow());
+//		System.out.println("getPerPage: " + pager.getPerPage());
+//		System.out.println("getPage: " + pager.getPage());
+//		
+		
 		
 		
 		model.addAttribute("list",ar);
-		 model.addAttribute("condition", condition); // 현재 선택된 조건
+		model.addAttribute("condition", condition); // 현재 선택된 조건
 		model.addAttribute("pager", pager);
 		
 		return "product/list";
@@ -53,15 +64,15 @@ public class ProductController {
 
 	        List<ProductDTO> ar = productService.getCategoryList(pager);
 	      
-	        // 각 상품에 대한 이미지 리스트 가져오기
-	        for (ProductDTO product : ar) {
-	            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
-	            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
-	                ProductFileDTO firstFile = fileList.get(0);
-	                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
-	                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
-	            }
-	        }
+//	        // 각 상품에 대한 이미지 리스트 가져오기
+//	        for (ProductDTO product : ar) {
+//	            List<ProductFileDTO> fileList = productService.getFileList(product.getProNo());
+//	            if (!fileList.isEmpty()) { // 파일이 있는 경우에만 첫 번째 파일을 설정
+//	                ProductFileDTO firstFile = fileList.get(0);
+//	                product.getFileDTOs().clear(); // 기존 파일 리스트 제거
+//	                product.getFileDTOs().add(firstFile); // 첫 번째 파일만 추가
+//	            }
+//	        }
 			model.addAttribute("list",ar);
 			model.addAttribute("pager", pager);
 			model.addAttribute("catNo", catNo);
@@ -135,6 +146,28 @@ public class ProductController {
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String setUpdate( ProductDTO productDTO,Model model) throws Exception{
+		
+		productDTO = productService.getDetail(productDTO);
+		System.out.println(productDTO.getProNo());
+		model.addAttribute("product", productDTO);
+		System.out.println(productDTO);
+		return "product/update";
+	
+	}
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session)throws Exception{
+		
+		 System.out.println(productDTO.getProNo());
+		 System.out.println("진입");
+		 int result = productService.setUpdate(productDTO, photos, session);
+		 Long proNo = productDTO.getProNo();
+		 System.out.println(productDTO.getProNo());
+		 System.out.println("2번진입");
+		 return "redirect:/product/detail?proNo=" + proNo;
 	}
 	
 	@GetMapping("dibsDelete")

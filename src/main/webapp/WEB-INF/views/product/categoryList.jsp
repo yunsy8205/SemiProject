@@ -273,94 +273,85 @@
                 </div>
 					<!-- /section title -->
         <!-- 상품리스트 부분-->
-        <section class="container mt-5">
-            <div class="container">
-                
-                <div class="row">
-                    <c:forEach items="${list}" var="product" varStatus="status">
-                        <div class="col-md-2">
-                            <div class="product-card">
-                                <c:choose>
-                                    <c:when test="${not empty product.fileDTOs}">
-                                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="/resources/images/이미지없음.jpg" alt="" class="product-image">
-                                    </c:otherwise>
-                                </c:choose>
-                                <h4>${product.proName}</h4>
-                                <p>상품가격: ${product.proPrice}</p>
-                                <p class="product-content">${product.proContents}</p>
-                                <p>작성자: ${product.userId}</p>
-                                <p>작성일: ${product.createDate}</p>
-                                <p>조회수: ${product.hit}</p>
-                            </div>
-                        </div>
-                        <c:if test="${status.index % 6 == 5 || status.last}">
-                        </div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
+      <section class="container mt-5">
+				<div class="col-md-12">
+			    <div class="row ">
+			        <c:forEach var="product" items="${list}" >
+			            <div class="col-md-3">
+			                <div class="product">
+			                    <div class="product-img">
+			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+			                    </div>
+			                    <div class="product-body">
+			                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>
+			                        <h4 class="product-price">${product.proPrice} </h4>
+			                        <p class="product-createDate">작성일: ${product.createDate}</p>
+			                        <p class="product-hit">조회수: ${product.hit}</p>
+			                        <div class="product-btns">
+			                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
+			                        </div>
+			                    </div>
+			                    <div class="add-to-cart">
+			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+			                    </div>
+			                </div>
+			            </div>
+			        </c:forEach>
+			    </div>
+			</div>
 
-                        </c:if>
-                    </c:forEach>
-                </div>
-            </div>
-            <!-- ... (페이징 및 검색 부분) ... -->
-                <nav aria-label="Page navigation example">
-                      <ul class="pagination">
-                          <c:if test="${pager.pre}">
-                            <li class="page-item">
-                              <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                              </a>
-                            </li>
-                        </c:if>
-                        <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-                            <li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
-                        </c:forEach>
-                        <c:if test="${pager.next && pager.lastNum < pager.totalPage && !empty list}">
-                            <li class="page-item">
-                                <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </c:if>
+						  <!-- ... (페이징 및 검색 부분) ... -->
+						  
+				 <nav aria-label="Page navigation example">
+			  		 <ul class="pagination">
+					    <c:if test="${pager.pre}">
+					        <li class="page-item">
+					            <a class="page-link" href="/product/list?page=${pager.startNum - 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Previous">
+					                <span aria-hidden="true">&laquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					        <li class="page-item"><a class="page-link" href="/product/list?page=${i}&kind=${param.kind}&search=${param.search}&condition=${param.condition}">${i}</a></li>
+					    </c:forEach>
+					    <c:if test="${pager.next}">
+					        <li class="page-item">
+					            <a class="page-link" href="/product/list?page=${pager.lastNum + 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Next">
+					                <span aria-hidden="true">&raquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					</ul>
 
-                        <c:if test="${!pager.next || pager.lastNum >= pager.totalPage}">
-                            <li class="page-item disabled">
-                                <span class="page-link" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </span>
-                            </li>
-                        </c:if>
-                      </ul>
-                    </nav>
-                
-                <div class="input-group mb-3">
-                 <form action="./categoryList" method="get" id="frm">
-                       <input type="hidden" value="${pager.page}" id="page" name="page">
-                       <input type="hidden" value="${catNo}" name="catNo">
-                           
-                      <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
-                          <option class="kind" value="proName">상품명</option>
-                          <option class="kind" value="proContents">상품설명</option>
-                          <option class="kind" value="userId">이름</option>
-                      </select>
-                      <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
-                       <div class="col-auto">
-                        <button type="submit" class="btn btn-primary">검색</button>
-                      </div>
-                  </form>
-                </div>
-            
-          
-        </section>
-    	</div>
+				</nav>
+
+			
+				<!-- 검색 부분 -->
+				<div class="input-group mb-3 justify-content-center">
+				<form action="/product/list" method="GET">
+				    <!-- 기존 검색 폼 입력 내용 -->
+				    <select name="kind" id="k" class="input-select" aria-label="Default select example">
+				        <option class="kind" value="proName">상품명</option>
+				        <option class="kind" value="proContents">상품설명</option>
+				        <option class="kind" value="userId">이름</option>
+				    </select>
+				    <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+				    <button type="submit" class="search-btn">검색</button>
+				
+				    <!-- 선택된 condition을 hidden input으로 추가 -->
+				    <input type="hidden" name="condition" value="${param.condition}">
+				</form>
+
+
+				</div>
+			
+			</section>
+				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
-
 
 
 <!-- FOOTER -->
@@ -464,6 +455,23 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="/resources/js/list.js"></script>
+<script type="text/javascript">
+    function changeCondition(condition) {
+        console.log('Condition changed to: ' + condition);
 
+        // 현재 URL을 가져옵니다.
+        const currentUrl = new URL(window.location.href);
+
+        // URL에서 page 매개변수 값을 가져옵니다. 없을 경우 1로 설정합니다.
+        const currentPage = currentUrl.searchParams.get('page') || 1;
+
+        // 선택된 condition 값을 추가하여 URL을 생성합니다.
+        currentUrl.searchParams.set('condition', condition);
+
+        // 새 URL로 이동합니다.
+        currentUrl.searchParams.set('page', currentPage); // 페이지 번호도 유지
+        window.location.href = currentUrl.toString();
+    }
+</script>
 </body>
 </html>
