@@ -35,15 +35,15 @@ public class ProductController {
 	   
 
 		List<ProductDTO> ar = productService.getList(pager);
-		System.out.println("Controller Pager: " + pager);
-		System.out.println("startNum Pager: " + pager.getStartNum());
-		System.out.println("lastNum Pager: " + pager.getLastNum());
-		System.out.println("total: " + pager.getTotalPage());
-		System.out.println("startRow Pager: " + pager.getStartRow());
-		System.out.println("LastRow Pager: " + pager.getLastRow());
-		System.out.println("getPerPage: " + pager.getPerPage());
-		System.out.println("getPage: " + pager.getPage());
-		
+//		System.out.println("Controller Pager: " + pager);
+//		System.out.println("startNum Pager: " + pager.getStartNum());
+//		System.out.println("lastNum Pager: " + pager.getLastNum());
+//		System.out.println("total: " + pager.getTotalPage());
+//		System.out.println("startRow Pager: " + pager.getStartRow());
+//		System.out.println("LastRow Pager: " + pager.getLastRow());
+//		System.out.println("getPerPage: " + pager.getPerPage());
+//		System.out.println("getPage: " + pager.getPage());
+//		
 		
 		
 		
@@ -146,6 +146,28 @@ public class ProductController {
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String setUpdate( ProductDTO productDTO,Model model) throws Exception{
+		
+		productDTO = productService.getDetail(productDTO);
+		System.out.println(productDTO.getProNo());
+		model.addAttribute("product", productDTO);
+		System.out.println(productDTO);
+		return "product/update";
+	
+	}
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session)throws Exception{
+		
+		 System.out.println(productDTO.getProNo());
+		 System.out.println("진입");
+		 int result = productService.setUpdate(productDTO, photos, session);
+		 Long proNo = productDTO.getProNo();
+		 System.out.println(productDTO.getProNo());
+		 System.out.println("2번진입");
+		 return "redirect:/product/detail?proNo=" + proNo;
 	}
 	
 	@GetMapping("dibsDelete")

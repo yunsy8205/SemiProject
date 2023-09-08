@@ -86,6 +86,9 @@ public class ProductDAO {
 		
 		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
 	}
+	public int setUpdate(ProductDTO productDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate", productDTO);
+	}
 	
 	public int setHitCount(Long proNo) throws Exception {
 		// TODO Auto-generated method stub
