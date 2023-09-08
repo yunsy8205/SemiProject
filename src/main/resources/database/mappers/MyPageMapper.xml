@@ -33,4 +33,14 @@
 	</delete>
 
 	
+    <insert id="saveChatMessage" parameterType="java.util.Map">
+        INSERT INTO CHAT (CHATNO, USERID, MESSAGE)
+        VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message})
+    </insert>
+
+    
+    <select id="getChatMessages" parameterType="String" resultType="ChatMessageDTO">
+        SELECT * FROM CHAT
+    </select>
+     
   </mapper>

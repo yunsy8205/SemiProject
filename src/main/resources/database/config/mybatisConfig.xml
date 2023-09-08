@@ -23,6 +23,7 @@
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportFileDTO" alias="ReportFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
   		
   	</typeAliases>
 
