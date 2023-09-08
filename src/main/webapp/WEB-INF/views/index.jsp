@@ -123,10 +123,7 @@
 										<!-- product -->
 										<c:forEach var="product" items="${list}">
 											<div class="product">
-												<div class="product-img">	
-												<%-- <c:forEach var="file" items="${product.fileDTOs}">
-											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
-											      </c:forEach> --%>
+												<div class="product-img">
 												
 													<img src="./resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
 													
@@ -135,14 +132,13 @@
 													</div>
 												</div>
 												<div class="product-body">
-													<p class="product-name">${product.proName}</p>
-													<h3 class="product-contents"><a href="./product/detail?proNo=${product.proNo}">${product.proContents}</a></h3>
+													<p class="product-name"><a href="./product/detail?proNo=${product.proNo}">${product.proName}</a></p>
+													
 													<h4 class="product-price">${product.proPrice} </h4>
 													<p class="product-createDate">작성일: ${product.createDate}</p>
 													<p class="product-hit">조회수: ${product.hit}</p>
 													<div class="product-btns">
 														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
-														<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 													</div>
 												</div>
 												<div class="add-to-cart">

@@ -54,8 +54,6 @@ SELECT COUNT(PRONO) FROM PRODUCT P INNER JOIN MEMBER M ON P.USERNO = M.USERNO WH
     ) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
 
-
-<!-- 상품 리스트 가져오는 쿼리 -->
 <select id="getList" resultMap="getSelectResult" parameterType="Pager">
     SELECT *
     FROM (
@@ -81,6 +79,35 @@ SELECT COUNT(PRONO) FROM PRODUCT P INNER JOIN MEMBER M ON P.USERNO = M.USERNO WH
         ) B
     ) WHERE R BETWEEN #{startRow} AND #{lastRow}
 </select>
+
+
+
+<!-- 상품 리스트 가져오는 쿼리 -->
+<!-- <select id="getList" resultMap="getSelectResult" parameterType="Pager">
+    SELECT *
+    FROM (
+        SELECT ROWNUM R, B.*
+        FROM (
+            SELECT P.*, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME
+            FROM PRODUCT P
+            INNER JOIN MEMBER M ON P.USERNO = M.USERNO
+            LEFT JOIN PRODUCTIMAGE PI ON P.PRONO = PI.PRONO
+            WHERE P.PRONO > 0
+            <choose>
+                <when test="kind=='proName'">AND P.PRONAME LIKE '%'||#{search}||'%'</when>
+                <when test="kind=='proContents'">AND P.PROCONTENTS LIKE '%'||#{search}||'%'</when>
+                <otherwise>AND M.USERID LIKE '%'||#{search}||'%'</otherwise>
+            </choose>
+            <choose>
+                <when test="condition == '최신순'">ORDER BY P.CREATEDATE DESC</when>
+                <when test="condition == '인기순'">ORDER BY P.PROHIT DESC</when>
+                <when test="condition == '저가순'">ORDER BY P.PROPRICE ASC</when>
+                <when test="condition == '고가순'">ORDER BY P.PROPRICE DESC</when>
+                <otherwise>ORDER BY P.CREATEDATE DESC</otherwise> 기본 정렬 조건
+            </choose>
+        ) B
+    ) WHERE R BETWEEN #{startRow} AND #{lastRow}
+</select> -->
 
 <resultMap type="ProductDTO" id="getSelectResult">
 <id column="PRONO" property="proNo"/>
@@ -152,7 +179,20 @@ DELETE DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
 SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
 </select>
 <select id="dibsNum" parameterType="ProductDTO" resultType="Long">SELECT COUNT(PRONO) FROM DIBS WHERE PRONO=#{proNo}</select>
-<insert id="a"/>
-<update id="b"/>
-<delete id="c"/>
+<update id="setUpdate" parameterType="ProductDTO">
+    UPDATE PRODUCT
+    SET
+        CATNO = #{catNo},
+        PRONAME = #{proName},
+        PROPRICE = #{proPrice},
+        PROCONTENTS = #{proContents},
+        PROAMOUNT = #{proAmount},
+        MODIFYDATE = sysdate,
+        EXCHANGE = #{exchange},
+        PROSTATUS = #{proStatus},
+        PROSALE = #{proSale}
+    WHERE
+         PRONO = #{proNo, jdbcType=NUMERIC}
+</update>
+
 </mapper>

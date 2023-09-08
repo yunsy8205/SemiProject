@@ -1,5 +1,6 @@
 package com.semi.main.product;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,8 @@ public class ProductService {
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		pager.makeRowNum();
 		pager.makePageNum(productDAO.getTotal(pager));
+		
+	    // 나머지 Pager 속성도 확인할 수 있습니다.
 		return productDAO.getList(pager);
 	}
 	
@@ -104,6 +107,28 @@ public class ProductService {
 	public List<ProductReviewDTO> memberReviewList(ProductDTO productDTO) throws Exception{
 		return productDAO.memberReviewList(productDTO);
 	}
+	
+	public int setUpdate(ProductDTO productDTO,MultipartFile[] files, HttpSession session) throws Exception{
+		
+		int result = productDAO.setUpdate(productDTO);
+		String path="/resources/upload/product/";
+		
+		 for (MultipartFile file : files) {
+		        if (file != null && !file.isEmpty()) { // 수정된 부분: 파일이 비어있지 않으면 실행
+		            String fileName = fileManager.fileSave(path, session, file);
+
+		            ProductFileDTO productFileDTO = new ProductFileDTO();
+		            productFileDTO.setFileNo(productDTO.getProNo());
+		            productFileDTO.setFileName(fileName);
+		            productFileDTO.setOriginalName(file.getOriginalFilename());
+		            productFileDTO.setProNo(productDTO.getProNo());
+		            System.out.println("ProductFileDTO proNo: " + productFileDTO.getProNo());
+		            result = productDAO.setFileAdd(productFileDTO);
+		        }
+		    }
+
+		    return result;
+		}
 	
 	public int dibsAdd(ProductDTO productDTO) throws Exception{
 		return productDAO.dibsAdd(productDTO);
