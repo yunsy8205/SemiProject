@@ -36,12 +36,14 @@ public class EchoHandler extends TextWebSocketHandler{
 		
 		List<ChatMessageDTO> ar = mypageService.getChatMessages(memberDTO.getUserId());
 		
+		for(ChatMessageDTO chatMessageDTO : ar) {
+			session.sendMessage(new TextMessage(chatMessageDTO.getUserId() + " : " + chatMessageDTO.getMessage()));
+		}
+		session.sendMessage(new TextMessage("지난대화"));
+		
 		
 		for(WebSocketSession s : map.values()) {
-			for(ChatMessageDTO chatMessageDTO : ar) {
-				s.sendMessage(new TextMessage(chatMessageDTO.getUserId() + " : " + chatMessageDTO.getMessage()));
-			}
-			s.sendMessage(new TextMessage("지난대화----"));
+			
 			s.sendMessage(new TextMessage("[" + memberDTO.getUserId() + "님이 입장했습니다.]"));
 		}
 		

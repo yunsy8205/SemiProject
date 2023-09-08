@@ -41,8 +41,8 @@
 		      
 	<br><br><br><br>
 	
-	<input id="message"/><button>전송</button>
 	<div id="target"></div>
+	<input id="message"/><button>전송</button>
 
 	<br><br><br><br>
 
