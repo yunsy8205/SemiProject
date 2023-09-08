@@ -110,7 +110,7 @@
    	    }, function(rsp){
              if(rsp.success){
           
-                let payData = new Object();
+               let payData = new Object();
                payData.uidNo = rsp.imp_uid;
                payData.totalPrice = totalPrice;
                payData.proName = proName;
