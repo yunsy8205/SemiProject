@@ -26,6 +26,8 @@
 		$('button').click(function(){
 
 			sock.send($('input').val());
+			
+			$('#message').val('')
 		});
 	});
 	</script>
@@ -39,7 +41,7 @@
 		      
 	<br><br><br><br>
 	
-	<input/><button>전송</button>
+	<input id="message"/><button>전송</button>
 	<div id="target"></div>
 
 	<br><br><br><br>

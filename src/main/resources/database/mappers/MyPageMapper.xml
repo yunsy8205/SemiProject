@@ -34,8 +34,8 @@
 
 	
     <insert id="saveChatMessage" parameterType="java.util.Map">
-        INSERT INTO CHAT (CHATNO, USERID, MESSAGE)
-        VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message})
+        INSERT INTO CHAT (CHATNO, USERID, MESSAGE, CHATDATE)
+        VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message}, sysdate)
     </insert>
 
     

@@ -1,10 +1,19 @@
 package com.semi.main.my;
 
+import java.sql.Date;
+
 public class ChatMessageDTO {
 	private Long chatNo;
 	private String userId;
 	private String message;
+	private Date chatDate;
 	
+	public Date getChatDate() {
+		return chatDate;
+	}
+	public void setChatDate(Date chatDate) {
+		this.chatDate = chatDate;
+	}
 	public Long getChatNo() {
 		return chatNo;
 	}
