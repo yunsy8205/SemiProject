@@ -33,11 +33,12 @@
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
+		
 	}
 	
 	#wrap1{
 		width: 100%;
-		height: 400px;
+		height: 500px;
 
 	}
 	
@@ -51,12 +52,13 @@
 		width: 50%;
 		height: 100%;
 		float: left;
-		box-sizing: border-box;
+		
 	}
 	
 	.imgdiv{
-		width: 450px;
-		height: 400px;
+		width: 470px;
+		height: 450px;
+		
 	}
 	
 </style>
