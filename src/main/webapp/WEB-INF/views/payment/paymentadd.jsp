@@ -116,12 +116,11 @@
               merchant_uid: "goodee_"+new Date().getTime(),//가맹점 주문번호
               name: proName,//상품명
               amount: proPrice,//가격
-
               buyer_name: name,//구매자
               buyer_tel: phone//구매자 번호
           }, function(rsp){
              if(rsp.success){
-                let payData = new Object();
+               let payData = new Object();
                payData.paymentNo = rsp.merchant_uid;
                payData.uidNo = rsp.imp_uid;
                payData.totalPrice = proPrice;
