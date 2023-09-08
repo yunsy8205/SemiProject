@@ -56,17 +56,17 @@
 	</beans:bean> -->
 	
 	
+
+
+	
+	
 	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/my/test" />
+		<websocket:mapping handler="webSocketHandler" path="/my/test3"/>
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>
-		<websocket:sockjs />
+		<websocket:sockjs></websocket:sockjs>
 	</websocket:handlers>
-    
-	<beans:bean id="echoHandler" class="com.semi.main.my.EchoHandler"></beans:bean>
 	
-
-
-
+	<beans:bean id="webSocketHandler" class="com.semi.main.my.EchoHandler"></beans:bean>
 </beans:beans>

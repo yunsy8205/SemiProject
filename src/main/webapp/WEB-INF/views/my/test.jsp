@@ -48,10 +48,6 @@
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
 	</style>
-	
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
     </head>
 	<body>
 <!-- HEADER -->
@@ -69,8 +65,7 @@
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-
+						<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -91,7 +86,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="../" class="logo">
-                            <img src="/resources/img/logotest6.png" alt="">
+                            <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -215,8 +210,8 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
-						<li><a href="./check">내 정보 수정</a></li>
-						<li class="active"><a href="./list">내 판매글/구매내역/후기</a></li>
+						<li class="active"><a href="./check">내 정보 수정</a></li>
+						<li><a href="./list">내 판매글/구매내역/후기</a></li>
 						<li><a href="#">내 찜 목록</a></li>
 						<li><a href="#">택배조회</a></li>
 						<li><a href="#">상품관리</a></li>
@@ -240,7 +235,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">테스트용</h3>
+						<h3 class="breadcrumb-header">내 정보 수정</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -250,24 +245,47 @@
 		<!-- /BREADCRUMB -->
 	
 <!-- ------------------------------------------------------------------------------------------- -->
-
-		      
-	<br><br><br><br>
 	
-	<input type="text" id="message" />
-	<input type="button" id="sendBtn" value="submit"/>
-	<div id="messageArea"></div>
+	<!-- SECTION -->
+	<form action="./check" method="post" id="frm">
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
 
-	<br><br><br><br>
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">비밀번호 입력</h3>
+							</div>
+							<div class="form-group">
+								<input class="input" type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요">
+							</div>
+							<div class="form-group">
+								<button type="button" id="btn" class="primary-btn order-submit">확인</button>
+							</div>
+							
+							<div class="form-group">
+								
+							</div>
+						</div>
+						<!-- /Billing Details -->
+
+						
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		</div>
+		</form>
+		<!-- /SECTION -->
 	
 	
-<!-- 유튜브 링크가 없는 iframe -->
-<button type="button" onclick="location.href='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617'" target="_blank">1대1 채팅</button>
-<!-- <iframe src='https://www.vchatcloud.com/chat-demo/iframe/iframe_pc/v4/index.html?channelKey=BVptbStFVx-ImcnTldgFH-20230905164617' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' width='396' height='736'></iframe>
- -->
-
-                    
-<!-- ------------------------------------------------------------------------------------------- -->
+	
+	<!-- ------------------------------------------------------------------------------------------- -->
 		
 
 		<!-- FOOTER -->
@@ -374,37 +392,19 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
-
-			    
-<script type="text/javascript">
-
-	var id = "<c:out value='${member.userId}'/>" + "님 : ";
-
-	$("#sendBtn").click(function() {
-		console.log("zz");
-		sendMessage();
-		$('#message').val('')
-	});
-
-	let sock = new SockJS("http://localhost:82/my/test/");
-	sock.onmessage = onMessage;
-	sock.onclose = onClose;
-	// 메시지 전송
-	function sendMessage() {
-		sock.send($("#message").val());
-	}
-	// 서버로부터 메시지를 받았을 때
-	function onMessage(msg) {
-		var data = id + msg.data;
-		$("#messageArea").append(data + "<br/>");
-	}
-	// 서버와 연결을 끊었을 때
-	function onClose(evt) {
-		$("#messageArea").append("연결 끊김");
-
-	}
-</script>
-  
-	</body>
+    
+	    <script>
+	    let btn = document.getElementById("btn");
+	    let frm = document.getElementById("frm");
+	    let userPw = document.getElementById("userPw");
+	    
+	  	btn.addEventListener("click", function(){
+	  		console.log("click");
+	  		
+	  		console.log(userPw.value);
+	  		
+	  		frm.submit();
+	  	})
+	    </script>
+</body>
 </html>
-
