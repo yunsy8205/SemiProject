@@ -8,8 +8,6 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<title>Electro - HTML Ecommerce Template</title>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	
 	
@@ -33,20 +31,9 @@
 	</script>
     </head>
 	<body>
-<!-- HEADER -->
-
-				<c:choose>
-					<c:when test="${not empty member}">
-						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-
-					</c:otherwise>
-				</c:choose>
 <!-- ------------------------------------------------------------------------------------------- -->
+
+	<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
 
 	${member.userId}님
 		      

@@ -159,17 +159,19 @@ public class MyPageController {
 	}
 	
 	@GetMapping("test")
-	public void test() throws Exception{
+	public void chattest() throws Exception{
 	
 	}
 	
 	@GetMapping("test2")
-	public void test2() throws Exception{
+	public void chattest2() throws Exception{
 	
 	}
 	
 	@GetMapping("test3")
-	public void test3() throws Exception{
-	
+	public void chattest3(Model model) throws Exception{		
+		
 	}
+	
+	
 }
