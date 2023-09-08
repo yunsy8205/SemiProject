@@ -36,11 +36,12 @@ public class EchoHandler extends TextWebSocketHandler{
 		
 		List<ChatMessageDTO> ar = mypageService.getChatMessages(memberDTO.getUserId());
 		
-		for(ChatMessageDTO chatMessageDTO : ar) {
-			session.sendMessage(new TextMessage(chatMessageDTO.getUserId() + " : " + chatMessageDTO.getMessage()));
-		}
+		if (!ar.isEmpty()) {
+			for(ChatMessageDTO chatMessageDTO : ar) {
+				session.sendMessage(new TextMessage(chatMessageDTO.getUserId() + " : " + chatMessageDTO.getMessage()));
+			}
 		session.sendMessage(new TextMessage("지난대화"));
-		
+		}
 		
 		for(WebSocketSession s : map.values()) {
 			
@@ -59,7 +60,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		System.out.println(session.getId());
 		System.out.println(message.getPayload());
 		
-		TextMessage msg = new TextMessage(memberDTO.getUserId() + " : " + message.getPayload());
+		TextMessage msg = new TextMessage(memberDTO.getUserId() + "님 : " + message.getPayload());
 
 		Set<String> keys = map.keySet();
 		Iterator<String> ite = keys.iterator();

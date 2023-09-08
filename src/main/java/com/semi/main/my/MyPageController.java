@@ -163,10 +163,6 @@ public class MyPageController {
 	
 	}
 	
-	@GetMapping("test2")
-	public void chattest2() throws Exception{
-	
-	}
 	
 	@GetMapping("test3")
 	public void chattest3(Model model) throws Exception{		

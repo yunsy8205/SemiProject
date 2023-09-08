@@ -56,16 +56,7 @@
 	</beans:bean> -->
 	
 	
-	<websocket:handlers>
-		<websocket:mapping handler="echoHandler1" path="/my/test" />
-		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-		<websocket:sockjs />
-	</websocket:handlers>
-    
-	<beans:bean id="echoHandler1" class="com.semi.main.my.EchoHandler1"></beans:bean>
-	
+
 
 	
 	
