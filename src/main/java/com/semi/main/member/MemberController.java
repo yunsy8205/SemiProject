@@ -24,14 +24,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.semi.main.admin.AdminService;
+import com.semi.main.admin.ReportDTO;
 
 @Controller
 @RequestMapping("/member/*")
@@ -48,6 +52,9 @@ public class MemberController {
 	
 	@Autowired
 	private HttpServletResponse response;
+	
+	@Autowired
+	private AdminService adminService;
 
 	/** 네이버 로그인 API 연동 */
 	// 인가코드 및 토큰 발급
@@ -322,7 +329,20 @@ public class MemberController {
 			return result;
 		}
 */	
-	
+	//report 신고하기
+		
+		@RequestMapping(value = "reportadd", method = RequestMethod.GET)
+		public String reportAdd(MemberDTO memberDTO, Model model)throws Exception{
+			memberDTO=adminService.memberDetail(memberDTO);
+			model.addAttribute("dto", memberDTO);
+			return "admin/reportadd";
+		}
+		
+		@RequestMapping(value = "reportadd", method = RequestMethod.POST)
+		public String reportAdd(MultipartFile [] photos, ReportDTO reportDTO, Model model, HttpSession session)throws Exception{
+			int result=adminService.reportAdd(photos, reportDTO, session);
+			return "redirect:../profile/products?userNo="+reportDTO.getUserNo();
+		}
 	
 	
 	

@@ -77,3 +77,7 @@
 			}
 		})
 	}
+	
+	$('#buy').click(function(){
+			window.location.href="../payment/paymentadd?proNo="+proNo;
+		})

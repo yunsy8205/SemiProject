@@ -94,11 +94,6 @@ public class ProductController {
 		Long dibsNum = productService.dibsNum(productDTO);
 		model.addAttribute("dibsNum", dibsNum);
 		
-		//imageCount
-		Long image = productService.imageCount(productDTO);
-		image = image-1;
-		model.addAttribute("image", image);
-		
 		return "product/detail";
 	}
 	

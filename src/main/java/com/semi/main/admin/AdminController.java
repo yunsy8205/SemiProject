@@ -56,19 +56,7 @@ public class AdminController {
 		int result = adminService.memberUpdate(memberDTO);
 		return "redirect:./memberdetail?userNo="+memberDTO.getUserNo(); 
 	}
-	
-	@RequestMapping(value = "reportadd", method = RequestMethod.GET)
-	public String reportAdd(MemberDTO memberDTO, Model model)throws Exception{
-		memberDTO=adminService.memberDetail(memberDTO);
-		model.addAttribute("dto", memberDTO);
-		return "admin/reportadd";
-	}
-	
-	@RequestMapping(value = "reportadd", method = RequestMethod.POST)
-	public String reportAdd(MultipartFile [] photos, ReportDTO reportDTO, Model model, HttpSession session)throws Exception{
-		int result=adminService.reportAdd(photos, reportDTO, session);
-		return "redirect:../profile/products?userNo="+reportDTO.getUserNo();
-	}
+
 	
 	@RequestMapping(value = "report", method = RequestMethod.GET)
 	public String reportList(Model model, Pager pager) throws Exception{

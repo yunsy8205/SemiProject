@@ -154,9 +154,7 @@ SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
 <select id="dibsNum" parameterType="ProductDTO" resultType="Long">
 SELECT COUNT(PRONO) FROM DIBS WHERE PRONO=#{proNo}
 </select>
-<select id="imageCount" parameterType="ProductDTO" resultType="Long">
-SELECT COUNT(FILENO) FROM PRODUCTIMAGE WHERE PRONO=#{proNo}
-</select>
+
 <insert id="a"/>
 <update id="b"/>
 <delete id="c"/>
