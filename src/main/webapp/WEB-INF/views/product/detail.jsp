@@ -6,121 +6,8 @@
 	<title>상품 Detail Page</title>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../resources/css/prodetail.css">
 <c:import url="../temp/header1.jsp"></c:import>
-<style>
-	
-	.btn1{
-		color: white;  
-		padding-top: 15px; 
-		padding-bottom: 15px; 
-		padding-left: 53px; 
-		padding-right: 53px;
-	}
-	
-	.btn3{
-		color: white;  
-		padding-top: 15px; 
-		padding-bottom: 15px; 
-		padding-left: 38px; 
-		padding-right: 38px;
-	}
-	
-	.btn2{
-		border:none;
-	}
-	
-	.proImage{
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-		
-	}
-	
-	#wrap1{
-		width: 100%;
-		height: 500px;
-
-	}
-	
-	.div1{
-		width: 50%;
-		height: 100%;
-		float: left;
-		box-sizing: border-box;
-	}
-	.div2{
-		width: 50%;
-		height: 100%;
-		float: left;
-		
-	}
-	
-	.imgdiv{
-		width: 90%;
-		height: 95%;
-		
-	}
-	
-	.t{
-		font-weight : bold; 
-		font-size: 20px;
-	}
-	
-	.bi-heart-fill{
-		color: red;
-	}
-	
-	.bi{
-		margin: 4px;
-	}
-	
-	#wrap2{
-		width: 100%;
-		height: 1000px;
-
-	}
-		
-	.div3{
-		width: 65%;
-		height: 100%;
-		float: left;
-	}
-	.div4{
-		width: 35%;
-		height: 100%;
-		float: left;
-		
-	}
-	
-	.div5{
-		height:90%;
-		margin-top: 30px;
-		margin-right: 30px;
-	}
-	
-	.div6{
-		margin: 30px;
-		height: 90%;
-	}
-	
-	.div7{
-		height: 7%;
-		padding-top: 35px;
-	}
-	
-	.div8{
-		
-
-	}
-	#report{
-		margin-left: 300px;
-	}
-	
-	#rt{
-		color: #B7B5B5;
-		font-weight : bold;
-	}
-</style>
 </head>
 <body>
 
@@ -177,8 +64,10 @@
 					<!-- Product details -->
 					<div class="div2">
 						<div class="div2-1">
-							<h2 class="product-name">${dto.proName}</h2>
-							<h1 class="product-price">${dto.proPrice}원</h1>
+							<div class="border-bottom">
+								<h2 class="product-name">${dto.proName}</h2>
+								<h1 class="product-price">${dto.proPrice}원</h1>	
+							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 							
 							<div class="mt-2">
@@ -208,12 +97,19 @@
 		             			</span>
 		             			<span id="report"><a href="../member/reportadd?userNo=${dto.userNo}" id="rt">신고하기</a></span>
 							</div>
-							<div style="padding-top: 30px">
-		                        <button style="background-color: #15161D;" class="btn2" id="dibs" type="button"><div class="t btn1"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum" class="ms-2">${dibsNum}</span></div></button>
-		                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn1">톡</div></button>
-		                        <button id="buy" style="background-color: #D10024;" class="btn2 ms-3" type="button"><div class="t btn3">바로구매</div></button>
-	                         
-	                        </div>
+							<c:choose>
+							 	<c:when test="${member.userNo eq dto.userNo}">
+							 	
+							 	</c:when>
+							 	<c:otherwise>
+									<div style="padding-top: 30px">
+				                        <button style="background-color: #15161D;" class="btn2" id="dibs" type="button"><div class="t btn1"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum" class="ms-2">${dibsNum}</span></div></button>
+				                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn1">톡</div></button>
+				                        <button id="buy" style="background-color: #D10024;" class="btn2 ms-3" type="button"><div class="t btn3">바로구매</div></button>
+			                         
+			                        </div>
+							 	</c:otherwise>
+							 </c:choose>
 						</div>
 					</div>
 					
@@ -221,12 +117,58 @@
 				<div id="wrap2" class="border-top border-dark">
 					<div class="div3">
 						<div class="div5">
-							<div class="border-bottom div7"><h4 class="div8">상품정보</h4></div>
+							<div class="border-bottom div7 div8"><h4>상품정보</h4></div>
+							<div><p id="p1">${dto.proContents}</p></div>
 						</div>
 					</div>
 					<div class="div4 border-start border-end">
 						<div class="div6">
 							<div class="border-bottom div7"><h4>판매자정보</h4></div>
+							<div class="div9">
+								<div class="div10">
+									<div class="div11">사진</div>
+									<div class="div12">
+										<div><a>${dto.userId}</a></div>
+										<div><a>상품 ${countp}</a></div>
+									</div>
+								</div>
+								<div class="div13">
+									<c:forEach items="${list}" var="d">
+										<c:set var="flag" value="true"/>
+										<div>
+											<figure>
+												<c:forEach items="${d.fileDTOs}" var="f">
+													<c:if test="${flag?true:false}">
+														<img class="image" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
+														<c:set var="flag" value="false"/>
+													</c:if>
+												</c:forEach>
+												<p class="imtext">${d.proPrice}</p>
+											</figure>
+										</div>
+									</c:forEach>
+								</div>
+								<div class="div14 border-bottom">
+									<a style="font-size: 15px; font-weight: bold;" href="../profile/products?userNo=${dto.userNo}">상품 더 보기</a>
+								</div>
+								<div class="div15 border-bottom">
+									<div id="reviewh">판매자 후기</div><span style="color:#D10024; margin-left:3px; font-weight: bold;">${countr}</span>
+									<div class="div18 border border-white">
+										<c:forEach items="${review}" var="r">
+											<div class="div16 border border-white">
+												<a style="font-size:13px; font-weight: bold; color: rgb(204, 204, 204);">${r.userId}</a>
+													<div>
+														<c:forEach var="i" begin="1" end="${r.score}" step="1"><i class="bi star bi-star-fill"></i></c:forEach><c:if test="${r.score%1>=0.5}"><i class="bi star bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-r.score}" step="1"><i class="bi bi-star"></i></c:forEach> 
+													</div>
+												<div>${r.contents}</div>
+											</div>
+										</c:forEach>
+									</div>
+									<div class="div17 border-bottom border-top">
+									<a style="font-size: 15px; font-weight: bold;" href="../profile/reviews?userNo=${dto.userNo}">후기 더 보기</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

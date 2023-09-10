@@ -14,26 +14,51 @@
 <c:import url="../temp/header1.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>
 <style>
-.image{
+	.image{
+				
+		width: 40%;
+	    height: 300px;
+		float:left;
+	    box-sizing: border-box;
+			}
+	.contain{
+
+		width: 1000px;
+		height: 1000px;
+		margin: auto;
+		box-sizing: border-box;
+		
+	}
 			
-			width: 50px;
-            height: 50px;
-            box-sizing: border-box;
-		}
+	.billing{
+		width: 100%;
+		height: 1000px;
+		margin-left: 15%;
+		margin-right: 15%;
+		margin-bottom: 5%;
+
+	}
+	.od{
+		width: 100%;
+		height: 100%;
+	}
+	
+	#product{
+		height: 20%;
+		margin-bottom: 5px;
+	}
+	.order-products{
+		width: 50%;
+		height: 10%;
+		float:left;
+		margin-left: 10%;
+	}
 </style>
   
-  </head>
-  <body>
-    		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
+</head>
+<body>
+	<section class="contain border mt-5 mb-5">
+		<div class="billing-details">
 							<div class="section-title">
 								<h1 class="title" id="member" data-no="${member.userNo}" data-name="${member.name}"
 							data-phone="${member.phone}">결제하기</h1>
@@ -74,72 +99,9 @@
 						</div>
 						<!-- /Billing Details -->
 
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+	</section>
+
 <c:import url="../temp/footer1.jsp"></c:import>
-    <script>
-
-      let proName=$('#order').attr("data-name");
-      let proNo=$('#order').attr("data-proNo");
-      let totalPrice=$('#order').attr('data-price');
-      let userNo=$('#member').attr('data-no');
-      let name=$('#member').attr('data-name');
-      let phone=$('#member').attr('data-phone');
-
-   	  
-   	  $('#btn').click(function(){
-		requestPay();
-   	  });
-   	  
-   	 function requestPay() {
-         IMP.init('imp50730076');
-         IMP.request_pay({
-             pg: "nice.iamport00m",
-             pay_method: "card",
-             merchant_uid: "goodee_"+new Date().getTime(),//가맹점 주문번호
-             name: proName,//상품명
-             amount: totalPrice,//가격
-             buyer_name: name,//구매자
-             buyer_tel: phone//구매자 번호
-
-   	    }, function(rsp){
-             if(rsp.success){
-          
-               let payData = new Object();
-               payData.uidNo = rsp.imp_uid;
-               payData.totalPrice = totalPrice;
-               payData.proName = proName;
-               payData.name = name;
-               payData.phone = phone;
-               payData.proNo = proNo;
-               payData.userNo = userNo;
-               payData.paymentNo = rsp.merchant_uid;
-	      		
-	      		$.ajax({
-					url:"/payment/paymentadd",
-					method:"POST",
-					headers:{ "Content-Type":"application/json" },
-					data:JSON.stringify(payData),
-					success:function(result){
-						console.log(result);
-					},
-					error:function(error){
-						alert("관리자에게 문의하세요.");
-					}
-				});
-	      		
-	      		//window.location.href = '../';
-   	    	}else{
-   	    		alert("결제 실패");
-   	    	}
-   	    });
-   	}
-
-    </script>
+<script src="../resources/js/payment.js"></script>
 </body>
 </html>

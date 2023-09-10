@@ -1,6 +1,7 @@
 package com.semi.main.admin;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ReportDTO {
 	
@@ -13,8 +14,15 @@ public class ReportDTO {
 	private String title;
 	private Date reportDate;
 	private String catName;
+	private List<ReportFileDTO> fileDTOs;
 	
 	
+	public List<ReportFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<ReportFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
 	public String getCatName() {
 		return catName;
 	}

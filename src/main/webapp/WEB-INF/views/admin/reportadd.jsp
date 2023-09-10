@@ -23,7 +23,7 @@
 
                <div class="col-md-7" style="width: 70%">
                   <!-- Billing Details -->
-                  <form action="../admin/reportadd" method="post" enctype="multipart/form-data">
+                  <form action="../member/reportadd" method="post" enctype="multipart/form-data">
                   <div class="billing-details">
                      <div class="section-title">
                         <h3 class="title">신고하기</h3>
@@ -68,9 +68,11 @@
                         <input class="input" type="file" name="photos">
                      </div>
                      
-                  <button type="submit" class="primary-btn order-submit">신고하기</button><a style="float:right; text-decoration: underline;" href="../profile/products?userNo=${dto.userNo}">취소</a>
+                  <button type="submit" class="primary-btn order-submit">신고하기</button>
+                  <a style="float:right; text-decoration: underline;" href="../profile/products?userNo=${dto.userNo}">취소</a>
                </div>
                </form>
+               </div>
             </div>
             <!-- /row -->
          </div>

@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <div class="container-fluid">
+	<div class="container-fluid">
 	
 		<div class="row justify-content-center my-4">
 			<h1 class="col-md-7 text-center">상품등록</h1>
@@ -99,7 +99,6 @@
 			</form>
 		</div>
 	</div>
-
 
 </body>
 </html>

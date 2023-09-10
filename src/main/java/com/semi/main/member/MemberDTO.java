@@ -48,7 +48,7 @@ public class MemberDTO {
 	
 	private MemberFileDTO memberFileDTO;
 	
-	private String fileName;
+	private String originalName;
 	
 
 	
@@ -214,13 +214,15 @@ public class MemberDTO {
 	}
 
 
-	public String getFileName() {
-		return fileName;
+	public String getOriginalName() {
+		return originalName;
 	}
 
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
+	
+	
 
 }
