@@ -117,6 +117,21 @@
 		FROM QNAFILE
 		WHERE FILENO=#{fileNo}
 	</select>
+	
+	<!-- qnacommentadd -->
+	<insert id="setCommentAdd" parameterType="QnaCommentDTO">
+	
+	INSERT INTO QNACOMMENT VALUES (QNACOMMENT_SEQ.NEXTVAL,#{userNo}, #{boardNo}, #{contents}, sysdate)
+	</insert>
+	
+	<!-- qnaList -->
+	<select id="getCommentList" resultType="QnaCommentDTO" parameterType="QnaCommentDTO">
+	SELECT QM.*, M.USERID
+	FROM QNACOMMENT QM JOIN MEMBER M
+	ON (QM.USERNO = M.USERNO)
+	WHERE QM.BOARDNO = #{boardNo}
+	</select>
+
 		
 	
   

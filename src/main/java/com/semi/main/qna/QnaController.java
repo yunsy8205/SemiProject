@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
+import com.semi.main.qnaComment.QnaCommentDTO;
 
 @Controller
 @RequestMapping("/qna/*")
@@ -30,6 +31,23 @@ public class QnaController {
 		return "qna";
 	}
 	
+	//commentList
+	@GetMapping("commentList")
+	public void getCommentList(QnaCommentDTO qnaCommentDTO, Model model)throws Exception{
+		
+		List<QnaCommentDTO> ar = qnaService.getCommentList(qnaCommentDTO);
+		model.addAttribute("commentList", ar);
+	}
+	
+	//commentAdd
+	@PostMapping("commentAdd")
+	public String setCommentAdd(QnaCommentDTO qnaCommentDTO, Model model)throws Exception{
+		
+		int result = qnaService.setCommentAdd(qnaCommentDTO);
+		model.addAttribute("result",result);
+		
+		return "commons/ajaxResult";
+	}
 	//filedelete
 	@GetMapping("fileDelete")
 	public String setFileDelete(QnaFileDTO qnaFileDTO,HttpSession session, Model model)throws Exception{

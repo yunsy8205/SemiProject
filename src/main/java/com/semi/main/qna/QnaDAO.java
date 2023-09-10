@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDAO;
 import com.semi.main.board.BoardDTO;
+import com.semi.main.qnaComment.QnaCommentDTO;
 import com.semi.main.util.Pager;
 
 @Repository 
@@ -18,6 +19,14 @@ public class QnaDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	
 	final private String NAMESPACE= "com.semi.main.qna.QnaDAO.";
+	
+	public List<QnaCommentDTO> getCommentList(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCommentList", qnaCommentDTO);
+	}
+	//qnacommetadd
+	public int setCommentAdd(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCommentAdd", qnaCommentDTO);
+	}
 	
 	public List<BoardDTO> getMyList(QnaDTO qnaDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getMyList",qnaDTO);

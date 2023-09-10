@@ -12,6 +12,7 @@ import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.board.BoardService;
 import com.semi.main.file.FileDTO;
+import com.semi.main.qnaComment.QnaCommentDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -24,6 +25,16 @@ public class QnaService implements BoardService{
 	@Autowired
 	private FileManager fileManager;
 	
+	//qnaCommentList
+	
+	public List<QnaCommentDTO> getCommentList(QnaCommentDTO qnaCommentDTO)throws Exception{
+		
+		return qnaDAO.getCommentList(qnaCommentDTO);
+	}
+	//qnaCommentADD
+	public int setCommentAdd(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return qnaDAO.setCommentAdd(qnaCommentDTO);
+	}
 	//imgdelete
 	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
 		

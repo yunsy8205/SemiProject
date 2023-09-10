@@ -25,9 +25,9 @@
   		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportFileDTO" alias="ReportFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
-  		
-  		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"/>
 
+		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"/>
+		<typeAlias type="com.semi.main.qnaComment.QnaCommentDTO" alias="QnaCommentDTO"/>
   		
 
 	</typeAliases>
