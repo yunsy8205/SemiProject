@@ -1,7 +1,9 @@
 package com.semi.main.my;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,16 @@ public class MyPageDAO {
 		return sqlSession.delete(NAMESPACE+"setDelete", memberDTO);
 	}
 	
+	// 채팅 내역 저장
+    public void saveChatMessage(String userId, String message) throws Exception {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userId", userId);
+        paramMap.put("message", message);
+        sqlSession.insert(NAMESPACE + "saveChatMessage", paramMap);
+    }
 
+    // 채팅 내역 불러오기
+    public List<ChatMessageDTO> getChatMessages(String userId) throws Exception {
+        return sqlSession.selectList(NAMESPACE + "getChatMessages", userId);
+    }
 }

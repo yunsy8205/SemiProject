@@ -112,7 +112,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img src="/resources/img/logo.png" alt="">
                         </a>
                     </div>
@@ -160,6 +160,7 @@
                         <!-- Wishlist -->
                         <div>
                             <a href="../product/add">
+                                
                                 <span>상품등록</span>
                             </a>
                         </div>

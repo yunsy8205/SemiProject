@@ -175,7 +175,16 @@
 			</div>
 			<!-- /container -->
 		</div>
+
 		<!-- /SECTION -->
+
+
+	</div> 
+
+	<div>
+    <a href="/product/update?proNo=${dto.proNo}">수정</a>
+	</div>	
+
 
 	<c:if test="${not empty member}">
 		<script src="../resources/js/detailLogin.js"></script>
