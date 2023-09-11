@@ -19,6 +19,7 @@
   		<typeAlias type="com.semi.main.member.RoleDTO" alias="RoleDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductReviewDTO" alias="ProductReviewDTO"></typeAlias>
 
+
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
   		
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
@@ -28,12 +29,14 @@
 
 		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"/>
 		<typeAlias type="com.semi.main.qnaComment.QnaCommentDTO" alias="QnaCommentDTO"/>
+		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
   		
 
 	</typeAliases>
 
   
   		
+
 
 
   </configuration>

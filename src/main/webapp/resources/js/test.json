@@ -1,0 +1,20 @@
+{
+   "from": {
+      "name": "",
+      "time": ""
+   },
+   "to": {
+      "name": "zzz",
+      "time": "&nbsp;T00:00:00+09:00"
+   },
+   "state": {
+      "id": "information_received",
+      "text": "방문예정"
+   },
+   "progresses": [],
+   "carrier": {
+      "id": "1111111111111",
+      "name": "우체국 택배",
+      "tel": "+8215881300"
+   }
+}

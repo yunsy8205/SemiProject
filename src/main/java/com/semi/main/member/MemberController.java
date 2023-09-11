@@ -3,12 +3,17 @@ package com.semi.main.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.ibatis.session.SqlSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -17,6 +22,10 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	
+	
+	
 	
 	/** 로그인 FORM 이동 */
 	@GetMapping("login")
@@ -45,7 +54,7 @@ public class MemberController {
 		// request에 있는 파라미터를 session에 넣음
 		HttpSession session = request.getSession();
 		
-		System.out.println("컨트롤러 로그인 상태 여부 ===========================");
+//		System.out.println("컨트롤러 로그인 상태 여부 ===========================");
 		
 		if(memberDTO != null && memberDTO.getStatusNo() != 0) {
 			session.setAttribute("member", memberDTO);
