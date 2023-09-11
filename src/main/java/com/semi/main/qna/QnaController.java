@@ -126,6 +126,31 @@ public class QnaController {
 
 	}
 	
+	@GetMapping("update")
+	public String setUpdate(QnaDTO qnaDTO, Model model)throws Exception{
+		
+		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
+		
+		model.addAttribute("dto", boardDTO);
+		
+		return "qna/update";
+		
+	}
+	@PostMapping("update")
+	public String setUpdate(QnaDTO qnaDTO,MultipartFile[] files1,HttpSession session, Model model)throws Exception{
+		
+		int result = qnaService.setUpdate(qnaDTO, files1, session);
+		String message = "등록 실패";
+
+		if (result > 0) {
+			message = "등록 성공";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "list");
+		return "commons/result";
+	}
+	
+	
 	//detail
 	@GetMapping("detail")
 	public String getDetail(QnaDTO qnaDTO, Model model) throws Exception {
@@ -138,6 +163,8 @@ public class QnaController {
 
 
 	}
+	
+	
 
 	
 }

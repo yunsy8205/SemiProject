@@ -60,7 +60,7 @@ public class QnaService implements BoardService{
 	
 	//fileDelete
 	public int setFileDelete(QnaFileDTO qnaFileDTO,HttpSession session)throws Exception{
-		String path ="/resources/upload/notice/";
+		String path ="/resources/upload/qna/";
 		
 		qnaFileDTO = qnaDAO.getFileDetail(qnaFileDTO);
 		boolean flag = fileManager.fileDelete(qnaFileDTO, path, session);
@@ -118,8 +118,25 @@ public class QnaService implements BoardService{
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String path = "/resources/upload/qna/";
+		int result = qnaDAO.setUpdate(boardDTO);
+		
+		for(MultipartFile multipartFile: files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(path, session, multipartFile);
+			QnaFileDTO qnaFileDTO = new QnaFileDTO();
+			qnaFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+			qnaFileDTO.setFileName(fileName);
+			qnaFileDTO.setBoardNo(boardDTO.getBoardNo());
+			result = qnaDAO.setFileAdd(qnaFileDTO);
+					
+		}
+		
+		return result;
 	}
 
 	@Override

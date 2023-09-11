@@ -69,7 +69,8 @@
 	
 	<script type="text/javascript">
 
-		
+	
+
 		let userNo = $("#no").attr("data-member-no");
 		let boardNo = $("#no").attr("data-num-no");
 		
@@ -92,7 +93,7 @@
 			success:function(result){
 
 				if(result.trim()>0){
-					alert("ok");
+					
 					$("#commentList").empty();
 					$("#comment").val("");
 					
@@ -119,6 +120,7 @@
 				console.log(result);
 				
 				$("#commentList").append(result);
+
 				
 			},
 			error:function(){
@@ -126,6 +128,12 @@
 			}
 		});
 	}
+	
+		
+
+
+
+	
 	</script>
 
 	

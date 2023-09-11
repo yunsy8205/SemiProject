@@ -100,6 +100,10 @@
 		INSERT INTO QNA
 		VALUES(#{boardNo},#{userNo},#{kindNo},#{title},sysdate,#{contents},default)	 
 	</insert>
+	<!-- update -->
+	<update id="setUpdate" parameterType="QnaDTO">
+		UPDATE QNA SET TITLE=#{title}, KINDNO=#{kindNo}, CONTENTS=#{contents} WHERE BOARDNO=#{boardNo}
+	</update>
 	
 	<!-- fileadd  -->
 	<insert id="setFileAdd" parameterType="QnaFileDTO">

@@ -40,4 +40,13 @@
 </header>
 <hr>
 <div>${com.contents}</div>
+<hr>
+<footer>
+	<c:if test="${member.userId == 'ADMIN'}">
+	<button class="btn btn-primary" id="btnUpdate">수정</button>
+	<button class="btn btn-primary" id="btnDel">삭제</button>
+	</c:if>
+</footer>
 </c:forEach>  
+
+
