@@ -29,6 +29,9 @@
   		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
   		
 
+  		<typeAlias type="com.semi.main.my.DibsDTO" alias="DibsDTO"></typeAlias>
+  		
+
   	</typeAliases>
 
   </configuration>

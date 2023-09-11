@@ -212,8 +212,7 @@
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li class="active"><a href="./check">내 정보 수정</a></li>
 						<li><a href="./list">내 판매글/구매내역/후기</a></li>
-						<li><a href="#">내 찜 목록</a></li>
-						<li><a href="#">택배조회</a></li>
+						<li><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="#">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
