@@ -21,12 +21,12 @@ public class MyPageService {
 	@Autowired
 	private FileManager fileManager;
 
-	
-	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ //회원수정 메서드
+	//회원수정
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ 
 		return myPageDAO.setMemberUpdate(memberDTO);
 	}
 
-	
+	// 사진등록
 	public String setContentsImg(MultipartFile file, HttpSession session) throws Exception {
 		String path="/resources/upload/member/";
 		String fileName = fileManager.fileSave(path, session, file); // -> fileName ------> insert 해야됨
@@ -51,22 +51,25 @@ public class MyPageService {
 		return path+fileName; // -5. 선택한 이미지가 실제로 존재하는 경로를 반환 -
 	}
 	
-	
-	public int setDelete(MemberDTO memberDTO) throws Exception{ //회원탈퇴
+	// 회원탈퇴
+	public int setDelete(MemberDTO memberDTO) throws Exception{ 
 		return myPageDAO.setDelete(memberDTO);
 	}
 	
 	
-	// 채팅 내역 저장 메서드
+	// 채팅 내역 저장
     public void saveChatMessage(String userId, String message) throws Exception {
         myPageDAO.saveChatMessage(userId, message);
     }
 
-    // 채팅 내역 불러오기 메서드
+    // 채팅 내역 불러오기
     public List<ChatMessageDTO> getChatMessages(String userId) throws Exception {
         return myPageDAO.getChatMessages(userId);
     }
     
-    
+    // 찜목록
+    public List<DibsDTO> getDibs(Long userNo) throws Exception{
+        return myPageDAO.getDibs(userNo);
+     }
 
 }

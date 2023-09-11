@@ -28,10 +28,8 @@ public class MyPageController {
 	MyPageService myPageService;
 	
 
-	
-	@GetMapping(value = "mypage") //마이페이지
-
-
+	// 마이페이지
+	@GetMapping(value = "mypage") 
 	public void myPage(HttpSession session) throws Exception{
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO=(MemberDTO)session.getAttribute("member");
@@ -40,12 +38,13 @@ public class MyPageController {
 
 	}
 	
-	
-	@GetMapping(value = "update") //정보수정
+	// 정보수정
+	@GetMapping(value = "update") 
 	public void update() throws Exception{
 		
 	}
 	
+	// 정보수정
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String setMemberUpdate(MemberDTO memberDTO, MultipartFile file,HttpSession session) throws Exception{
 		MemberDTO memberDTO2 = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
@@ -83,14 +82,8 @@ public class MyPageController {
 		
 		return "redirect:./mypage";
 	}
-	
-	@GetMapping(value = "list") // 내판매글/구매내역
-	public String list(MemberDTO memberDTO) throws Exception{
-		return "./my/list";
-	}
-	
 
-	
+	// 사진수정
 	// 4. AJAX로 넘긴 파일 데이터를 처리
 	@PostMapping("setContentsImg")
 	public String setContentsImg(MultipartFile file, HttpSession session, Model model)throws Exception{
@@ -100,12 +93,13 @@ public class MyPageController {
 		
 	}
 	
-	
+	// 회원 탈퇴
 	@GetMapping("delete")
-	public void setDelete() throws Exception{ //회원탈퇴
+	public void setDelete() throws Exception{ 
 
 	}
 	
+	// 회원 탈퇴
 	@PostMapping("delete")
 	public String setDelete(MemberDTO memberDTO, HttpSession session, Model model) throws Exception{ //회원탈퇴
 		MemberDTO mem = (MemberDTO)session.getAttribute("member");
@@ -128,13 +122,14 @@ public class MyPageController {
 	}
 	
 
-	
-	@GetMapping("check") //정보수정창
+	// 정보수정 검증
+	@GetMapping("check") 
 	public void check() throws Exception{
 		
 	}
 	
-	@PostMapping("check") //정보수정창
+	// 정보수정 검증
+	@PostMapping("check")
 	public String check(MemberDTO memberDTO, HttpSession session, Model model) throws Exception{
 		MemberDTO mem = (MemberDTO)session.getAttribute("member");
 		String sessionPass = mem.getUserPw();
@@ -153,21 +148,35 @@ public class MyPageController {
 		return "./my/update";
 	}
 	
-	@GetMapping("management") //상품관리
-	public void management() throws Exception{
-		
-	}
-	
-	@GetMapping("test")
-	public void chattest() throws Exception{
-	
-	}
-	
-	
-	@GetMapping("test3")
-	public void chattest3(Model model) throws Exception{		
+	@GetMapping("chat") // 1대1 채팅
+	public void chat() throws Exception{		
 		
 	}
 	
 	
+	
+	//내 찜 목록
+	@GetMapping("dibs")
+	public String getDibs(DibsDTO dibsDTO, HttpSession session, Model model) throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+	    long userNo = memberDTO.getUserNo();
+
+	    List<DibsDTO> dibs = myPageService.getDibs(userNo);
+	    model.addAttribute("dibs", dibs);
+	    
+	    return "./my/dibs";
+	}
+	
+	// 상품 관리
+		@GetMapping("management") 
+		public void management() throws Exception{
+			
+		}
+		
+	// 내판매글/구매내역
+	@GetMapping(value = "list") 
+	public String list(MemberDTO memberDTO) throws Exception{
+		return "./my/list";
+	}
+	 
 }

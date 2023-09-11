@@ -25,6 +25,8 @@
   		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
   		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
   		
+  		<typeAlias type="com.semi.main.my.DibsDTO" alias="DibsDTO"></typeAlias>
+  		
   	</typeAliases>
 
   </configuration>

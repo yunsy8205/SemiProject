@@ -32,15 +32,22 @@
 		WHERE USERID=#{userId} AND USERPW=#{userPw}
 	</delete>
 
-	
+	<!-- 채팅내용저장 -->	
     <insert id="saveChatMessage" parameterType="java.util.Map">
         INSERT INTO CHAT (CHATNO, USERID, MESSAGE, CHATDATE)
         VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message}, sysdate)
     </insert>
 
-    
+    <!-- 채팅목록 -->
     <select id="getChatMessages" parameterType="String" resultType="ChatMessageDTO">
         SELECT * FROM CHAT
     </select>
      
+     <!-- 찜목록 -->
+     <select id="getDibs" parameterType="Long" resultType="DibsDTO">
+      SELECT * FROM MEMBER m INNER JOIN dibs d 
+      ON m.USERNO = d.USERNO INNER JOIN product p 
+      ON d.PRONO = p.PRONO
+      WHERE m.USERNO = #{userNo}
+     </select>
   </mapper>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url var="root" value="/"></c:url>
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -48,9 +48,6 @@
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
 	</style>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-	
-	
     </head>
 	<body>
 <!-- HEADER -->
@@ -213,10 +210,9 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
-						<li class="active"><a href="./check">내 정보 수정</a></li>
+						<li><a href="./check">내 정보 수정</a></li>
 						<li><a href="./list">내 판매글/구매내역/후기</a></li>
-						<li><a href="#">내 찜 목록</a></li>
-						<li><a href="#">택배조회</a></li>
+						<li class="active"><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="#">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
@@ -238,7 +234,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">내 정보 수정</h3>
+						<h3 class="breadcrumb-header">내 찜 목록</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -249,8 +245,11 @@
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 	
+	
+	
+    
 	<!-- SECTION -->
-	<div class="section">
+		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -260,12 +259,17 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">채팅</h3>
-							</div>
-							<div class="form-group" id="target">
+								<h3 class="title">내가 찜한 목록</h3>
 							</div>
 							<div class="form-group">
-								<input class="input" id="message"/><button>전송</button>
+								<c:forEach var="dibs" items="${dibs}">
+							        <p>유저 번호: ${dibs.userNo}</p>
+							        <p>상품 번호: ${dibs.proNo}</p>
+							        <p>상품 제목: ${dibs.proName}</p>
+						    	</c:forEach>
+							</div>
+							<div class="form-group">
+					
 							</div>
 							
 							<div class="form-group">
@@ -282,8 +286,6 @@
 		</div>
 		</div>
 		<!-- /SECTION -->
-		
-	
 	
 	
 	
@@ -395,25 +397,18 @@
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
     
-	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-
-	<script type="text/javascript">
-	var sock=new SockJS("${root}my/test3");
-	sock.onmessage=function(msg){
-		console.log(msg.data);
-		
-		$('#target').append(msg.data+"<br/>");
-	};
-	
-	
-	$(function(){
-		$('button').click(function(){
-
-			sock.send($('#message').val());
-			
-			$('#message').val('')
-		});
-	});
-	</script>
+	    <script>
+	    let btn = document.getElementById("btn");
+	    let frm = document.getElementById("frm");
+	    let userPw = document.getElementById("userPw");
+	    
+	  	btn.addEventListener("click", function(){
+	  		console.log("click");
+	  		
+	  		console.log(userPw.value);
+	  		
+	  		frm.submit();
+	  	})
+	    </script>
 </body>
 </html>
