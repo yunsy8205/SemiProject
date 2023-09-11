@@ -227,13 +227,9 @@
 
 <!-- ------------------------------------------------------------------------------------------- -->
 
-		
-
-	
-<!-- ------------------------------------------------------------------------------------------- -->
 
 		<!-- SECTION -->
-		<form action="./update" method="post" enctype="multipart/form-data">
+		<form action="./update" method="post" enctype="multipart/form-data" id="frm">
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -255,7 +251,7 @@
 					</div>
 					
 					<!-- Order Details -->
-					<div class="col-md-5 order-details">
+					<div class="col-md-6 order-details">
 						
 						<div class="order-summary">
 							<div class="order-col">
@@ -265,7 +261,8 @@
 							<div class="order-products">
 								<div class="order-col-md-3">
 									<div class="form-group">
-										<input class="input" type="text" name="name" value="${member.name}" placeholder="이름을 입력하세요">
+										<input class="input" type="text" name="name" id="name" value="${member.name}" placeholder="이름을 입력하세요">
+										<span id="namex" style="color:red"></span>
 									</div>
 								</div>
 								
@@ -276,7 +273,8 @@
 							
 								<div class="order-col-md-3">
 									<div class="form-group">
-										<input class="input" type="password" name="userPw" id="userPw1" value="${member.userPw}" placeholder="비밀번호를 입력하세요">
+										<input class="input" type="password" name="userPw" id="pw" value="${member.userPw}" placeholder="비밀번호를 입력하세요">
+										<span id="pwx" style="color:red"></span>
 									</div>
 								</div>
 								
@@ -287,7 +285,8 @@
 							
 								<div class="order-col-md-3">
 									<div class="form-group">
-										<input class="input" type="password" id="userPw2" value="${member.userPw}" placeholder="비밀번호를 입력하세요">
+										<input class="input" type="password" id="pw2" value="${member.userPw}" placeholder="비밀번호를 입력하세요">
+										<span id="pwx2" style="color:red"></span>
 									</div>
 								</div>
 								
@@ -309,7 +308,8 @@
 							
 								<div class="order-col-md-3">
 									<div class="form-group">
-										<input class="input" type="date" name="birth" value="${member.birth}" placeholder="생일을 입력하세요">
+										<input class="input" type="date" name="birth" id="birth" value="${member.birth}" placeholder="생일을 입력하세요">
+										<span id="birthx" style="color:red"></span>
 									</div>
 								</div>
 								
@@ -319,23 +319,28 @@
 								</div>
 							
 								<div class="order-col-md-3">
-									<div class="form-group">
+									<div class="form-group" id="addressTotal">
 										<input class="input" type="text" id="postcode" name="zipCode" value="${member.zipCode}" placeholder="우편번호">
 										<input class="input" type="button" onclick="openDaumPostcode()" value="우편번호 찾기"><br>
 										<input class="input" type="text" id="address" name="address" value="${member.address}" placeholder="주소"><br>
 										<input class="input" type="text" id="extraAddress" name="refAddress" value="${member.refAddress}" placeholder="참고항목"><br>
 										<input class="input" type="text" id="detailAddress" name="detailAddress" value="${member.detailAddress}" placeholder="상세주소"><br>
+										<span id="postcodex" style="color:red"></span><br>
+										<span id="addressx" style="color:red"></span><br>
+										<span id="extraAddressx" style="color:red"></span><br>
+										<span id="detailAddressx" style="color:red"></span>
 									</div>
 								</div>
 								
 								<div class="order-col">
 									<div><strong>휴대폰</strong></div>
-									<div><strong></strong></div>
+									<div style="color:red">*필수입력</div>
 								</div>
 							
 								<div class="order-col-md-3">
 									<div class="form-group">
-										<input class="input" type="tel" name="phone" value="${member.phone}" placeholder="번호를 입력하세요">
+										<input class="input" type="tel" name="phone" value="${member.phone}" id="phone" oninput="autoHyphen2(this)" maxlength="13" placeholder="번호를 입력하세요">
+										<span id="phonex" style="color:red"></span>
 									</div>
 								</div>
 								
@@ -352,7 +357,7 @@
 								
 						</div>
 						
-						<button class="primary-btn order-submit center">회원수정</button>
+						<button class="primary-btn order-submit center" type="button" id="btn">회원수정</button>
 					</div>
 					<!-- /Order Details -->
 					
@@ -505,24 +510,152 @@
 				$("#profile").attr("src", result);
 			}
 		});
-		
-		/*	
-			$.ajax({
-				type:'post',
-				url:'./setContentsImgDelete',
-				data:{
-					path:path
-				},
-				success:function(result){
-					console.log(result);
-				},
-				error:function(){
-					console.log("err");
-				}
-			});
-		*/
+
   	});
 </script>
+
+<script>
+const name1 = document.getElementById("name");
+const namex = document.getElementById("namex");
+const pw = document.getElementById("pw");
+const pw2 = document.getElementById("pw2");
+const pwx = document.getElementById("pwx");
+const pwx2 = document.getElementById("pwx2");
+const birth = document.getElementById("birth");
+const birthx = document.getElementById("birthx");
+const phone = document.getElementById("phone");
+const phonex = document.getElementById("phonex");
+
+const addressTotal = document.getElementById("addressTotal");
+
+const postcode = document.getElementById("postcode");
+const address = document.getElementById("address");
+const extraAddress = document.getElementById("extraAddress");
+const detailAddress = document.getElementById("detailAddress");
+
+const postcodex = document.getElementById("postcodex");
+const addressx = document.getElementById("addressx");
+const extraAddressx = document.getElementById("extraAddressx");
+const detailAddressx = document.getElementById("detailAddressx");
+
+const btn = document.getElementById("btn");
+const frm = document.getElementById("frm");
+
+let checkResults=[false, false, false, false, false, false, false, false, false];
+
+name1.addEventListener("focusout", function(){
+    if(name1.value.length<1){
+        document.getElementById("namex").innerHTML = "이름을 입력해주세요";
+        checkResults[0]=false;    
+    } else{
+        document.getElementById("namex").innerHTML = "";
+        checkResults[0]=true;
+    }
+})
+
+pw.addEventListener("focusout", function(){
+    if(pw.value.length < 4){
+        document.getElementById("pwx").innerHTML = "4글자 이상";
+        checkResults[1]=false;
+    } else if(pw.value.length > 11){
+        document.getElementById("pwx").innerHTML = "10글자 미만";
+        checkResults[1]=false;
+    } else{
+        document.getElementById("pwx").innerHTML = "";
+        checkResults[1]=true;
+    }
+})
+
+pw.addEventListener("change", function(){
+    pw2.value="";
+    checkResults[2]=false;
+    pwx2.innerHTML="";
+})
+
+pw2.addEventListener("keyup", function(){
+    if(pw.value!=pw2.value){
+        document.getElementById("pwx2").innerHTML = "비밀번호는 동일해야 합니다";
+        checkResults[2]=false;
+    } else{
+        document.getElementById("pwx2").innerHTML = "";
+        checkResults[2]=true;
+    }
+})
+
+birth.addEventListener("focusout", function(){
+    if(birth.value<1){
+        document.getElementById("birthx").innerHTML = "생년월일을 입력해주세요";
+        checkResults[3]=false;
+    } else{
+        document.getElementById("birthx").innerHTML = "";
+        checkResults[3]=true;
+    }
+})
+
+addressTotal.addEventListener("focusout", function(){
+	if(postcode.value<1){
+		document.getElementById("postcodex").innerHTML = "우편번호를 입력해주세요";
+        checkResults[4]=false;
+	} else{
+        document.getElementById("postcodex").innerHTML = "";
+        checkResults[4]=true;
+    }
+	
+	if(address.value<1){
+		document.getElementById("addressx").innerHTML = "주소를 입력해주세요";
+        checkResults[5]=false;
+	} else{
+        document.getElementById("addressx").innerHTML = "";
+        checkResults[5]=true;
+    }
+	
+	if(extraAddress.value<1){
+		document.getElementById("extraAddressx").innerHTML = "참고항목을 입력해주세요";
+        checkResults[6]=false;
+	} else{
+        document.getElementById("extraAddressx").innerHTML = "";
+        checkResults[6]=true;
+    }
+	
+	if(detailAddress.value<1){
+		document.getElementById("detailAddressx").innerHTML = "상세주소를 입력해주세요";
+        checkResults[7]=false;
+	} else{
+        document.getElementById("detailAddressx").innerHTML = "";
+        checkResults[7]=true;
+    }
+	
+})
+
+phone.addEventListener("focusout", function(){
+    if(phone.value.length<13){
+        document.getElementById("phonex").innerHTML = "휴대폰 번호를 바르게 입력해주세요";
+        checkResults[8]=false;
+    } else{
+        document.getElementById("phonex").innerHTML = "";
+        checkResults[8]=true;
+    }
+})
+
+const autoHyphen2 = (target) => {
+ target.value = target.value
+   .replace(/[^0-9]/g, '')
+  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
+
+btn.addEventListener("click", function(){
+    
+	if((name1.value == '') || (pw.value.length < 4) || (pw.value!=pw2.value) || (birth.value < 1) || (postcode.value == '') || (address.value == '') || (extraAddress.value.length < 1) || (detailAddress.value.length < 1) || phone.value.length < 13){
+		alert("필수입력사항을 입력해주세요");
+	} else{
+		frm.submit();
+		alert("회원정보 수정이 완료되었습니다.");
+	}
+
+})
+
+</script>
+
 	</body>
 </html>
 

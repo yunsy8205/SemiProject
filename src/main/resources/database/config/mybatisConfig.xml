@@ -23,10 +23,14 @@
   		<typeAlias type="java.lang.Long" alias="Long"></typeAlias>
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
-  		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
-  		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportFileDTO" alias="ReportFileDTO"></typeAlias>
+
   		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"></typeAlias>
+
+  		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
+  		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
+  		
+
   	</typeAliases>
 
   </configuration>

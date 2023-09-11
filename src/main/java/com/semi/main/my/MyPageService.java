@@ -56,5 +56,17 @@ public class MyPageService {
 		return myPageDAO.setDelete(memberDTO);
 	}
 	
+	
+	// 채팅 내역 저장 메서드
+    public void saveChatMessage(String userId, String message) throws Exception {
+        myPageDAO.saveChatMessage(userId, message);
+    }
+
+    // 채팅 내역 불러오기 메서드
+    public List<ChatMessageDTO> getChatMessages(String userId) throws Exception {
+        return myPageDAO.getChatMessages(userId);
+    }
+    
+    
 
 }

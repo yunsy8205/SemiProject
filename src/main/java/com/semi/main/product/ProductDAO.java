@@ -18,7 +18,7 @@ public class ProductDAO {
 	
 	
 	public Long getTotal(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 
@@ -86,10 +86,13 @@ public class ProductDAO {
 		
 		return sqlSession.insert(NAMESPACE+"setFileAdd", productFileDTO);
 	}
+	public int setUpdate(ProductDTO productDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate", productDTO);
+	}
 	
-	public int setHitUpdate(ProductDTO productDTO) throws Exception {
+	public int setHitCount(Long proNo) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setHitCount",proNo);
 	}
 	
 	public int dibsAdd(ProductDTO productDTO)throws Exception{

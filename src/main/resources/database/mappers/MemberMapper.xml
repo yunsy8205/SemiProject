@@ -61,5 +61,8 @@
  		SELECT USERID FROM MEMBER WHERE USERID = #{userId}
  	</select>	
 	
+	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+  		SELECT * FROM MEMBER WHERE EMAIL=#{email}
+  	</select>
 	
 </mapper>

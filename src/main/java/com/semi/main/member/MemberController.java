@@ -24,18 +24,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.semi.main.admin.AdminService;
-import com.semi.main.admin.ReportDTO;
 
 @Controller
 @RequestMapping("/member/*")
@@ -52,9 +48,6 @@ public class MemberController {
 	
 	@Autowired
 	private HttpServletResponse response;
-	
-	@Autowired
-	private AdminService adminService;
 
 	/** 네이버 로그인 API 연동 */
 	// 인가코드 및 토큰 발급
@@ -124,7 +117,7 @@ public class MemberController {
 		 + "&client_id=" + clientId + "&client_secret=" + clientSecret +
 		 "&redirect_uri=" + redirectURI + "&code=" + code + "&state=" + state; 
 		 /*토큰 불러오기*/
-		// NaverLoginApi naverLoginApi = new NaverLoginApi(); //여기서 에러발생해서 주석처리함 - 소영
+		 NaverLoginApi naverLoginApi = new NaverLoginApi();
 		
 //		@SuppressWarnings("unchecked")
 //		Enumeration<String> map = request.getParameterNames();
@@ -272,6 +265,7 @@ public class MemberController {
 		
 	}
 	
+	
 /** 회원가입  */
 	 @ResponseBody
 	 @PostMapping("signUp") 
@@ -279,7 +273,7 @@ public class MemberController {
 		 
 		
 		 System.out.println("컨트롤러 회원가입");
-		 System.out.println(memberDTO.getBirth());
+		 System.out.println(memberDTO.getUserId());
 		 
 		 
 		 // result가 0이면 insert 안됨, 1이면 insert 됨.
@@ -296,56 +290,18 @@ public class MemberController {
 		 	 return result;
 	 }
 
+/** ID 찾기*/
+	 @GetMapping("findId")
+	 public String getFindId() throws Exception{
+		 
+		 return "member/findId";
+	 }
 	 
-/** 중복 체크 */
-/**	
-		@PostMapping("joinCheck")
-		@ResponseBody
-		public int setJoinCheck(MemberDTO memberDTO) throws Exception {
-			System.out.println(memberDTO.getUserId());
-			System.out.println(memberDTO.getName());
-			System.out.println(memberDTO.getEmail());
-			System.out.println(memberDTO.getPhone());
-			int result = 0;
-			MemberDTO userIdCheck = memberService.getUserIdCheck(memberDTO);
-//			memberDTO nameCheck = memberService.getNameCheck(memberDTO);
-//			memberDTO phoneCheck = memberService.getPhoneCheck(memberDTO);
-//			memberDTO emailCheck = memberService.getEmailCheck(memberDTO);
-			
-			if(userIdCheck != null) {
-				result = 1; //userId 중복
-			}
-			   
-//			if(nameCheck != null) {
-//				result = 2; //name 중복
-//			}
-//			if(emailCheck != null) {
-//				result = 3; //email 중복
-//			}
-//			if(phoneCheck != null) {
-//				result = 4; //phone 중복
-//			}
-			
-			return result;
-		}
-*/	
-	//report 신고하기
-		
-		@RequestMapping(value = "reportadd", method = RequestMethod.GET)
-		public String reportAdd(MemberDTO memberDTO, Model model)throws Exception{
-			memberDTO=adminService.memberDetail(memberDTO);
-			model.addAttribute("dto", memberDTO);
-			return "admin/reportadd";
-		}
-		
-		@RequestMapping(value = "reportadd", method = RequestMethod.POST)
-		public String reportAdd(MultipartFile [] photos, ReportDTO reportDTO, Model model, HttpSession session)throws Exception{
-			int result=adminService.reportAdd(photos, reportDTO, session);
-			return "redirect:../profile/products?userNo="+reportDTO.getUserNo();
-		}
-	
-	
+/** PW 찾기*/
+	 @GetMapping("findPw")
+	 public String getFindPw() throws Exception{
+		 
+		 return "member/findPw";
+	 }
 	
 }
-
-
