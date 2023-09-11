@@ -30,6 +30,11 @@ public class MemberDAO {
 	  public MemberDTO getUserIdCheck(MemberDTO memberDTO) throws Exception{
 		  return sqlSession.selectOne(NAMESPACE+"getUserIdCheck", memberDTO);
 	  }
+	  
+	// EMAIL 체크
+	  public MemberDTO getMailCheck(MemberDTO memberDTO) throws Exception{
+		  return sqlSession.selectOne(NAMESPACE+"getMailCheck", memberDTO);
+	  }
 	 
 	
 
