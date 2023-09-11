@@ -91,8 +91,8 @@
 	      </a>
 	    </li>
 	  </ul>
-	</nav> -->
-		<!-- <div class="search">
+	</nav>
+		<div class="search">
 			<form method="get" name="search" action="./member">
 				<table class="pull-right">
 					<tr>
@@ -107,9 +107,8 @@
 					</tr>
 				</table>
 			</form>
-		</div>  -->
+		</div> -->
 	</section>
-<!-- <script src="../resources/js/adminMember.js"></script> -->
 <script>
 	$('.form-select').change(function(){
 		alert("판매상태변경");

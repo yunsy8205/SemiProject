@@ -117,7 +117,7 @@ public class MemberController {
 		 + "&client_id=" + clientId + "&client_secret=" + clientSecret +
 		 "&redirect_uri=" + redirectURI + "&code=" + code + "&state=" + state; 
 		 /*토큰 불러오기*/
-		 NaverLoginApi naverLoginApi = new NaverLoginApi();
+		// NaverLoginApi naverLoginApi = new NaverLoginApi();
 		
 //		@SuppressWarnings("unchecked")
 //		Enumeration<String> map = request.getParameterNames();

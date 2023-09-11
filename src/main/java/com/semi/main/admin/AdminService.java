@@ -101,6 +101,13 @@ public class AdminService {
 	}
 	
 	public List<ProductDTO> productList(ProductDTO productDTO)throws Exception{
+//		pager.setPerPage(20L);
+//		pager.makeRowNum();
+//		Map<String , Object> map = new HashMap<String, Object>();
+//		map.put("profileDTO", profileDTO);
+//		map.put("pager", pager);
+//		Long total = profileDAO.getTotal(map);
+//		pager.makePageNum(total);
 		return adminDAO.productList(productDTO);
 	}
 	
