@@ -206,30 +206,6 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
-
-		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="../views/index">Home</a></li>
-						<li><a href="#">에어컨</a></li>
-						<li><a href="#">냉장고</a></li>
-						<li><a href="#">세탁기</a></li>
-						<li><a href="#">TV</a></li>
-						<li><a href="#">노트북</a></li>
-						<li><a href="#">청소기</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
   
   
 </body>

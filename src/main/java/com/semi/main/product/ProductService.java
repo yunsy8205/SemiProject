@@ -145,4 +145,5 @@ public class ProductService {
 	public Long dibsNum(ProductDTO productDTO)throws Exception{
 		return productDAO.dibsNum(productDTO);
 	}
+
 }

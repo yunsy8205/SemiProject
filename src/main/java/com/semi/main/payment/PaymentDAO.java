@@ -10,5 +10,8 @@ public class PaymentDAO {
 	private SqlSession sqlSession;
 	
 	private final String NAMESPACE="com.semi.main.payment.PaymentDAO.";
-
+	
+	public int paymentAdd(PaymentDTO paymentDTO)throws Exception {
+		return sqlSession.insert(NAMESPACE+"paymentAdd", paymentDTO);
+	}
 }

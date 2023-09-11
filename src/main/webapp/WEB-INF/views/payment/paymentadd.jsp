@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -6,133 +7,101 @@
     <meta charset="UTF-8" />
     <title>Sample Payment</title>
 <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <c:import url="../temp/header1.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>
+<style>
+	.image{
+				
+		width: 40%;
+	    height: 300px;
+		float:left;
+	    box-sizing: border-box;
+			}
+	.contain{
 
-  </head>
-  <body>
-    		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
+		width: 1000px;
+		height: 1000px;
+		margin: auto;
+		box-sizing: border-box;
+		
+	}
+			
+	.billing{
+		width: 100%;
+		height: 1000px;
+		margin-left: 15%;
+		margin-right: 15%;
+		margin-bottom: 5%;
 
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
+	}
+	.od{
+		width: 100%;
+		height: 100%;
+	}
+	
+	#product{
+		height: 20%;
+		margin-bottom: 5px;
+	}
+	.order-products{
+		width: 50%;
+		height: 10%;
+		float:left;
+		margin-left: 10%;
+	}
+</style>
+  
+</head>
+<body>
+	<section class="contain border mt-5 mb-5">
+		<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">결제하기</h3>
+								<h1 class="title" id="member" data-no="${member.userNo}" data-name="${member.name}"
+							data-phone="${member.phone}">결제하기</h1>
 							</div>
-							<div class="form-group" id="member" data-email="${member.email}" data-name="${member.name}"
-							data-phone="${member.phone}" data-address="${member.address}" data-code="${member.zipCode}">
-								배송지
-								<input class="input" type="text" name="first-name" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="배송시 요청사항">
-							</div>
-						</div>
-						<!-- /Billing Details -->
-
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">결제수단</h3>
-							</div>
-							
-						</div>
-						<!-- /Shiping Details -->
-
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
-					</div>
-
-					<!-- Order Details -->
-					<div class="col-md-5 order-details">
+	<!-- Order Details -->
+					<div class="col-md-5 order-details" style="width: 100%">
 						<div class="section-title text-center">
-							<h3 class="title" id="order" data-name="${dto.proName}" data-price="${dto.proPrice}"
-							>Your Order</h3>
+							<h3 class="title" id="order" data-proNo="${dto.proNo}" data-name="${dto.proName}" data-price="${dto.proPrice}"
+							>결제금액</h3>
 						</div>
 						<div class="order-summary">
-							<div class="order-col">
-								<div><strong>PRODUCT</strong></div>
-								<div><strong>TOTAL</strong></div>
-							</div>
+					<c:set var="flag" value="true"/>
+					<div>
+						<c:forEach items="${dto.fileDTOs}" var="f">
+							<c:if test="${flag?true:false}">
+								<img class="image" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
+										
+								<c:set var="flag" value="false"/>
+							</c:if>
+						</c:forEach>
+					</div>
 							<div class="order-products">
 								<div class="order-col">
-									<div>1x Product Name Goes Here</div>
-									<div>$980.00</div>
+									<div>${dto.proName}</div>
+									<div>${dto.proPrice}원</div>
 								</div>
 							</div>
 							<div class="order-col">
-								<div>Shiping</div>
-								<div><strong>FREE</strong></div>
-							</div>
-							<div class="order-col">
-								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$2940.00</strong></div>
+								<div><strong>총 결제금액</strong></div>
+								<div><strong class="order-total">${dto.proPrice}원</strong></div>
 							</div>
 						</div>
 						
-						<a href="#" id="btn" onclick="requestPay()" class="primary-btn order-submit">Place order</a>
+						<button type="button" class="primary-btn order-submit" id="btn">결제하기</button>
+						
 					</div>
 					<!-- /Order Details -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+						</div>
+						<!-- /Billing Details -->
+
+	</section>
+
 <c:import url="../temp/footer1.jsp"></c:import>
-    <script>
-      var IMP = window.IMP;
-      IMP.init("imp50730076");
- 		
-      let proName=$('#order').attr("data-name");
-      console.log(proName);
-   	  let proPrice=$('#order').attr('data-price');
-   	  console.log(proPrice);
-   	  let name=$('#member').attr('data-name');
-		
-   	  let phone=$('#member').attr('data-phone');
-
-		$('#btn').click(function(){
-			requestPay();
-		})
-   	  
-      
-      function requestPay() {
-        IMP.request_pay(
-          {
-            pg: "html5_inicis",
-            pay_method: "trans",
-            merchant_uid: 3456+new Date().getTime(),//가맹점 주문번호
-            name: proName,//상품명
-            amount: proPrice,//가격
-
-            buyer_name: name,//구매자
-            buyer_tel: phone,//구매자 번호
-
-          },
-          function (rsp) {
-        	  if (rsp.success) {
-                  console.log(rsp);
-              } else {
-                  console.log(rsp);
-              }
-            // callback
-            //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-          }
-        );
-      }
-    </script>
+<script src="../resources/js/payment.js"></script>
 </body>
 </html>

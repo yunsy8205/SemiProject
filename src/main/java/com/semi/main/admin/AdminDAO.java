@@ -59,4 +59,16 @@ public class AdminDAO {
 		System.out.println("확인여부");
 		return sqlSession.update(NAMESPACE+"reportStatus", reportDTO);
 	}
+	
+	public ReportDTO reportDetail(ReportDTO reportDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"reportDetail", reportDTO);
+	}
+	
+	public MemberDTO reportId(ReportDTO reportDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"reportId", reportDTO);
+	}
+	
+	public int passwordReset(MemberDTO memberDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"passwordReset", memberDTO);
+	}
 }

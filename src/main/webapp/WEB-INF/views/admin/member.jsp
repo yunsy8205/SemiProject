@@ -12,7 +12,7 @@
 </head>
 <body>
 	<section class="container mt-5">
-		<h1 class="text-center mb-5">회원관리</h1>
+		<h1 class="text-center mb-5">회원목록</h1>
 		<table class="table">
 			<thead>
 				<th>회원번호</th><th>회원ID</th><th>권한</th><th>이름</th><th>이메일</th>
