@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="java.util.List" %>
+<%@ page import="com.semi.main.product.ProductFileDTO" %>
+<%@ page import="com.semi.main.my.DibsDTO" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -266,6 +268,9 @@
 							        <p>유저 번호: ${dibs.userNo}</p>
 							        <p>상품 번호: ${dibs.proNo}</p>
 							        <p>상품 제목: ${dibs.proName}</p>
+							    <c:forEach var="fileDTO" items="${dibs.fileDTOs}">
+							        <img src="../resources/upload/product/${fileDTO.originalName}">
+							    </c:forEach>    
 						    	</c:forEach>
 							</div>
 							<div class="form-group">

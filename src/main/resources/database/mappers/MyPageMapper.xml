@@ -44,10 +44,27 @@
     </select>
      
      <!-- 찜목록 -->
-     <select id="getDibs" parameterType="Long" resultType="DibsDTO">
-      SELECT * FROM MEMBER m INNER JOIN dibs d 
-      ON m.USERNO = d.USERNO INNER JOIN product p 
-      ON d.PRONO = p.PRONO
+     <select id="getDibs" parameterType="Long" resultMap="dibsResultMap">
+      SELECT * FROM MEMBER m INNER JOIN DIBS d 
+      ON m.USERNO = d.USERNO INNER JOIN PRODUCT p 
+      ON d.PRONO = p.PRONO INNER JOIN PRODUCTIMAGE pr
+	  ON p.PRONO = pr.PRONO
       WHERE m.USERNO = #{userNo}
      </select>
+     
+     <resultMap id="dibsResultMap" type="DibsDTO">
+    <id property="userNo" column="USERNO"/>
+    <result property="proNo" column="PRONO"/>
+    <result property="proName" column="PRONAME"/>
+    
+    <!-- ProductFileDTO의 fileDTOs 필드를 매핑하기 위한 resultMap 참조 -->
+    <collection property="fileDTOs" ofType="com.semi.main.product.ProductFileDTO">
+        <result property="fileNo" column="FILENO"/>
+        <result property="fileName" column="FILENAME"/>
+        <result property="originalName" column="ORIGINALNAME"/>
+    </collection>
+    
+    
+	</resultMap>
+     
   </mapper>

@@ -1,10 +1,21 @@
 package com.semi.main.my;
 
+import java.util.List;
+
+import com.semi.main.product.ProductFileDTO;
+
 public class DibsDTO {
 	 private Long userNo;
 	 private Long proNo;
 	 private String proName;
+	 private List<ProductFileDTO> fileDTOs;
 	 
+	public List<ProductFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<ProductFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
 	public Long getUserNo() {
 		return userNo;
 	}
