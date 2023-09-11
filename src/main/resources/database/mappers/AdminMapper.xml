@@ -159,4 +159,46 @@
   	<update id="passwordReset" parameterType="MemberDTO">
   		UPDATE MEMBER SET USERPW=#{userPw} WHERE USERNO=#{userNo}
   	</update>
+  	
+  	<select id="productList" parameterType="ProductDTO" resultMap="getSelectResult">
+  		SELECT P.*, C.*, M.USERID, PI.* FROM PRODUCT P
+  		JOIN CATEGORY C ON (P.CATNO  = C.CATNO)
+  		JOIN MEMBER M ON (P.USERNO = M.USERNO)
+  		LEFT JOIN PRODUCTIMAGE PI ON(P.PRONO = PI.PRONO)
+  		ORDER BY P.PRONO
+  	</select>
+  	
+  	<resultMap type="ProductDTO" id="getSelectResult">
+		<id column="PRONO" property="proNo"/>
+		<result column="PRONAME" property="proName"/>
+		<result column="USERNO" property="userNo"/>
+		<result column="CATNO" property="catNo"/>
+		<result column="PROPRICE" property="proPrice"/>
+		<result column="PROCONTENTS" property="proContents"/>
+		<result column="CREATEDATE" property="createDate"/>
+		<result column="MODIFYDATE" property="modifyDate"/>
+		<result column="PROHIT" property="hit"/>
+		<result column="PROSALE" property="proSale"/>
+		<result column="PROAMOUNT" property="proAmount"/>
+		
+		<association property="category" javaType="CategoryDTO">
+			<id column="CATNO" property="catNo"/>
+			<result column="CATNAME" property="catName"/>
+		</association>
+		
+		<association property="member" javaType="MemberDTO">
+			<id column="USERNO" property="userNo"/>
+			<result column="USERID" property="userId"/>
+		</association>
+
+		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+	</resultMap>
+	
+	<update id="productSale" parameterType="ProductDTO">
+		UPDATE PRODUCT SET PROSALE=#{proSale} WHERE PRONO=#{proNo}
+	</update>
   </mapper>

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.member.MemberDTO;
+import com.semi.main.product.ProductDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -97,5 +98,13 @@ public class AdminService {
 	public int passwordReset(MemberDTO memberDTO)throws Exception{
 		int result = adminDAO.passwordReset(memberDTO);
 		return result;
+	}
+	
+	public List<ProductDTO> productList(ProductDTO productDTO)throws Exception{
+		return adminDAO.productList(productDTO);
+	}
+	
+	public int productSale(ProductDTO productDTO) throws Exception{
+		return adminDAO.productSale(productDTO);
 	}
 }

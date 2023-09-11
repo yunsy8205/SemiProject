@@ -3,6 +3,8 @@ package com.semi.main.product;
 import java.sql.Date;
 import java.util.List;
 
+import com.semi.main.member.MemberDTO;
+
 public class ProductDTO {
 	
 	private Long proNo;
@@ -22,9 +24,16 @@ public class ProductDTO {
 	private String userId;
 	private List<ProductFileDTO> fileDTOs;
 	private CategoryDTO category;
+	private MemberDTO member;
 	
 	
 	
+	public MemberDTO getMember() {
+		return member;
+	}
+	public void setMember(MemberDTO member) {
+		this.member = member;
+	}
 	public CategoryDTO getCategory() {
 		return category;
 	}

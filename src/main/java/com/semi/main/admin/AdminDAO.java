@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.semi.main.member.MemberDTO;
+import com.semi.main.product.ProductDTO;
 import com.semi.main.util.Pager;
 
 @Repository
@@ -70,5 +71,13 @@ public class AdminDAO {
 	
 	public int passwordReset(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"passwordReset", memberDTO);
+	}
+	
+	public List<ProductDTO> productList(ProductDTO productDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"productList", productDTO);
+	}
+	
+	public int productSale(ProductDTO productDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"productSale", productDTO);
 	}
 }

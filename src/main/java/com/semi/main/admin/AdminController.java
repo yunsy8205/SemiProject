@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.member.MemberDTO;
-import com.semi.main.util.MailService;
+import com.semi.main.product.ProductDTO;
+import com.semi.main.util.MailService2;
 import com.semi.main.util.Pager;
 import com.semi.main.util.PayService;
 
@@ -27,7 +28,7 @@ public class AdminController {
 	@Autowired
 	private PayService payService;
 	@Autowired
-	private MailService mailService;
+	private MailService2 mailService;
 	
 	@RequestMapping(value = "member", method = RequestMethod.GET)
 	public String memberList(Pager pager, Model model) throws Exception{
@@ -90,19 +91,12 @@ public class AdminController {
 		
 		return "admin/reportdetail";
 	}
-	
-	@RequestMapping(value = "checkAccount", method = RequestMethod.GET)
-	public String checkAccount()throws Exception{
-		String token = payService.getToken("3857776236202128", "qt5gBM0lhOUyMjNsP0SCyU89K16kK326nk369CwdKlRavvMtHIp14JJZLHocGlzAz5WPLENXIux6DcwK");
-		String name =payService.checkAccount(token, "011", "3520512490733");
-		System.out.println(name);
-		return "redirect:/";
-	}
+
 	//비번초기화
 	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
 	public String passwordReset(MemberDTO memberDTO, Model model)throws Exception{
 		String pw = RandomStringUtils.randomAlphanumeric(10);
-		System.out.println(pw);
+		System.out.println("비번:"+pw);
 		memberDTO.setUserPw(pw);
 		int result = adminService.passwordReset(memberDTO);
 		if(result==1) {
@@ -116,6 +110,23 @@ public class AdminController {
 			System.out.println("비번 초기화 실패");
 		}
 		
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
+	}
+	
+	@RequestMapping(value = "product", method = RequestMethod.GET)
+	public String productList(ProductDTO productDTO, Model model)throws Exception{
+		List<ProductDTO> ar = adminService.productList(productDTO);
+
+		model.addAttribute("list", ar);
+		return "admin/product";
+	}
+	
+	@RequestMapping(value = "productsale", method = RequestMethod.POST)
+	public String productSale(ProductDTO productDTO, Model model) throws Exception{
+
+		int result = adminService.productSale(productDTO);
+		System.out.println(result);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	}

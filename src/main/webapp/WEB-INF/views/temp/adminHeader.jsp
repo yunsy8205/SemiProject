@@ -14,6 +14,9 @@
           			<a class="nav-link active" href="/admin/member">회원관리</a>
         		</li>
         		<li class="nav-item">
+          			<a class="nav-link active" href="/admin/product">상품관리</a>
+        		</li>
+        		<li class="nav-item">
           			<a class="nav-link active" href="#">결제관리</a>
         		</li>
         		<li class="nav-item">
