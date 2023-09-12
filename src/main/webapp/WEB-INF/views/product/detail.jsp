@@ -182,7 +182,7 @@
 	</div> 
 
 	<div>
-    <a href="/product/update?proNo=${dto.proNo}">수정</a>
+    <a class="mb-3 btn btn-primary" href="/product/update?proNo=${dto.proNo}">수정</a>
 	</div>	
 
 
