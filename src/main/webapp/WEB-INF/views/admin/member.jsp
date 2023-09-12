@@ -16,15 +16,15 @@
 		<table class="table">
 			<thead>
 				<th>회원번호</th><th>회원ID</th><th>권한</th><th>이름</th><th>이메일</th>
-				<th>생년월일</th><th>주소</th><th>전화번호</th><th>가입일</th><th>회원상태</th>
+				<th>생년월일</th><th>전화번호</th><th>가입일</th><th>회원상태</th>
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="m">
 					<tr>
 						<td>${m.userNo}</td><td><a href="./memberdetail?userNo=${m.userNo}">${m.userId}</a></td><td>
-						<c:forEach items="${m.roles}" var="r">${r.grantName}/</c:forEach> 
+						<c:forEach items="${m.roles}" var="r">${r.grantName}</c:forEach> 
 						</td><td>${m.name}</td><td>${m.email}</td><td>${m.birth}</td>
-						<td>${m.address}</td><td>${m.phone}</td><td>${m.accountDate}</td><td>
+						<td>${m.phone}</td><td>${m.accountDate}</td><td>
 						<c:if test="${m.statusNo eq '0'}"><span>정지</span><button data-num="${m.userNo}" type="button" class="ms-2 btn btn-secondary b" data-status="${m.statusNo}">정지해제</button></c:if>
 						<c:if test="${m.statusNo eq '1'}"><span>활동</span><button data-num="${m.userNo}" type="button" class="ms-2 btn btn-danger b" data-status="${m.statusNo}">회원정지</button></c:if>
 						</td> 

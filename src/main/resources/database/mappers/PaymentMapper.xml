@@ -9,7 +9,11 @@
   		VALUES (#{paymentNo}, #{userNo}, #{proNo}, 1, #{uidNo}, SYSDATE, #{totalPrice}, #{name}, #{proName})
   	</insert>
   	
-  	<update id="b"></update>
+  	<update id="checkAccount" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		HOLDER=#{holder}, BANKCODE=#{bankCode}, BANKNUM=#{bankNum}
+  		WHERE USERNO=#{userNo}
+  	</update>
   	<delete id="c"></delete>
   	<select id="d"></select>
   

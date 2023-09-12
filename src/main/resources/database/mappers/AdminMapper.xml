@@ -57,13 +57,22 @@
 			<result column="zipcode" property="zipCode" />
 			<result column="refaddress" property="refAddress" />
 			<result column="detailaddress" property="detailAddress" />
-			<result column="ORIGINALNAME" property="originalName" />
-	
+			<!-- 9/12추가 -->
+			<result column="HOLDER" property="holder" />
+			<result column="BANKCODE" property="bankCode" />
+			<result column="BANKNUM" property="bankNum" />
+			
+			<association property="memberFileDTO" javaType="MemberFileDTO">
+				<id column="FILENO" property="fileNo"/>
+				<result column="ORIGINALNAME" property="originalName"/>
+				<result column="FILENAME" property="fileName"/>
+			</association>
+			
 			<collection property="roles" javaType="List" ofType="RoleDTO">
 				<id column="GRANTNO" property="grantNo" />
 				<result column="GRANTNAME" property="grantName" />
 			</collection>
-		</resultMap>
+	</resultMap>
   	
   	<select id="getTotal" parameterType="Pager" resultType="Long">
   		SELECT COUNT(USERNO) FROM MEMBER M
@@ -76,7 +85,7 @@
   	</update>
   	
   	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
-		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.ORIGINALNAME
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME
 		FROM MEMBER M LEFT JOIN MEMBERROLE MR
 		ON(M.USERNO=MR.USERNO)
 		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
@@ -92,6 +101,14 @@
   		PHONE=#{phone},INTRO=#{intro}
   		WHERE USERNO=#{userNo}
   	</update>
+  	
+  	<delete id="roleDelete" parameterType="Map">
+  		DELETE MEMBERROLE WHERE USERNO=#{member.userNo}
+  	</delete>
+  	
+  	<insert id="memberRole" parameterType="Map">
+  		INSERT INTO MEMBERROLE (USERNO, GRANTNO) VALUES (#{member.userNo}, #{role.grantNo})
+  	</insert>
   	
   	<insert id="reportAdd" parameterType="Map">
   		<selectKey keyProperty="report.reportNo" resultType="Long" order="BEFORE">
@@ -201,4 +218,8 @@
 	<update id="productSale" parameterType="ProductDTO">
 		UPDATE PRODUCT SET PROSALE=#{proSale} WHERE PRONO=#{proNo}
 	</update>
+	
+	<delete id="memberFileDel">
+		DELETE PROFILE WHERE USERNO=#{userNo}
+	</delete>
   </mapper>

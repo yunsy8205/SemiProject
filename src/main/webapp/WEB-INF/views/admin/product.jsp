@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<section class="container mt-5">
+	<section class="container mt-5 mb-5">
 		<h1 class="text-center mb-5">상품목록</h1>
 		<table class="table">
 			<thead>
@@ -26,7 +26,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="m">
 					<tr>
-						<td>${m.proNo}</td><td>${m.category.catName}</td>
+						<td>${m.proNo}</td><tds>${m.category.catName}</td>
 						<td>이미지
 						<c:set var="flag" value="true"/>
 							<div>

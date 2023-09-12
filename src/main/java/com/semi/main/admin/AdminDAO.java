@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.semi.main.member.MemberDTO;
+import com.semi.main.member.MemberFileDTO;
+import com.semi.main.member.RoleDTO;
 import com.semi.main.product.ProductDTO;
 import com.semi.main.util.Pager;
 
@@ -37,6 +39,13 @@ public class AdminDAO {
 	
 	public int memberUpdate(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESPACE+"memberUpdate", memberDTO);
+	}
+	
+	public int memberRole(Map<String, Object> map)throws Exception{
+		int result = sqlSession.delete(NAMESPACE+"roleDelete", map);
+			result = sqlSession.update(NAMESPACE+"memberRole", map);
+
+		return result; 
 	}
 	
 	public int reportAdd(Map<String, Object> map)throws Exception{
@@ -79,5 +88,9 @@ public class AdminDAO {
 	
 	public int productSale(ProductDTO productDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"productSale", productDTO);
+	}
+	
+	public int memberFileDel(MemberFileDTO memberFileDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"memberFileDel", memberFileDTO);
 	}
 }

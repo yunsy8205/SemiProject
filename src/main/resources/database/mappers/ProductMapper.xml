@@ -120,6 +120,7 @@ SELECT COUNT(PRONO) FROM PRODUCT P INNER JOIN MEMBER M ON P.USERNO = M.USERNO WH
 <result column="PROHIT" property="hit"/>
 <result column="PROSALE" property="proSale"/>
 <result column="USERID" property="userId"/>
+<result column="PROAMOUNT" property="proAmount"/>
 <!--
   <association property="category" javaType="CategoryDTO">
 	        <id column="CATNO" property="catNo"/>
