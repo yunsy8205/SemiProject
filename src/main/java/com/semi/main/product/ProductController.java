@@ -107,10 +107,7 @@ public class ProductController {
 		//판매자후기 리스트
 		List<ProductReviewDTO> ar2 = productService.memberReviewList(productDTO);
 		model.addAttribute("review", ar2);
-		for(ProductReviewDTO a:ar2) {
-			System.out.println(a.getReviewNo());
-			
-		}
+		
 		//dibsNum
 		Long dibsNum = productService.dibsNum(productDTO);
 		model.addAttribute("dibsNum", dibsNum);
