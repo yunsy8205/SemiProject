@@ -39,20 +39,9 @@ public class MyPageController {
 		memberDTO=(MemberDTO)session.getAttribute("member");
 		System.out.println(memberDTO.getUserId()+"?zzz");
 		System.out.println(memberDTO.getAccountDate());
-
-	
-	@GetMapping(value = "mypage") //마이페이지
-
-
-	public void myPage() throws Exception{
-//		MemberDTO memberDTO = new MemberDTO();
-//		memberDTO=(MemberDTO)session.getAttribute("member");
-//		System.out.println(memberDTO);
-//		System.out.println(memberDTO.getUserId()+"?zzz");
-//		System.out.println(memberDTO.getAccountDate());
-
-
 	}
+	
+	
 	
 	// 정보수정
 	@GetMapping(value = "update") 
@@ -212,10 +201,6 @@ public class MyPageController {
 			
 		}
 		
-	// 내판매글/구매내역
-	@GetMapping(value = "list") 
-	public String list(MemberDTO memberDTO) throws Exception{
-		return "./my/list";
-	}
+
 	 
 }
