@@ -49,8 +49,8 @@
 		</c:forEach> 
 		
 		<c:if test="${member.userId == 'ADMIN'}">
-		<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
-		<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
+		<a class="btn btn-dark" style="float:right" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
+		<a class="btn btn-dark mx-2" style="float:right" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
 		</c:if>
 		
 	

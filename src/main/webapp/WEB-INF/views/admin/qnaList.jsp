@@ -13,7 +13,9 @@
 <c:import url="../temp/adminHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
-		<table class="table">
+	
+	
+		<table class="table mt-5">
 		
 		<thead class="table">
 		<th>NO</th> <th>ID</th> <th>유형</th> <th>TITLE</th><th>DATE</th> <th>상태</th>

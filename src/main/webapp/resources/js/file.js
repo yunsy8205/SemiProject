@@ -6,7 +6,7 @@ $("#fileAdd").click(function(){
 
     r = r.concat('<label for="pic" class="form-label">파일첨부</label>');
 
-    r = r.concat('<input type="file" class="form-control" id="pic" name="files1"');
+    r = r.concat('<input type="file" class="form-control" size=30 id="pic" name="files1"');
    
     r = r.concat('</div>');
 

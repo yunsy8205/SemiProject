@@ -80,6 +80,7 @@ public class QnaService implements BoardService{
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
+		pager.setPerPage(15L);
 		pager.makeRowNum();
 		Long total = qnaDAO.getTotal(pager);
 		pager.makePageNum(total);

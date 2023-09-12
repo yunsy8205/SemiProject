@@ -15,8 +15,24 @@ public class PaymentDTO {
 	   private Integer StatusNo;
 	   private Date paymentDate;
 	   private String reason;
+	   
+	   private String userId;
+	   private String statusName;
    
-   public Long getUserNo() {
+	   
+   public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getStatusName() {
+		return statusName;
+	}
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+public Long getUserNo() {
       return userNo;
    }
    public Long getTotalPrice() {

@@ -1,7 +1,12 @@
 package com.semi.main.payment;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.semi.main.qna.QnaDAO;
+import com.semi.main.util.Pager;
 
 @Service
 public class PaymentService {
@@ -13,5 +18,13 @@ public class PaymentService {
       return paymentDAO.paymentAdd(paymentDTO);
    }
    
+   public List<PaymentDTO> getPayList(Pager pager)throws Exception{
+	   
+	   pager.setPerPage(15L);
+	   pager.makeRowNum();
+	   Long total = paymentDAO.getTotal(pager);
+	   pager.makePageNum(total);
+	   return paymentDAO.getPayList(pager);
+   }
    
 }
