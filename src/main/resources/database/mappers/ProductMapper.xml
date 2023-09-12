@@ -194,8 +194,24 @@ SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
         PROSTATUS = #{proStatus},
         PROSALE = #{proSale}
     WHERE
-         PRONO = #{proNo, jdbcType=NUMERIC}
+         PRONO = #{proNo}
 </update>
+<delete id="setDelete" parameterType="Long">
+    DELETE FROM PRODUCT WHERE PRONO = #{proNo}
+</delete>
+<delete id="setFileDelete" parameterType="ProductFileDTO">
+    DELETE FROM PRODUCTIMAGE WHERE FILENO = #{fileNo}
+</delete>
+
+<select id="getFileDetail" parameterType="ProductFileDTO" resultType="ProductFileDTO">
+    SELECT FILENO, FILENAME
+    FROM PRODUCTIMAGE
+    WHERE FILENO = #{fileNo}
+</select>
+
+
+
+
 
 
 </mapper>
