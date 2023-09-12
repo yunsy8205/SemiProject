@@ -229,20 +229,55 @@
 
 		
 <!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">내 판매글/구매내역/후기</h3>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">내 판매글/구매내역/후기</h3>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- Product List Table -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>사진</th>
+                        <th>상품명</th>
+                        <th>가격</th>
+                        <th>상태</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JSTL을 사용하여 상품 목록을 반복해서 출력 -->
+                    <c:forEach var="product" items="${list}">
+                        <tr> 
+                        <td>
+                                <!-- 상품 사진을 표시 -->
+                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+                            </td>
+                            <td>${product.proName}</td>
+                            <td>${product.proPrice}</td>
+                            <td>${product.proStatus}</td>
+                           
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 

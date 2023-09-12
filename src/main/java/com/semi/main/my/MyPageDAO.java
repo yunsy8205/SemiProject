@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
+import com.semi.main.product.ProductDTO;
 
 @Repository
 public class MyPageDAO {
@@ -48,9 +49,22 @@ public class MyPageDAO {
         return sqlSession.selectList(NAMESPACE + "getChatMessages", userId);
     }
     
+
     // 찜 목록
     public List<DibsDTO> getDibs(Long userNo) throws Exception{
         return sqlSession.selectList(NAMESPACE+"getDibs", userNo);
      }
+
+
+    
+    //내판매글불러오기
+    public List<ProductDTO> memberProList(Map<String, Object> map)throws Exception {
+		return sqlSession.selectList(NAMESPACE+"memberProList", map);
+	} 
+    
+    //total
+  	public Long getTotal(Map<String, Object> map)throws Exception{
+  		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
+  	}
 
 }
