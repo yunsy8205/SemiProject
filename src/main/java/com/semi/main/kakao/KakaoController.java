@@ -67,8 +67,7 @@ public class KakaoController {
          MemberDTO memberDTO = getUserInfoWithToken(accessToken);
                  
          MemberDTO memberDTO2 = kakaoService.getEmailCheck(memberDTO);
-         System.out.println(memberDTO2);
-         MemberDTO memberDTO3 = (MemberDTO)session.getAttribute("member");
+       
          if(memberDTO2 != null) {
  			//4. 세션에 저장
  			System.out.println("기존 정보 있음");
@@ -111,6 +110,7 @@ public class KakaoController {
          memberDTO.setEmail(email);
          
          System.out.println(memberDTO);
+         System.out.println(memberDTO.getName());
          return memberDTO;
  	}
 }
