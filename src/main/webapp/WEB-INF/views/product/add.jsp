@@ -34,6 +34,14 @@
                     <label for="pic" class="form-label">사진첨부 (1장 이상 필수)</label>
                     <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
                 </div>
+                <div class="mb-3">
+                    <label for="pic" class="form-label">사진첨부 (1장 이상 필수)</label>
+                    <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
+                </div>
+                <div class="mb-3">
+                    <label for="pic" class="form-label">사진첨부 (1장 이상 필수)</label>
+                    <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
+                </div>
 				
 				<!-- <div class="mb-3">
 				  <label for="pic" class="form-label">사진첨부</label>
