@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletRequest;
+
 
 import com.semi.main.member.MemberDTO;
 import com.semi.main.profile.ProfileService;
+import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
 @Controller
@@ -25,6 +28,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@RequestMapping(value = "list",method = RequestMethod.GET)
 	public String getList(Pager pager,Model model,Long catNo,String condition) throws Exception{
@@ -162,16 +168,56 @@ public class ProductController {
 	
 	}
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session)throws Exception{
-		
-		 System.out.println(productDTO.getProNo());
-		 System.out.println("진입");
-		 int result = productService.setUpdate(productDTO, photos, session);
-		 Long proNo = productDTO.getProNo();
-		 System.out.println(productDTO.getProNo());
-		 System.out.println("2번진입");
-		 return "redirect:/product/detail?proNo=" + proNo;
+	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session, HttpServletRequest request) throws Exception {
+	    // 제품 정보 업데이트
+	    int result = productService.setUpdate(productDTO, photos, session);
+
+//	    // 선택한 파일 삭제
+//	    String[] fileIds = request.getParameterValues("deleteFiles");
+//	    if (fileIds != null) {
+//	        for (String fileId : fileIds) {
+//	            ProductFileDTO productFileDTO = new ProductFileDTO();
+//	            productFileDTO.setFileNo(Long.parseLong(fileId));
+//	            
+//	            // 파일 삭제 메서드 호출
+//	            productService.setFileDelete(productFileDTO, session);
+//	        }
+//	    }
+//
+//	    // 새 파일 업로드
+//	    for (MultipartFile file : photos) {
+//	        if (file != null && !file.isEmpty()) {
+//	            String fileName = fileManager.fileSave("/resources/upload/product/", session, file);
+//
+//	            ProductFileDTO productFileDTO = new ProductFileDTO();
+//	            productFileDTO.setFileNo(productDTO.getProNo());
+//	            productFileDTO.setFileName(fileName);
+//	            productFileDTO.setOriginalName(file.getOriginalFilename());
+//	            productFileDTO.setProNo(productDTO.getProNo());
+//
+//	            // 파일 추가 메서드 호출
+//	            productService.setFileAdd(productFileDTO);
+//	        }
+//	    }
+
+	    Long proNo = productDTO.getProNo();
+	    return "redirect:/product/detail?proNo=" + proNo;
 	}
+
+	
+	@GetMapping("fileDelete")
+	public String setFileDelete(ProductFileDTO productFileDTO,Model modle,HttpSession session) throws Exception{
+		System.out.println("Controller = "+productFileDTO.getFileNo());
+		System.out.println("Controller = "+productFileDTO.getFileName());
+		System.out.println("Controller = "+productFileDTO.getOriginalName());
+		int result = productService.setFileDelete(productFileDTO,session);;
+		modle.addAttribute("result",result);
+		
+		return "commons/ajaxResult";
+		
+	}
+
+	
 	
 	@GetMapping("dibsDelete")
 	public String dibsDelete(ProductDTO productDTO, Model model, HttpSession session)throws Exception{
