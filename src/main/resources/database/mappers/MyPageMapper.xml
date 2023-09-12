@@ -42,5 +42,42 @@
     <select id="getChatMessages" parameterType="String" resultType="ChatMessageDTO">
         SELECT * FROM CHAT
     </select>
+    
+    <select id="memberProList" parameterType="Map" resultMap="getResult">
+		SELECT C.*, PI.* FROM
+		(SELECT B.* FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT * FROM PRODUCT WHERE USERNO=#{profileDTO.userNo} ORDER BY CREATEDATE DESC)A)B)C
+		LEFT JOIN PRODUCTIMAGE PI
+		ON(C.PRONO=PI.PRONO)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+  	      <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="hit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	  	<select id="getTotal" resultType="Long" parameterType="Map">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{profileDTO.userNo}
+  		</select>
      
   </mapper>

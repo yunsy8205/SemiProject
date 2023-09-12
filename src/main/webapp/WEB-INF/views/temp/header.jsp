@@ -113,7 +113,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="/" class="logo">
-                            <img src="/resources/img/logo.png" alt="">
+                            <img src="/resources/img/구디장터로고.jpg" alt="">
                         </a>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                             <select name="kind" id="k" class="input-select" aria-label="Default select example">
                                 <option class="kind" value="proName">상품명</option>
                                 <option class="kind" value="proContents">상품설명</option>
-                                <option class="kind" value="userId">이름</option>
+                                <option class="kind" value="userId">작성자</option>
                             </select>
                             <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
                             <button type="submit" class="search-btn">검색</button>

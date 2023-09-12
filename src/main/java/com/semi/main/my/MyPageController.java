@@ -19,6 +19,9 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
+import com.semi.main.product.ProductDTO;
+import com.semi.main.profile.ProfileDTO;
+import com.semi.main.util.Pager;
 
 @Controller
 @RequestMapping("/my/*")
@@ -32,11 +35,12 @@ public class MyPageController {
 	@GetMapping(value = "mypage") //마이페이지
 
 
-	public void myPage(HttpSession session) throws Exception{
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO=(MemberDTO)session.getAttribute("member");
-		System.out.println(memberDTO.getUserId()+"?zzz");
-		System.out.println(memberDTO.getAccountDate());
+	public void myPage() throws Exception{
+//		MemberDTO memberDTO = new MemberDTO();
+//		memberDTO=(MemberDTO)session.getAttribute("member");
+//		System.out.println(memberDTO);
+//		System.out.println(memberDTO.getUserId()+"?zzz");
+//		System.out.println(memberDTO.getAccountDate());
 
 	}
 	
@@ -84,10 +88,10 @@ public class MyPageController {
 		return "redirect:./mypage";
 	}
 	
-	@GetMapping(value = "list") // 내판매글/구매내역
-	public String list(MemberDTO memberDTO) throws Exception{
-		return "./my/list";
-	}
+//	@GetMapping(value = "list") // 내판매글/구매내역
+//	public String list(MemberDTO memberDTO) throws Exception{
+//		return "./my/list";
+//	}
 	
 
 	
@@ -167,6 +171,22 @@ public class MyPageController {
 	@GetMapping("test3")
 	public void chattest3(Model model) throws Exception{		
 		
+	}
+	
+	@GetMapping("list")
+	public String proList(HttpSession session, Model model, Pager pager) throws Exception{
+	    // 현재 로그인한 사용자의 정보를 세션에서 가져옴
+	    MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+	    
+	    // profileDTO 생성 및 userNo 설정
+	    ProfileDTO profileDTO = new ProfileDTO();
+	    profileDTO.setUserNo(memberDTO.getUserNo());
+	    
+	    List<ProductDTO> ar = myPageService.memberProList(profileDTO, pager);
+	    model.addAttribute("list", ar);
+	    model.addAttribute("pager", pager);
+	    
+	    return "./my/list";
 	}
 	
 	
