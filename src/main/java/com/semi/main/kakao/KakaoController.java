@@ -111,6 +111,7 @@ public class KakaoController {
          
          System.out.println(memberDTO);
          System.out.println(memberDTO.getName());
+         System.out.println(memberDTO.getEmail());
          return memberDTO;
  	}
 }
