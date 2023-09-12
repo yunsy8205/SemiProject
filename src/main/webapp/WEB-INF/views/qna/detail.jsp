@@ -14,6 +14,7 @@
   }
 </style>
 
+
 </head>
 
 <body>
@@ -43,9 +44,11 @@
 		<footer>
 			<c:forEach items="${dto.fileDTOs}" var="f">
 				<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
-			</c:forEach> 
+			</c:forEach>
+			 <c:if test="${member.userId == dto.userId}">
 			<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
 			<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
+			</c:if>
 		</footer>
 		
 		
@@ -128,13 +131,17 @@
 			}
 		});
 	}
+		
+		
+	
+	</script>
 	
 		
 
 
 
 	
-	</script>
+
 
 	
 	

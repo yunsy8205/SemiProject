@@ -54,7 +54,7 @@
 		</c:if>
 		
 	
-	<a href="./list">list</a>
+
 	
 	
 

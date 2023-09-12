@@ -19,6 +19,8 @@ import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.qnaComment.QnaCommentDTO;
 
+import retrofit2.http.POST;
+
 @Controller
 @RequestMapping("/qna/*")
 public class QnaController {
@@ -34,7 +36,6 @@ public class QnaController {
 	//commentList
 	@GetMapping("commentList")
 	public void getCommentList(QnaCommentDTO qnaCommentDTO, Model model)throws Exception{
-		
 		List<QnaCommentDTO> ar = qnaService.getCommentList(qnaCommentDTO);
 		model.addAttribute("commentList", ar);
 	}
@@ -162,6 +163,31 @@ public class QnaController {
 			return "qna/detail";
 
 
+	}
+	
+	@GetMapping("delete")
+	public String setDelete(QnaDTO qnaDTO,Model model)throws Exception{
+		
+		int result = qnaService.setDelete(qnaDTO);
+		String message = "삭제 실패";
+
+		if (result > 0) {
+			message = "삭제 성공";
+		}
+		model.addAttribute("message", message);
+		model.addAttribute("url", "list");
+		
+		return "commons/result";
+		
+	}
+	
+	@GetMapping("statusUpdate")
+	public String setStatusUpdate(QnaDTO qnaDTO)throws Exception{
+		
+		int result = qnaService.setStatusUpdate(qnaDTO);
+		
+		return "commons/ajaxResult";
+	
 	}
 	
 	
