@@ -68,11 +68,12 @@ public class KakaoController {
                  
          MemberDTO memberDTO2 = kakaoService.getEmailCheck(memberDTO);
          System.out.println(memberDTO2);
-         
+         MemberDTO memberDTO3 = (MemberDTO)session.getAttribute("member");
          if(memberDTO2 != null) {
  			//4. 세션에 저장
  			System.out.println("기존 정보 있음");
- 			session.setAttribute("member", memberDTO2);				
+ 			session.setAttribute("member", memberDTO2);
+ 			
  			return "redirect:/";
  		}else {
  			System.out.println("기존 정보 없음");
