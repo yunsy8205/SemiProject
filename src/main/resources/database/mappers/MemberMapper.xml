@@ -62,6 +62,10 @@
  	</select>	
 	
 	 <!-- Email 중복체크 -->
+ 	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+ 	 <!-- Email 중복체크 -->
  	<select id="getMailCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}
  	</select>
