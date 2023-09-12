@@ -89,17 +89,6 @@ public class ProductDAO {
 	public int setUpdate(ProductDTO productDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", productDTO);
 	}
-	public int setDelete(ProductDTO productDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.delete(NAMESPACE+"setDelete", productDTO);
-	}
-	public int setFileDelete(ProductFileDTO productFileDTO)throws Exception{
-		return sqlSession.delete(NAMESPACE+"setFileDelete", productFileDTO);
-	}
-	public ProductFileDTO getFileDetail(ProductFileDTO productFileDTO) throws Exception {
-	    return sqlSession.selectOne(NAMESPACE + "getFileDetail", productFileDTO);
-	}
-
 	
 	public int setHitCount(Long proNo) throws Exception {
 		// TODO Auto-generated method stub
