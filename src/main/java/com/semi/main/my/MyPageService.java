@@ -1,6 +1,8 @@
 package com.semi.main.my;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.semi.main.file.FileDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
+import com.semi.main.product.ProductDTO;
+import com.semi.main.profile.ProfileDTO;
 import com.semi.main.util.FileManager;
+import com.semi.main.util.Pager;
 
 @Service
 public class MyPageService {
@@ -67,6 +72,17 @@ public class MyPageService {
         return myPageDAO.getChatMessages(userId);
     }
     
+    
+    public List<ProductDTO> memberProList(ProfileDTO profileDTO, Pager pager)throws Exception {
+		pager.setPerPage(3L);
+		pager.makeRowNum();
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("profileDTO", profileDTO);
+		map.put("pager", pager);
+		Long total = myPageDAO.getTotal(map);
+		pager.makePageNum(total);
+		return myPageDAO.memberProList(map);
+	}
     
 
 }

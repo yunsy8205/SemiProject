@@ -81,7 +81,7 @@
                     <label for="proName" class="form-label">제목</label>
                     <input type="text" name="proName"  class="form-control" id="proName" placeholder="제목 입력">
                   </div> -->
-                  
+                  <div>
                   <label for="catNo">카테고리 선택:</label>
 				    <select id="catNo" name="catNo">
 				        <option value="1001">에어컨</option>
@@ -91,7 +91,7 @@
 						<option value="1005">노트북</option>
 				        <option value="1006">청소기</option>
 				    </select>
-
+					</div>
                
                   <div class="mb-3">
                     <label for="proStatus" class="form-label">상태</label>
@@ -113,7 +113,7 @@
 					<div class="mb-3">
 						<label for="proPrice" class="form-label">가격 (필수)</label>
 						<input type="text" name="proPrice" class="form-control" id="proPrice" placeholder="가격 입력">
-						원
+						
 					</div>
 
 					<!-- 내용 필수 조건 -->
@@ -126,7 +126,7 @@
 					<div class="mb-3">
 						<label for="proAmount" class="form-label">수량 (필수)</label>
 						<input type="text" name="proAmount" class="form-control" id="proAmount" placeholder="수량 입력">
-						개
+						
 					</div>
                   <!-- <div class="mb-3">
                     <label for="proPrice" class="form-label">가격</label>
