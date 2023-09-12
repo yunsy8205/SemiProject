@@ -113,7 +113,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="/" class="logo">
-                            <img src="/resources/img/logo.png" alt="">
+                            <img src="/resources/img/구디장터로고.jpg" alt="">
                         </a>
                     </div>
                 </div>
