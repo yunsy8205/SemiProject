@@ -1,5 +1,6 @@
 package com.semi.main.product;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.util.FileManager;
@@ -68,6 +70,10 @@ public class ProductService {
 		
 		return result;
 	}
+	public int setFileAdd(ProductFileDTO productFileDTO) throws Exception {
+        // DAO의 setFileAdd 메서드 호출
+        return productDAO.setFileAdd(productFileDTO);
+    }
 	//상품 조건별 리스
 	public List<ProductDTO> getConditionList(Pager pager) throws Exception{
 		pager.makeRowNum();
@@ -108,27 +114,47 @@ public class ProductService {
 		return productDAO.memberReviewList(productDTO);
 	}
 	
-	public int setUpdate(ProductDTO productDTO,MultipartFile[] files, HttpSession session) throws Exception{
-		
-		int result = productDAO.setUpdate(productDTO);
-		String path="/resources/upload/product/";
-		
-		 for (MultipartFile file : files) {
-		        if (file != null && !file.isEmpty()) { // 수정된 부분: 파일이 비어있지 않으면 실행
-		            String fileName = fileManager.fileSave(path, session, file);
+	
 
-		            ProductFileDTO productFileDTO = new ProductFileDTO();
-		            productFileDTO.setFileNo(productDTO.getProNo());
-		            productFileDTO.setFileName(fileName);
-		            productFileDTO.setOriginalName(file.getOriginalFilename());
-		            productFileDTO.setProNo(productDTO.getProNo());
-		            System.out.println("ProductFileDTO proNo: " + productFileDTO.getProNo());
-		            result = productDAO.setFileAdd(productFileDTO);
-		        }
-		    }
+	
+	public int setUpdate(ProductDTO productDTO, MultipartFile[] files, HttpSession session) throws Exception {
+	    int result = productDAO.setUpdate(productDTO);
+	    String path = "/resources/upload/product/";
 
-		    return result;
-		}
+	    for (MultipartFile file : files) {
+	        if (file != null && !file.isEmpty()) {
+	            String fileName = fileManager.fileSave(path, session, file);
+
+	            ProductFileDTO productFileDTO = new ProductFileDTO();
+	            productFileDTO.setFileNo(productDTO.getProNo());
+	            productFileDTO.setFileName(fileName);
+	            productFileDTO.setOriginalName(file.getOriginalFilename());
+	            productFileDTO.setProNo(productDTO.getProNo());
+	            System.out.println("ProductFileDTO proNo: " + productFileDTO.getProNo());
+	            result = productDAO.setFileAdd(productFileDTO);
+	        }
+	    }
+
+	    return result;
+	}
+
+	
+
+	public int setFileDelete(ProductFileDTO productFileDTO, HttpSession session) throws Exception {
+		System.out.println("service ="+productFileDTO.getFileNo());
+		System.out.println("service ="+productFileDTO.getFileName());
+		System.out.println("service ="+productFileDTO.getOriginalName());
+				//폴더 파일 삭제
+				
+				boolean flag=fileManager.fileDelete(productFileDTO, "/resources/upload/product/", session);
+				
+				if(flag) {
+					//DB에서 삭제
+					return productDAO.setFileDelete(productFileDTO);
+				}
+				return 0;	
+			}
+
 	
 	public int dibsAdd(ProductDTO productDTO) throws Exception{
 		return productDAO.dibsAdd(productDTO);
