@@ -26,8 +26,8 @@
 			<tbody>
 				<c:forEach items="${list}" var="m">
 					<tr>
-						<td>${m.proNo}</td><tds>${m.category.catName}</td>
-						<td>이미지
+						<td>${m.proNo}</td><td>${m.category.catName}</td>
+						<td>
 						<c:set var="flag" value="true"/>
 							<div>
 								<figure>
@@ -52,7 +52,7 @@
 						</td>
 						<td>${m.hit}</td>
 						<td>
-							<select class="form-select" data-no="${m.proNo}" name="proSale">
+							<select class="form-select sale" data-no="${m.proNo}" name="proSale">
 								<c:choose>
 									<c:when test="${m.proSale eq '0'}"><option class="option" value="0" selected>판매중</option></c:when>
 									<c:otherwise><option class="option" value="0">판매중</option></c:otherwise>
@@ -75,31 +75,30 @@
 				</c:forEach>
 			</tbody> 
 		</table>
-	<!-- <nav aria-label="Page navigation example">
+	<nav aria-label="Page navigation example">
 	  <ul class="pagination">
 	    <li class="page-item ${pager.pre?'':'disabled'}">
-	      <a class="page-link" href="./member?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
+	      <a class="page-link" href="./product?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
 	        <span aria-hidden="true">&laquo;</span>
 	      </a>
 	    </li>
 	    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-		    <li class="page-item"><a class="page-link" href="./member?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}<a></a></li>
+		    <li class="page-item"><a class="page-link" href="./product?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}<a></a></li>
 	    </c:forEach>
 	    <li class="page-item ${pager.next?'':'disabled'}">
-	      <a class="page-link" href="./member?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
+	      <a class="page-link" href="./product?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
 	      </a>
 	    </li>
 	  </ul>
 	</nav>
 		<div class="search">
-			<form method="get" name="search" action="./member">
+			<form method="get" name="search" action="./product">
 				<table class="pull-right">
 					<tr>
 						<td><select class="form-select" name="kind">
 								<option value="userId">아이디</option>
-								<option value="email">이메일</option>
-								<option value="phone">전화번호</option>
+								<option value="proName">상품명</option>
 						</select></td>
 						<td><input type="text" class="form-control"
 							name="search" maxlength="100"></td>
@@ -107,10 +106,10 @@
 					</tr>
 				</table>
 			</form>
-		</div> -->
+		</div>
 	</section>
 <script>
-	$('.form-select').change(function(){
+	$('.sale').change(function(){
 		alert("판매상태변경");
 		let proSale = $(this).val();
 		console.log(proSale);

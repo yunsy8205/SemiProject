@@ -41,13 +41,14 @@ let proName=$('#order').attr("data-name");
 					data:JSON.stringify(payData),
 					success:function(result){
 						console.log(result);
+			      		window.location.href = "../";
+						
 					},
 					error:function(error){
 						alert("관리자에게 문의하세요.");
 					}
 				});
 	      		
-	      		//window.location.href = '../';
    	    	}else{
    	    		alert("결제 실패");
    	    	}

@@ -7,9 +7,9 @@
     <meta charset="UTF-8" />
     <title>Sample Payment</title>
 <!-- jQuery -->
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <c:import url="../temp/header1.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>

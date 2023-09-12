@@ -126,7 +126,7 @@
 							<div class="div9">
 								<div class="div10">
 									<div class="div11">
-										<img class="memberImage" src="../resources/upload/member/${member.memberFileDTO.fileName}"alt="...">
+										<img class="memberImage" src="../resources/upload/member/${member.memberFileDTO.fileName}" alt="...">
 									</div>
 									<div class="div12">
 										<div class="t2"><a>${dto.userId}</a></div>

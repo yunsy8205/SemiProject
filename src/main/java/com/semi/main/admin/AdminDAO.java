@@ -82,8 +82,12 @@ public class AdminDAO {
 		return sqlSession.update(NAMESPACE+"passwordReset", memberDTO);
 	}
 	
-	public List<ProductDTO> productList(ProductDTO productDTO)throws Exception{
-		return sqlSession.selectList(NAMESPACE+"productList", productDTO);
+	public List<ProductDTO> productList(Pager pager)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"productList", pager);
+	}
+	
+	public Long productTotal(Pager pager)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"productTotal", pager);
 	}
 	
 	public int productSale(ProductDTO productDTO) throws Exception{

@@ -28,6 +28,15 @@
   		AND A.TITLE LIKE '%'||#{search}||'%'
   		</if>	
   </sql>
+  <sql id="searchSql3">
+  	WHERE A.PRONO>0
+  		<if test="kind == 'userId'">
+  		AND A.USERID LIKE '%'||#{search}||'%'
+  		</if>
+  		<if test="kind == 'proName'">
+  		AND A.PRONAME LIKE '%'||#{search}||'%'
+  		</if>
+  </sql>
   	
   	<delete id="c"></delete>
   	
@@ -177,12 +186,21 @@
   		UPDATE MEMBER SET USERPW=#{userPw} WHERE USERNO=#{userNo}
   	</update>
   	
-  	<select id="productList" parameterType="ProductDTO" resultMap="getSelectResult">
-  		SELECT P.*, C.*, M.USERID, PI.* FROM PRODUCT P
-  		JOIN CATEGORY C ON (P.CATNO  = C.CATNO)
-  		JOIN MEMBER M ON (P.USERNO = M.USERNO)
-  		LEFT JOIN PRODUCTIMAGE PI ON(P.PRONO = PI.PRONO)
-  		ORDER BY P.PRONO
+  	<select id="productList" resultMap="getSelectResult" parameterType="Pager">
+  		SELECT A.* FROM
+		(SELECT P.*, C.CATNAME, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM PRODUCT P
+		JOIN CATEGORY C ON (P.CATNO  = C.CATNO)
+		JOIN MEMBER M ON (P.USERNO = M.USERNO)
+		LEFT JOIN PRODUCTIMAGE PI ON(P.PRONO = PI.PRONO))A
+		<include refid="searchSql3"></include>
+		ORDER BY A.PRONO
+  	</select>
+  	
+  	<select id="productTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(A.PRONO) FROM
+  		(SELECT P.*, M.USERID FROM PRODUCT P
+  		JOIN MEMBER M ON (P.USERNO=M.USERNO))A
+  		<include refid="searchSql3"></include>
   	</select>
   	
   	<resultMap type="ProductDTO" id="getSelectResult">

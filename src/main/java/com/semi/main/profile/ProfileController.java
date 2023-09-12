@@ -29,6 +29,10 @@ public class ProfileController {
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
+		if(score==null) {
+			score=0.0;
+		}
+		System.out.println(score);
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "products");
 		
@@ -42,6 +46,9 @@ public class ProfileController {
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
+		if(score==null) {
+			score=0.0;
+		}
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "reviews");
 		return "profile/profile";

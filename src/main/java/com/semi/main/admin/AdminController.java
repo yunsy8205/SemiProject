@@ -117,9 +117,9 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "product", method = RequestMethod.GET)
-	public String productList(ProductDTO productDTO, Model model)throws Exception{
-		List<ProductDTO> ar = adminService.productList(productDTO);
-
+	public String productList(Pager pager, Model model)throws Exception{
+		List<ProductDTO> ar = adminService.productList(pager);
+		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
 		return "admin/product";
 	}

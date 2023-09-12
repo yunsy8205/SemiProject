@@ -115,15 +115,12 @@ public class AdminService {
 		return result;
 	}
 	
-	public List<ProductDTO> productList(ProductDTO productDTO)throws Exception{
-//		pager.setPerPage(20L);
-//		pager.makeRowNum();
-//		Map<String , Object> map = new HashMap<String, Object>();
-//		map.put("profileDTO", profileDTO);
-//		map.put("pager", pager);
-//		Long total = profileDAO.getTotal(map);
-//		pager.makePageNum(total);
-		return adminDAO.productList(productDTO);
+	public List<ProductDTO> productList(Pager pager)throws Exception{
+		pager.setPerPage(20L);
+		pager.makeRowNum();
+		Long total = adminDAO.productTotal(pager);
+		pager.makePageNum(total);
+		return adminDAO.productList(pager);
 	}
 	
 	public int productSale(ProductDTO productDTO) throws Exception{
