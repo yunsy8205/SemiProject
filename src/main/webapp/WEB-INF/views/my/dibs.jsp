@@ -257,6 +257,7 @@
 								<!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
+                    <h3 class="title">내가 찜한 목록</h3>
                         <div class="section-nav">
                         </div>
                     </div>
@@ -267,37 +268,36 @@
             <div class="container">
                 
                 <div class="row">
+                <c:choose>
+                <c:when test="${not empty dibs}">
                     <c:forEach items="${dibs}" var="product" varStatus="status">
                         <div class="col-md-2">
                             <div class="product-card">
-                                <c:choose>
-                                    <c:when test="${not empty product.fileDTOs}">
-                                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image" width="200" height="200">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="/resources/images/이미지없음.jpg" alt="" class="product-image">
-                                    </c:otherwise>
-                                </c:choose>
-                                <h4>${product.proName}</h4>
-                                <p>상품가격: ${product.proPrice}</p>
-                                <p class="product-content">${product.proContents}</p>
-                                <p>작성자: ${product.userId}</p>
-                                <p>작성일: ${product.createDate}</p>
-                                <p>조회수: ${product.proHit}</p>
+                                
+                               <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image" width="250" height="250"></a>
+                                    
+                                <div class="product-body">
+                                <br>
+                                <h3 class="product-contents"><a href="../product/detail?proNo=${product.proNo}">${product.proName}</a></h3>
+                                <h4 class="product-price" style="color:red">상품가격 : ${product.proPrice}원</h4>
+                                <p class="product-content">상품내용 : ${product.proContents}</p>
+                                <p>작성일 : ${product.createDate}</p>
+                                <p>조회수 : ${product.proHit}</p>
+                                <h3 class="product-contents"></h3>
+								</div>		
                             </div>
                         </div>
-                        <c:if test="${status.index % 6 == 5 || status.last}">
-                        </div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
-
-                        </c:if>
                     </c:forEach>
-                   
+                   </c:when>
+                <c:otherwise>
+                    <div class="col-md-12">
+                        <h3>찜목록이 없습니다. 찜목록을 추가해주세요.</h3>
+                    </div>
+                </c:otherwise>
+            </c:choose>
                 </div>
             </div>
-          
-            
-            
-          
+
         </section>
     	</div>
 				<!-- /row -->
@@ -308,7 +308,7 @@
 	
 	
 	
-	
+	<%-- 
 	<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -337,9 +337,9 @@
 										<c:forEach var="product" items="${dibs}">
 											<div class="product">
 												<div class="product-img">	
-												<%-- <c:forEach var="file" items="${product.fileDTOs}">
+												<c:forEach var="file" items="${product.fileDTOs}">
 											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
-											      </c:forEach> --%>
+											      </c:forEach>
 												
 													<img src="../resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
 													
@@ -377,7 +377,7 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-	
+	 --%>
 	 
 <%-- 	
 	<!-- SECTION -->
