@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.semi.main.file.FileDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
+import com.semi.main.product.ProductFileDTO;
 import com.semi.main.util.FileManager;
 
 @Service
@@ -71,5 +72,7 @@ public class MyPageService {
     public List<DibsDTO> getDibs(Long userNo) throws Exception{
         return myPageDAO.getDibs(userNo);
      }
+    
+
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
+import com.semi.main.product.ProductFileDTO;
 
 @Repository
 public class MyPageDAO {
@@ -50,7 +51,10 @@ public class MyPageDAO {
     
     // 찜 목록
     public List<DibsDTO> getDibs(Long userNo) throws Exception{
-        return sqlSession.selectList(NAMESPACE+"getDibs", userNo);
-     }
+    	List<DibsDTO> dibs =  sqlSession.selectList(NAMESPACE+"getDibs", userNo);
+    	System.out.println("사이즈 : " + dibs.size());
 
+    	return dibs;
+    }
+    
 }
