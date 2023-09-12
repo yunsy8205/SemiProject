@@ -37,7 +37,7 @@ public class MyPageController {
 	public void myPage(HttpSession session) throws Exception{
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO=(MemberDTO)session.getAttribute("member");
-		System.out.println(memberDTO.getUserId()+"?zzz");
+		System.out.println(memberDTO.getUserId()+"myPage 메서드");
 		System.out.println(memberDTO.getAccountDate());
 	}
 	
@@ -189,9 +189,14 @@ public class MyPageController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 	    long userNo = memberDTO.getUserNo();
 
+	    
 	    List<DibsDTO> dibs = myPageService.getDibs(userNo);
 	    model.addAttribute("dibs", dibs);
 	    
+//	    for(int i=0; i<dibs.size(); i++) {
+//	    	System.out.println(dibs.get(i).getUserId());
+//	    	System.out.println(dibs.get(i).getProNo());
+//	    }
 	    return "./my/dibs";
 	}
 	

@@ -15,6 +15,7 @@ import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
 import com.semi.main.product.ProductDTO;
 import com.semi.main.profile.ProfileDTO;
+import com.semi.main.product.ProductFileDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -77,6 +78,8 @@ public class MyPageService {
     public List<DibsDTO> getDibs(Long userNo) throws Exception{
         return myPageDAO.getDibs(userNo);
      }
+    
+
 
     
     public List<ProductDTO> memberProList(ProfileDTO profileDTO, Pager pager)throws Exception {

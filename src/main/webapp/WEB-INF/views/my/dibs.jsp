@@ -247,9 +247,139 @@
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 	
+	<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+								<!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <div class="section-nav">
+                        </div>
+                    </div>
+                </div>
+					<!-- /section title -->
+        <!-- 상품리스트 부분-->
+        <section class="container mt-5">
+            <div class="container">
+                
+                <div class="row">
+                    <c:forEach items="${dibs}" var="product" varStatus="status">
+                        <div class="col-md-2">
+                            <div class="product-card">
+                                <c:choose>
+                                    <c:when test="${not empty product.fileDTOs}">
+                                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image" width="200" height="200">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="/resources/images/이미지없음.jpg" alt="" class="product-image">
+                                    </c:otherwise>
+                                </c:choose>
+                                <h4>${product.proName}</h4>
+                                <p>상품가격: ${product.proPrice}</p>
+                                <p class="product-content">${product.proContents}</p>
+                                <p>작성자: ${product.userId}</p>
+                                <p>작성일: ${product.createDate}</p>
+                                <p>조회수: ${product.proHit}</p>
+                            </div>
+                        </div>
+                        <c:if test="${status.index % 6 == 5 || status.last}">
+                        </div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
+
+                        </c:if>
+                    </c:forEach>
+                   
+                </div>
+            </div>
+          
+            
+            
+          
+        </section>
+    	</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
 	
 	
-    
+	
+	
+	
+	<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">내가 찜한 목록</h3>
+							
+						</div>
+					</div>
+					<!-- /section title -->
+
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										<!-- product -->
+										<c:forEach var="product" items="${dibs}">
+											<div class="product">
+												<div class="product-img">	
+												<%-- <c:forEach var="file" items="${product.fileDTOs}">
+											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
+											      </c:forEach> --%>
+												
+													<img src="../resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+													
+													<div class="product-label">
+														<span class="new">NEW</span>
+													</div>
+												</div>
+												<div class="product-body">
+													<p class="product-name">${product.proName}</p>
+													<h3 class="product-contents"><a href="../product/detail?proNo=${product.proNo}">${product.proContents}</a></h3>
+													<h4 class="product-price">${product.proPrice} </h4>
+													<p class="product-createDate">작성일: ${product.createDate}</p>
+													<p class="product-hit">조회수: ${product.proHit}</p>
+													<div class="product-btns">
+														<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
+													</div>
+												</div>
+												<!-- <div class="add-to-cart">
+													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+												</div> -->
+											</div>
+										</c:forEach>
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	
+	 
+<%-- 	
 	<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -264,14 +394,19 @@
 								<h3 class="title">내가 찜한 목록</h3>
 							</div>
 							<div class="form-group">
+								
 								<c:forEach var="dibs" items="${dibs}">
-							        <p>유저 번호: ${dibs.userNo}</p>
-							        <p>상품 번호: ${dibs.proNo}</p>
+							        <c:forEach var="fileDTO" items="${dibs.fileDTOs}" begin="0" end="0" step="1">
+							                <img src="../resources/upload/product/${fileDTO.originalName}">
+							        </c:forEach>
 							        <p>상품 제목: ${dibs.proName}</p>
-							    <c:forEach var="fileDTO" items="${dibs.fileDTOs}">
-							        <img src="../resources/upload/product/${fileDTO.originalName}">
-							    </c:forEach>    
-						    	</c:forEach>
+								    <p>상품 내용 : ${dibs.proContents}</p>
+								    <p>가격 : ${dibs.proPrice}원</p>
+								    <p>작성일 : ${dibs.createDate}</p>
+								    <p>조회수 : ${dibs.proHit}</p>
+        
+    							</c:forEach>
+     
 							</div>
 							<div class="form-group">
 					
@@ -291,7 +426,7 @@
 		</div>
 		</div>
 		<!-- /SECTION -->
-	
+	 --%>
 	
 	
 	<!-- ------------------------------------------------------------------------------------------- -->
