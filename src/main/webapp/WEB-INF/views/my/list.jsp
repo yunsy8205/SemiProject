@@ -47,7 +47,43 @@
             max-height: 200px; /* Set the maximum height of the image */
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
-	</style>
+	 /* 테이블 스타일 */
+    table {
+        text-align: center;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* 테이블 헤더 셀 스타일 */
+    
+    th {
+        text-align: center;
+    }
+
+    /* 상품명 폰트 크기 */
+    td:nth-child(2) {
+        font-size: 16px; /* 원하는 폰트 크기로 조정하세요 */
+        padding-top: 10px; /* 위에 공간을 줄 크기로 조정하세요 */
+    }
+
+    /* 가격 폰트 크기 */
+    td:nth-child(3) {
+        font-size: 16px; /* 원하는 폰트 크기로 조정하세요 */
+        padding-top: 10px; /* 위에 공간을 줄 크기로 조정하세요 */
+    }
+
+    /* 수정 버튼 스타일 */
+    .btn-primary {
+        font-size: 16px; /* 원하는 폰트 크기로 조정하세요 */
+        padding: 10px 20px; /* 원하는 버튼 크기로 조정하세요 */
+    }
+
+    /* 삭제 버튼 스타일 */
+    .btn-danger {
+        font-size: 16px; /* 원하는 폰트 크기로 조정하세요 */
+        padding: 10px 20px; /* 원하는 버튼 크기로 조정하세요 */
+    }
+</style>
     </head>
 	<body>
 <!-- HEADER -->
@@ -212,9 +248,9 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li class="active"><a href="./list">내 판매글/구매내역/후기</a></li>
-						<li><a href="./dibs">내 찜 목록</a></li>
-						<li><a href="#">상품관리</a></li>
+						<li ><a href="">내 판매글/구매내역/후기</a></li>
+						<li ><a href="./dibs">내 찜 목록</a></li>
+						<li class="active"><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -235,7 +271,7 @@
         <!-- row -->
         <div class="row">
             <div class="col-md-12">
-                <h3 class="breadcrumb-header">내 판매글/구매내역/후기</h3>
+                <h3 class="breadcrumb-header">상품관리</h3>
             </div>
         </div>
         <!-- /row -->
@@ -254,7 +290,9 @@
                     <th>사진</th>
                         <th>상품명</th>
                         <th>가격</th>
-                        <th>상태</th>
+                        <!-- <th>상태</th> -->
+                        <th>수정</th>
+                        <th>삭제</th>
                         
                     </tr>
                 </thead>
@@ -266,9 +304,23 @@
                                 <!-- 상품 사진을 표시 -->
                                 <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
                             </td>
-                            <td>${product.proName}</td>
+                            <td><a href="/product/detail?proNo=${product.proNo}">${product.proName}</a></td>
                             <td>${product.proPrice}</td>
-                            <td>${product.proStatus}</td>
+                            <%--  <!-- 상태에 따라 텍스트 출력 (예: "판매 중", "판매 완료") -->
+                                <c:choose>
+                                    <c:when test="${product.proStatus eq '판매 중'}">판매 중</c:when>
+                                    <c:when test="${product.proStatus eq '판매 완료'}">판매 완료</c:when>
+                                    <!-- 필요한 상태에 따라 추가로 설정 -->
+                                </c:choose> --%>
+                            </td>
+                            <td>
+                                <!-- 수정 버튼 -->
+                                <a href="/product/update?proNo=${product.proNo}" class="btn btn-primary">수정</a>
+                            </td>
+                            <td>
+                                <!-- 삭제 버튼 -->
+                                <a href="/product/delete?proNo=${product.proNo}" class="btn btn-danger">삭제</a>
+                            </td>
                            
                         </tr>
                     </c:forEach>
@@ -276,8 +328,33 @@
             </table>
         </div>
     </div>
+    
 </div>
+  <!-- ... (페이징 및 검색 부분) ... -->
+						  
+				 <nav aria-label="Page navigation example">
+			  		 <ul class="pagination">
+					    <c:if test="${pager.pre}">
+					        <li class="page-item">
+					            <a class="page-link" href="/my/list?page=${pager.startNum - 1}" aria-label="Previous">
+					                <span aria-hidden="true">&laquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					        <li class="page-item"><a class="page-link" href="/my/list?page=${i}">${i}</a></li>
+					    </c:forEach>
+					    <c:if test="${pager.next}">
+					        <li class="page-item">
+					            <a class="page-link" href="/my/list?page=${pager.lastNum + 1}" aria-label="Next">
+					                <span aria-hidden="true">&raquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					</ul>
 
+				</nav>
+ 
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 

@@ -18,7 +18,7 @@
 		<hr>
 
 <!-- 회원가입 폼 -->		
-		<form class="align-center" action="./signUp" method="post" enctype="multipart/form-data" id="frm">
+		<form class="align-center" action="/member/signUp" method="post" enctype="multipart/form-data" id="frm">
 			<div class="form-group">
 				<label for="userId">아이디</label>		
 				<input type="text" class="form-control" id="id" name="userId" maxlength="20" placeholder="영문 대소문자와 숫자 4~8자리으로 id를 입력하세요" required>	
