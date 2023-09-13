@@ -238,13 +238,14 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="/">Home</a></li>
-						<li><a href="/product/categoryList?catNo=1001">에어컨</a></li>
-						<li><a href="/product/categoryList?catNo=1002">냉장고</a></li>
-						<li><a href="/product/categoryList?catNo=1003">세탁기</a></li>
-						<li><a href="/product/categoryList?catNo=1004">TV</a></li>
-						<li><a href="/product/categoryList?catNo=1005">노트북</a></li>
-						<li><a href="/product/categoryList?catNo=1006">청소기</a></li>
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="./categoryList?catNo=1001">핸드폰</a></li>
+						<li><a href="./categoryList?catNo=1002">전자기기</a></li>
+						<li><a href="./categoryList?catNo=1003">미용가전</a></li>
+						<li><a href="./categoryList?catNo=1004">주방가전</a></li>
+						<li><a href="./categoryList?catNo=1005">생활가전</a></li>
+						<li><a href="./categoryList?catNo=1006">사무기기</a></li>
+						<li><a href="./categoryList?catNo=1006">기타</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -282,7 +283,7 @@
 			            <div class="col-md-3">
 			                <div class="product">
 			                    <div class="product-img">
-			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
 			                    </div>
 			                    <div class="product-body">
 			                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>

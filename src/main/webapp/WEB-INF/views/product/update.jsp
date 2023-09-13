@@ -33,9 +33,9 @@
 				<div>
 					<c:forEach items="${product.fileDTOs}" var="f">
 						<div class="alert alert-danger" role="alert" >
-							${f.originalName}
+							${f.fileName}
 						</div>
-						<span class="delets" data-delete-num="${f.fileNo}" data-original-name="${f.originalName}">X</span>
+						<span class="delets" data-delete-num="${f.fileNo}" data-file-name="${f.fileName}">X</span>
 					</c:forEach>	
 
 				</div>
