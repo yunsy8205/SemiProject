@@ -433,7 +433,6 @@
 		$('button').click(function(){
 
 			sock.send($('#message').val());
-			
 			$('#message').val('')
 		});
 	});

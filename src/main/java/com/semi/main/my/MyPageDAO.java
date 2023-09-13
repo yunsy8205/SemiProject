@@ -73,7 +73,11 @@ public class MyPageDAO {
   		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
   	}
 
-
+  	public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
+  		List<BuyerDTO> ar = sqlSession.selectList(NAMESPACE + "getBuyer", userNo);
+  		System.out.println("사이즈1 : " + ar.size());
+  		return ar;
+  	}
     	
     
 

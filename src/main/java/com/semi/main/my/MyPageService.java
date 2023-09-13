@@ -94,5 +94,8 @@ public class MyPageService {
 	}
     
 
+    public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
+    	return myPageDAO.getBuyer(userNo);
+    }
 
 }
