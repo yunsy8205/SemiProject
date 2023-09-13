@@ -106,12 +106,12 @@ public class AdminController {
 		return "commons/ajaxResult";
 	}
 	
-// 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
-// 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
-// 		memberDTO = adminService.memberDetail(memberDTO);
-// 		model.addAttribute("dto", memberDTO);
-// 		return "admin/memberdetail";
-// 	}
+ 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
+ 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
+ 		memberDTO = adminService.memberDetail(memberDTO);
+ 		model.addAttribute("dto", memberDTO);
+ 		return "admin/memberdetail";
+ 	}
 	
 	@RequestMapping(value = "memberupdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberDTO memberDTO, Model model) throws Exception{

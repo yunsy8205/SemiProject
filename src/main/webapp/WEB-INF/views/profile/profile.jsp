@@ -5,80 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 profile</title>
-<style>
-	.contain{
-		width: 1000px;
-		height: 1200px;
-		margin: auto;
-	}
-	
-	.userImage{
-				
-				width: 100%;
-	            height: 100%;
-	            object-fit: cover;
-	     
-			}
-	.wrap{
-	            width: 100%;
-	            height: 25%;
-
-	        }
-	#test2{ 
-	           
-	            height: 100%;
-	            box-sizing: border-box;
-	            float: left;
-	        }
-			
-	#box1{
-		width: 30%;
-	    height: 100%;
-	    float: left;
-
-	}
-	
-	#box2{
-		width: 50%;
-		height: 50%;
-		border-radius: 70%;
-	    overflow: hidden;
-	    margin: auto;
-	    margin-top: 40px;
-	}
-	
-	#test2{ width: 67%;}
-	
-	#div1{
-		padding: 20px;
-	}
-	.bi{
-		color: rgb(252, 219, 3);
-	}
-	
-	.btn1{
-		    padding: 15px 100px 15px 100px;
-		    background: white;
-		    border: 1px solid black;
-	}
-	
-	.btn2{
-		    padding: 15px 85px 15px 85px;
-		    background: white;
-		    border: 1px solid black;
-	}
-	
-	.wrap2{
-		width: 100%;
-	    height: 70%;
-	    padding-top: 4%;
-	}
-	
-	#more{
-		margin: auto;
-	}
-	
-</style>
+<link rel="stylesheet" href="../resources/css/profile.css">
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <c:import url="../temp/header1.jsp"></c:import>
@@ -107,7 +34,7 @@
 		</div>
 
 </div>
-<div class="wrap2 border">
+<div class="wrap2">
 	<c:if test="${flag eq 'products'}"></c:if>
 	<c:if test="${flag eq 'reviews'}"></c:if>	
 		<a class="btn1" href="./products?userNo=${dto.userNo}">상품</a>	

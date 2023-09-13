@@ -246,4 +246,22 @@ public class ProductController {
 		}
 		return "commons/ajaxResult";
 	}
+	
+	@GetMapping("reviewadd")
+	public String reviewAdd(ProductDTO productDTO, Model model)throws Exception{
+		productDTO=productService.getDetail(productDTO);
+		System.out.println(productDTO.getProName());
+		model.addAttribute("dto", productDTO);
+		return "product/reviewadd";
+	}
+	
+	@PostMapping("reviewadd")
+	public String reviewAdd(ProductReviewDTO productReviewDTO, Model model)throws Exception{
+		System.out.println(productReviewDTO.getProNo());
+		System.out.println(productReviewDTO.getUserNo());
+
+		int result =productService.reviewAdd(productReviewDTO);
+		System.out.println(result);
+		return "redirect:../";
+	}
 }

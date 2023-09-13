@@ -16,7 +16,7 @@
 		success:function(result){
 			$('#add').append(result);
 			tp = $('#totalpage').attr('data-totalPage');
-			let button='<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>';
+			let button='<button id="moreButton" class="border">더보기('+pageNum+'/'+tp+')</button>';
 			
 			$('#more').html(button);
 		},error:function(){
