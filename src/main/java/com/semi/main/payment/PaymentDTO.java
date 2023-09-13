@@ -103,5 +103,5 @@ public void setUidNo(String uidNo) {
 	this.uidNo = uidNo;
 }
  
->>>>>>> request
+
 }
