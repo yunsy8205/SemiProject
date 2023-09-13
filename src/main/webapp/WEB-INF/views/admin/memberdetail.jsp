@@ -27,7 +27,8 @@
 	<section class="container mt-5">
 		<h1 class="text-center mb-5">회원정보관리</h1>
 			<div id="image">
-				<img class="memberImage" src="../resources/upload/member/${dto.fileName}" class="d-block w-100" alt="...">
+				${dto.originalName}
+				<img class="memberImage" src="../resources/upload/member/${dto.originalName}" class="d-block w-100" alt="...">
 			</div>
 			<table class="table table-bordered border-secondary">
 				<tr>
@@ -41,13 +42,13 @@
 					</td><th>가입일</th><td>${dto.accountDate}</td>
 				</tr>
 				<tr>
-					<th>ID</th><td>${dto.userId}</td><th>PW</th><td>${dto.userPw}</td>
+					<th>ID</th><td>${dto.userId}</td><th>PW</th><td><button type="button" id="pw">비밀번호 초기화</button></td>
 				</tr>
 				<tr>
 					<th>이름</th><td>${dto.name}</td><th>생년월일</th><td>${dto.birth}</td>
 				</tr>
 				<tr>
-					<th>이메일</th><td>${dto.email}</td><th>전화번호</th><td>${dto.phone}</td>
+					<th id="email" data-email="${dto.email}">이메일</th><td>${dto.email}</td><th>전화번호</th><td>${dto.phone}</td>
 				</tr>
 				<tr>
 					<th>소개글</th><td colspan="3">${dto.intro}</td>
@@ -57,6 +58,7 @@
 			<c:if test="${dto.statusNo eq '0'}"><button data-num="${dto.userNo}" type="button" class="ms-2 btn btn-secondary b" data-status="${dto.statusNo}">정지해제</button></c:if>
 			<c:if test="${dto.statusNo eq '1'}"><button data-num="${dto.userNo}" type="button" class="ms-2 btn btn-danger b" data-status="${dto.statusNo}">회원정지</button></c:if>
 			<a href="./memberupdate?userNo=${dto.userNo}" class="ms-2 btn btn-danger">수정</a>
+			<a href="./checkAccount" class="ms-2 btn btn-danger">계좌추가</a>
 	</section>
 	
 	<!-- 주소 정보 추가 -->
@@ -95,6 +97,27 @@ $('.b').click(function(){
 	}
 	
 	})
+	
+$('#pw').click(function(){
+		let userNo=$('.b').attr("data-num");
+		let email=$('#email').attr("data-email")
+	$.ajax({
+		type:"post",
+		url:"./passwordreset",
+		data:{
+			userNo:userNo,
+			email:email
+		},
+		success:function(response){
+			r=response.trim();
+			if(r>0){
+				alert("비밀번호 초기화 되었습니다.");
+			}else{
+				alert("초기화 실패");
+			}
+		}
+	})
+})
 </script>
 </body>
 </html>

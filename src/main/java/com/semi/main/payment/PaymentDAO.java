@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PaymentDAO {
+
    @Autowired
    private SqlSession sqlSession;
    
@@ -15,3 +16,5 @@ public class PaymentDAO {
       return sqlSession.insert(NAMESPACE+"paymentAdd", paymentDTO);
    }
 }
+
+

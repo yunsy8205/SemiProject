@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
+<<<<<<< HEAD
 import com.semi.main.qna.QnaService;
+=======
+import com.semi.main.util.MailService;
+>>>>>>> 52313e43583d1c1e9640aa5bfc7401c02b37c3aa
 import com.semi.main.util.Pager;
+import com.semi.main.util.PayService;
 
 
 @Controller
@@ -24,6 +30,10 @@ import com.semi.main.util.Pager;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private PayService payService;
+	@Autowired
+	private MailService mailService;
 	
 	@Autowired
 	private QnaService qnaService;
@@ -57,6 +67,7 @@ public class AdminController {
 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
 		memberDTO = adminService.memberDetail(memberDTO);
 		model.addAttribute("dto", memberDTO);
+		System.out.println(memberDTO.getOriginalName());
 		return "admin/memberdetail";
 	}
 	
@@ -72,19 +83,7 @@ public class AdminController {
 		int result = adminService.memberUpdate(memberDTO);
 		return "redirect:./memberdetail?userNo="+memberDTO.getUserNo(); 
 	}
-	
-	@RequestMapping(value = "reportadd", method = RequestMethod.GET)
-	public String reportAdd(MemberDTO memberDTO, Model model)throws Exception{
-		memberDTO=adminService.memberDetail(memberDTO);
-		model.addAttribute("dto", memberDTO);
-		return "admin/reportadd";
-	}
-	
-	@RequestMapping(value = "reportadd", method = RequestMethod.POST)
-	public String reportAdd(MultipartFile [] photos, ReportDTO reportDTO, Model model, HttpSession session)throws Exception{
-		int result=adminService.reportAdd(photos, reportDTO, session);
-		return "redirect:../profile/products?userNo="+reportDTO.getUserNo();
-	}
+
 	
 	@RequestMapping(value = "report", method = RequestMethod.GET)
 	public String reportList(Model model, Pager pager) throws Exception{
@@ -97,6 +96,45 @@ public class AdminController {
 	@RequestMapping(value = "reportstatus", method = RequestMethod.POST)
 	public String reportStatus(ReportDTO reportDTO, Model model)throws Exception {
 		int result = adminService.reportStatus(reportDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
+	}
+	
+	@RequestMapping(value = "reportdetail", method = RequestMethod.GET)
+	public String reportDetail(ReportDTO reportDTO, Model model)throws Exception{
+		reportDTO = adminService.reportDetail(reportDTO);
+		model.addAttribute("dto", reportDTO);
+		MemberDTO memberDTO = adminService.reportId(reportDTO);
+		model.addAttribute("id", memberDTO);
+		
+		return "admin/reportdetail";
+	}
+	
+	@RequestMapping(value = "checkAccount", method = RequestMethod.GET)
+	public String checkAccount()throws Exception{
+		String token = payService.getToken("3857776236202128", "qt5gBM0lhOUyMjNsP0SCyU89K16kK326nk369CwdKlRavvMtHIp14JJZLHocGlzAz5WPLENXIux6DcwK");
+		String name =payService.checkAccount(token, "011", "3520512490733");
+		System.out.println(name);
+		return "redirect:/";
+	}
+	//비번초기화
+	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
+	public String passwordReset(MemberDTO memberDTO, Model model)throws Exception{
+		String pw = RandomStringUtils.randomAlphanumeric(10);
+		System.out.println(pw);
+		memberDTO.setUserPw(pw);
+		int result = adminService.passwordReset(memberDTO);
+		if(result==1) {
+			String toEmail = memberDTO.getEmail();
+			String frEmail = "yunsy8205@naver.com";
+			String subject = "구디장터 비밀번호 변경 안내";
+			String body = "비밀번호가 ["+memberDTO.getUserPw()+"]로 변경되었습니다.";
+
+			mailService.sendEmail(toEmail, frEmail, subject, body);
+		}else {
+			System.out.println("비번 초기화 실패");
+		}
+		
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	}

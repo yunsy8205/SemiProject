@@ -57,7 +57,7 @@
 			<result column="zipcode" property="zipCode" />
 			<result column="refaddress" property="refAddress" />
 			<result column="detailaddress" property="detailAddress" />
-			<result column="FILENAME" property="fileName" />
+			<result column="ORIGINALNAME" property="originalName" />
 	
 			<collection property="roles" javaType="List" ofType="RoleDTO">
 				<id column="GRANTNO" property="grantNo" />
@@ -76,7 +76,7 @@
   	</update>
   	
   	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
-		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.ORIGINALNAME
 		FROM MEMBER M LEFT JOIN MEMBERROLE MR
 		ON(M.USERNO=MR.USERNO)
 		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
@@ -98,7 +98,7 @@
  			SELECT REPORT_SEQ.NEXTVAL FROM DUAL 
  		</selectKey>
   		INSERT INTO REPORT
-  		VALUES (#{report.reportNo}, #{report.userNo}, #{report.catNo}, 0, #{report.title}, #{report.rContents}, #{member.userId}, SYSDATE)
+  		VALUES (#{report.reportNo}, #{report.userNo}, #{report.catNo}, 0, #{report.rContents}, #{member.userId}, #{report.title}, SYSDATE)
   	</insert>
   	
   	 <insert id="setFileAdd" parameterType="ReportFileDTO">
@@ -124,5 +124,39 @@
   	
   	<update id="reportStatus" parameterType="ReportDTO">
   		UPDATE REPORT SET STATUSNO=1 WHERE REPORTNO=#{reportNo}
+  	</update>
+  	
+  	<select id="reportDetail" parameterType="ReportDTO" resultMap="resultReport">
+  		SELECT R.*, RC.*, RI.* FROM REPORT R
+		JOIN REPORTCATEGORY RC ON (R.CATNO=RC.CATNO)
+		LEFT JOIN REPORTIMAGE RI ON (R.REPORTNO=RI.REPORTNO)
+		WHERE R.REPORTNO=#{reportNo}
+  	</select>
+  	
+  	<select id="reportId" parameterType="ReportDTO" resultType="MemberDTO">
+  		SELECT USERID, USERNO FROM MEMBER WHERE USERNO=#{userNo}
+  	</select>
+  	
+  	<resultMap type="ReportDTO" id="resultReport">
+  		<id column="REPORTNO" property="reportNo" />
+		<result column="USERNO" property="userNo" />
+		<result column="CATNO" property="catNo" />
+		<result column="STATUSNO" property="statusNo" />
+		<result column="RCONTENTS" property="rContents" />
+		<result column="USERID" property="userId" />
+		<result column="TITLE" property="title" />
+		<result column="REPORTDATE" property="reportDate" />
+		<result column="CATNAME" property="catName" />
+  		
+  		<collection property="fileDTOs" javaType="List" ofType="reportFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="REPORTNO" property="reportNo" />
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+  	</resultMap>
+  	
+  	<update id="passwordReset" parameterType="MemberDTO">
+  		UPDATE MEMBER SET USERPW=#{userPw} WHERE USERNO=#{userNo}
   	</update>
   </mapper>

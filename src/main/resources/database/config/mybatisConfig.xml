@@ -21,6 +21,7 @@
 
 
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
+
   		
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
@@ -30,13 +31,10 @@
 		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"/>
 		<typeAlias type="com.semi.main.qnaComment.QnaCommentDTO" alias="QnaCommentDTO"/>
 		<typeAlias type="com.semi.main.my.ChatMessageDTO" alias="ChatMessageDTO"></typeAlias>
-  		
+  			<typeAlias type="com.semi.main.my.DibsDTO" alias="DibsDTO"></typeAlias>
 
 	</typeAliases>
 
   
-  		
-
-
-
+  
   </configuration>

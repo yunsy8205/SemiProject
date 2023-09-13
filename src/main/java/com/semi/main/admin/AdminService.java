@@ -6,8 +6,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.dsl.KotlinFilterEndpointSpec;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,5 +84,18 @@ public class AdminService {
 	
 	public int reportStatus(ReportDTO reportDTO)throws Exception{
 		return adminDAO.reportStatus(reportDTO);
+	}
+	
+	public ReportDTO reportDetail(ReportDTO reportDTO)throws Exception{
+		return adminDAO.reportDetail(reportDTO);
+	}
+	
+	public MemberDTO reportId(ReportDTO reportDTO)throws Exception{
+		return adminDAO.reportId(reportDTO);
+	}
+	
+	public int passwordReset(MemberDTO memberDTO)throws Exception{
+		int result = adminDAO.passwordReset(memberDTO);
+		return result;
 	}
 }

@@ -32,15 +32,89 @@
 		WHERE USERID=#{userId} AND USERPW=#{userPw}
 	</delete>
 
-	
+	<!-- 채팅내용저장 -->	
     <insert id="saveChatMessage" parameterType="java.util.Map">
         INSERT INTO CHAT (CHATNO, USERID, MESSAGE, CHATDATE)
         VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message}, sysdate)
     </insert>
 
-    
+    <!-- 채팅목록 -->
     <select id="getChatMessages" parameterType="String" resultType="ChatMessageDTO">
         SELECT * FROM CHAT
     </select>
+    
+    <select id="memberProList" parameterType="Map" resultMap="getResult">
+		SELECT C.*, PI.* FROM
+		(SELECT B.* FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT * FROM PRODUCT WHERE USERNO=#{profileDTO.userNo} ORDER BY CREATEDATE DESC)A)B)C
+		LEFT JOIN PRODUCTIMAGE PI
+		ON(C.PRONO=PI.PRONO)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+  	      <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="hit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	  	<select id="getTotal" resultType="Long" parameterType="Map">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{profileDTO.userNo}
+  		</select>
      
+     <!-- 찜목록 -->
+     <select id="getDibs" parameterType="Long" resultMap="dibsResultMap">
+      SELECT p.*, pr.* 
+      FROM MEMBER m 
+      			INNER JOIN 
+      		DIBS d
+      		ON m.USERNO = d.USERNO 
+      		
+      		INNER 
+      		JOIN PRODUCT p
+      		ON d.PRONO = p.PRONO 
+      		
+      		INNER JOIN 
+      		PRODUCTIMAGE pr
+      		ON p.PRONO = pr.PRONO
+      		
+      WHERE m.USERNO = #{userNo}
+     </select>
+     
+     <resultMap id="dibsResultMap"   type="DibsDTO">
+    	<result property="userNo" column="USERNO"/>
+    	<result property="proNo" column="PRONO"/>
+    	<result property="proName" column="PRONAME"/>
+    	<result property="userId" column="USERID"/>
+    	<result property="proContents" column="PROCONTENTS"/>
+    	<result property="proPrice" column="PROPRICE"/>
+    	<result property="createDate" column="CREATEDATE"/>
+    	<result property="proHit" column="PROHIT"/>
+    	
+    	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+        	<id column="FILENO" property="fileNo"/>
+        	<result column="ORIGINALNAME" property="originalName"/>
+        	<result column="FILENAME" property="fileName"/>
+    	</collection>
+	</resultMap>
+
+
   </mapper>

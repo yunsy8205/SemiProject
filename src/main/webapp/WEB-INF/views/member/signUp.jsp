@@ -1,8 +1,4 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 
 <html>
@@ -22,53 +18,47 @@
 		<hr>
 
 <!-- 회원가입 폼 -->		
-		<form action="./signUp" method="post" enctype="multipart/form-data" id="frm">
+		<form class="align-center" action="./signUp" method="post" enctype="multipart/form-data" id="frm">
 			<div class="form-group">
 				<label for="userId">아이디</label>		
-				<input type="text" class="form-control" id="userId" name="userId" placeholder="id를 입력하세요">
-				<div class="checkResult" id="idCheck"></div>
+				<input type="text" class="form-control" id="id" name="userId" maxlength="20" placeholder="영문 대소문자와 숫자 4~8자리으로 id를 입력하세요" required>	
+				<div class="checkResult" id="idResult"  style="display:none;"></div>
+				<button type="button" id="sameId" value="N">ID확인</button>
 			</div>	
-			
 			<div class="form-group">
 				<label for="userPw">비밀번호</label>		
-				<input type="password" class="form-control" id="userPw" name="userPw" placeholder="패스워드를 입력하세요">
-				<div class="checkResult" id="pwCheck"></div>
+				<input type="password" class="form-control" id="pw" name="userPw" maxlength="20" placeholder="패스워드를 입력하세요" required>
+				<div class="checkResult" id="pwResult"></div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="userPw2">비밀번호 확인</label>		
-				<input type="password" class="form-control" id="userPw2" name="userPw2" placeholder="패스워드를 한번 더 입력하세요">
-				<div class="checkResult" id="pwCheck2"></div>
+				<input type="password" class="form-control" id="pw2" maxlength="20" placeholder="패스워드를 한번 더 입력하세요" required>
+				<div class="checkResult" id="pw2Result"></div>
 			</div>	
 			
 			<div class="form-group">
 				<label for="name">이름</label>		
-				<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력하세요">
-				<div class="checkResult" id="nameCheck"></div>
+				<input type="text" class="form-control" id="name" name="name" maxlength="20" placeholder="이름을 입력하세요" required>
+				<div class="checkResult" id="nameResult"></div>
 			</div>	
-			
-			<div class="form-group">
-				<label for="phone">핸드폰번호</label>		
-				<input type="text" class="form-control" id="phone" name="phone" placeholder="번호를 입력하세요">
-				<div class="checkResult" id="phoneCheck"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="phone">핸드폰번호</label>		
-				<input type="text" class="form-control" id="phone" name="phone" placeholder="번호를 입력하세요">
-				<div class="checkResult" id="phoneCheck"></div>
-			</div>
-			
+							
 			<div class="form-group">
 				<label for="email">이메일 주소</label>		
-				<input type="email" class="form-control" id="email" name="email" placeholder="E-mail (Ex.GUDI@naver.com)">
-				<div class="checkResult" id="emailCheck"></div>
+				<input type="email" class="form-control" id="email" name="email" placeholder="E-mail (Ex.GUDI@naver.com)" required>
+				<div class="checkResult" id="emailResult"></div>
 			</div>
 			
+			<div class="form-group">
+				<label for="phone">핸드폰번호</label>		
+				<input type="text" class="form-control" id="phone" name="phone" oninput="autoHyphen2(this)" maxlength="13" placeholder="번호를 입력하세요">
+				<div class="checkResult" id="phoneResult"></div>
+			</div>	
+						
 			<div class="form-group">
 				<label for="zipCode">우편번호</label>		
 				<input type="text" class="form-control" id="postcode" name="zipCode" placeholder="우편번호">
-				<input type="button" onclick="openDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="button" onclick="openDaumPostcode()"id="postcodebtn"  value="우편번호 찾기"><br>
 			</div>
 			<div class="form-group">
 				<label for="address">주소</label>		
@@ -76,8 +66,8 @@
 				<div class="checkResult" id="addrCheck"></div>
 			</div>
 			<div class="form-group">
-				<label for="refAddress">참고항목</label>		
-				<input type="text" class="form-control" id="extraAddress" name="refAddress" placeholder="참고항목">
+				<label for="refAddress">참고주소</label>		
+				<input type="text" class="form-control" id="extraAddress" name="refAddress" placeholder="예:(금천구)">
 				<div class="checkResult" id="addr2Check"></div>
 			</div>
 			<div class="form-group">
@@ -89,7 +79,7 @@
 			<div class="form-group">
 				<label for="birth">생년월일</label>		
 				<input type="date" class="form-control" id="birth" name="birth">
-				<div class="checkResult" id="birthCheck"></div>
+				<div class="birthResult" id="birthCheck"></div>
 			</div>
 			
 			<!-- 회원 프로필사진 첨부 -->
@@ -98,14 +88,23 @@
 		  		<input type="file" name="file" class="form-control" id="file">
 			</div>
 			
+			<p>자기소개</p>
+		    <textarea name="intro" id="intro" placeholder="자기소개를 입력해주세요" cols="30" rows="4"></textarea>
+		    <br/>
+			
+			<button type="button" class="btn btn-primary" id="signUp">회원가입</button>
+			<input type="reset" value="다시쓰기">
+			<p>
+				"이미 계정이 있나요?"
+				<a href="/member/login">로그인</a>
+			</p>
+			
 		</form>
 	</section>
 <!-- 다음 우편주소api -->
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/adress.js"></script>
-
-<body>
-
+<script src="/resources/js/signUp.js"></script>
 	
 </body>
 </html>

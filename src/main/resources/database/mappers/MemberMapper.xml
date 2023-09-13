@@ -8,8 +8,6 @@
 
 <!-- login -->
 	<select id="getLogin" resultMap="getLoginResult" parameterType="MemberDTO">
-
-
 	SELECT M.*, R.*, P.*
 	FROM MEMBER M 
 	LEFT OUTER JOIN PROFILE P
@@ -51,10 +49,27 @@
 		</collection>
 
 	</resultMap>
+
+	<!-- 회원가입 -->
+ 	<insert id="setJoin"  parameterType="MemberDTO">
+ 		INSERT INTO MEMBER VALUES(USERNO_SEQ.NEXTVAL,#{userId},#{userPw},#{name},#{email}
+ 		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress})
+ 	</insert>
+ 	
+ 	<!-- ID 중복체크 -->
+ 	<select id="getUserIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT USERID FROM MEMBER WHERE USERID = #{userId}
+ 	</select>	
 	
-	
-	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
-  		SELECT * FROM MEMBER WHERE EMAIL=#{email}
-  	</select>
+	 <!-- Email 중복체크 -->
+ 	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+ 	 <!-- Email 중복체크 -->
+ 	<select id="getMailCheck" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+ 	
+ 	
 	
 </mapper>

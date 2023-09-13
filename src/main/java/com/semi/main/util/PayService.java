@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 
 @Component
 public class PayService {
+
    public String getToken(String imp_key, String imp_secret) throws Exception {
       HttpURLConnection conn = null;
       URL url = new URL("https://api.iamport.kr/users/getToken");
@@ -143,4 +144,33 @@ public class PayService {
          return 1;
       }
    }
+
+	
+	
+	public String checkAccount(String access_token, String code, String num) throws Exception {
+		HttpsURLConnection conn = null;
+		URL url = new URL("https://api.iamport.kr/vbanks/holder?bank_code="+code+"&bank_num="+num);
+		
+		conn = (HttpsURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Authorization", access_token);
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setDoOutput(true);
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		
+		// 응답 결과인 JSON의 Key 또는 Value 값에 공백, 유니코드, 특수문자가 포함되어 있는 경우에는 아래의 방법으로 JSON을 조작해야 하는 것 같다.
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject)parser.parse(br.readLine());
+		
+		String response = json.get("response").toString();
+		json = (JSONObject)parser.parse(response);
+		
+		String name = json.get("bank_holder").toString();
+		System.out.println(name);
+
+		
+		return name;
+	}
+
 }
