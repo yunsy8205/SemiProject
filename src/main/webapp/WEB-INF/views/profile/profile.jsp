@@ -70,7 +70,7 @@
 	
 	.wrap2{
 		width: 100%;
-	    height: 30%;
+	    height: 70%;
 	    padding-top: 4%;
 	}
 	

@@ -314,7 +314,7 @@
 			                        </div>
 			                    </div>
 			                    <div class="add-to-cart">
-			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+			                        <button class="add-to-cart-btn">구매하기</button>
 			                    </div>
 			                </div>
 			            </div>
