@@ -213,6 +213,12 @@ public class ProductController {
 		return "commons/ajaxResult";
 		
 	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setDelete(@RequestParam Long proNo)throws Exception{
+		int result =productService.setDelete(proNo);
+		return "redirect:/my/list";
+	}	
 
 	
 	

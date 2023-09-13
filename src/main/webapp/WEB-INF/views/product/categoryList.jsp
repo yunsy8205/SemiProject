@@ -30,6 +30,8 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
 
@@ -236,8 +238,8 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li ><a href="/product/categoryList?catNo=1001">에어컨</a></li>
+						<li><a href="/">Home</a></li>
+						<li><a href="/product/categoryList?catNo=1001">에어컨</a></li>
 						<li><a href="/product/categoryList?catNo=1002">냉장고</a></li>
 						<li><a href="/product/categoryList?catNo=1003">세탁기</a></li>
 						<li><a href="/product/categoryList?catNo=1004">TV</a></li>
@@ -292,7 +294,7 @@
 			                        </div>
 			                    </div>
 			                    <div class="add-to-cart">
-			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+			                        <button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
 			                    </div>
 			                </div>
 			            </div>
