@@ -1,6 +1,9 @@
 package com.semi.main.my;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.semi.main.product.ProductFileDTO;
 
 public class BuyerDTO {
 	private Long userNo;
@@ -8,8 +11,16 @@ public class BuyerDTO {
 	private String proName;
 	private Long totalPrice;
 	private Date paymentDate;
+	private List<ProductFileDTO> fileDTOs;
 	
 	
+	
+	public List<ProductFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<ProductFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
 	public Date getPaymentDate() {
 		return paymentDate;
 	}
