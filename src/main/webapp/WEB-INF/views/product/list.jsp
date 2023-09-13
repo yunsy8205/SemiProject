@@ -304,7 +304,7 @@
 			            <div class="col-md-3">
 			                <div class="product">
 			                    <div class="product-img">
-			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
 			                    </div>
 			                    <div class="product-body">
 			                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>

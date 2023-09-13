@@ -19,7 +19,7 @@ public class FileManager {
 	    // 1. 삭제할 폴더의 실제 경로
 	    path = session.getServletContext().getRealPath(path);
 
-	    File file = new File(path, fileDTO.getOriginalName());
+	    File file = new File(path, fileDTO.getFileName());
 
 	    // 로그 추가
 	    System.out.println("Deleting file: " + file.getAbsolutePath());

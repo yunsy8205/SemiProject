@@ -51,7 +51,7 @@
 			
 			<div class="form-group">
 				<label for="phone">핸드폰번호</label>		
-				<input type="text" class="form-control" id="phone" name="phone" oninput="autoHyphen2(this)" maxlength="13" placeholder="번호를 입력하세요">
+				<input type="tel" class="form-control" id="phone" name="phone" oninput="autoHyphen2(this)" maxlength="13" placeholder="번호를 입력하세요">
 				<div class="checkResult" id="phoneResult"></div>
 			</div>	
 						
