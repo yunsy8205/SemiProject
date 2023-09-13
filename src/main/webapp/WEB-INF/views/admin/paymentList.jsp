@@ -14,7 +14,7 @@
 	<section class="container mt-5">
 	
 	
-	
+	<h1 class="text-center mb-5">결제 관리</h1>
 		<table class="table mt-5">
 		
 		<thead class="table">
