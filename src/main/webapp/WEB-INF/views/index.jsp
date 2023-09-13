@@ -31,6 +31,8 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -142,7 +144,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
 												</div>
 											</div>
 										</c:forEach>
@@ -170,7 +172,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="hot-deal">
-							<ul class="hot-deal-countdown">
+							<!-- <ul class="hot-deal-countdown">
 								<li>
 									<div>
 										<h3>02</h3>
@@ -195,10 +197,10 @@
 										<span>Secs</span>
 									</div>
 								</li>
-							</ul>
-							<h2 class="text-uppercase">hot deal this week</h2>
-							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="./product/list">Shop now</a>
+							</ul> -->
+							<h2 class="text-uppercase">소가전 직거래 플랫폼</h2>
+							<p>구디장터</p>
+							<a class="primary-btn cta-btn" href="./product/list">GO SHOP</a>
 						</div>
 					</div>
 				</div>

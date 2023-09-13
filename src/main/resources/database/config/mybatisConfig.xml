@@ -8,6 +8,9 @@
 
   <configuration>
   	<typeAliases>
+      <typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="com.semi.main.product.ProductDTO" alias="ProductDTO"></typeAlias>
   		<typeAlias type="com.semi.main.product.ProductFileDTO" alias="ProductFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.member.MemberDTO" alias="MemberDTO"></typeAlias>
@@ -23,10 +26,14 @@
   		<typeAlias type="com.semi.main.profile.ProfileDTO" alias="ProfileDTO"></typeAlias>
 
   		
+
   		<typeAlias type="java.util.Map" alias="Map"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportDTO" alias="ReportDTO"></typeAlias>
   		<typeAlias type="com.semi.main.admin.ReportFileDTO" alias="ReportFileDTO"></typeAlias>
   		<typeAlias type="com.semi.main.util.Pager" alias="Pager"></typeAlias>
+
+  		
+  		
 
 		<typeAlias type="com.semi.main.payment.PaymentDTO" alias="PaymentDTO"/>
 		<typeAlias type="com.semi.main.qnaComment.QnaCommentDTO" alias="QnaCommentDTO"/>
