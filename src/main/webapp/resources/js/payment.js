@@ -33,24 +33,25 @@ let proName=$('#order').attr("data-name");
                payData.proNo = proNo;
                payData.userNo = userNo;
                payData.paymentNo = rsp.merchant_uid;
-               
-               $.ajax({
-               url:"/payment/paymentadd",
-               method:"POST",
-               headers:{ "Content-Type":"application/json" },
-               data:JSON.stringify(payData),
-               success:function(result){
-                  console.log(result);
-                     window.location.href = "../";
-                  
-               },
-               error:function(error){
-                  alert("관리자에게 문의하세요.");
-               }
-            });
-               
-             }else{
-                alert("결제 실패");
-             }
-          });
-      }
+
+	      		
+	      		$.ajax({
+					url:"/payment/paymentadd",
+					method:"POST",
+					headers:{ "Content-Type":"application/json" },
+					data:JSON.stringify(payData),
+					success:function(result){
+						console.log(result);
+			      		window.location.href = "../";
+						
+					},
+					error:function(error){
+						alert("관리자에게 문의하세요.");
+					}
+				});
+	      		
+   	    	}else{
+   	    		alert("결제 실패");
+   	    	}
+   	    });
+   	}

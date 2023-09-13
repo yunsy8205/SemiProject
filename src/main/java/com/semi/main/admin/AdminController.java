@@ -17,6 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
 
+import com.semi.main.member.MemberFileDTO;
+import com.semi.main.member.RoleDTO;
+import com.semi.main.product.ProductDTO;
+
+
 import com.semi.main.payment.PaymentDTO;
 import com.semi.main.payment.PaymentService;
 
@@ -37,12 +42,34 @@ public class AdminController {
 	private PayService payService;
 	@Autowired
 	private MailService mailService;
-	
 	@Autowired
 	private QnaService qnaService;
-	
 	@Autowired
 	private PaymentService paymentService;
+
+	//비번초기화
+	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
+	public String passwordReset(MemberDTO memberDTO, Model model)throws Exception{
+		String pw = RandomStringUtils.randomAlphanumeric(10);//비번생성 10자리
+		System.out.println("비번:"+pw);
+		memberDTO.setUserPw(pw);
+		int result = adminService.passwordReset(memberDTO);//비번 db에 저장
+		if(result==1) {//저장 성공시 메일
+			String toEmail = memberDTO.getEmail();
+			String frEmail = "yunsy8205@naver.com";
+			String subject = "구디장터 비밀번호 변경 안내";
+			String body = "비밀번호가 ["+memberDTO.getUserPw()+"]로 변경되었습니다.";
+			
+			mailService.sendEmail(toEmail, frEmail, subject, body);
+		}else {
+			System.out.println("비번 초기화 실패");
+		}
+		
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
+	}
+	
+
 	
 	//qnalist
 	@GetMapping("qna")
@@ -62,8 +89,8 @@ public class AdminController {
 		model.addAttribute("pager",pager);
 		return "admin/paymentList";
 	}
-	
-	
+
+
 	@RequestMapping(value = "member", method = RequestMethod.GET)
 	public String memberList(Pager pager, Model model) throws Exception{
 		List<MemberDTO> ar = adminService.memberList(pager);
@@ -79,13 +106,12 @@ public class AdminController {
 		return "commons/ajaxResult";
 	}
 	
-	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
-	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
-		memberDTO = adminService.memberDetail(memberDTO);
-		model.addAttribute("dto", memberDTO);
-		System.out.println(memberDTO.getOriginalName());
-		return "admin/memberdetail";
-	}
+// 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
+// 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
+// 		memberDTO = adminService.memberDetail(memberDTO);
+// 		model.addAttribute("dto", memberDTO);
+// 		return "admin/memberdetail";
+// 	}
 	
 	@RequestMapping(value = "memberupdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberDTO memberDTO, Model model) throws Exception{
@@ -95,8 +121,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "memberupdate", method = RequestMethod.POST)
-	public String memberUpdate(MemberDTO memberDTO) throws Exception{
-		int result = adminService.memberUpdate(memberDTO);
+	public String memberUpdate(MemberDTO memberDTO, RoleDTO roleDTO) throws Exception{
+		int result = adminService.memberUpdate(memberDTO, roleDTO);
 		return "redirect:./memberdetail?userNo="+memberDTO.getUserNo(); 
 	}
 
@@ -125,33 +151,30 @@ public class AdminController {
 		
 		return "admin/reportdetail";
 	}
-	
-	@RequestMapping(value = "checkAccount", method = RequestMethod.GET)
-	public String checkAccount()throws Exception{
-		String token = payService.getToken("3857776236202128", "qt5gBM0lhOUyMjNsP0SCyU89K16kK326nk369CwdKlRavvMtHIp14JJZLHocGlzAz5WPLENXIux6DcwK");
-		String name =payService.checkAccount(token, "011", "3520512490733");
-		System.out.println(name);
-		return "redirect:/";
-	}
-	//비번초기화
-	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
-	public String passwordReset(MemberDTO memberDTO, Model model)throws Exception{
-		String pw = RandomStringUtils.randomAlphanumeric(10);
-		System.out.println(pw);
-		memberDTO.setUserPw(pw);
-		int result = adminService.passwordReset(memberDTO);
-		if(result==1) {
-			String toEmail = memberDTO.getEmail();
-			String frEmail = "yunsy8205@naver.com";
-			String subject = "구디장터 비밀번호 변경 안내";
-			String body = "비밀번호가 ["+memberDTO.getUserPw()+"]로 변경되었습니다.";
 
-			mailService.sendEmail(toEmail, frEmail, subject, body);
-		}else {
-			System.out.println("비번 초기화 실패");
-		}
-		
+	
+	@RequestMapping(value = "product", method = RequestMethod.GET)
+	public String productList(Pager pager, Model model)throws Exception{
+		List<ProductDTO> ar = adminService.productList(pager);
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", ar);
+		return "admin/product";
+	}
+	
+	@RequestMapping(value = "productsale", method = RequestMethod.POST)
+	public String productSale(ProductDTO productDTO, Model model) throws Exception{
+
+		int result = adminService.productSale(productDTO);
+		System.out.println(result);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 	}
+	
+	@RequestMapping(value = "memberFileDel", method = RequestMethod.POST)
+	public String memberFileDel(MemberFileDTO memberFileDTO, Model model)throws Exception {
+		int result = adminService.memberFileDel(memberFileDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
+	}
+
 }	

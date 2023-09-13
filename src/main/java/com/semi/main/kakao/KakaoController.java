@@ -96,7 +96,7 @@ public class KakaoController {
          
          //HttpHeader 담기
          RestTemplate rt = new RestTemplate();
-         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity(headers);
          ResponseEntity<String> response = rt.exchange(
                  "https://kapi.kakao.com/v2/user/me",
                  HttpMethod.POST,

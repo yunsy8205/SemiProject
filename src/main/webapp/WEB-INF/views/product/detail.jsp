@@ -10,6 +10,29 @@
 <c:import url="../temp/header1.jsp"></c:import>
 </head>
 <body>
+<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
+						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
+						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
+						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
+						<li><a href="./product/categoryList?catNo=1005">노트북</a></li>
+						<li><a href="./product/categoryList?catNo=1006">청소기</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -19,11 +42,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Headphones</a></li>
-							<li class="active">Product name goes here</li>
+							<li><a href="../">Home</a></li>
+							<li><a href="#">${dto.catNo}</a></li><!--  -->
 						</ul>
 					</div>
 				</div>
@@ -68,11 +88,13 @@
 								<h2 class="product-name">${dto.proName}</h2>
 								<h1 class="product-price">${dto.proPrice}원</h1>	
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-							
-							<div class="mt-2">
-								<span><i class="fa fa-heart-o me-2"></i>상품상태</span>
-		             			<span class="span ms-3">
+							<div class="mt">
+								<span style="font-weight: bold; font-size: 17px; color: #CCCCCC;"><i class="bi bi-eye-fill"> ${dto.hit}</i></span>
+								<span id="report"><a href="../member/reportadd?userNo=${dto.userNo}" id="rt">신고하기</a></span>
+							</div>
+							<div class="mt">
+								<span style="font-weight: bold; color: #CCCCCC;"><i class="fa fa-heart-o me-2"></i>상품상태</span>
+		             			<span class="span ms-3" style="font-weight: bold;">
 			             			<c:choose>
 								 	    <c:when test="${dto.proStatus eq 0}">
 								 			중고상품
@@ -83,9 +105,9 @@
 							        </c:choose>
 		             			</span>
 							</div>
-							<div class="mt-2">
-								<span><i class="fa fa-heart-o me-2"></i>교환여부</span>
-		             			<span class="span ms-3">
+							<div class="mt">
+								<span style="font-weight: bold; color: #CCCCCC;"><i class="fa fa-heart-o me-2"></i>교환여부</span>
+		             			<span class="span ms-3" style="font-weight: bold;">
 			             			<c:choose>
 								 	    <c:when test="${dto.exchange eq 0}">
 								 			교환가능
@@ -95,16 +117,16 @@
 								 	    </c:otherwise>
 							        </c:choose>
 		             			</span>
-		             			<span id="report"><a href="../member/reportadd?userNo=${dto.userNo}" id="rt">신고하기</a></span>
+		             			
 							</div>
 							<c:choose>
 							 	<c:when test="${member.userNo eq dto.userNo}">
 							 	
 							 	</c:when>
 							 	<c:otherwise>
-									<div style="padding-top: 30px">
+									<div id="button1">
 				                        <button style="background-color: #15161D;" class="btn2" id="dibs" type="button"><div class="t btn1"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum" class="ms-2">${dibsNum}</span></div></button>
-				                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn1">톡</div></button>
+				                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn4">톡</div></button>
 				                        <button id="buy" style="background-color: #D10024;" class="btn2 ms-3" type="button"><div class="t btn3">바로구매</div></button>
 			                         
 			                        </div>
@@ -126,10 +148,12 @@
 							<div class="border-bottom div7"><h4>판매자정보</h4></div>
 							<div class="div9">
 								<div class="div10">
-									<div class="div11">사진</div>
+									<div class="div11">
+										<img class="memberImage" src="../resources/upload/member/${member.memberFileDTO.fileName}" alt="...">
+									</div>
 									<div class="div12">
-										<div><a>${dto.userId}</a></div>
-										<div><a>상품 ${countp}</a></div>
+										<div class="t2"><a>${dto.userId}</a></div>
+										<div class="t2" style="color: #CCCCCC;"><a>상품 ${countp}</a></div>
 									</div>
 								</div>
 								<div class="div13">

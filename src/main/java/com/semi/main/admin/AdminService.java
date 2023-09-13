@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.member.MemberDTO;
+import com.semi.main.member.MemberFileDTO;
+import com.semi.main.member.RoleDTO;
+import com.semi.main.product.ProductDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -45,8 +48,21 @@ public class AdminService {
 		return adminDAO.memberDetail(memberDTO);
 	}
 	
-	public int memberUpdate(MemberDTO memberDTO)throws Exception{
-		return adminDAO.memberUpdate(memberDTO);
+	public int memberUpdate(MemberDTO memberDTO, RoleDTO roleDTO)throws Exception{
+		int result = adminDAO.memberUpdate(memberDTO);
+		
+		if(result==1) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("member", memberDTO);
+			map.put("role", roleDTO);
+			result = adminDAO.memberRole(map);
+			System.out.println(result);
+		}else {
+			result=0;
+			System.out.println("권한업데이트 실패");
+		}
+		
+		return result;
 	}
 	
 	public int reportAdd(MultipartFile [] files, ReportDTO reportDTO, HttpSession session)throws Exception{
@@ -98,4 +114,21 @@ public class AdminService {
 		int result = adminDAO.passwordReset(memberDTO);
 		return result;
 	}
+	
+	public List<ProductDTO> productList(Pager pager)throws Exception{
+		pager.setPerPage(20L);
+		pager.makeRowNum();
+		Long total = adminDAO.productTotal(pager);
+		pager.makePageNum(total);
+		return adminDAO.productList(pager);
+	}
+	
+	public int productSale(ProductDTO productDTO) throws Exception{
+		return adminDAO.productSale(productDTO);
+	}
+	
+	public int memberFileDel(MemberFileDTO memberFileDTO) throws Exception{
+		return adminDAO.memberFileDel(memberFileDTO);
+	}
+	
 }

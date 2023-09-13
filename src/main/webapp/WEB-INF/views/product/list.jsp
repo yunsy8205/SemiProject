@@ -316,7 +316,9 @@
 			                        </div>
 			                    </div>
 			                    <div class="add-to-cart">
+
 			                        <button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
+
 			                    </div>
 			                </div>
 			            </div>
