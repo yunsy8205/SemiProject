@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -16,6 +15,7 @@
 <link rel="stylesheet" href="../resources/css/paymentadd.css">
 </head>
 <body>
+
 	<section class="contain border mt-5 mb-5">
 		<div class="billing-details">
 							<div class="section-title title2">
@@ -62,7 +62,8 @@
 						<a id="cancle" href="../product/detail?proNo=${dto.proNo}">취소</a>
 						<!-- /Billing Details -->
 
-	</section>
+
+   </section>
 
 <c:import url="../temp/footer1.jsp"></c:import>
 <script src="../resources/js/payment.js"></script>

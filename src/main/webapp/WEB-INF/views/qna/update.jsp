@@ -23,12 +23,22 @@
 			
 			<div class="mb-3">
 			<label for="userId" class="form-label">작성자</label>
-			<input type="text" class="form-control" id="userId" name="userId" value="${member.userId}">
+			<input type="text" class="form-control w-25" id="userId" name="userId" value="${member.userId}">
 			</div>
 			
 			<div class="mb-3">
+			 <label for="Default select example" class="form-label">유형</label>
+			  <select id="kind" name="kindNo" class="form-select form-control w-25" aria-label="Default select example" value="${dto.kindNo}">
+				  <option class="kind" value="1">회원/계정</option>
+				  <option class="kind" value="2">오류/신고/제안</option>
+				  <option class="kind" value="3">거래문의</option>
+				  <option class="kind" value="4">기타</option>
+			  </select>
+			  </div>
+			
+			<div class="mb-3">
 			<label for="title" class="form-label">제목</label>
-			<input type="text" class="form-control" id="title" name="title" value="${dto.title}">
+			<input type="text" class="form-control w-50" id="title" name="title" value="${dto.title}">
 			</div>
 			
 			<div class="mb-3">
@@ -54,7 +64,7 @@
 			</c:forEach>
 			</div>
 			
-			<button class="btn btn-danger mt-4" type="submit" id="btn">수정</button>
+			<button class="btn btn-dark mt-4" type="submit" style="float:right" id="btn">수정</button>
 			
 		</form>
 </section>			
@@ -63,7 +73,7 @@
 	
 
 
-<script src="../resources/js/file.js"></script>
+<script src="../resources/js/file2.js"></script>
 
 
 </body>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDAO;
 import com.semi.main.board.BoardDTO;
+import com.semi.main.qnaComment.QnaCommentDTO;
 import com.semi.main.util.Pager;
 
 @Repository 
@@ -19,9 +20,21 @@ public class QnaDAO implements BoardDAO{
 	
 	final private String NAMESPACE= "com.semi.main.qna.QnaDAO.";
 	
+	public List<QnaCommentDTO> getCommentList(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getCommentList", qnaCommentDTO);
+	}
+	//qnacommetadd
+	public int setCommentAdd(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCommentAdd", qnaCommentDTO);
+	}
+	
 	public List<BoardDTO> getMyList(QnaDTO qnaDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE+"getMyList",qnaDTO);
+	}
+	
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getList",pager);
 	}
 	
 	public int setFileAdd(QnaFileDTO qnaFileDTO) throws Exception{
@@ -53,25 +66,28 @@ public class QnaDAO implements BoardDAO{
 	}
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 	@Override
 	public Long getTotal(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getTotal",pager);
+	}
+	
+	//statusupdate
+	public int setStatusUpdate(QnaDTO qnaDTO)throws Exception{
+		
+		return sqlSession.update(NAMESPACE+"setStatusUpdate", qnaDTO);
+				
 	}
 
-	@Override
-	public List<BoardDTO> getList(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	
 

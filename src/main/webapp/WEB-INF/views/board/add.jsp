@@ -22,12 +22,12 @@
 				
 			<div class="mb-3">
 			<label for="userId" class="form-label">작성자</label>
-			<input type="text" class="form-control" id="userId" name="userId" value="${member.userId}">
+			<input type="text" class="form-control w-25" id="userId" name="userId" value="${member.userId}">
 			</div>
 			
 			<div class="mb-3">
 			<label for="title" class="form-label">제목</label>
-			<input type="text" class="form-control" id="title" name="title" >
+			<input type="text" class="form-control w-50" id="title" name="title" >
 			</div>
 			
 			<div class="mb-3">
@@ -44,7 +44,7 @@
 				<button type="button" class="btn btn-outline-primary" id="fileAdd">File추가</button>
 			</div>
 			
-			<button class="btn btn-danger" type="submit" id="btn" >등록</button>
+			<button class="btn btn-dark"  style="float:right" type="submit" id="btn" >등록</button>
 			
 			
 		</form>
@@ -55,7 +55,7 @@
 
 </script>
 
-<script src="../resources/js/file.js"></script>
+<script src="../resources/js/file2.js"></script>
 
 
 </body>

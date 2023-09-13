@@ -5,13 +5,13 @@ let proName=$('#order').attr("data-name");
       let name=$('#member').attr('data-name');
       let phone=$('#member').attr('data-phone');
 
-   	  
-   	  $('#btn').click(function(){
-		requestPay();
-   	  });
-   	  
-   	 function requestPay() {
-         IMP.init('imp50730076');
+        
+        $('#btn').click(function(){
+      requestPay();
+        });
+        
+       function requestPay() {
+         IMP.init('imp48226253');
          IMP.request_pay({
              pg: "nice.iamport00m",
              pay_method: "card",
@@ -21,7 +21,7 @@ let proName=$('#order').attr("data-name");
              buyer_name: name,//구매자
              buyer_tel: phone//구매자 번호
 
-   	    }, function(rsp){
+          }, function(rsp){
              if(rsp.success){
           
                let payData = new Object();
@@ -33,6 +33,7 @@ let proName=$('#order').attr("data-name");
                payData.proNo = proNo;
                payData.userNo = userNo;
                payData.paymentNo = rsp.merchant_uid;
+
 	      		
 	      		$.ajax({
 					url:"/payment/paymentadd",

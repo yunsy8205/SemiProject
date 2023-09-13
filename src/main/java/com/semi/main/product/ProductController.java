@@ -22,6 +22,8 @@ import com.semi.main.profile.ProfileService;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {
@@ -213,6 +215,12 @@ public class ProductController {
 		return "commons/ajaxResult";
 		
 	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setDelete(@RequestParam Long proNo)throws Exception{
+		int result =productService.setDelete(proNo);
+		return "redirect:/my/list";
+	}	
 
 	
 	

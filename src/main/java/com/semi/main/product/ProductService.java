@@ -22,7 +22,6 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
-	
 	public List<ProductFileDTO> getFileList(Long proNo) throws Exception {
 		
 		
@@ -154,6 +153,10 @@ public class ProductService {
 				}
 				return 0;	
 			}
+	
+	public int setDelete(Long proNo) throws Exception{
+		return productDAO.setDelete(proNo);
+	}
 
 	
 	public int dibsAdd(ProductDTO productDTO) throws Exception{

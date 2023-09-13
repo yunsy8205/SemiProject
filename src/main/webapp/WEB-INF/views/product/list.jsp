@@ -30,6 +30,8 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 		<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
 
@@ -314,7 +316,9 @@
 			                        </div>
 			                    </div>
 			                    <div class="add-to-cart">
-			                        <button class="add-to-cart-btn">구매하기</button>
+
+			                        <button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
+
 			                    </div>
 			                </div>
 			            </div>

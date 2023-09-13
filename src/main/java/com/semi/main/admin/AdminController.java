@@ -9,15 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
+
 import com.semi.main.member.MemberFileDTO;
 import com.semi.main.member.RoleDTO;
 import com.semi.main.product.ProductDTO;
+
+
+import com.semi.main.payment.PaymentDTO;
+import com.semi.main.payment.PaymentService;
+
+import com.semi.main.qna.QnaService;
+
 import com.semi.main.util.MailService;
+
 import com.semi.main.util.Pager;
 import com.semi.main.util.PayService;
 
@@ -31,7 +42,11 @@ public class AdminController {
 	private PayService payService;
 	@Autowired
 	private MailService mailService;
-	
+	@Autowired
+	private QnaService qnaService;
+	@Autowired
+	private PaymentService paymentService;
+
 	//비번초기화
 	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
 	public String passwordReset(MemberDTO memberDTO, Model model)throws Exception{
@@ -54,6 +69,28 @@ public class AdminController {
 		return "commons/ajaxResult";
 	}
 	
+
+	
+	//qnalist
+	@GetMapping("qna")
+	public String QnaList(Pager pager, Model model)throws Exception {
+		List<BoardDTO> ar = qnaService.getList(pager);
+		
+		model.addAttribute("list",ar);
+		model.addAttribute("pager",pager);
+		return "admin/qnaList";
+	}
+	
+	@GetMapping("payment")
+	public String getPayList(Pager pager, Model model)throws Exception {
+		List<PaymentDTO> ar = paymentService.getPayList(pager);
+		
+		model.addAttribute("list",ar);
+		model.addAttribute("pager",pager);
+		return "admin/paymentList";
+	}
+
+
 	@RequestMapping(value = "member", method = RequestMethod.GET)
 	public String memberList(Pager pager, Model model) throws Exception{
 		List<MemberDTO> ar = adminService.memberList(pager);
@@ -69,12 +106,12 @@ public class AdminController {
 		return "commons/ajaxResult";
 	}
 	
-	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
-	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
-		memberDTO = adminService.memberDetail(memberDTO);
-		model.addAttribute("dto", memberDTO);
-		return "admin/memberdetail";
-	}
+// 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
+// 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
+// 		memberDTO = adminService.memberDetail(memberDTO);
+// 		model.addAttribute("dto", memberDTO);
+// 		return "admin/memberdetail";
+// 	}
 	
 	@RequestMapping(value = "memberupdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberDTO memberDTO, Model model) throws Exception{

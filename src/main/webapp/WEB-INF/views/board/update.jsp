@@ -22,13 +22,13 @@
 			<input type="hidden" name="boardNo" readonly="readonly"  value="${dto.boardNo}">
 			
 			<div class="mb-3">
-			<label for="userId" class="form-label">작성자</label>
-			<input type="text" class="form-control" id="userId" name="userId" value="${member.userId}">
+			<label for="userId" class="form-label ">작성자</label>
+			<input type="text" class="form-control p-2 mb-3 w-25" id="userId" name="userId" value="${member.userId}">
 			</div>
 			
 			<div class="mb-3">
 			<label for="title" class="form-label">제목</label>
-			<input type="text" class="form-control" id="title" name="title" value="${dto.title}">
+			<input type="text" class="form-control p-2 mb-3 w-25" id="title" name="title" value="${dto.title}">
 			</div>
 			
 			<div class="mb-3">
@@ -39,7 +39,7 @@
 			
 			
 							<!-- file -->
-			<div id="fileList" class="my-5"></div>
+			<div id="fileList" class="my-5 col-xs-3"></div>
 			
 			<div class="mb-3">
 				<button type="button" class="btn btn-outline-primary mb-2" id="fileAdd">File추가</button>
@@ -54,7 +54,7 @@
 			</c:forEach>
 			</div>
 			
-			<button class="btn btn-danger mt-4" type="submit" id="btn">수정</button>
+			<button class="btn btn-dark mt-4" style="float:right" type="submit" id="btn">수정</button>
 			
 		</form>
 </section>			
@@ -63,7 +63,7 @@
 	
 
 
-<script src="../resources/js/file.js"></script>
+<script src="../resources/js/file2.js"></script>
 
 </body>
 </html>
