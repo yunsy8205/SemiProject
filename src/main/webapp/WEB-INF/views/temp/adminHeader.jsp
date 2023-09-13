@@ -14,13 +14,13 @@
           			<a class="nav-link active" href="/admin/member">회원관리</a>
         		</li>
         		<li class="nav-item">
-          			<a class="nav-link active" href="#">결제관리</a>
+          			<a class="nav-link active" href="/admin/payment">결제관리</a>
         		</li>
         		<li class="nav-item">
           			<a a class="nav-link active" href="/admin/report">신고관리</a>
 			     </li>
 			     <li class="nav-item">
-          			<a a class="nav-link active" href="#">1대1 문의</a>
+          			<a a class="nav-link active" href="/admin/qna">1대1 문의</a>
 			     </li>
      			 </ul>
      			

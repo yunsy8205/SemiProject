@@ -12,6 +12,7 @@ import com.semi.main.adminNotice.AdminNoticeFileDTO;
 import com.semi.main.board.BoardDTO;
 import com.semi.main.board.BoardService;
 import com.semi.main.file.FileDTO;
+import com.semi.main.qnaComment.QnaCommentDTO;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
@@ -24,6 +25,16 @@ public class QnaService implements BoardService{
 	@Autowired
 	private FileManager fileManager;
 	
+	//qnaCommentList
+	
+	public List<QnaCommentDTO> getCommentList(QnaCommentDTO qnaCommentDTO)throws Exception{
+		
+		return qnaDAO.getCommentList(qnaCommentDTO);
+	}
+	//qnaCommentADD
+	public int setCommentAdd(QnaCommentDTO qnaCommentDTO)throws Exception{
+		return qnaDAO.setCommentAdd(qnaCommentDTO);
+	}
 	//imgdelete
 	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
 		
@@ -49,7 +60,7 @@ public class QnaService implements BoardService{
 	
 	//fileDelete
 	public int setFileDelete(QnaFileDTO qnaFileDTO,HttpSession session)throws Exception{
-		String path ="/resources/upload/notice/";
+		String path ="/resources/upload/qna/";
 		
 		qnaFileDTO = qnaDAO.getFileDetail(qnaFileDTO);
 		boolean flag = fileManager.fileDelete(qnaFileDTO, path, session);
@@ -69,7 +80,12 @@ public class QnaService implements BoardService{
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		pager.setPerPage(15L);
+		pager.makeRowNum();
+		Long total = qnaDAO.getTotal(pager);
+		pager.makePageNum(total);
+		
+		return qnaDAO.getList(pager);
 	}
 
 	@Override
@@ -103,14 +119,36 @@ public class QnaService implements BoardService{
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String path = "/resources/upload/qna/";
+		int result = qnaDAO.setUpdate(boardDTO);
+		
+		for(MultipartFile multipartFile: files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(path, session, multipartFile);
+			QnaFileDTO qnaFileDTO = new QnaFileDTO();
+			qnaFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+			qnaFileDTO.setFileName(fileName);
+			qnaFileDTO.setBoardNo(boardDTO.getBoardNo());
+			result = qnaDAO.setFileAdd(qnaFileDTO);
+					
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return qnaDAO.setDelete(boardDTO);
+	}
+	
+	//setStatusUpdate
+	public int setStatusUpdate(QnaDTO qnaDTO)throws Exception{
+		return qnaDAO.setStatusUpdate(qnaDTO);
 	}
 	
 	
