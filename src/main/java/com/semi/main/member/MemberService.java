@@ -63,6 +63,10 @@ public class MemberService {
 		return memberDAO.getUserIdCheck(memberDTO);
 	}
 	
+	/**EMAIL 체크*/
+	public MemberDTO getMailCheck(MemberDTO memberDTO) throws Exception{
+		return memberDAO.getMailCheck(memberDTO);
+	}
 	
 	
 	

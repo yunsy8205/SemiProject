@@ -72,7 +72,8 @@ public class KakaoController {
          if(memberDTO2 != null) {
  			//4. 세션에 저장
  			System.out.println("기존 정보 있음");
- 			session.setAttribute("member", memberDTO2);				
+ 			session.setAttribute("member", memberDTO2);	
+ 			System.out.println(memberDTO2.getName());
  			return "redirect:/";
  		}else {
  			System.out.println("기존 정보 없음");
@@ -110,6 +111,7 @@ public class KakaoController {
          memberDTO.setEmail(email);
          
          System.out.println(memberDTO);
+         System.out.println(memberDTO.getName());
          return memberDTO;
  	}
 }

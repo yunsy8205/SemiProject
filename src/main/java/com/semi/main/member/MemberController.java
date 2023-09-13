@@ -51,81 +51,87 @@ public class MemberController {
 
 	/** 네이버 로그인 API 연동 */
 	// 인가코드 및 토큰 발급
-	// @SuppressWarnings("unchecked")
-	@GetMapping("callback")
-	public void naverCallback(@RequestParam("code") String code, @RequestParam("state") String state,
-			HttpSession session, Model model) throws Exception {
-
-		// 1. header 생성
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8");
-
-		// 2. body 생성
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.add("grant_type", "authorization_code");
-		params.add("clientId", "r6eVt2waeuOw7uHsH9OU");
-		params.add("clientSecret", "wLhCPAnFJX");
-		params.add("redirectURI", "http://localhost:82/member/callback");
-		params.add("code", code);
-		params.add("state", state);
-
-		// 3. header + body
-		HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(params,
-				httpHeaders);
-
-		// 4. http 요청하기
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.exchange("https://nid.naver.com/oauth2.0/token", HttpMethod.POST,
-				httpEntity, String.class);
-
-		System.out.println("http 요청");
-		JsonParser jsonParser = new JsonParser();
-		JsonObject jsonObj = (JsonObject) jsonParser.parse(response.getBody());
-
-//		String accessToken = (String)jsonObj.get("access_token");
-
-		// 발급받은 토큰 정보로 유저 정보를 얻어옴
-		// MemberDTO memberDTO = getUserInfoWithToken(accessToken);
-
-		// state용 난수 생성
-//		SecureRandom random = new SecureRandom();
+	//@SuppressWarnings("unchecked")
+//	@GetMapping("callback")
+//	public void naverCallback(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session, Model model) throws Exception{
 //		
-//		// 상태 토큰으로 사용할 랜덤 문자열 생성
-//		String state = new BigInteger(130, random).toString(32);
+//		//1. header 생성
+//		HttpHeaders httpHeaders = new HttpHeaders();
+//		httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8");
 //		
-//		// 세션에 상태 토큰을 저장
-//		session.setAttribute("state", state);
-//		System.out.println(state);
+//		//2. body 생성
+//		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+//		params.add("grant_type", "authorization_code");
+//		params.add("clientId", "r6eVt2waeuOw7uHsH9OU");
+//		params.add("clientSecret", "wLhCPAnFJX");
+//		params.add("redirectURI", "http://localhost:82/member/callback");
+//		params.add("code", code);
+//		params.add("state", state);
 //		
-//		// redirect
-//		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/authorize?response_type=code");
-//		url.append("/oauth2.0/authorize?");
-//		System.out.println(url);
-
-		System.out.println("Naver Call Back");
-		System.out.println(request.getParameterNames());
-
-		String clientId = "r6eVt2waeuOw7uHsH9OU";// 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "wLhCPAnFJX";// 애플리케이션 클라이언트 시크릿값";
-		code = request.getParameter("code");
-
-		String redirectURI = URLEncoder.encode("http://localhost:82/member/callback", "UTF-8");
-		String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" + "&client_id=" + clientId
-				+ "&client_secret=" + clientSecret + "&redirect_uri=" + redirectURI + "&code=" + code + "&state="
-				+ state;
-		/* 토큰 불러오기 */
-		// NaverLoginApi naverLoginApi = new NaverLoginApi();
-
-//		@SuppressWarnings("unchecked")
-//		Enumeration<String> map = request.getParameterNames();
+//		//3. header + body
+//		HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String,String>>(params, httpHeaders);
 //		
-//		while (map.hasMoreElements()) {
-//			String string = (String) map.nextElement();
-//			System.out.println(string);
-//		}
+//		//4. http 요청하기
+//		RestTemplate restTemplate = new RestTemplate();
+//		ResponseEntity<String> response = restTemplate.exchange(
+//			"https://nid.naver.com/oauth2.0/token", 
+//			HttpMethod.POST, 
+//			httpEntity, 
+//			String.class
+//		);
+//		
+//		System.out.println("http 요청");
+//		JsonParser jsonParser = new JsonParser();
+//		JsonObject jsonObj = (JsonObject)jsonParser.parse(response.getBody());
+//		
+////		String accessToken = (String)jsonObj.get("access_token");
+//		
+//		//발급받은 토큰 정보로 유저 정보를 얻어옴
+//		//MemberDTO memberDTO = getUserInfoWithToken(accessToken);
+//		
+//		
+//		//state용 난수 생성
+////		SecureRandom random = new SecureRandom();
+////		
+////		// 상태 토큰으로 사용할 랜덤 문자열 생성
+////		String state = new BigInteger(130, random).toString(32);
+////		
+////		// 세션에 상태 토큰을 저장
+////		session.setAttribute("state", state);
+////		System.out.println(state);
+////		
+////		// redirect
+////		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/authorize?response_type=code");
+////		url.append("/oauth2.0/authorize?");
+////		System.out.println(url);
+//		
+//		System.out.println("Naver Call Back");
+//		System.out.println(request.getParameterNames());
+//		
+//		String clientId="r6eVt2waeuOw7uHsH9OU";//애플리케이션 클라이언트 아이디값"; 
+//		String clientSecret="wLhCPAnFJX";//애플리케이션 클라이언트 시크릿값"; 
+//		code=request.getParameter("code"); 
+//		
+//		String redirectURI=URLEncoder.encode("http://localhost:82/member/callback", "UTF-8"); 
+//		String apiURL="https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+//		 + "&client_id=" + clientId + "&client_secret=" + clientSecret +
+//		 "&redirect_uri=" + redirectURI + "&code=" + code + "&state=" + state; 
+//		 /*토큰 불러오기*/
+//		 NaverLoginApi naverLoginApi = new NaverLoginApi();
+//		
+////		@SuppressWarnings("unchecked")
+////		Enumeration<String> map = request.getParameterNames();
+////		
+////		while (map.hasMoreElements()) {
+////			String string = (String) map.nextElement();
+////			System.out.println(string);
+////		}
+//		
+//		
+//		return;
+//	}
+	
 
-		return;
-	}
 
 	@GetMapping("naver/login")
 	public String naverConnect(HttpSession session) throws Exception {
@@ -250,18 +256,39 @@ public class MemberController {
 		return "commons/ajaxResult";
 
 	}
-
-	/** 회원가입 */
+	
+/** EMAIL 체크 */
 	@ResponseBody
-	@PostMapping("signUp")
-	public int setJoin(@RequestBody MemberDTO memberDTO, Model model) throws Exception {
-
-		System.out.println("컨트롤러 회원가입");
-		System.out.println(memberDTO.getUserId());
-
-		// result가 0이면 insert 안됨, 1이면 insert 됨.
-		int result = memberService.setJoin(memberDTO);
-		System.out.println(result);
+	@PostMapping("mailCheck")
+	public int getMailCheck(@RequestBody MemberDTO memberDTO, Model model) throws Exception{
+		System.out.println(memberDTO.getEmail());
+		memberDTO = memberService.getMailCheck(memberDTO);
+		
+		int result = 0;
+		
+		if(memberDTO == null) {
+			result=1;
+		}
+		
+		System.out.println("result: "+ result);
+		
+		return result;
+	}
+	
+	
+/** 회원가입  */
+	 @ResponseBody
+	 @PostMapping("signUp") 
+		public int setJoin(@RequestBody MemberDTO memberDTO, Model model) throws Exception{ 
+		 
+		
+		 System.out.println("컨트롤러 회원가입");
+		 System.out.println(memberDTO.getUserId());
+		 
+		 
+		 // result가 0이면 insert 안됨, 1이면 insert 됨.
+		 int result = memberService.setJoin(memberDTO); 
+		 System.out.println(result);
 //		 
 //		 if(result>0) { 
 //			  model.addAttribute("msg", "회원가입을 축하드립니다");

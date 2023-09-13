@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.member.MemberFileDTO;
 
+import com.semi.main.product.ProductDTO;
+
+import com.semi.main.product.ProductFileDTO;
+
+
 @Repository
 public class MyPageDAO {
 
@@ -19,28 +24,19 @@ public class MyPageDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.semi.main.my.MyPageDAO.";
 	
-	
-	public int setFileJoin(MemberFileDTO memberFileDTO) throws Exception{ //사진등록
+	 //사진등록
+	public int setFileJoin(MemberFileDTO memberFileDTO) throws Exception{
 	
 		return sqlSession.insert(NAMESPACE+"setFileJoin", memberFileDTO);
 	}
 	
-	
-	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception{ //로그인 테스트로 나중에 삭제
-    
-		System.out.println(memberDTO.getUserId());
-		System.out.println(memberDTO.getUserPw());
-		
-		return sqlSession.selectOne(NAMESPACE+"getLogin", memberDTO);
-	}
-	
-	
-	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ // 회원수정
+	// 회원수정
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{ 
 		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
 	}
 	
-
-	public int setDelete(MemberDTO memberDTO) throws Exception{ // 회원탈퇴
+	// 회원탈퇴
+	public int setDelete(MemberDTO memberDTO) throws Exception{ 
 		return sqlSession.delete(NAMESPACE+"setDelete", memberDTO);
 	}
 	
@@ -56,4 +52,29 @@ public class MyPageDAO {
     public List<ChatMessageDTO> getChatMessages(String userId) throws Exception {
         return sqlSession.selectList(NAMESPACE + "getChatMessages", userId);
     }
+    
+
+    // 찜 목록
+    public List<DibsDTO> getDibs(Long userNo) throws Exception{
+    	List<DibsDTO> dibs =  sqlSession.selectList(NAMESPACE+"getDibs", userNo);
+    	System.out.println("사이즈 : " + dibs.size());
+    	return dibs;
+    }
+
+
+    
+    //내판매글불러오기
+    public List<ProductDTO> memberProList(Map<String, Object> map)throws Exception {
+		return sqlSession.selectList(NAMESPACE+"memberProList", map);
+	} 
+    
+    //total
+  	public Long getTotal(Map<String, Object> map)throws Exception{
+  		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
+  	}
+
+
+    	
+    
+
 }

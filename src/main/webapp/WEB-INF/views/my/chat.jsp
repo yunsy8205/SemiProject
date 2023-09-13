@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:url var="root" value="/"></c:url>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -47,7 +47,28 @@
             max-height: 200px; /* Set the maximum height of the image */
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
+		.message {
+             margin: 10px;
+             padding: 10px;
+             border-radius: 5px;
+             max-width: 70%; /* 필요에 따라 조정 */
+             word-wrap: break-word;
+         }
+         
+         .sent {
+             background-color: #4CAF50; /* 녹색 또는 원하는 다른 색상 */
+             align-self: flex-end;
+         }
+         
+         .received {
+             background-color: #f1f1f1; /* 회색 또는 다른 색상으로 설정 */
+         }
+
+		
 	</style>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	
+	
     </head>
 	<body>
 <!-- HEADER -->
@@ -199,14 +220,14 @@
 <!-- /HEADER -->
 
 <!-- ------------------------------------------------------------------------------------------- -->
-
-		<!-- NAVIGATION -->
+<!-- 
+		NAVIGATION
 		<nav id="navigation">
-			<!-- container -->
+			container
 			<div class="container">
-				<!-- responsive-nav -->
+				responsive-nav
 				<div id="responsive-nav">
-					<!-- NAV -->
+					NAV
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
@@ -217,14 +238,14 @@
 						<li><a href="#">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
-					<!-- /NAV -->
+					/NAV
 				</div>
-				<!-- /responsive-nav -->
+				/responsive-nav
 			</div>
-			<!-- /container -->
+			/container
 		</nav>
-		<!-- /NAVIGATION -->
-
+		/NAVIGATION
+ -->
 <!-- ------------------------------------------------------------------------------------------- -->
 
 		
@@ -235,7 +256,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">내 정보 수정</h3>
+						<h3 class="breadcrumb-header">1대1 채팅</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -247,8 +268,7 @@
 <!-- ------------------------------------------------------------------------------------------- -->
 	
 	<!-- SECTION -->
-	<form action="./check" method="post" id="frm">
-		<div class="section">
+	<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -258,13 +278,15 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">비밀번호 입력</h3>
+								<h3 class="title">채팅</h3>
+							</div>
+							<div class="form-group" id="target">
 							</div>
 							<div class="form-group">
-								<input class="input" type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요">
-							</div>
-							<div class="form-group">
-								<button type="button" id="btn" class="primary-btn order-submit">확인</button>
+							
+								<input class="input" id="message"/><br>
+								<br>
+								<button class="primary-btn order-submit">전송</button>
 							</div>
 							
 							<div class="form-group">
@@ -280,8 +302,9 @@
 			<!-- /container -->
 		</div>
 		</div>
-		</form>
 		<!-- /SECTION -->
+		
+	
 	
 	
 	
@@ -393,18 +416,27 @@
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
     
-	    <script>
-	    let btn = document.getElementById("btn");
-	    let frm = document.getElementById("frm");
-	    let userPw = document.getElementById("userPw");
-	    
-	  	btn.addEventListener("click", function(){
-	  		console.log("click");
-	  		
-	  		console.log(userPw.value);
-	  		
-	  		frm.submit();
-	  	})
-	    </script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+
+	<script type="text/javascript">
+	var sock=new SockJS("${root}my/chat");
+	sock.onmessage=function(msg){
+		console.log(msg.data);
+		
+	       var message = $('<div class="message received">').text(msg.data); // 받은 메시지용 div 생성
+	       $('#target').append(message);
+
+	};
+	
+	
+	$(function(){
+		$('button').click(function(){
+
+			sock.send($('#message').val());
+			
+			$('#message').val('')
+		});
+	});
+	</script>
 </body>
 </html>
