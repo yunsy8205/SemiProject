@@ -8,12 +8,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../temp/bootstrap.jsp"></c:import>
+<style>
+  .container {
+    width: 900px;
+  }
+</style>
+
+<c:if test="${empty member }">
+	<script type="text/javascript">
+		alert("로그인하세요");
+		location.href="../member/login";
+	</script>
+</c:if>
 </head>
 <body>
 <c:import url="../temp/BoardHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
-		<table class="table">
+	<h1 align="center">1대1 문의</h1>
+		<table class="table mt-5">
 		
 		<thead class="table-dark">
 			<th>TITLE</th><th>DATE</th><th>상태</th>
@@ -33,7 +46,7 @@
 		
 	
 
-	<a class="btn btn-primary me-2" style="float:right" href="./add">문의하기</a>
+	<a class="btn btn-dark me-2" style="float:right" href="./add">문의하기</a>
 	</section>
 	
 

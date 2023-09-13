@@ -1,4 +1,4 @@
-package com.semi.main.member;
+	package com.semi.main.member;
 
 import java.sql.Date;
 import java.util.List;
@@ -48,14 +48,50 @@ public class MemberDTO {
 	
 	private MemberFileDTO memberFileDTO;
 	
-	private String originalName;
+	/* 계좌관련 추가 칼럼 */
 	
+	private String holder;
+	
+	private String bankCode;
+	
+	private String bankNum;
 
 	
 	/* getter and setter */
 	
+	
 	public Long getUserNo() {
 		return userNo;
+	}
+
+
+	public String getHolder() {
+		return holder;
+	}
+
+
+	public void setHolder(String holder) {
+		this.holder = holder;
+	}
+
+
+	public String getBankCode() {
+		return bankCode;
+	}
+
+
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+
+
+	public String getBankNum() {
+		return bankNum;
+	}
+
+
+	public void setBankNum(String bankNum) {
+		this.bankNum = bankNum;
 	}
 
 
@@ -212,17 +248,5 @@ public class MemberDTO {
 	public void setRoles(List<RoleDTO> roles) {
 		this.roles = roles;
 	}
-
-
-	public String getOriginalName() {
-		return originalName;
-	}
-
-
-	public void setOriginalName(String originalName) {
-		this.originalName = originalName;
-	}
-	
-	
 
 }

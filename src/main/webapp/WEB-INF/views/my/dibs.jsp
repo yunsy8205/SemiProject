@@ -213,9 +213,9 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li><a href="./list">내 판매글/구매내역/후기</a></li>
+						<li><a href="./management">구매내역/후기</a></li>
 						<li class="active"><a href="./dibs">내 찜 목록</a></li>
-						<li><a href="#">상품관리</a></li>
+						<li><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
 					<!-- /NAV -->
@@ -252,11 +252,116 @@
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
+				<div class="row ">
+
+				<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<div class="section-nav">
+						
+					</div>
+				</div>
+			</div>
+			<section class="container mt-5">
+				<div class="col-md-12">
+			    <div class="row ">
+			        <c:forEach var="product" items="${dibs}" >
+			            <div class="col-md-3">
+			                <div class="product">
+			                    <div class="product-img">
+			                  
+			                        <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="255" height="200"></a>
+			                   
+			                    </div>
+			                    <div class="product-body">
+			                        <p class="product-name"><a href="../product/detail?proNo=${product.proNo}">${product.proName}</a></p>
+			                        <h4 class="product-price">${product.proPrice} </h4>
+			                        <p class="product-createDate">작성일: ${product.createDate}</p>
+			                        <p class="product-hit">조회수: ${product.proHit}</p>
+			                        <div class="product-btns">
+			                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
+			                        </div>
+			                    </div>
+			                    <div class="add-to-cart">
+			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+			                    </div>
+			                </div>
+			            </div>
+			        </c:forEach>
+			    </div>
+			</div>
+
+						  <!-- ... (페이징 및 검색 부분) ... -->
+						  
+				 <nav aria-label="Page navigation example">
+			  		 <ul class="pagination">
+					    <c:if test="${pager.pre}">
+					        <li class="page-item">
+					            <a class="page-link" href="/product/list?page=${pager.startNum - 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Previous">
+					                <span aria-hidden="true">&laquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					        <li class="page-item"><a class="page-link" href="/product/list?page=${i}&kind=${param.kind}&search=${param.search}&condition=${param.condition}">${i}</a></li>
+					    </c:forEach>
+					    <c:if test="${pager.next}">
+					        <li class="page-item">
+					            <a class="page-link" href="/product/list?page=${pager.lastNum + 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Next">
+					                <span aria-hidden="true">&raquo;</span>
+					            </a>
+					        </li>
+					    </c:if>
+					</ul>
+
+				</nav>
+
+			
+				<!-- 검색 부분 -->
+				<div class="input-group mb-3 justify-content-center">
+				<form action="/product/list" method="GET">
+				    <!-- 기존 검색 폼 입력 내용 -->
+				    <select name="kind" id="k" class="input-select" aria-label="Default select example">
+				        <option class="kind" value="proName">상품명</option>
+				        <option class="kind" value="proContents">상품설명</option>
+				        <option class="kind" value="userId">이름</option>
+				    </select>
+				    <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+				    <button type="submit" class="search-btn">검색</button>
+				
+				    <!-- 선택된 condition을 hidden input으로 추가 -->
+				    <input type="hidden" name="condition" value="${param.condition}">
+				</form>
+
+
+				</div>
+			
+			</section>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	
+	
+	
+	
+	
+	
+	
+	<%-- 
+	<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
 				<div class="row">
 
 								<!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
+                    <h3 class="title">내가 찜한 목록</h3>
                         <div class="section-nav">
                         </div>
                     </div>
@@ -267,48 +372,47 @@
             <div class="container">
                 
                 <div class="row">
+                <c:choose>
+                <c:when test="${not empty dibs}">
                     <c:forEach items="${dibs}" var="product" varStatus="status">
                         <div class="col-md-2">
                             <div class="product-card">
-                                <c:choose>
-                                    <c:when test="${not empty product.fileDTOs}">
-                                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image" width="200" height="200">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img src="/resources/images/이미지없음.jpg" alt="" class="product-image">
-                                    </c:otherwise>
-                                </c:choose>
-                                <h4>${product.proName}</h4>
-                                <p>상품가격: ${product.proPrice}</p>
-                                <p class="product-content">${product.proContents}</p>
-                                <p>작성자: ${product.userId}</p>
-                                <p>작성일: ${product.createDate}</p>
-                                <p>조회수: ${product.proHit}</p>
+                                
+                               <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" class="product-image" width="250" height="250"></a>
+                                    
+                                <div class="product-body">
+                                <br>
+                                <h3 class="product-contents"><a href="../product/detail?proNo=${product.proNo}">${product.proName}</a></h3>
+                                <h4 class="product-price" style="color:red">상품가격 : ${product.proPrice}원</h4>
+                                <p class="product-content">상품내용 : ${product.proContents}</p>
+                                <p>작성일 : ${product.createDate}</p>
+                                <p>조회수 : ${product.proHit}</p>
+                                <h3 class="product-contents"></h3>
+								</div>		
                             </div>
                         </div>
-                        <c:if test="${status.index % 6 == 5 || status.last}">
-                        </div></div><div class="row"> <!-- 5개 카드마다 row 닫고 새로운 row 열기 -->
-
-                        </c:if>
                     </c:forEach>
-                   
+                   </c:when>
+                <c:otherwise>
+                    <div class="col-md-12">
+                        <h3>찜목록이 없습니다. 찜목록을 추가해주세요.</h3>
+                    </div>
+                </c:otherwise>
+            </c:choose>
                 </div>
             </div>
-          
-            
-            
-          
+
         </section>
     	</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
+	 --%>
 	
 	
 	
-	
-	
+	<%-- 
 	<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -337,9 +441,9 @@
 										<c:forEach var="product" items="${dibs}">
 											<div class="product">
 												<div class="product-img">	
-												<%-- <c:forEach var="file" items="${product.fileDTOs}">
+												<c:forEach var="file" items="${product.fileDTOs}">
 											        <img src="/resources/upload/product/${file.originalName}" width="200" height="200 alt="">
-											      </c:forEach> --%>
+											      </c:forEach>
 												
 													<img src="../resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
 													
@@ -377,7 +481,7 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-	
+	 --%>
 	 
 <%-- 	
 	<!-- SECTION -->

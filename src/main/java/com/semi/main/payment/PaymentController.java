@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.semi.main.member.MemberDTO;
 import com.semi.main.product.ProductDTO;
 import com.semi.main.product.ProductService;
 import com.semi.main.util.PayService;
@@ -26,6 +28,7 @@ import com.siot.IamportRestClient.response.Payment;
 @Controller
 @RequestMapping("/payment/*")
 public class PaymentController {
+  
 	private final String REST_API_KEY = "3857776236202128";
 	private final String REST_API_SECRET = "qt5gBM0lhOUyMjNsP0SCyU89K16kK326nk369CwdKlRavvMtHIp14JJZLHocGlzAz5WPLENXIux6DcwK";
 	
@@ -35,6 +38,10 @@ public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
 	
+	@Autowired
+	private PayService payService;
+	
+
 	@RequestMapping(value = "paymentadd", method = RequestMethod.GET)
 	public String paymentAdd(ProductDTO productDTO, Model model) throws Exception{
 		productDTO = productService.getDetail(productDTO);
@@ -88,4 +95,31 @@ public class PaymentController {
 		return "commons/ajaxResult";
 	
 	}
+
+	//계좌 확인후 db 저장
+	 @RequestMapping(value = "checkaccount", method = RequestMethod.POST)
+	   public String checkAccount(MemberDTO memberDTO, Model model)throws Exception{
+		  System.out.println(memberDTO.getHolder());
+		  System.out.println(memberDTO.getBankCode());
+		  System.out.println(memberDTO.getBankNum());
+	      String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
+	      String name = payService.checkAccount(token, memberDTO.getBankCode(), memberDTO.getBankNum());
+	      System.out.println(name);
+	      
+	      int result = 0;
+	      if(memberDTO.getHolder().equals(name)) {
+	    	  System.out.println("예금주 확인 완료");
+	    	  //db저장
+	    	  result = paymentService.checkAccount(memberDTO);
+	    	  
+	      }else {
+	    	  System.out.println("예금주가 다릅니다.");
+	    	  result = 0;
+	      }
+	      
+	      System.out.println(result);
+	      model.addAttribute("result", result);
+	      return "commons/ajaxResult";
+	   }
+
 }

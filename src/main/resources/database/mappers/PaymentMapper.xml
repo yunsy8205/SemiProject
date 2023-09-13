@@ -4,13 +4,65 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
     <mapper namespace="com.semi.main.payment.PaymentDAO">
-  	<insert id="paymentAdd" parameterType="PaymentDTO">
-  		INSERT INTO PAYMENT (PAYMENTNO, USERNO, PRONO, STATUSNO, UIDNO, PAYMENTDATE, TOTALPRICE, NAME, PRONAME)
-  		VALUES (#{paymentNo}, #{userNo}, #{proNo}, 1, #{uidNo}, SYSDATE, #{totalPrice}, #{name}, #{proName})
-  	</insert>
+
+    
+    <sql id="searchSql">
+ 			<if test="kind == 'userId'">
+		 		AND	M.USERID LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'paymentNo'">
+		 		AND	PAYMENTNO LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'proName'">
+		 		AND	PRONAME LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'statusName'">
+		 		AND	PS.STATUSNAME LIKE '%'||#{search}||'%'
+		 	</if>
+  	</sql>
   	
-  	<update id="b"></update>
+
+  	<update id="checkAccount" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		HOLDER=#{holder}, BANKCODE=#{bankCode}, BANKNUM=#{bankNum}
+  		WHERE USERNO=#{userNo}
+  	</update>
   	<delete id="c"></delete>
   	<select id="d"></select>
+
+
+     <insert id="paymentAdd" parameterType="PaymentDTO">
+        INSERT INTO PAYMENT (PAYMENTNO, USERNO, PRONO, STATUSNO, UIDNO, PAYMENTDATE, TOTALPRICE, NAME, PRONAME)
+        VALUES (#{paymentNo}, #{userNo}, #{proNo}, 1, #{uidNo}, SYSDATE, #{totalPrice}, #{name}, #{proName})
+     </insert>
+     
+
+     <select id="getPayList" resultType="PaymentDTO" parameterType="Pager">
+     
+	  SELECT PAYMENTNO,USERID,NAME,PRONAME,TOTALPRICE,PAYMENTDATE,STATUSNAME,PRONO
+	  FROM(SELECT ROWNUM R, B.*   	
+	     FROM(	
+	     	SELECT PM.*, M.USERID, PS.STATUSNAME
+	     	FROM PAYMENT PM JOIN MEMBER M
+	     	ON (PM.USERNO = M.USERNO) JOIN PAYMENTSTATUS PS
+	     	ON (PM.STATUSNO = PS.STATUSNO)
+	     	<include refid="searchSql"/>
+	     	ORDER BY PAYMENTDATE DESC
+	     	)B )
+	     WHERE R BETWEEN #{startRow} AND #{lastRow}
+ 
+     </select>
+     
+     <select id="getTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(PAYMENTNO) 
+  		FROM PAYMENT PM JOIN MEMBER M
+	     	ON (PM.USERNO = M.USERNO) JOIN PAYMENTSTATUS PS
+	     	ON (PM.STATUSNO = PS.STATUSNO)
+  		
+  		<include refid="searchSql"/>
+  	</select>
+     
+
+
   
   </mapper>

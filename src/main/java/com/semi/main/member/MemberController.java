@@ -36,16 +36,16 @@ import com.google.gson.JsonParser;
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 //	@Autowired
 //	private HttpSession session;
-	
+
 	@Autowired
 	private HttpServletRequest request;
-	
+
 	@Autowired
 	private HttpServletResponse response;
 
@@ -134,82 +134,77 @@ public class MemberController {
 
 
 	@GetMapping("naver/login")
-	public String naverConnect(HttpSession session) throws Exception{
-		
-		//state용 난수 생성
+	public String naverConnect(HttpSession session) throws Exception {
+
+		// state용 난수 생성
 		SecureRandom random = new SecureRandom();
-		
+
 		// 상태 토큰으로 사용할 랜덤 문자열 생성
 		String state = new BigInteger(130, random).toString(32);
-		
+
 		// 세션에 상태 토큰을 저장
 		session.setAttribute("state", state);
 		System.out.println(state);
-		
+
 		// redirect
 		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/authorize?response_type=code");
 		url.append("/oauth2.0/authorize?");
 		System.out.println(url);
-		
+
 		return "naver/login";
 	}
-	
-	
 
 	/** 로그인 FORM 이동 */
 	@GetMapping("login")
-	public String getLogin() throws Exception{
-	
+	public String getLogin() throws Exception {
+
 		return "member/login";
 	}
-	
-	
+
 	@PostMapping("login")
-	public ModelAndView getLogin(MemberDTO memberDTO, String cookieUserId) throws Exception{
-		
+	public ModelAndView getLogin(MemberDTO memberDTO, String cookieUserId) throws Exception {
+
 		ModelAndView mv = new ModelAndView();
 		Cookie cookie = new Cookie("cookieUserId", memberDTO.getUserId());
-	
-		if(cookieUserId != null && cookieUserId.equals("cookieUserId")) {
+
+		if (cookieUserId != null && cookieUserId.equals("cookieUserId")) {
 			cookie.setPath("/");
-			cookie.setMaxAge(60*60*24*7);
+			cookie.setMaxAge(60 * 60 * 24 * 7);
 			response.addCookie(cookie);
-		}
-		else {
+		} else {
 			cookie.setMaxAge(0);
 			cookie.setPath("/");
 			response.addCookie(cookie);
 		}
-		
-		/* NullPointException 발생 이유 : Null이라서 에러가 뜨는게 아니라 Null에 들어있는 주소를 참조하려는 시도를 하였기 때문에 에러가 발생함.
-			System.out.println("아이디 :"+memberDTO.getUserId());
-		*/
-		
+
+		/*
+		 * NullPointException 발생 이유 : Null이라서 에러가 뜨는게 아니라 Null에 들어있는 주소를 참조하려는 시도를 하였기
+		 * 때문에 에러가 발생함. System.out.println("아이디 :"+memberDTO.getUserId());
+		 */
+
 		memberDTO = memberService.getLogin(memberDTO);
-		
-		System.out.println("null인지 확인 :"+memberDTO);
+
+		System.out.println("null인지 확인 :" + memberDTO);
 //		System.out.println("아이디 :"+memberDTO.getUserId());
 //		System.out.println("회원상태 :"+memberDTO.getStatusNo());
-		
+
 		// request에 있는 파라미터를 session에 넣음
 		HttpSession session = request.getSession();
-		
+
 		System.out.println("컨트롤러 로그인 상태 여부 ===========================");
-		
-		if(memberDTO != null && memberDTO.getStatusNo() != 0) {
+
+		if (memberDTO != null && memberDTO.getStatusNo() != 0) {
 			session.setAttribute("member", memberDTO);
 			session.setAttribute("userId", memberDTO.getUserId());
 			System.out.println("로그인 성공");
-			
-		} 
-		else if(memberDTO != null && memberDTO.getStatusNo() == 0){
+
+		} else if (memberDTO != null && memberDTO.getStatusNo() == 0) {
 			session.setAttribute("member", memberDTO);
 			mv.addObject("msg", "활동 정지중인 아이디입니다. 고객센터로 문의해주세요.");
 			mv.addObject("url", "login");
 			mv.setViewName("member/alert");
 			return mv;
-		}
-		else {
+		} else {
 			session.setAttribute("member", memberDTO);
 			System.out.println("로그인 실패");
 			// member/alert.jsp 이동
@@ -218,51 +213,48 @@ public class MemberController {
 			mv.setViewName("member/alert");
 			return mv;
 		}
-		
+
 		mv.addObject("dto", memberDTO);
 		mv.setViewName("redirect:../");
-		
+
 		return mv;
-		
+
 	}
-	
-	
-/** 로그아웃 */
+
+	/** 로그아웃 */
 	@GetMapping("logout")
-	public String logout(HttpSession session) throws Exception{
-		
+	public String logout(HttpSession session) throws Exception {
+
 		// 세션 비우기
 		session.invalidate();
-		
+
 		return "redirect:../";
 	}
-	
-	
-/** 회원가입 FORM 이동 */
+
+	/** 회원가입 FORM 이동 */
 	@GetMapping("signUp")
-	public String setJoin() throws Exception{
-		
+	public String setJoin() throws Exception {
+
 		return "member/signUp";
 	}
 
-	
-/** ID 체크 */	
+	/** ID 체크 */
 	@GetMapping("idCheck")
-	public String getIdCheck(MemberDTO memberDTO, Model model) throws Exception{
-		
+	public String getIdCheck(MemberDTO memberDTO, Model model) throws Exception {
+
 		System.out.println(memberDTO.getUserId());
 		memberDTO = memberService.getIdCheck(memberDTO);
-		
+
 		int result = 0;
-		
-		if(memberDTO == null) {
-			result=1;
+
+		if (memberDTO == null) {
+			result = 1;
 		}
-		
+
 		model.addAttribute("result", result);
-		
+
 		return "commons/ajaxResult";
-		
+
 	}
 	
 /** EMAIL 체크 */
@@ -304,22 +296,22 @@ public class MemberController {
 //		 else { 
 //			 model.addAttribute("msg", "회원가입 오류 발생하였습니다");
 //			  }
-			  
-		 	 return result;
-	 }
 
-/** ID 찾기*/
-	 @GetMapping("findId")
-	 public String getFindId() throws Exception{
-		 
-		 return "member/findId";
-	 }
-	 
-/** PW 찾기*/
-	 @GetMapping("findPw")
-	 public String getFindPw() throws Exception{
-		 
-		 return "member/findPw";
-	 }
-	
+		return result;
+	}
+
+	/** ID 찾기 */
+	@GetMapping("findId")
+	public String getFindId() throws Exception {
+
+		return "member/findId";
+	}
+
+	/** PW 찾기 */
+	@GetMapping("findPw")
+	public String getFindPw() throws Exception {
+
+		return "member/findPw";
+	}
+
 }

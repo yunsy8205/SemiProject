@@ -33,7 +33,23 @@
 				<tr>
 					<th>권한</th>
 					<td>
-						<c:forEach items="${dto.roles}" var="r">${r.grantName}/</c:forEach>
+						<c:forEach items="${dto.roles}" var="r">${r.grantName}
+						<c:if test="${r.grantName eq 'MEMBER'}">
+						<select class="" name="grantNo">
+								<option value="1" selected>MEMBER</option>
+								<option value="2">ADMIN</option>
+						</select></c:if>
+						<c:if test="${r.grantName eq 'ADMIN'}">
+						<select class="" name="grantNo">
+								<option value="1">MEMBER</option>
+								<option value="2" selected>ADMIN</option>
+						</select></c:if>
+						</c:forEach>
+						<c:if test="${empty dto.roles}">
+						<select class="" name="grantNo">
+								<option value="1">MEMBER</option>
+								<option value="2">ADMIN</option>
+						</select></c:if>
 					</td>
 					<th>가입일</th><td>${dto.accountDate}</td>
 				</tr>

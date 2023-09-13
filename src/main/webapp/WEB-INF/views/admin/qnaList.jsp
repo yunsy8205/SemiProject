@@ -10,24 +10,26 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 </head>
 <body>
-<c:import url="../temp/BoardHeader.jsp"></c:import>
+<c:import url="../temp/adminHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
-		<h1 align="center">NOTICE</h1>
-		
+	
+		<h1 class="text-center mb-5">1대1문의 관리</h1>
 		<table class="table mt-5">
 		
-		<thead class="table-dark">
-			 <th>ID</th><th>TITLE</th><th>DATE</th><th>HIT</th>
+		<thead class="table">
+		<th>NO</th> <th>ID</th> <th>유형</th> <th>TITLE</th><th>DATE</th> <th>상태</th>
 		</thead>
 		
-		<tbody class="table-light">
+		<tbody >
 			<c:forEach items="${list}" var="d">
 				<tr>
+					<td>${d.boardNo}</td>
 					<td>${d.userId}</td>
-					<td><a class="text-decoration-none" href="./detail?boardNo=${d.boardNo}">${d.title}</a></td>
+					<td>${d.kindName}</td>
+					<td><a class="text-decoration-none t" data-num="${d.boardNo}" href="../qna/detail?boardNo=${d.boardNo}">${d.title}</a></td>
 					<td>${d.createDate}</td>
-					<td>${d.hit}</td>
+					<td>${d.status}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -47,7 +49,7 @@
 			    	<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
 			    </c:forEach>
 			    <c:if test="${pager.next}">
-				    <li class="page-item ${pager.next?'':'disabled' }">
+				    <li class="page-item ${pager.next?'':'disabled'}">
 				      <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
@@ -55,44 +57,52 @@
 			    </c:if>
 			  </ul>
 			</nav>
-		
-		<div class="input-group mb-3">
-		 <form action="./list" method="get" id="frm">
+			
+			<div class="input-group mb-3">
+		 <form action="../admin/qna" method="get" id="frm">
 		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
-		
-		<table> 
-		<tr>
-		 	 <td> 	
+		 	  	
+		 	  <table>
+		 	  <tr>
+		 	  <td>
 			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
+				  <option class="kind" value="userId">ID</option>
+				  <option class="kind" value="KindName">유형</option>
 				  <option class="kind" value="title">title</option>
 				  <option class="kind" value="contents">Contents</option>
 				  
 			  </select></td>
-			  
 			  <td>
 			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
-			  <td>
-			   <div class="col-auto">
-			    <button type="submit" class="btn btn-dark">검색</button>
-			  </div>
-			  </td>
-		</table> 	
+			   </td>
+			   <td>
+			    <button type="submit" class="btn btn-primary">검색</button>
+			  	</td>
+			  </table>	
 		  </form>
 		</div>
 		
-		<c:forEach items="${member.roles}" var="r"> 
-		<c:if test="${r.grantName == 'admin'}">
-			<a class="btn btn-dark me-2" style="float:right" href="./add">글등록</a>
-		
-		</c:if>
-		</c:forEach>
 	
+
 	</section>
-	
-	
-	
 	
 
 <script src="/resources/js/list.js"></script>
+<script type="text/javascript">
+ $(".t").click(function(){
+	 
+	 let boardNo = $(this).attr("data-num");
+	 
+	 $.ajax({
+			type:"get",
+			url:"../qna/statusUpdate",
+			data:{
+				boardNo:boardNo
+			}
+		})
+	 
+ })
+</script>
+
 </body>
 </html>

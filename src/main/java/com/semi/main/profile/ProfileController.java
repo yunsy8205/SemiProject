@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.semi.main.product.ProductDTO;
+import com.semi.main.product.ProductFileDTO;
 import com.semi.main.product.ProductReviewDTO;
 import com.semi.main.product.ProductService;
 import com.semi.main.util.Pager;
@@ -29,6 +30,10 @@ public class ProfileController {
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
+		if(score==null) {
+			score=0.0;
+		}
+		System.out.println(score);
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "products");
 		
@@ -42,6 +47,9 @@ public class ProfileController {
 		Long countp = profileService.countSaleProduct(profileDTO);
 		model.addAttribute("countp", countp);
 		Double score = profileService.avgScore(profileDTO);
+		if(score==null) {
+			score=0.0;
+		}
 		model.addAttribute("score", score);
 		model.addAttribute("flag", "reviews");
 		return "profile/profile";
@@ -53,7 +61,9 @@ public class ProfileController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		for(ProductDTO a:ar) {
-			System.out.println(a.getProName());
+			for(ProductFileDTO b : a.getFileDTOs()) {
+				System.out.println(b.getOriginalName());
+			}
 		}
 		return "commons/productresult";
 	}

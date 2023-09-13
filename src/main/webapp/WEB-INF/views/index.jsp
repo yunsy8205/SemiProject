@@ -75,6 +75,7 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
+
 						<li><a href="./product/categoryList?catNo=1001">핸드폰</a></li>
 						<li><a href="./product/categoryList?catNo=1002">전자기기</a></li>
 						<li><a href="./product/categoryList?catNo=1003">미용가전</a></li>
@@ -82,6 +83,7 @@
 						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
 						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
 						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
+
 					</ul>
 					<!-- /NAV -->
 				</div>

@@ -19,14 +19,14 @@
   	</sql>
   	
   	<!-- total  -->
-  	<select id="getTotal" resultType="Long" >
+  	<select id="getTotal" resultType="Long" parameterType="Pager">
   		SELECT COUNT(BOARDNO) FROM NOTICE
   		WHERE BOARDNO > 0
   		<include refid="searchSql"/>
   	</select>
   	
   	<!-- List -->
-  	<select id="getList" resultType="AdminNoticeDTO">
+  	<select id="getList" resultType="AdminNoticeDTO" parameterType="Pager">
   	
   	SELECT BOARDNO,USERID,TITLE,CREATEDATE,HIT
   	FROM(SELECT ROWNUM R, B.* 

@@ -22,6 +22,8 @@ import com.semi.main.profile.ProfileService;
 import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {

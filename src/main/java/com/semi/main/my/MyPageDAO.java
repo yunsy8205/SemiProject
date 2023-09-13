@@ -42,7 +42,7 @@ public class MyPageDAO {
 	
 	// 채팅 내역 저장
     public void saveChatMessage(String userId, String message) throws Exception {
-        Map<String, Object> paramMap = new HashMap<>();
+        Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("userId", userId);
         paramMap.put("message", message);
         sqlSession.insert(NAMESPACE + "saveChatMessage", paramMap);
@@ -73,7 +73,11 @@ public class MyPageDAO {
   		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
   	}
 
-
+  	public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
+  		List<BuyerDTO> ar = sqlSession.selectList(NAMESPACE + "getBuyer", userNo);
+  		System.out.println("사이즈1 : " + ar.size());
+  		return ar;
+  	}
     	
     
 

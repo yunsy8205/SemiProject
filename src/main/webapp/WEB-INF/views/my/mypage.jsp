@@ -212,7 +212,8 @@
 						<li><a href="../">Home</a></li>
 						<li class="active"><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li><a href="#">내 판매글/구매내역/후기</a></li>
+
+						<li><a href="./management">구매내역/후기</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
@@ -283,8 +284,14 @@
 							<div class="input-checkbox">
 								
 									<span></span>
-									${member.intro}
-								
+									<c:choose>
+							            <c:when test="${empty member.intro}">
+							                <p>자기소개를 입력해주세요.</p>
+							            </c:when>
+										<c:otherwise>
+							                ${member.intro}
+							            </c:otherwise>
+							        </c:choose>
 								
 							</div>
 						</div>

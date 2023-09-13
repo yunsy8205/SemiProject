@@ -28,6 +28,15 @@
   		AND A.TITLE LIKE '%'||#{search}||'%'
   		</if>	
   </sql>
+  <sql id="searchSql3">
+  	WHERE A.PRONO>0
+  		<if test="kind == 'userId'">
+  		AND A.USERID LIKE '%'||#{search}||'%'
+  		</if>
+  		<if test="kind == 'proName'">
+  		AND A.PRONAME LIKE '%'||#{search}||'%'
+  		</if>
+  </sql>
   	
   	<delete id="c"></delete>
   	
@@ -57,13 +66,22 @@
 			<result column="zipcode" property="zipCode" />
 			<result column="refaddress" property="refAddress" />
 			<result column="detailaddress" property="detailAddress" />
-			<result column="ORIGINALNAME" property="originalName" />
-	
+			<!-- 9/12추가 -->
+			<result column="HOLDER" property="holder" />
+			<result column="BANKCODE" property="bankCode" />
+			<result column="BANKNUM" property="bankNum" />
+			
+			<association property="memberFileDTO" javaType="MemberFileDTO">
+				<id column="FILENO" property="fileNo"/>
+				<result column="ORIGINALNAME" property="originalName"/>
+				<result column="FILENAME" property="fileName"/>
+			</association>
+			
 			<collection property="roles" javaType="List" ofType="RoleDTO">
 				<id column="GRANTNO" property="grantNo" />
 				<result column="GRANTNAME" property="grantName" />
 			</collection>
-		</resultMap>
+	</resultMap>
   	
   	<select id="getTotal" parameterType="Pager" resultType="Long">
   		SELECT COUNT(USERNO) FROM MEMBER M
@@ -76,7 +94,7 @@
   	</update>
   	
   	<select id="memberDetail" parameterType="MemberDTO" resultMap="getResult">
-		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.ORIGINALNAME
+		SELECT M.*, RO.GRANTNO, RO.GRANTNAME, P.FILENAME
 		FROM MEMBER M LEFT JOIN MEMBERROLE MR
 		ON(M.USERNO=MR.USERNO)
 		LEFT JOIN ROLE RO ON(MR.GRANTNO=RO.GRANTNO)
@@ -92,6 +110,14 @@
   		PHONE=#{phone},INTRO=#{intro}
   		WHERE USERNO=#{userNo}
   	</update>
+  	
+  	<delete id="roleDelete" parameterType="Map">
+  		DELETE MEMBERROLE WHERE USERNO=#{member.userNo}
+  	</delete>
+  	
+  	<insert id="memberRole" parameterType="Map">
+  		INSERT INTO MEMBERROLE (USERNO, GRANTNO) VALUES (#{member.userNo}, #{role.grantNo})
+  	</insert>
   	
   	<insert id="reportAdd" parameterType="Map">
   		<selectKey keyProperty="report.reportNo" resultType="Long" order="BEFORE">
@@ -159,4 +185,59 @@
   	<update id="passwordReset" parameterType="MemberDTO">
   		UPDATE MEMBER SET USERPW=#{userPw} WHERE USERNO=#{userNo}
   	</update>
+  	
+  	<select id="productList" resultMap="getSelectResult" parameterType="Pager">
+  		SELECT A.* FROM
+		(SELECT P.*, C.CATNAME, M.USERID, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM PRODUCT P
+		JOIN CATEGORY C ON (P.CATNO  = C.CATNO)
+		JOIN MEMBER M ON (P.USERNO = M.USERNO)
+		LEFT JOIN PRODUCTIMAGE PI ON(P.PRONO = PI.PRONO))A
+		<include refid="searchSql3"></include>
+		ORDER BY A.PRONO
+  	</select>
+  	
+  	<select id="productTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(A.PRONO) FROM
+  		(SELECT P.*, M.USERID FROM PRODUCT P
+  		JOIN MEMBER M ON (P.USERNO=M.USERNO))A
+  		<include refid="searchSql3"></include>
+  	</select>
+  	
+  	<resultMap type="ProductDTO" id="getSelectResult">
+		<id column="PRONO" property="proNo"/>
+		<result column="PRONAME" property="proName"/>
+		<result column="USERNO" property="userNo"/>
+		<result column="CATNO" property="catNo"/>
+		<result column="PROPRICE" property="proPrice"/>
+		<result column="PROCONTENTS" property="proContents"/>
+		<result column="CREATEDATE" property="createDate"/>
+		<result column="MODIFYDATE" property="modifyDate"/>
+		<result column="PROHIT" property="hit"/>
+		<result column="PROSALE" property="proSale"/>
+		<result column="PROAMOUNT" property="proAmount"/>
+		
+		<association property="category" javaType="CategoryDTO">
+			<id column="CATNO" property="catNo"/>
+			<result column="CATNAME" property="catName"/>
+		</association>
+		
+		<association property="member" javaType="MemberDTO">
+			<id column="USERNO" property="userNo"/>
+			<result column="USERID" property="userId"/>
+		</association>
+
+		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+			<id column="FILENO" property="fileNo"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+			<result column="FILENAME" property="fileName"/>
+		</collection>
+	</resultMap>
+	
+	<update id="productSale" parameterType="ProductDTO">
+		UPDATE PRODUCT SET PROSALE=#{proSale} WHERE PRONO=#{proNo}
+	</update>
+	
+	<delete id="memberFileDel">
+		DELETE PROFILE WHERE USERNO=#{userNo}
+	</delete>
   </mapper>

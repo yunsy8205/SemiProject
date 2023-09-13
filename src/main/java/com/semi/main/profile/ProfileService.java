@@ -30,7 +30,7 @@ public class ProfileService {
 	}
 	
 	public List<ProductDTO> memberProList(ProfileDTO profileDTO, Pager pager)throws Exception {
-		pager.setPerPage(3L);
+		pager.setPerPage(8L);
 		pager.makeRowNum();
 		Map<String , Object> map = new HashMap<String, Object>();
 		map.put("profileDTO", profileDTO);

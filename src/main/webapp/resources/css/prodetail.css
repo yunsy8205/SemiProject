@@ -1,19 +1,27 @@
 @charset "UTF-8";
 	
 	.btn1{
-		color: white;  
-		padding-top: 15px; 
-		padding-bottom: 15px; 
-		padding-left: 53px; 
-		padding-right: 53px;
+		color: white;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    padding-left: 50px;
+	    padding-right: 50px;
 	}
 	
 	.btn3{
-		color: white;  
-		padding-top: 15px; 
-		padding-bottom: 15px; 
-		padding-left: 38px; 
-		padding-right: 38px;
+		color: white;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    padding-left: 44px;
+	    padding-right: 44px;
+	}
+	
+	.btn4{
+		    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 73px;
+    padding-right: 73px;
 	}
 	
 	.btn2{
@@ -43,6 +51,7 @@
 		width: 50%;
 		height: 100%;
 		float: left;
+		padding-top: 5%;
 		
 	}
 	
@@ -105,12 +114,14 @@
 	}
 	
 	#report{
-		margin-left: 300px;
+		margin-left: 420px;
 	}
 	
 	#rt{
-		color: rgb(204, 204, 204);
-		font-weight : bold;
+		color: #CCCCCC;
+	    font-weight: bold;
+	    text-decoration: underline;
+	    font-size: 17px;
 	}
 	
 	#p1{
@@ -119,6 +130,9 @@
 	
 	.product-price{
 		color: #D10024;
+		margin-top: 15px;
+    	margin-bottom: 20px;
+    	font-size: 40px;
 	}
 	
 	.div9{
@@ -129,21 +143,25 @@
 	
 	.div10{
 		height: 10%;
-		width: 100%;
+	    width: 100%;
+	    margin-top: 15px;
 	}
 	
 	.div11{
 		width: 80px;
-		height: 80px;
-		margin-right: 20px;
-		box-sizing: border-box;
-		float: left;
+	    height: 80px;
+	    margin-right: 20px;
+	    box-sizing: border-box;
+	    float: left;
+	    border-radius: 70%;
+	    overflow: hidden;
 	}
 	
 	.div12{
 		width: 50%;
 		height: 100%;
 		float: left;
+		padding-top: 8px;
 	}
 	.div13{
 		padding-left: 4px;
@@ -192,7 +210,7 @@
 	}
 	
 	.bi-star{
-		color: rgb(204, 204, 204);
+		color: #CCCCCC;
 	}
 	
 	.div16{
@@ -210,4 +228,24 @@
 		width: 100%;
 		height: 250px;
 		padding-top: 7%;
+	}
+	
+	.mt{
+		margin-top: 15px;
+		font-size: 15px;
+	}
+	
+	#button1{
+		padding-top: 70px;
+	}
+	
+	.memberImage{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.t2{
+		font-weight: bold;
+	    margin-top: 8px;
 	}
