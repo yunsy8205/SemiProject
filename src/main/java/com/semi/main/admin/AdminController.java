@@ -16,11 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.main.board.BoardDTO;
 import com.semi.main.member.MemberDTO;
-<<<<<<< HEAD
+
 import com.semi.main.qna.QnaService;
-=======
+
 import com.semi.main.util.MailService;
->>>>>>> 52313e43583d1c1e9640aa5bfc7401c02b37c3aa
+
 import com.semi.main.util.Pager;
 import com.semi.main.util.PayService;
 
