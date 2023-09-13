@@ -11,27 +11,30 @@
 </head>
 <body>
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
+		<!-- NAVIGATION -->
+		<nav id="navigation">
 			<!-- container -->
 			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">Headphones</a></li>
-							<li class="active">Product name goes here</li>
-						</ul>
-					</div>
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="./product/categoryList?catNo=1001">핸드폰</a></li>
+						<li><a href="./product/categoryList?catNo=1002">전자기기</a></li>
+						<li><a href="./product/categoryList?catNo=1003">미용가전</a></li>
+						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
+						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
+						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
+						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
+					</ul>
+					<!-- /NAV -->
 				</div>
-				<!-- /row -->
+				<!-- /responsive-nav -->
 			</div>
 			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+		</nav>
+		<!-- /NAVIGATION -->
 
 		<!-- SECTION -->
 		<div class="section">
@@ -44,7 +47,7 @@
 						<div class="carousel-inner imgdiv">
 							<c:forEach items="${dto.fileDTOs}" var="f">
 								<div class="carousel-item active imgdiv">
-									<img class="proImage" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
+									<img class="proImage" src="../resources/upload/product/${f.fileName}" class="d-block w-100" alt="...">
 								</div>
 							</c:forEach>
 						</div>
@@ -139,7 +142,7 @@
 											<figure>
 												<c:forEach items="${d.fileDTOs}" var="f">
 													<c:if test="${flag?true:false}">
-														<img class="image" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
+														<img class="image" src="../resources/upload/product/${f.fileName}" class="d-block w-100" alt="...">
 														<c:set var="flag" value="false"/>
 													</c:if>
 												</c:forEach>

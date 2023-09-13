@@ -10,12 +10,12 @@ const delets = document.getElementsByClassName("delets");
 function addDeleteEventListener(deleteElement) {
     deleteElement.addEventListener("click", function () {
         let fileNo = this.getAttribute("data-delete-num");
-        let originalName = this.getAttribute("data-original-name"); // 파일 이름 가져오기
+        let fileName = this.getAttribute("data-file-name"); // 파일 이름 가져오기
         let check = confirm("삭제시 복구 불가");
 
         if (check) {
             // GET 방식으로 파일 삭제 요청을 보냄
-            fetch(`./fileDelete?fileNo=${fileNo}&originalName=${originalName}`, { // 파일 번호와 파일 이름 모두 전달
+            fetch(`./fileDelete?fileNo=${fileNo}&fileName=${fileName}`, { // 파일 번호와 파일 이름 모두 전달
                 method: "GET"
             })
                 .then((result) => {

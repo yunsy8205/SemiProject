@@ -76,17 +76,7 @@
 
 						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle  me-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								마이페이지
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: #000000; color: #ffffff;">
-								<li><a class="dropdown-item" href="">내 상품</a></li>
-								<li><a class="dropdown-item" href="">찜한 상품</a></li>
-								<li><a class="dropdown-item" href="">고객센터</a></li>
-								<li><a class="dropdown-item" href="">계정 설정</a></li>
-							</ul>
-						</li>
+						
 
 					</c:when>
 					<c:otherwise>
@@ -113,7 +103,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="/" class="logo">
-                            <img src="/resources/img/구디장터로고.jpg" alt="">
+                            <img src="/resources/img/구디장터로고찐찐마지막.jpg" alt="">
                         </a>
                     </div>
                 </div>
@@ -123,12 +113,12 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form action="/product/list" method="GET">
-                            <select name="kind" id="k" class="input-select" aria-label="Default select example">
+                            <select name="kind" id="k" class="input-select">
                                 <option class="kind" value="proName">상품명</option>
                                 <option class="kind" value="proContents">상품설명</option>
                                 <option class="kind" value="userId">작성자</option>
                             </select>
-                            <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+                            <input type="text" name="search" value="${pager.search}"  placeholder="Search here">
                             <button type="submit" class="search-btn">검색</button>
 
                             <!-- <input class="input" type="text" name="query" placeholder="Search here">

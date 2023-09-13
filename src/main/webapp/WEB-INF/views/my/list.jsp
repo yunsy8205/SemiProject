@@ -302,7 +302,7 @@
                         <tr> 
                         <td>
                                 <!-- 상품 사진을 표시 -->
-                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
                             </td>
                             <td><a href="/product/detail?proNo=${product.proNo}">${product.proName}</a></td>
                             <td>${product.proPrice}</td>
