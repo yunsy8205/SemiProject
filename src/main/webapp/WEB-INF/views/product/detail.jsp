@@ -10,6 +10,29 @@
 <c:import url="../temp/header1.jsp"></c:import>
 </head>
 <body>
+<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
+						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
+						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
+						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
+						<li><a href="./product/categoryList?catNo=1005">노트북</a></li>
+						<li><a href="./product/categoryList?catNo=1006">청소기</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">

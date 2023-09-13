@@ -74,7 +74,6 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
 						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
-
 						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
 						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
 						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
