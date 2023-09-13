@@ -14,6 +14,7 @@
   }
 </style>
 
+
 </head>
 
 <body>
@@ -43,33 +44,41 @@
 		<footer>
 			<c:forEach items="${dto.fileDTOs}" var="f">
 				<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
-			</c:forEach> 
-			<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
-			<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
+			</c:forEach>
+			 <c:if test="${member.userId == dto.userId}">
+			<a class="btn btn-dark" style="float:right" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
+			<a class="btn btn-dark" style="float:right" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
+			</c:if>
 		</footer>
 		
 		
-		<label for="contents" class="form-label">답글</label>
+		<label for="contents" class="form-label mt-5">답글</label>
 		<div class="border border-dark border-opacity-50 p-2 mb-3 w-100 rounded" id="contents">
 		
 		<div id="commentList"> </div>
 		
 		</div>
-			
-		<c:if test="${member.userId == 'ADMIN' }">
-		<div class="a mb-3">
+		
+			<c:forEach items="${member.roles}" var="r"> 
+		<c:if test="${r.grantName == 'admin'}">
+			<div class="a mb-3">
 			<label for="comment" class="form-label">답글달기</label>
 			<textarea cols="10" rows="10" class="form-control" id="comment"></textarea>
-			<button class="btn btn-primary mb-3" id="commentAdd">답글등록</button>
+			<button class="btn btn-dark mt-3" style="float:right" id="commentAdd">답글등록</button>
 		</div>
+		
 		</c:if>
+		</c:forEach>
+			
+		
 		
 	
 	</div>
 	
 	<script type="text/javascript">
 
-		
+	
+
 		let userNo = $("#no").attr("data-member-no");
 		let boardNo = $("#no").attr("data-num-no");
 		
@@ -92,7 +101,7 @@
 			success:function(result){
 
 				if(result.trim()>0){
-					alert("ok");
+					
 					$("#commentList").empty();
 					$("#comment").val("");
 					
@@ -119,14 +128,25 @@
 				console.log(result);
 				
 				$("#commentList").append(result);
+
 				
 			},
 			error:function(){
-				alert("관리자에게 문의")
+				alert("실패")
 			}
 		});
 	}
+		
+		
+	
 	</script>
+	
+		
+
+
+
+	
+
 
 	
 	

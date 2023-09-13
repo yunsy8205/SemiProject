@@ -59,6 +59,7 @@
 		SELECT BOARDNO,TITLE,CREATEDATE,STATUS
 		FROM QNA
 		WHERE USERNO=#{userNo}
+		ORDER BY BOARDNO DESC
 	</select>
 	
  	<!-- detail  -->
@@ -100,6 +101,10 @@
 		INSERT INTO QNA
 		VALUES(#{boardNo},#{userNo},#{kindNo},#{title},sysdate,#{contents},default)	 
 	</insert>
+	<!-- update -->
+	<update id="setUpdate" parameterType="QnaDTO">
+		UPDATE QNA SET TITLE=#{title}, KINDNO=#{kindNo}, CONTENTS=#{contents} WHERE BOARDNO=#{boardNo}
+	</update>
 	
 	<!-- fileadd  -->
 	<insert id="setFileAdd" parameterType="QnaFileDTO">
@@ -124,13 +129,23 @@
 	INSERT INTO QNACOMMENT VALUES (QNACOMMENT_SEQ.NEXTVAL,#{userNo}, #{boardNo}, #{contents}, sysdate)
 	</insert>
 	
-	<!-- qnaList -->
+	<!-- qnaCommentList -->
 	<select id="getCommentList" resultType="QnaCommentDTO" parameterType="QnaCommentDTO">
 	SELECT QM.*, M.USERID
 	FROM QNACOMMENT QM JOIN MEMBER M
 	ON (QM.USERNO = M.USERNO)
 	WHERE QM.BOARDNO = #{boardNo}
 	</select>
+	
+	<!--  qnastatusUpdate -->
+	<update id="setStatusUpdate" parameterType="QnaDTO">
+	UPDATE QNA SET STATUS ='확인' WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<!-- delete  -->
+	<delete id="setDelete" parameterType="QnaDTO">
+	DELETE FROM QNA WHERE BOARDNO = #{boardNo}
+	</delete>
 
 		
 	

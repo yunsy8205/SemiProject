@@ -48,13 +48,13 @@
 			<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
 		</c:forEach> 
 		
-		<c:if test="${member.userId == '관리자1'}">
-		<a class="btn btn-dark" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
-		<a class="btn btn-dark" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
+		<c:if test="${member.userId == 'ADMIN'}">
+		<a class="btn btn-dark" style="float:right" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
+		<a class="btn btn-dark mx-2" style="float:right" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
 		</c:if>
 		
 	
-	<a href="./list">list</a>
+
 	
 	
 

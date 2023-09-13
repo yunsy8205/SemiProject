@@ -13,7 +13,9 @@
 <c:import url="../temp/adminHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
-		<table class="table">
+	
+		<h1 class="text-center mb-5">1대1문의 관리</h1>
+		<table class="table mt-5">
 		
 		<thead class="table">
 		<th>NO</th> <th>ID</th> <th>유형</th> <th>TITLE</th><th>DATE</th> <th>상태</th>
@@ -25,7 +27,7 @@
 					<td>${d.boardNo}</td>
 					<td>${d.userId}</td>
 					<td>${d.kindName}</td>
-					<td><a class="text-decoration-none" href="../qna/detail?boardNo=${d.boardNo}">${d.title}</a></td>
+					<td><a class="text-decoration-none t" data-num="${d.boardNo}" href="../qna/detail?boardNo=${d.boardNo}">${d.title}</a></td>
 					<td>${d.createDate}</td>
 					<td>${d.status}</td>
 				</tr>
@@ -86,5 +88,21 @@
 	
 
 <script src="/resources/js/list.js"></script>
+<script type="text/javascript">
+ $(".t").click(function(){
+	 
+	 let boardNo = $(this).attr("data-num");
+	 
+	 $.ajax({
+			type:"get",
+			url:"../qna/statusUpdate",
+			data:{
+				boardNo:boardNo
+			}
+		})
+	 
+ })
+</script>
+
 </body>
 </html>
