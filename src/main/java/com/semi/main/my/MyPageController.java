@@ -202,8 +202,12 @@ public class MyPageController {
 	
 	// 상품 관리
 		@GetMapping("management") 
-		public void management() throws Exception{
+		public void management(HttpSession session, Model model) throws Exception{
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		    long userNo = memberDTO.getUserNo();
+			List<BuyerDTO> ar = myPageService.getBuyer(userNo);
 			
+			model.addAttribute("buyer", ar);
 		}
 		
 

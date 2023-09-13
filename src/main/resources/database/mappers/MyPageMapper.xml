@@ -116,5 +116,9 @@
     	</collection>
 	</resultMap>
 
+	<select id="getBuyer" parameterType="Long" resultType="BuyerDTO">
+        SELECT * FROM PAYMENT WHERE USERNO = #{userNo}
+    </select>
+
 
   </mapper>
