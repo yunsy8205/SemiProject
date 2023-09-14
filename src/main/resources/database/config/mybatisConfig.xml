@@ -33,6 +33,7 @@
   		
 
   		<typeAlias type="com.semi.main.my.BuyerDTO" alias="BuyerDTO"></typeAlias>
+		<typeAlias type="com.semi.main.my.SaleDTO" alias="SaleDTO"></typeAlias>
 
 		<typeAlias type="com.semi.main.qnaComment.QnaCommentDTO" alias="QnaCommentDTO"/>
   		<typeAlias type="com.semi.main.my.DibsDTO" alias="DibsDTO"></typeAlias>
