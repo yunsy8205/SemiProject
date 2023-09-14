@@ -127,26 +127,29 @@
         <div class="container">
             
          
-         <ul class="header-links pull-right">
+        <ul class="header-links pull-right">
+    <c:choose>
+        <c:when test="${not empty member}">
+            <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
+            <c:forEach items="${member.roles}" var="m">
+                <c:choose>
+                    <c:when test="${m.grantNo==1}">
+                        <li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+                        <li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
+                    </c:when>
+                    <c:when test="${m.grantNo==2}">
+                        <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
+            <li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
+        </c:otherwise>
+    </c:choose>
+</ul>
 
-               <c:if test="${not empty member}">
-       			  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-	               <c:forEach items="${member.roles}" var="m">
-             			<c:if test="${m.grantNo==1}">${m.grantNo}
-                  			<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
-                  			<li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
-             			</c:if>
-             			<c:if test="${m.grantNo==2}">${m.grantNo}
-			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
-	               		</c:if>
-	               </c:forEach>
-               </c:if>
-               <c:if test="${empty member}">
-                  <li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-                  <li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-               </c:if>
-
-         </ul>
          
          
          
