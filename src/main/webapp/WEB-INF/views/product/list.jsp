@@ -182,48 +182,7 @@
                         </div>
                         <!-- /Wishlist -->
 
-                        <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                                <div class="qty">3</div>
-                            </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/resources/img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-                                </div>
-                                <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="#">View Cart</a>
-                                    <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Cart -->
+                       
 
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
@@ -259,12 +218,13 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="/product/categoryList?catNo=1001">에어컨</a></li>
-						<li><a href="/product/categoryList?catNo=1002">냉장고</a></li>
-						<li><a href="/product/categoryList?catNo=1003">세탁기</a></li>
-						<li><a href="/product/categoryList?catNo=1004">TV</a></li>
-						<li><a href="/product/categoryList?catNo=1005">노트북</a></li>
-						<li><a href="/product/categoryList?catNo=1006">청소기</a></li>
+						<li><a href="./categoryList?catNo=1001">핸드폰</a></li>
+						<li><a href="./categoryList?catNo=1002">전자기기</a></li>
+						<li><a href="./categoryList?catNo=1003">미용가전</a></li>
+						<li><a href="./categoryList?catNo=1004">주방가전</a></li>
+						<li><a href="./categoryList?catNo=1005">생활가전</a></li>
+						<li><a href="./categoryList?catNo=1006">사무기기</a></li>
+						<li><a href="./categoryList?catNo=1006">기타</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -288,7 +248,7 @@
 				<div class="section-title">
 					<div class="section-nav">
 						<ul class="section-tab-nav tab-nav">
-							<li class="active"><a href="#" onclick="changeCondition('최신순')">최신순</a></li>
+							<li><a href="#" onclick="changeCondition('최신순')">최신순</a></li>
 							<li><a href="#" onclick="changeCondition('인기순')">인기순</a></li>
 							<li><a href="#" onclick="changeCondition('저가순')">저가순</a></li>
 							<li><a href="#" onclick="changeCondition('고가순')">고가순</a></li>
@@ -304,7 +264,7 @@
 			            <div class="col-md-3">
 			                <div class="product">
 			                    <div class="product-img">
-			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
 			                    </div>
 			                    <div class="product-body">
 			                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>
@@ -326,49 +286,49 @@
 			    </div>
 			</div>
 
-						  <!-- ... (페이징 및 검색 부분) ... -->
+					  <!-- ... (페이징 및 검색 부분) ... -->
 						  
-				 <nav aria-label="Page navigation example">
-			  		 <ul class="pagination">
-					    <c:if test="${pager.pre}">
-					        <li class="page-item">
-					            <a class="page-link" href="/product/list?page=${pager.startNum - 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Previous">
-					                <span aria-hidden="true">&laquo;</span>
-					            </a>
-					        </li>
-					    </c:if>
-					    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-					        <li class="page-item"><a class="page-link" href="/product/list?page=${i}&kind=${param.kind}&search=${param.search}&condition=${param.condition}">${i}</a></li>
-					    </c:forEach>
-					    <c:if test="${pager.next}">
-					        <li class="page-item">
-					            <a class="page-link" href="/product/list?page=${pager.lastNum + 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}" aria-label="Next">
-					                <span aria-hidden="true">&raquo;</span>
-					            </a>
-					        </li>
-					    </c:if>
-					</ul>
-
-				</nav>
-
-			
+					  <nav aria-label="Page navigation example" class="text-center"> <!-- Add 'text-center' class here -->
+						<ul class="pagination justify-content-center"> <!-- Add 'justify-content-center' class here -->
+						 <c:if test="${pager.pre}">
+							 <li class="page-item">
+								 <a class="page-link" href="/product/list?page=${pager.startNum - 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}" aria-label="Previous">
+									 <span aria-hidden="true">&laquo;</span>
+								 </a>
+							 </li>
+						 </c:if>
+						 <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+							 <li class="page-item"><a class="page-link" href="/product/list?page=${i}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}">${i}</a></li>
+						 </c:forEach>
+						 <c:if test="${pager.next}">
+							 <li class="page-item">
+								 <a class="page-link" href="/product/list?page=${pager.lastNum + 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}" aria-label="Next">
+									 <span aria-hidden="true">&raquo;</span>
+								 </a>
+							 </li>
+						 </c:if>
+					 </ul>
+ 
+				 </nav>
 				<!-- 검색 부분 -->
-				<div class="input-group mb-3 justify-content-center">
-				<form action="/product/list" method="GET">
-				    <!-- 기존 검색 폼 입력 내용 -->
-				    <select name="kind" id="k" class="input-select" aria-label="Default select example">
-				        <option class="kind" value="proName">상품명</option>
-				        <option class="kind" value="proContents">상품설명</option>
-				        <option class="kind" value="userId">이름</option>
-				    </select>
-				    <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
-				    <button type="submit" class="search-btn">검색</button>
-				
-				    <!-- 선택된 condition을 hidden input으로 추가 -->
-				    <input type="hidden" name="condition" value="${param.condition}">
-				</form>
-
-
+				<div class="search">
+					<form method="get" name="search" action="/product/list">
+						<table class="pull-right">
+							<tr>
+								<td><select name="kind" id="k" class="input-select" aria-label="Default select example">
+									<option class="kind" value="proName">상품명</option>
+									<option class="kind" value="proContents">상품설명</option>
+									<option class="kind" value="userId">이름</option>
+								</select></td>
+								<td><input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+								</td>
+								<td><button type="submit" class="search-btn">검색</button></td>
+                                 <!-- 선택된 condition을 hidden input으로 추가 -->
+                             <input type="hidden" name="condition" value="${param.condition}">
+                             <input type="hidden" name="catNo" value="${param.catNo}">
+							</tr>
+						</table>
+					</form>
 				</div>
 			
 			</section>
@@ -378,8 +338,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
-
 
   
 

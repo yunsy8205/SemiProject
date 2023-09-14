@@ -248,10 +248,9 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-
-						<li><a href="./management">구매내역/후기</a></li>
+						<li><a href="./management">구매내역</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
-
+						<li><a href="./review">후기</a></li>
 						<li class="active"><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
@@ -304,7 +303,7 @@
                         <tr> 
                         <td>
                                 <!-- 상품 사진을 표시 -->
-                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+                                <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
                             </td>
                             <td><a href="/product/detail?proNo=${product.proNo}">${product.proName}</a></td>
                             <td>${product.proPrice}</td>
@@ -334,8 +333,8 @@
 </div>
   <!-- ... (페이징 및 검색 부분) ... -->
 						  
-				 <nav aria-label="Page navigation example">
-			  		 <ul class="pagination">
+  <nav aria-label="Page navigation example" class="text-center"> <!-- Add 'text-center' class here -->
+    <ul class="pagination justify-content-center"> <!-- Add 'justify-content-center' class here -->
 					    <c:if test="${pager.pre}">
 					        <li class="page-item">
 					            <a class="page-link" href="/my/list?page=${pager.startNum - 1}" aria-label="Previous">

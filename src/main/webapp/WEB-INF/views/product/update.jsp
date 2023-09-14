@@ -21,6 +21,13 @@
                 <!-- 생략... -->
                 <input type="hidden" name="proNo" value="${product.proNo}">
 
+                <!-- 기존 이미지 표시 -->
+                    <div id="imagePreview" class="mb-3">
+                        <c:forEach var="image" items="${existingImages}">
+                            <img src="${image}" alt="기존 이미지" width="100">
+                        </c:forEach>
+                    </div>
+
                <div class="mb-3">
 					<button type="button" class="btn btn-primary" id="add">File추가</button>
 				</div>
@@ -33,9 +40,9 @@
 				<div>
 					<c:forEach items="${product.fileDTOs}" var="f">
 						<div class="alert alert-danger" role="alert" >
-							${f.originalName}
+							${f.fileName}
 						</div>
-						<span class="delets" data-delete-num="${f.fileNo}" data-original-name="${f.originalName}">X</span>
+						<span class="delets" data-delete-num="${f.fileNo}" data-file-name="${f.fileName}">X</span>
 					</c:forEach>	
 
 				</div>

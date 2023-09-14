@@ -211,8 +211,9 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li class="active"><a href="./management">구매내역/후기</a></li>
+						<li class="active"><a href="./management">구매내역</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
+						<li><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
@@ -234,7 +235,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">구매내역/후기</h3>
+						<h3 class="breadcrumb-header">판매내역/구매내역</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -246,6 +247,8 @@
 <!-- ------------------------------------------------------------------------------------------- -->
 	
 	<c:forEach var="product" items="${buyer}" >
+					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="255" height="200"></a>
+					
 					상품제목 : ${product.proName}
 					<br>
 					결제금액 : ${product.totalPrice}원
@@ -258,42 +261,6 @@
 	
 	
 	
-	<!-- SECTION -->
-	<form action="./check" method="post" id="frm">
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-
-					<div class="col-md-7">
-						<!-- Billing Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">비밀번호 입력</h3>
-							</div>
-							<div class="form-group">
-								<input class="input" type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요">
-							</div>
-							<div class="form-group">
-								<button type="button" id="btn" class="primary-btn order-submit">확인</button>
-							</div>
-							
-							<div class="form-group">
-								
-							</div>
-						</div>
-						<!-- /Billing Details -->
-
-						
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		</div>
-		</form>
-		<!-- /SECTION -->
 	
 	
 	

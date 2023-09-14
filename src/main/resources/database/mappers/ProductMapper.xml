@@ -165,7 +165,7 @@ SELECT C.* FROM (SELECT R.*, M.USERID FROM REVIEW R JOIN MEMBER M ON(R.USERNO=M.
 INSERT INTO PRODUCT (PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS, PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE) VALUES (#{proNo}, #{catNo}, (SELECT USERNO FROM MEMBER WHERE USERID = #{userId}), #{proName}, #{proPrice}, #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange}, #{proStatus}, 0, #{proSale})
 </insert>
 <insert id="setFileAdd" parameterType="ProductFileDTO">
-INSERT INTO PRODUCTIMAGE VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
+INSERT INTO PRODUCTIMAGE VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{originalName},#{fileName} )
 </insert>
 <select id="getDetail" parameterType="ProductDTO" resultMap="getSelectResult">
 SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P LEFT JOIN PRODUCTIMAGE PR ON (P.PRONO=PR.PRONO) JOIN CATEGORY C ON (P.CATNO = C.CATNO) JOIN MEMBER M ON (P.USERNO = M.USERNO) WHERE P.PRONO= #{proNo}

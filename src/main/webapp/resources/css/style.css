@@ -463,7 +463,7 @@ textarea.input {
 	Search
 \*----------------------------*/
 
-.header-search {
+/* .header-search {
   padding: 15px 0px;
 }
 
@@ -490,7 +490,35 @@ textarea.input {
   border: none;
   border-radius: 0px 40px 40px 0px;
 }
+ */
+ .header-search {
+  display: flex;
+  align-items: center;
+}
 
+.header-search form {
+  display: flex;
+  align-items: center;
+}
+
+.header-search .input-select {
+  margin-right: 10px; /* 선택 상자와 입력 상자 사이의 간격 조정 */
+}
+
+.header-search .form-control {
+  width: 100%; /* 입력 상자가 가득 차도록 설정 */
+  margin-right: 10px; /* 입력 상자와 검색 버튼 사이의 간격 조정 */
+}
+
+.header-search .search-btn {
+  background-color: #D10024;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0; /* 검색 버튼의 우측 부분만 둥글게 만듭니다. */
+}
+ 
 /*----------------------------*\
 	Cart
 \*----------------------------*/
