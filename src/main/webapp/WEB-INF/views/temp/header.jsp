@@ -197,8 +197,12 @@
                             </a>
                         </div>
                         <!-- /Wishlist -->
-
-                      
+                      <div>
+                            <a href="../my/chat">
+                            <i class="bi bi-chat-left-dots-fill"></i>
+                                <span>1대1 채팅</span>
+                            </a>
+                        </div>
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#">
