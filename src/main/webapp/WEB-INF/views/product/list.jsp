@@ -80,204 +80,82 @@
     </head>
 	<body>
 		
-<!-- HEADER -->
-<header>
-    <!-- TOP HEADER -->
-    <div id="top-header">
-        <div class="container">
-            
-			
-			<ul class="header-links pull-right">
-				<c:choose>
-					<c:when test="${not empty member}">
-						<li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-
-						<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
-
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle  me-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								마이페이지
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: #000000; color: #ffffff;">
-								<li><a class="dropdown-item" href="">내 상품</a></li>
-								<li><a class="dropdown-item" href="">찜한 상품</a></li>
-								<li><a class="dropdown-item" href="">고객센터</a></li>
-								<li><a class="dropdown-item" href="">계정 설정</a></li>
-							</ul>
-						</li>
-
-					</c:when>
-					<c:otherwise>
-						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ul>
-			
-			
-			
-        </div>
-    </div>
-    <!-- /TOP HEADER -->
-
-    <!-- MAIN HEADER -->
-    <div id="header">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- LOGO -->
-                <div class="col-md-3">
-                    <div class="header-logo">
-                        <a href="/" class="logo">
-                            <img src="/resources/img/logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <!-- /LOGO -->
-
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form action="/product/list" method="GET">
-                            <select name="kind" id="k" class="input-select" aria-label="Default select example">
-                                <option class="kind" value="proName">상품명</option>
-                                <option class="kind" value="proContents">상품설명</option>
-                                <option class="kind" value="userId">이름</option>
-                            </select>
-                            <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
-                            <button type="submit" class="search-btn">검색</button>
-
-                            <!-- <input class="input" type="text" name="query" placeholder="Search here">
-                            <button type="submit" class="search-btn">Search</button> -->
-                        </form>
-                    </div>
-                </div>
-                <!-- <div class="col-md-6">
-                    <div class="header-search">
-                        <form action="./list" method="get" id="frm">
-                            <input type="hidden" value="${pager.page}" id="page" name="page">		
-                            <select name="kind" id="k" class="input-select" data-kind="${pager.kind}" aria-label="Default select example">
-                                <option class="kind" value="proName">상품명</option>
-                                <option class="kind" value="proContents">상품설명</option>
-                                <option class="kind" value="userId">이름</option>
-                            </select>
-                               <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                <button type="submit" class="search-btn">검색</button>
-                               
-                           </form>
-                            
-                    </div>
-                </div> -->
-                <!-- /SEARCH BAR -->
-
-                <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="../product/add">
-                                <span>상품등록</span>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
-                       
-
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                        <!-- /Menu Toogle -->
-                    </div>
-                </div>
-                <!-- /ACCOUNT -->
-            </div>
-            <!-- row -->
-        </div>
-        <!-- container -->
-    </div>
-    <!-- /MAIN HEADER -->
-</header>
-<!-- /HEADER -->
-
-
-
-
-
-
-		<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="./categoryList?catNo=1001">핸드폰</a></li>
-						<li><a href="./categoryList?catNo=1002">전자기기</a></li>
-						<li><a href="./categoryList?catNo=1003">미용가전</a></li>
-						<li><a href="./categoryList?catNo=1004">주방가전</a></li>
-						<li><a href="./categoryList?catNo=1005">생활가전</a></li>
-						<li><a href="./categoryList?catNo=1006">사무기기</a></li>
-						<li><a href="./categoryList?catNo=1006">기타</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
-			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
-
-
-
-<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row ">
-
-				<!-- section title -->
-			<div class="col-md-12">
-				<div class="section-title">
-					<div class="section-nav">
-						<ul class="section-tab-nav tab-nav">
-							<li><a href="#" onclick="changeCondition('최신순')">최신순</a></li>
-							<li><a href="#" onclick="changeCondition('인기순')">인기순</a></li>
-							<li><a href="#" onclick="changeCondition('저가순')">저가순</a></li>
-							<li><a href="#" onclick="changeCondition('고가순')">고가순</a></li>
-							
+	<c:import url="../temp/header.jsp"></c:import>
+	
+	
+	
+	
+	
+	
+			<!-- NAVIGATION -->
+			<nav id="navigation">
+				<!-- container -->
+				<div class="container">
+					<!-- responsive-nav -->
+					<div id="responsive-nav">
+						<!-- NAV -->
+						<ul class="main-nav nav navbar-nav">
+							<li class="active"><a href="/">Home</a></li>
+							<li><a href="./categoryList?catNo=1001">핸드폰</a></li>
+							<li><a href="./categoryList?catNo=1002">전자기기</a></li>
+							<li><a href="./categoryList?catNo=1003">미용가전</a></li>
+							<li><a href="./categoryList?catNo=1004">주방가전</a></li>
+							<li><a href="./categoryList?catNo=1005">생활가전</a></li>
+							<li><a href="./categoryList?catNo=1006">사무기기</a></li>
+							<li><a href="./categoryList?catNo=1006">기타</a></li>
 						</ul>
+						<!-- /NAV -->
+					</div>
+					<!-- /responsive-nav -->
+				</div>
+				<!-- /container -->
+			</nav>
+			<!-- /NAVIGATION -->
+	
+	
+	
+	<!-- SECTION -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row ">
+	
+					<!-- section title -->
+				<div class="col-md-12">
+					<div class="section-title">
+						<div class="section-nav">
+							<ul class="section-tab-nav tab-nav">
+								<li><a href="#" onclick="changeCondition('최신순')">최신순</a></li>
+								<li><a href="#" onclick="changeCondition('인기순')">인기순</a></li>
+								<li><a href="#" onclick="changeCondition('저가순')">저가순</a></li>
+								<li><a href="#" onclick="changeCondition('고가순')">고가순</a></li>
+								
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<section class="container mt-5">
-				<div class="col-md-12">
-			    <div class="row ">
-			        <c:forEach var="product" items="${list}" >
-			            <div class="col-md-3">
-			                <div class="product">
-			                    <div class="product-img">
-			                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
-			                    </div>
-			                    <div class="product-body">
-			                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>
-			                        <h4 class="product-price">${product.proPrice} </h4>
-			                        <p class="product-createDate">작성일: ${product.createDate}</p>
-			                        <p class="product-hit">조회수: ${product.hit}</p>
-			                        <div class="product-btns">
-			                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
-			                        </div>
-			                    </div>
-			                    <div class="add-to-cart">
-
-			                        <button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
+				<section class="container mt-5">
+					<div class="col-md-12">
+				    <div class="row ">
+				        <c:forEach var="product" items="${list}" >
+				            <div class="col-md-3">
+				                <div class="product">
+				                    <div class="product-img">
+				                        <img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
+				                    </div>
+				                    <div class="product-body">
+				                        <p class="product-name"><a href="./detail?proNo=${product.proNo}">${product.proName}</a></p>
+				                        <h4 class="product-price">${product.proPrice} </h4>
+				                        <p class="product-createDate">작성일: ${product.createDate}</p>
+				                        <p class="product-hit">조회수: ${product.hit}</p>
+				                        <div class="product-btns">
+				                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
+				                        </div>
+				                    </div>
+				                    <div class="add-to-cart">
+	
+				                        <button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i><a href="../payment/paymentadd?proNo=${product.proNo}">구매하기</a></button>
 
 			                    </div>
 			                </div>

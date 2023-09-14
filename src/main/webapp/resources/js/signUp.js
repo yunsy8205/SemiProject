@@ -264,7 +264,7 @@ email.addEventListener("blur", function(){
     // var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const obj = {email : email.value}
 
-    fetch("mailCheck?email="+email.value,  {
+    fetch("../member/mailCheck?email="+email.value,  {
         method:"POST",
         headers: {
             "Content-Type": "application/json",
@@ -436,7 +436,7 @@ signUp.addEventListener('click', function(){
                  detailAddress : detailAddress.value
     };
     if(!c){
-        fetch("signUp", {
+        fetch("../member/signUp", {
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
