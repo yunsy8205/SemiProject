@@ -82,7 +82,7 @@ public class PaymentController {
 	@RequestMapping(value="cancel", method = RequestMethod.POST)
 	public String paymentDelete(PaymentDTO paymentDTO) throws Exception
 	{
-		System.out.println("cancel");
+		
 		PayService payService = new PayService();
 		String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
 		
@@ -90,12 +90,14 @@ public class PaymentController {
 		
 		String amount = paymentInfo.get("amount");
 		
-		System.out.println(paymentDTO.getUidNo());
-		System.out.println(amount);
+		int result=payService.paymentCancel(token,paymentDTO.getUidNo() , amount, paymentDTO.getReason());
+	
 		
-		int result=payService.paymentCancel(token,paymentDTO.getUidNo() , amount, "단순변심");
-		System.out.println("삭제 성공");
-		System.out.println(result);
+		System.out.println("result:"+result);
+		if( result > 0 ) {
+			
+			paymentService.setPayUpdate(paymentDTO);
+		}
 		return "commons/ajaxResult";
 	
 	}

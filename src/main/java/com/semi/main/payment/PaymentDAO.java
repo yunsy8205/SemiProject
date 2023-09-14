@@ -32,6 +32,10 @@ public class PaymentDAO {
    public Long getTotal(Pager pager)throws Exception{
 	   return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
    }
+   
+   public int setPayUpdate(PaymentDTO paymentDTO)throws Exception{
+	   return sqlSession.update(NAMESPACE+"setPayUpdate", paymentDTO);
+   }
   
 
 }

@@ -259,41 +259,26 @@
       <h1>구매내역</h1>
 	
 				
-			<c:forEach var="product" items="${buyer}" >	
+			<c:forEach var="product" items="${buyer}"  varStatus="i">	
+			
+			<c:if test="${product.statusNo == 1}">
 					
 					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="255" height="200"></a>
 					
 			     	<div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
 		
-					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" data-amount="${product.totalPrice}"> 결제금액 : ${product.totalPrice}원</div>
+					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.totalPrice}원</div>
 		
 			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
 			        
-			        <div><button class="btn btn-danger cancelBtn" data-uid ="${product.uidNo}" data-status="${product.statusNo}">
- 					 결제취소<!-- data-toggle="modal" data-target="#exampleModal" --> 
+			       <div>
+			       <input type="hidden"  data-toggle="modal" data-target="#exampleModal" id="c" >
+			      <%--  <button class="d-nonr" data-toggle="modal" data-target="#exampleModal" id="c" data-uid ="${product.uidNo}"></button> --%>
+			        <button class="btn btn-danger open"   data-uid ="${product.uidNo}">
+ 					 결제취소
 					</button></div>
-					
-			       <!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">환불사유 </h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        
-					       <textarea rows="10" cols="70" id="reason"></textarea>
-					      </div>
-					      <div class="modal-footer">
-					      	<button type="button" class="btn btn-primary cancel" data-uid ="${product.uidNo}" data-status="${product.statusNo}">환불하기</button>
-					       	<button type="button" class="btn btn-secondary" data-dismiss="modal" >취소하기</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+			</c:if>		
+			     
 			     
 	  		</c:forEach>
 	  
@@ -312,7 +297,27 @@
     </div>	
 	
 
-
+ 			<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">환불사유 </h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        
+					       <textarea rows="10" cols="70" id="reason"></textarea>
+					      </div>
+					      <div class="modal-footer">
+					      	<button type="button" class="btn btn-primary cancel" data-dismiss="modal" >환불하기</button>
+					       	<button type="button" class="btn btn-secondary" data-dismiss="modal" >취소하기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 
 	
 	
@@ -428,65 +433,8 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
+		<script src="/resources/js/cancel.js"></script>
 		
-		
-    	<script type="text/javascript">
-    	
-    
-    	
-    	 $('.cancelBtn').click(function(){
-    		 
-    	let status = $(this).attr("data-status");
-    	console.log(status);
-    	let uid = $(this).attr("data-uid");
-    	console.log(uid);
-    		//let reason = $("#reason").val();
-    		//console.log(reason);
-    	     confirm('msaage');
-    	     
-    		cancelPay(status, uid);
-    	        });
-    	 
-    	 function cancelPay(status, uid){
-    		 
-    		 
-    		
-    		//let payData = new Object();
-    		//payData.uidNo = uid;
-    		//payData.amount= amount;
-    		//payData.status= status;
-    		//payData.reason = reason;
-    		
-    		console.log(status);
-    		console.log(uid);
-    		console.log(reason);
-    		$.ajax({
-				url:"../payment/cancel",
-				method:"POST",
-				data:{
-					uidNo:uid,
-					statusNo:status
-					//reason:reason
-					
-				},
-				success:function(result){
-					console.log(result);
-		      		window.location.href = "../";
-					
-				},
-				error:function(error){
-					alert("관리자에게 문의하세요.");
-				}
-			});
-    		
-      		
-	    	}
-	 
-		
-    		 
-    		 
-    	 
-    	</script>
 
 </body>
 </html>
