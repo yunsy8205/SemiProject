@@ -106,7 +106,7 @@ sameId.addEventListener("click", function(){
     console.log("idResult: "+ idResult);  
     console.log("id.value: "+ id.value);  // 아이디 입력값
 
-   fetch("idCheck?userId="+id.value, {method:"get"})
+   fetch("../member/idCheck?userId="+id.value, {method:"get"})
     .then((res)=>{
         // console.log("res1: "+res); // [Object response]
         // object.text() 검색
