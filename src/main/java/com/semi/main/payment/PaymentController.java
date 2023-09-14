@@ -29,8 +29,8 @@ import com.siot.IamportRestClient.response.Payment;
 @RequestMapping("/payment/*")
 public class PaymentController {
   
-	private final String REST_API_KEY = "3857776236202128";
-	private final String REST_API_SECRET = "qt5gBM0lhOUyMjNsP0SCyU89K16kK326nk369CwdKlRavvMtHIp14JJZLHocGlzAz5WPLENXIux6DcwK";
+	private final String REST_API_KEY = "0423121332258201";
+	private final String REST_API_SECRET = "gucymO3pfPTz2um1RFankOgQlBdMynAnTuxxjh8mXDFLYhLjcC5XZjhZ1UD39Dgpv0aFfphzsR1RYlvK";
 	
 	@Autowired
 	private ProductService productService;
@@ -78,18 +78,22 @@ public class PaymentController {
 			return result;
 	}
 	
-	
-	@RequestMapping(value="delete", method = RequestMethod.POST)
-	public String paymentDelete() throws Exception
+
+	@RequestMapping(value="cancel", method = RequestMethod.POST)
+	public String paymentDelete(PaymentDTO paymentDTO) throws Exception
 	{
+		System.out.println("cancel");
 		PayService payService = new PayService();
 		String token = payService.getToken(REST_API_KEY, REST_API_SECRET);
 		
-		Map<String, String> paymentInfo = payService.paymentInfo(token, "imp_608353866775");
+		Map<String, String> paymentInfo = payService.paymentInfo(token,paymentDTO.getUidNo());
 		
 		String amount = paymentInfo.get("amount");
 		
-		int result=payService.paymentCancel(token, "imp_608353866775", amount, "단순변심");
+		System.out.println(paymentDTO.getUidNo());
+		System.out.println(amount);
+		
+		int result=payService.paymentCancel(token,paymentDTO.getUidNo() , amount, "단순변심");
 		System.out.println("삭제 성공");
 		System.out.println(result);
 		return "commons/ajaxResult";

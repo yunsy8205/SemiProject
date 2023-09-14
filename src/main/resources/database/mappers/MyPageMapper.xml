@@ -117,9 +117,10 @@
 	</resultMap>
 
 	<select id="getBuyer" parameterType="Long" resultMap="SaleResult">
-       SELECT * FROM PAYMENT p left JOIN PRODUCTIMAGE p2 
-		ON p.PRONO = p2.PRONO
+       SELECT * FROM PAYMENT P left JOIN PRODUCTIMAGE PM 
+		ON P.PRONO = PM.PRONO
 		WHERE USERNO = #{userNo}
+		ORDER BY P.PAYMENTDATE DESC
     </select>
     
     <resultMap id="SaleResult"   type="BuyerDTO">
@@ -127,6 +128,9 @@
     	<result property="proNo" column="PRONO"/>
     	<result property="proName" column="PRONAME"/>
     	<result property="totalPrice" column="TOTALPRICE"/>
+    	<result property="paymentDate" column="PAYMENTDATE"/>
+    	<result property="uidNo" column="UIDNO"/>
+    	<result property="statusNo" column="STATUSNO"/>
 
     	
     	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
