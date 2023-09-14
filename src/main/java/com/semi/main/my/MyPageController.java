@@ -34,11 +34,17 @@ public class MyPageController {
 
 	// 마이페이지
 	@GetMapping(value = "mypage") 
-	public void myPage(HttpSession session) throws Exception{
+	public void myPage(HttpSession session,Model model) throws Exception{
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO=(MemberDTO)session.getAttribute("member");
 		System.out.println(memberDTO.getUserId()+"myPage 메서드");
 		System.out.println(memberDTO.getAccountDate());
+		
+		
+		List<SaleDTO> arr = myPageService.getSale(memberDTO.getUserNo());
+		model.addAttribute("sale", arr);
+		List<BuyerDTO> ar = myPageService.getBuyer(memberDTO.getUserNo());
+		model.addAttribute("buyer", ar);
 	}
 	
 	
@@ -200,14 +206,18 @@ public class MyPageController {
 	    return "./my/dibs";
 	}
 	
-	// 구매목록
+	// 구매목록, 판매목록
 		@GetMapping("management") 
 		public void management(HttpSession session, Model model) throws Exception{
+//			--------구매목록
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		    long userNo = memberDTO.getUserNo();
 			List<BuyerDTO> ar = myPageService.getBuyer(userNo);
+//			--------판매목록
+			List<SaleDTO> arr = myPageService.getSale(userNo);
 			
 			model.addAttribute("buyer", ar);
+			model.addAttribute("sale", arr);
 		}
 
 		// 후기

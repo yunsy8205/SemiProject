@@ -67,7 +67,7 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li><a href="./management">구매내역</a></li>
+						<li><a href="./management">구매내역/판매내역</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
