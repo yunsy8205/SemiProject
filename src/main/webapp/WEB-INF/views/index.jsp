@@ -146,7 +146,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
+													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i><a href="../payment/paymentadd?proNo=${product.proNo}">구매하기</a></button>
 												</div>
 											</div>
 										</c:forEach>
