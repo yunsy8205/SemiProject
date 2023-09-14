@@ -8,31 +8,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../resources/css/prodetail.css">
 
+
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
-<!-- NAVIGATION -->
-		<nav id="navigation">
-			<!-- container -->
-			<div class="container">
 
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="./product/categoryList?catNo=1001">핸드폰</a></li>
-						<li><a href="./product/categoryList?catNo=1002">전자기기</a></li>
-						<li><a href="./product/categoryList?catNo=1003">미용가전</a></li>
-						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
-						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
-						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
-						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
-					</ul>
-					<!-- /NAV -->
-
-
-		<!-- BREADCRUMB -->
+<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -44,13 +25,12 @@
 							<li><a href="#">${dto.catNo}</a></li><!--  -->
 						</ul>
 					</div>
-
 				</div>
-				<!-- /responsive-nav -->
+				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
+		</div>
+		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
 		<div class="section">
@@ -89,7 +69,7 @@
 							</div>
 							<div class="mt">
 								<span style="font-weight: bold; font-size: 17px; color: #CCCCCC;"><i class="bi bi-eye-fill"> ${dto.hit}</i></span>
-								<span id="report"><a href="../member/reportadd?userNo=${dto.userNo}" id="rt">신고하기</a></span>
+								<span id="report"><a href="../product/reportadd?userNo=${dto.userNo}" id="rt">신고하기</a></span>
 							</div>
 							<div class="mt">
 								<span style="font-weight: bold; color: #CCCCCC;"><i class="fa fa-heart-o me-2"></i>상품상태</span>
@@ -310,6 +290,6 @@
 	<c:if test="${empty member}">
 		<script src="../resources/js/detailLogout.js"></script>	
 	</c:if>
-<c:import url="../temp/footer1.jsp"></c:import>
+
 </body>
 </html>

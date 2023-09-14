@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
-
+import com.semi.main.admin.AdminService;
+import com.semi.main.admin.ReportDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.profile.ProfileService;
 import com.semi.main.util.FileManager;
@@ -33,6 +34,9 @@ public class ProductController {
 	
 	@Autowired
 	private FileManager fileManager;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@RequestMapping(value = "list",method = RequestMethod.GET)
 	public String getList(Pager pager,Model model,Long catNo,String condition) throws Exception{
@@ -262,5 +266,30 @@ public class ProductController {
 		int result =productService.reviewAdd(productReviewDTO);
 		System.out.println(result);
 		return "redirect:../";
+	}
+	
+	@GetMapping("reportadd")
+	public void reportAdd(ReportDTO reportDTO, Model model)throws Exception{
+		MemberDTO memberDTO=adminService.reportId(reportDTO);
+		System.out.println(memberDTO.getUserId());
+		model.addAttribute("dto", memberDTO);
+		
+	}
+	
+	@PostMapping("reportadd")
+	public String reportAdd(ReportDTO reportDTO, MultipartFile [] photos, HttpSession session, Model model)throws Exception{
+		int result =adminService.reportAdd(photos, reportDTO, session);
+		
+		String message="신고 실패";
+		
+		if(result>0) {
+			message="신고 완료";	
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("url", "/");
+		
+		return "commons/result";
+		
 	}
 }
