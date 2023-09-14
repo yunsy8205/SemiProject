@@ -61,6 +61,10 @@
   		
   		<include refid="searchSql"/>
   	</select>
+  	
+  	<update id="setPayUpdate" parameterType="PaymentDTO">
+  		UPDATE PAYMENT SET STATUSNO = 0 , REASON=#{reason} WHERE UIDNO = #{uidNo}
+  	</update>
      
 
 

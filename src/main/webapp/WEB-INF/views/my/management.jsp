@@ -47,6 +47,12 @@
             max-height: 200px; /* Set the maximum height of the image */
             object-fit: cover; /* Maintain aspect ratio and cover area */
 		}
+		.m{
+		padding: 5px;
+		}
+		.m1{
+		padding-bottom: 10px;
+		}
 	</style>
     </head>
 	<body>
@@ -67,7 +73,8 @@
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li class="active"><a href="./management">구매내역</a></li>
+
+						<li class="active"><a href="./management">구매내역/판매내역</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
@@ -91,7 +98,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">판매내역/구매내역</h3>
+						<h3 class="breadcrumb-header">구매내역/판매내역</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -102,17 +109,74 @@
 	
 <!-- ------------------------------------------------------------------------------------------- -->
 	
-	<c:forEach var="product" items="${buyer}" >
+	<div class="container" >
+	
+	<div class="row">
+		
+      <div class="col-md-6">
+      <h1>구매내역</h1>
+	
+				
+			<c:forEach var="product" items="${buyer}"  varStatus="i">	
+			
+			<c:if test="${product.statusNo == 1}">
+					
 					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="255" height="200"></a>
 					
-					상품제목 : ${product.proName}
-					<br>
-					결제금액 : ${product.totalPrice}원
-			        <br>
-			        결제날짜 : ${product.paymentDate}일
-					
-			        </c:forEach>
+			     	<div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
+		
+					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.totalPrice}원</div>
+		
+			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
+			        
+			       <div>
+			       <input type="hidden"  data-toggle="modal" data-target="#exampleModal" id="c" >
+			      <%--  <button class="d-nonr" data-toggle="modal" data-target="#exampleModal" id="c" data-uid ="${product.uidNo}"></button> --%>
+			        <button class="btn btn-danger open"   data-uid ="${product.uidNo}">
+ 					 결제취소
+					</button></div>
+			</c:if>		
+			     
+			     
+	  		</c:forEach>
+	  
+	  	 
+	</div>
+			   
+			   
+      <div class="col-md-6">
+      
+      <h1>판매내역</h1>
+      </div>
+      
+      
+      </div>
+      
+    </div>	
 	
+
+ 			<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">환불사유 </h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        
+					       <textarea rows="10" cols="70" id="reason"></textarea>
+					      </div>
+					      <div class="modal-footer">
+					      	<button type="button" class="btn btn-primary cancel" data-dismiss="modal" >환불하기</button>
+					       	<button type="button" class="btn btn-secondary" data-dismiss="modal" >취소하기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
 	
 	
 	
@@ -227,19 +291,8 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
-    
-	    <script>
-	    let btn = document.getElementById("btn");
-	    let frm = document.getElementById("frm");
-	    let userPw = document.getElementById("userPw");
-	    
-	  	btn.addEventListener("click", function(){
-	  		console.log("click");
-	  		
-	  		console.log(userPw.value);
-	  		
-	  		frm.submit();
-	  	})
-	    </script>
+		<script src="/resources/js/cancel.js"></script>
+		
+
 </body>
 </html>
