@@ -334,8 +334,8 @@
 </div>
   <!-- ... (페이징 및 검색 부분) ... -->
 						  
-				 <nav aria-label="Page navigation example">
-			  		 <ul class="pagination">
+  <nav aria-label="Page navigation example" class="text-center"> <!-- Add 'text-center' class here -->
+    <ul class="pagination justify-content-center"> <!-- Add 'justify-content-center' class here -->
 					    <c:if test="${pager.pre}">
 					        <li class="page-item">
 					            <a class="page-link" href="/my/list?page=${pager.startNum - 1}" aria-label="Previous">
