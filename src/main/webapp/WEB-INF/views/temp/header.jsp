@@ -130,17 +130,14 @@
          <ul class="header-links pull-right">
 
                <c:if test="${not empty member}">
+       			  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
 	               <c:forEach items="${member.roles}" var="m">
-	               		<c:choose>
-	               			<c:when test="${m.grantNo==1}">
-			                  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-			                  <li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
-	               			</c:when>
-	               			<c:otherwise>
-	               			  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-			                  <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
-	               			</c:otherwise>
-	               		</c:choose>
+             			<c:if test="${m.grantNo==1}">${m.grantNo}
+                  			<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+             			</c:if>
+             			<c:if test="${m.grantNo==2}">${m.grantNo}
+			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
+	               		</c:if>
 	               </c:forEach>
                </c:if>
                <c:if test="${empty member}">
