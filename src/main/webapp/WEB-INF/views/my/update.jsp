@@ -213,6 +213,7 @@
 						<li class="active"><a href="./check">내 정보 수정</a></li>
 						<li><a href="./management">구매내역/후기</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
+						<li><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>

@@ -65,7 +65,8 @@
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item text-white me-3"><a href="../member/login">로그인</a></li>
-						<li class="nav-item text-white me-3"><a href="../member/join">회원가입</a></li>
+						<li class="nav-item text-white me-3"><a href="../member/signUp">회원가입</a></li>
+
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -210,10 +211,10 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="../">Home</a></li>
 						<li><a href="./mypage">MY PAGE</a></li>
-						<li class="active"><a href="./check">내 정보 수정</a></li>
-						<li><a href="./management">구매내역</a></li>
+						<li><a href="./check">내 정보 수정</a></li>
+						<li><a href="./management">구매내역/후기</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
-						<li><a href="./review">후기</a></li>
+						<li class="active"><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
 						<li><a href="./delete">회원탈퇴</a></li>
 					</ul>
@@ -235,7 +236,7 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">내 정보 수정</h3>
+						<h3 class="breadcrumb-header">내게 작성한 후기</h3>
 					</div>
 				</div>
 				<!-- /row -->
@@ -245,47 +246,92 @@
 		<!-- /BREADCRUMB -->
 	
 <!-- ------------------------------------------------------------------------------------------- -->
-	
-	<!-- SECTION -->
-	<form action="./check" method="post" id="frm">
+
+		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 
-					<div class="col-md-7">
+					<div class="col-md-4">
 						<!-- Billing Details -->
 						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">비밀번호 입력</h3>
-							</div>
-							<div class="form-group">
-								<input class="input" type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요">
-							</div>
-							<div class="form-group">
-								<button type="button" id="btn" class="primary-btn order-submit">확인</button>
-							</div>
 							
 							<div class="form-group">
+								<p>
+								<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}" onerror="this.onerror-null; this.src='../resources/img/imgtest.jpeg';" width="300" height="300">
+								</p>
+							</div>
+							<div class="form-group">
+								${member.userId} 님
+							</div>
+							
+							<%-- <div class="form-group">
+								<br><br>
+								<p>자기소개</p><br>
+								${member.intro}
+							</div> --%>
+						</div>
+						<!-- /Billing Details -->	
+					</div>
+					
+					<!-- Shiping Details -->
+						<div class="shiping-details">
+							<div class="section-title">
+								<h3 class="title">자기소개</h3>
+							</div>
+							<div class="input-checkbox">
+								
+									<span></span>
+									<c:choose>
+							            <c:when test="${empty member.intro}">
+							                <p>자기소개를 입력해주세요.</p>
+							            </c:when>
+										<c:otherwise>
+							                ${member.intro}
+							            </c:otherwise>
+							        </c:choose>
 								
 							</div>
 						</div>
-						<!-- /Billing Details -->
+						<!-- /Shiping Details -->
+					
+					
+					
 
+					<!-- Order Details -->
+					<div class="col-md-3 order-details">
 						
+						<div class="order-summary">
+							
+							<div class="order-products">
+								<div class="order-col">
+									<div>회원가입일</div>
+									<div>${member.accountDate}</div>
+								</div>
+								<div class="order-col">
+									<div>판매횟수</div>
+									<div>?</div>
+								</div>
+								<div class="order-col">
+									<div>구매횟수</div>
+									<div>?</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						
+					</div>
+					<!-- /Order Details -->
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
-		</div>
-		</form>
 		<!-- /SECTION -->
-	
-	
-	
-	<!-- ------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------------------------------------- -->
 		
 
 		<!-- FOOTER -->
@@ -392,19 +438,7 @@
 		<script src="/resources/js/nouislider.min.js"></script>
 		<script src="/resources/js/jquery.zoom.min.js"></script>
 		<script src="/resources/js/main.js"></script>
-    
-	    <script>
-	    let btn = document.getElementById("btn");
-	    let frm = document.getElementById("frm");
-	    let userPw = document.getElementById("userPw");
-	    
-	  	btn.addEventListener("click", function(){
-	  		console.log("click");
-	  		
-	  		console.log(userPw.value);
-	  		
-	  		frm.submit();
-	  	})
-	    </script>
-</body>
+
+	</body>
 </html>
+
