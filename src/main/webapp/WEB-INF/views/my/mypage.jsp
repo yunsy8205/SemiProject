@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -67,7 +67,7 @@
 						<li><a href="../">Home</a></li>
 						<li class="active"><a href="./mypage">MY PAGE</a></li>
 						<li><a href="./check">내 정보 수정</a></li>
-						<li><a href="./management">구매내역</a></li>
+						<li><a href="./management">구매내역/판매내역</a></li>
 						<li><a href="./dibs">내 찜 목록</a></li>
 						<li><a href="./review">후기</a></li>
 						<li><a href="./list">상품관리</a></li>
@@ -167,11 +167,11 @@
 								</div>
 								<div class="order-col">
 									<div>판매횟수</div>
-									<div>?</div>
+									<div>${fn:length(sale) }</div>
 								</div>
 								<div class="order-col">
 									<div>구매횟수</div>
-									<div>?</div>
+									<div>${fn:length(buyer) }</div>
 								</div>
 							</div>
 						</div>
