@@ -108,4 +108,16 @@ public class MyPageService {
     	return myPageDAO.getSale(userNo);
     }
     
+  //구매목록카운트
+    public Long getBuyCount(Long userNo) throws Exception{
+    	return myPageDAO.getBuyCount(userNo);
+    }
+    
+  //판매목록카운트
+    public Long getSaleCount(Long userNo) throws Exception{
+    	return myPageDAO.getSaleCount(userNo);
+    }
+    
+    
+    
 }

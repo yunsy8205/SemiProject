@@ -83,7 +83,7 @@ public class MyPageDAO {
   	//구매목록
   	public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
   		List<BuyerDTO> ar = sqlSession.selectList(NAMESPACE + "getBuyer", userNo);
-  		System.out.println("사이즈1 : " + ar.size());
+  		System.out.println("구매목록 사이즈1 : " + ar.size());
   		return ar;
   	}
   	
@@ -93,4 +93,19 @@ public class MyPageDAO {
   		System.out.println("판매목록 사이즈 : " + arr.size());
   		return arr;
   	}
+  	
+  	//구매목록 카운트
+  	public Long getBuyCount(Long userNo) throws Exception{
+  		Long a = sqlSession.selectOne(NAMESPACE+"getBuyCount", userNo);
+  		System.out.println("구매카운트? : " + a);
+  		return a;
+  	}
+  	
+  	//판매목록 카운트
+  	public Long getSaleCount(Long userNo) throws Exception{
+  		Long b = sqlSession.selectOne(NAMESPACE+"getSaleCount", userNo);
+  		System.out.println("판매카운트? : " + b);
+  		return b;
+  	}
+  	
 }

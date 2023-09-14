@@ -40,11 +40,13 @@ public class MyPageController {
 		System.out.println(memberDTO.getUserId()+"myPage 메서드");
 		System.out.println(memberDTO.getAccountDate());
 		
-		
-		List<SaleDTO> arr = myPageService.getSale(memberDTO.getUserNo());
-		model.addAttribute("sale", arr);
-		List<BuyerDTO> ar = myPageService.getBuyer(memberDTO.getUserNo());
+		Long ar = myPageService.getBuyCount(memberDTO.getUserNo());
 		model.addAttribute("buyer", ar);
+		
+		Long arr = myPageService.getSaleCount(memberDTO.getUserNo());
+		model.addAttribute("sale", arr);
+		
+		
 	}
 	
 	
