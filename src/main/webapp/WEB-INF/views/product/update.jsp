@@ -21,6 +21,13 @@
                 <!-- 생략... -->
                 <input type="hidden" name="proNo" value="${product.proNo}">
 
+                <!-- 기존 이미지 표시 -->
+                    <div id="imagePreview" class="mb-3">
+                        <c:forEach var="image" items="${existingImages}">
+                            <img src="${image}" alt="기존 이미지" width="100">
+                        </c:forEach>
+                    </div>
+
                <div class="mb-3">
 					<button type="button" class="btn btn-primary" id="add">File추가</button>
 				</div>
