@@ -98,4 +98,7 @@ public class MyPageService {
     	return myPageDAO.getBuyer(userNo);
     }
 
+    public List<ReviewsDTO> getReviews(Long userNo) throws Exception{
+    	return myPageDAO.getReviews(userNo);
+    }
 }
