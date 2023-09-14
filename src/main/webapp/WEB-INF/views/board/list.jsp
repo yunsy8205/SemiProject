@@ -81,7 +81,7 @@
 		</div>
 		
 		<c:forEach items="${member.roles}" var="r"> 
-		<c:if test="${r.grantName == 'admin'}">
+		<c:if test="${r.grantNo eq '2'}">
 			<a class="btn btn-dark me-2" style="float:right" href="./add">글등록</a>
 		
 		</c:if>
