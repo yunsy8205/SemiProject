@@ -21,12 +21,7 @@
                 <!-- 생략... -->
                 <input type="hidden" name="proNo" value="${product.proNo}">
 
-                <!-- 기존 이미지 표시 -->
-                    <div id="imagePreview" class="mb-3">
-                        <c:forEach var="image" items="${existingImages}">
-                            <img src="${image}" alt="기존 이미지" width="100">
-                        </c:forEach>
-                    </div>
+                
 
                <div class="mb-3">
 					<button type="button" class="btn btn-primary" id="add">File추가</button>
@@ -48,15 +43,18 @@
 				</div>
 
 				</div>
-                <label for="catNo">카테고리 선택:</label>
-                <select id="catNo" name="catNo">
-                    <option value="1001">에어컨</option>
-                    <option value="1002">냉장고</option>
-                    <option value="1003">세탁기</option>
-                    <option value="1004">TV</option>
-                    <option value="1005">노트북</option>
-                    <option value="1006">청소기</option>
-                </select>
+                <div>
+                    <label for="catNo">카테고리 선택:</label>
+                      <select id="catNo" name="catNo">
+                          <option value="1001">핸드폰</option>
+                          <option value="1002">전자기기</option>
+                          <option value="1003">미용가전</option>
+                          <option value="1004">주방가전</option>
+                          <option value="1005">생활가전</option>
+                          <option value="1006">사무기기</option>
+                          <option value="1007">기타</option>
+                      </select>
+                      </div>
 
                 <div class="mb-3">
                     <label for="proStatus" class="form-label">상태</label>

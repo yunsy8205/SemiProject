@@ -7,10 +7,10 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../resources/css/prodetail.css">
-
+<c:import url="../temp/header.jsp"></c:import>
 </head>
 <body>
-<c:import url="../temp/header.jsp"></c:import>
+
 
 		<!-- NAVIGATION -->
 		<nav id="navigation">
@@ -28,16 +28,20 @@
 						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
 						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
 						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
-						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
+						<li><a href="./product/categoryList?catNo=1007">기타</a></li>
 
 					</ul>
 					<!-- /NAV -->
-				
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
 
-				<!-- row -->
-				
+				<!-- row --><div class="col-md-12">
 				<div class="row">
-					<div class="col-md-12">
+					
 						<ul class="breadcrumb-tree">
 							<li><a href="../">Home</a></li>
 							<li><a href="#">${dto.catNo}</a></li><!--  -->
@@ -203,9 +207,7 @@
 
 	</div> 
 
-	<div>
-    <a href="/product/update?proNo=${dto.proNo}">수정</a>
-	</div>	
+	
 <!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->

@@ -84,16 +84,17 @@
                   <div>
                   <label for="catNo">카테고리 선택:</label>
 				    <select id="catNo" name="catNo">
-				        <option value="1001">에어컨</option>
-				        <option value="1002">냉장고</option>
-				        <option value="1003">세탁기</option>
-						<option value="1004">TV</option>
-						<option value="1005">노트북</option>
-				        <option value="1006">청소기</option>
+				        <option value="1001">핸드폰</option>
+				        <option value="1002">전자기기</option>
+				        <option value="1003">미용가전</option>
+						<option value="1004">주방가전</option>
+						<option value="1005">생활가전</option>
+				        <option value="1006">사무기기</option>
+                        <option value="1007">기타</option>
 				    </select>
 					</div>
                
-                  <div class="mb-3">
+                  
                     <label for="proStatus" class="form-label">상태</label>
                     <input name="proStatus" id="proStatus0" type="radio" value="0" checked>
                     <label for="proStatus0">중고상품</label>
