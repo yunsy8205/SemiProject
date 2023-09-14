@@ -43,18 +43,6 @@
                     <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
                 </div>
 				
-				<!-- <div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>
-				<div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>
-				<div class="mb-3">
-				  <label for="pic" class="form-label">사진첨부</label>
-				  <input type="file" name="photos" class="form-control" id="pic" placeholder="+">
-				</div>	 -->
 				
 						
 				
@@ -77,10 +65,7 @@
                     <input type="text" name="proName" class="form-control" id="proName" placeholder="제목 입력">
                 </div>
 
-				<!-- <div class="mb-3">
-                    <label for="proName" class="form-label">제목</label>
-                    <input type="text" name="proName"  class="form-control" id="proName" placeholder="제목 입력">
-                  </div> -->
+				
                   <div>
                   <label for="catNo">카테고리 선택:</label>
 				    <select id="catNo" name="catNo">
@@ -94,7 +79,7 @@
 				    </select>
 					</div>
                
-                  
+                  <div>
                     <label for="proStatus" class="form-label">상태</label>
                     <input name="proStatus" id="proStatus0" type="radio" value="0" checked>
                     <label for="proStatus0">중고상품</label>
@@ -129,22 +114,7 @@
 						<input type="text" name="proAmount" class="form-control" id="proAmount" placeholder="수량 입력">
 						
 					</div>
-                  <!-- <div class="mb-3">
-                    <label for="proPrice" class="form-label">가격</label>
-                    <input type="text" name="proPrice" class="form-control" id="proPrice" placeholder="가격 입력">
-                    원
-                  </div>
-		
-				<div class="mb-3">
-				  <label for="proContents" class="form-label">내용</label>
-				  <textarea name="proContents" class="form-control" id="proContents" placeholder="내용 입력" rows="7"></textarea>
-				</div>
-
-                <div class="mb-3">
-                    <label for="proAmount" class="form-label">수량</label>
-                    <input type="text" name="proAmount" class="form-control" id="proAmount" placeholder="수량 입력">
-                    개
-                  </div> -->
+               
 				
 				
 				

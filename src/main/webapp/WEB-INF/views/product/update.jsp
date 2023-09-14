@@ -30,7 +30,7 @@
 				<div id="fileList" class="my-5">
 						
 	
-				</div>
+				
 
 				<div>
 					<c:forEach items="${product.fileDTOs}" var="f">
@@ -105,6 +105,7 @@
                     <button class="my btn btn-danger" type="submit" id="btn">수정하기</button>
                 </div>
             </form>
+        </div>
         </div>
     </div>
     
