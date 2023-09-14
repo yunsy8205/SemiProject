@@ -134,6 +134,7 @@
 	               <c:forEach items="${member.roles}" var="m">
              			<c:if test="${m.grantNo==1}">${m.grantNo}
                   			<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+                  			<li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
              			</c:if>
              			<c:if test="${m.grantNo==2}">${m.grantNo}
 			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
