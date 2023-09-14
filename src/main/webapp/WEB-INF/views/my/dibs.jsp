@@ -127,7 +127,7 @@
 			                <div class="product">
 			                    <div class="product-img">
 			                  
-			                        <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="255" height="200"></a>
+			                        <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="255" height="200"></a>
 			                   
 			                    </div>
 			                    <div class="product-body">
