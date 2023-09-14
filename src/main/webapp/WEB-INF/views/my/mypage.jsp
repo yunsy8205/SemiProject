@@ -167,11 +167,11 @@
 								</div>
 								<div class="order-col">
 									<div>판매횟수</div>
-									<div>${sale}</div>
+									<div>${fn:length(sale) }</div>
 								</div>
 								<div class="order-col">
 									<div>구매횟수</div>
-									<div>${buyer}</div>
+									<div>${fn:length(buyer) }</div>
 								</div>
 							</div>
 						</div>
