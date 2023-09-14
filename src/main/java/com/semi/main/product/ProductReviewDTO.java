@@ -8,20 +8,21 @@ public class ProductReviewDTO {
 	private String contents;
 	private Double score;
 	private String userId;
-	private String originalName;
+	private String fileName;
 	private String proName;
 	
+	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public String getProName() {
 		return proName;
 	}
 	public void setProName(String proName) {
 		this.proName = proName;
-	}
-	public String getOriginalName() {
-		return originalName;
-	}
-	public void setOriginalName(String originalName) {
-		this.originalName = originalName;
 	}
 	public Double getScore() {
 		if(score==null) {

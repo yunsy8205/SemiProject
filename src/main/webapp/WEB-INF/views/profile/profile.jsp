@@ -19,7 +19,7 @@
 
 		<div id="box1">
 			<div id="box2">
-				<img class="userImage" src="../resources/upload/member/${member.memberFileDTO.fileName}" alt="...">
+				<img class="userImage" src="../resources/upload/member/${dto.fileName}" alt="...">
 			</div>
 			<div style="text-align: center; margin-top: 15px;">
 				<div style="font-size: 17px;">${dto.userId}</div>
