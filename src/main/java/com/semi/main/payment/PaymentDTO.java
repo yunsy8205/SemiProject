@@ -20,9 +20,33 @@ public class PaymentDTO {
 	   
 	   private String userId;
 	   private String statusName;
+	   
+	   private String holder;
+	   private String bankCode;
+	   private String bankNum;
+	   
+	   
    
 	   
-   public String getUserId() {
+   public String getHolder() {
+		return holder;
+	}
+	public void setHolder(String holder) {
+		this.holder = holder;
+	}
+public String getBankCode() {
+		return bankCode;
+	}
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+	public String getBankNum() {
+		return bankNum;
+	}
+	public void setBankNum(String bankNum) {
+		this.bankNum = bankNum;
+	}
+public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
