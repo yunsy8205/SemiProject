@@ -37,6 +37,9 @@ public class PaymentDAO {
 	   return sqlSession.update(NAMESPACE+"setPayUpdate", paymentDTO);
    }
   
+   public PaymentDTO getPayDetail(PaymentDTO paymentDTO)throws Exception{
+	   return sqlSession.selectOne(NAMESPACE+"getPayDetail", paymentDTO);
+   }
 
 }
 

@@ -52,10 +52,17 @@
 
 	<!-- 회원가입 -->
  	<insert id="setJoin"  parameterType="MemberDTO">
- 		INSERT INTO MEMBER VALUES(USERNO_SEQ.NEXTVAL,#{userId},#{userPw},#{name},#{email}
+ 		<selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
+ 			SELECT USERNO_SEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO MEMBER (USERNO,USERID,USERPW,NAME,EMAIL,BIRTH,ADDRESS,PHONE,ACCOUNTDATE
+ 		,INTRO,STATUSNO,ZIPCODE,REFADDRESS,DETAILADDRESS)VALUES(#{userNo},#{userId},#{userPw},#{name},#{email}
  		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress})
  	</insert>
  	
+ 	<insert id="joinGrant" parameterType="MemberDTO">
+ 		INSERT INTO MEMBERROLE VALUES (#{userNo},1)
+ 	</insert>
  	<!-- ID 중복체크 -->
  	<select id="getUserIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT USERID FROM MEMBER WHERE USERID = #{userId}

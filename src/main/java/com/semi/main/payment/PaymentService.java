@@ -36,5 +36,8 @@ public class PaymentService {
   public int setPayUpdate(PaymentDTO paymentDTO)throws Exception{
 	  return paymentDAO.setPayUpdate(paymentDTO);
   }
-	
+
+  public PaymentDTO getPayDetail(PaymentDTO paymentDTO)throws Exception{
+	  return paymentDAO.getPayDetail(paymentDTO);
+  }
 }
