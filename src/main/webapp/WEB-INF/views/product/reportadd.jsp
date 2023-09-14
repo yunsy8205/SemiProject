@@ -10,8 +10,14 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title>Insert title here</title>
 <c:import url="../temp/bootstrap.jsp"></c:import>
-<c:import url="../temp/header1.jsp"></c:import>
+<c:import url="../temp/header.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>
+<style type="text/css">
+	#reportadd{
+		width: 70%;
+		margin-left:10%;
+	}
+</style>
 </head>
 <body>
       <!-- SECTION -->
@@ -19,11 +25,11 @@
          <!-- container -->
          <div class="container">
             <!-- row -->
-            <div class="row" style="display:block; margin: 0px;">
+            <div class="row">
 
-               <div class="col-md-7" style="width: 70%">
+               <div class="col-md-7" id="reportadd">
                   <!-- Billing Details -->
-                  <form action="../member/reportadd" method="post" enctype="multipart/form-data">
+                  <form action="../product/reportadd" method="post" enctype="multipart/form-data">
                   <div class="billing-details">
                      <div class="section-title">
                         <h3 class="title">신고하기</h3>
@@ -61,12 +67,6 @@
                      <div class="form-group">
                         <input class="input" type="file" name="photos">
                      </div>
-                     <div class="form-group">
-                        <input class="input" type="file" name="photos">
-                     </div>
-                     <div class="form-group">
-                        <input class="input" type="file" name="photos">
-                     </div>
                      
                   <button type="submit" class="primary-btn order-submit">신고하기</button>
                   <a style="float:right; text-decoration: underline;" href="../profile/products?userNo=${dto.userNo}">취소</a>
@@ -85,6 +85,6 @@
 
       </div>
       <!-- /NEWSLETTER -->
-<c:import url="../temp/footer1.jsp"></c:import>
+
 </body>
 </html>
