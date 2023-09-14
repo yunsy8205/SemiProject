@@ -200,7 +200,7 @@ public class MyPageController {
 	    return "./my/dibs";
 	}
 	
-	// 상품 관리
+	// 구매목록
 		@GetMapping("management") 
 		public void management(HttpSession session, Model model) throws Exception{
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
@@ -209,7 +209,11 @@ public class MyPageController {
 			
 			model.addAttribute("buyer", ar);
 		}
-		
 
+		// 후기
+		@GetMapping("review")
+		public void review() throws Exception{
+			
+		}
 	 
 }
