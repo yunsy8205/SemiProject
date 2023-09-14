@@ -24,7 +24,7 @@
 		<tr>
 				 	<td>${dto.userId} </td>	
 					<td>${dto.holder}</td>
-					<td>${dto.bankCode}</td>
+					<td>${dto.bankName}</td>
 					<td>${dto.bankNum}</td>
 				</tr>
 			

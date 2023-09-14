@@ -24,11 +24,17 @@ public class PaymentDTO {
 	   private String holder;
 	   private String bankCode;
 	   private String bankNum;
-	   
+	   private String bankName;
 	   
    
 	   
-   public String getHolder() {
+   public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+public String getHolder() {
 		return holder;
 	}
 	public void setHolder(String holder) {

@@ -28,7 +28,7 @@
 			
 			<div class="mb-3">
 			<label for="title" class="form-label">제목</label>
-			<input type="text" class="form-control p-2 mb-3 w-25" id="title" name="title" value="${dto.title}">
+			<input type="text" class="form-control p-2 mb-3 w-50" id="title" name="title" value="${dto.title}">
 			</div>
 			
 			<div class="mb-3">

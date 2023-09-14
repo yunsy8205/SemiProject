@@ -33,7 +33,7 @@
 		<tfoot>
 		
 		<tr>
-			<td colspan="4">${dto.contents} <br>
+			<td colspan="4">${dto.contents}<br>
 			
 			</td>
 			
@@ -48,10 +48,12 @@
 			<div>첨부파일 <a href="./fileDown?fileNo=${f.fileNo}">${f.originalName}</a><div>
 		</c:forEach> 
 		
-		<c:if test="${member.userId == 'ADMIN'}">
+		<c:forEach items="${member.roles}" var="r"> 
+		<c:if test="${r.grantNo == 2}">
 		<a class="btn btn-dark" style="float:right" href="./update?boardNo=${dto.boardNo}"> 수정 </a>
 		<a class="btn btn-dark mx-2" style="float:right" href="./delete?boardNo=${dto.boardNo}"> 삭제</a>
 		</c:if>
+		</c:forEach>
 		
 	
 

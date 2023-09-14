@@ -34,7 +34,7 @@
 		<div class="border border-dark border-opacity-50 p-2 mb-3 w-25 rounded" >${dto.kindName}</div>
 
 		<label for="title" class="form-label">제목</label>
-		<div class="border border-dark border-opacity-50 p-2 mb-3 w-25 rounded" >${dto.title}</div>
+		<div class="border border-dark border-opacity-50 p-2 mb-3 w-50 rounded" >${dto.title}</div>
 		
 		<label for="contents" class="form-label">내용</label>
 		<div class="border border-dark border-opacity-50 p-2 mb-3 w-100 rounded" >${dto.contents}</div>
@@ -60,7 +60,7 @@
 		</div>
 		
 			<c:forEach items="${member.roles}" var="r"> 
-		<c:if test="${r.grantName == 'admin'}">
+		<c:if test="${r.grantNo == 2}">
 			<div class="a mb-3">
 			<label for="comment" class="form-label">답글달기</label>
 			<textarea cols="10" rows="10" class="form-control" id="comment"></textarea>

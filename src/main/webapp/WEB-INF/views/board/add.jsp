@@ -53,9 +53,10 @@
 
 	
 
-</script>
+
 
 <script src="../resources/js/file2.js"></script>
+
 
 
 </body>

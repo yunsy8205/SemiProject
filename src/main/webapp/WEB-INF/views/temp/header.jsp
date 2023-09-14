@@ -138,8 +138,8 @@
                   			<li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
              			</c:if>
              			<c:if test="${m.grantNo == 2}">
-
 			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
+							 <li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
 	               		</c:if>
 	               </c:forEach>
                </c:if>

@@ -69,10 +69,11 @@
      <!-- ADMIN결제관리 -->
      
      <select id="getPayDetail" resultType="PaymentDTO" parameterType="PaymentDTO">
-       SELECT M.USERID, p2.REASON, M.HOLDER, M.BANKCODE, M.BANKNUM
+       SELECT M.USERID, p2.REASON, M.HOLDER, B.BANKNAME, M.BANKNUM
 		FROM PRODUCT P LEFT JOIN PAYMENT p2 
 		ON (P.PRONO=P2.PRONO) LEFT JOIN MEMBER M
-		ON (P.USERNO = M.USERNO)
+		ON (P.USERNO = M.USERNO) LEFT JOIN BANK B
+		ON (M.BANKCODE= B.BANKCODE)
 	 WHERE p2.PAYMENTNO = #{paymentNo}
      </select>
  
