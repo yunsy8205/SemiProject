@@ -11,10 +11,23 @@ public class BuyerDTO {
 	private String proName;
 	private Long totalPrice;
 	private Date paymentDate;
+	private String uidNo;
 	private List<ProductFileDTO> fileDTOs;
+	private Long statusNo;
 	
 	
-	
+	public Long getStatusNo() {
+		return statusNo;
+	}
+	public void setStatusNo(Long statusNo) {
+		this.statusNo = statusNo;
+	}
+	public String getUidNo() {
+		return uidNo;
+	}
+	public void setUidNo(String uidNo) {
+		this.uidNo = uidNo;
+	}
 	public List<ProductFileDTO> getFileDTOs() {
 		return fileDTOs;
 	}

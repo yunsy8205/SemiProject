@@ -43,6 +43,7 @@ let proName=$('#order').attr("data-name");
 					success:function(result){
 						console.log(result);
 			      		window.location.href = "../";
+			      		alert("결제 성공");
 						
 					},
 					error:function(error){
