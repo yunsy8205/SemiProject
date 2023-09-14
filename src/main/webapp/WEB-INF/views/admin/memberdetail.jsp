@@ -147,7 +147,6 @@
 	
 	<!-- 주소 정보 추가 -->
 <script type="text/javascript">
-console.log(${dto.holder});
 
 $('.b').click(function(){
 	let userNo=$(this).attr("data-num");

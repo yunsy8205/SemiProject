@@ -82,7 +82,7 @@
 						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
 						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
 						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
-						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
+						<li><a href="./product/categoryList?catNo=1007">기타</a></li>
 
 					</ul>
 					<!-- /NAV -->
@@ -111,11 +111,6 @@
 					</div>
 					<!-- /section title -->
 
-					
-
-					
-					  
-					
 
 					<!-- Products tab & slick -->
 					<div class="col-md-12">

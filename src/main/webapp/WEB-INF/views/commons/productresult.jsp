@@ -4,7 +4,7 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 				
 				<c:forEach items="${list}" var="d" varStatus="i" >
-			            <div class="col-md-3" style="padding-right: 26px;">
+			            <div class="col-md-3" style="padding-right: 26px; padding-left: 16px; display: inline;">
 			                <div class="product">
 					<c:set var="flag" value="true"/>
 					<c:choose>

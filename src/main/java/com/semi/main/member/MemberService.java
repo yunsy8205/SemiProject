@@ -49,8 +49,9 @@ public class MemberService {
 	/** 회원가입*/
 	public int setJoin(MemberDTO memberDTO) throws Exception{
 		System.out.println("회원가입 서비스");
-		return memberDAO.setJoin(memberDTO);
-	}
+		int result = memberDAO.setJoin(memberDTO);
+		return memberDAO.joinGrant(memberDTO);
+		}
 	
 	// Naver login
 	/*

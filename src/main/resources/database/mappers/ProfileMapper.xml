@@ -6,7 +6,7 @@
  
   <mapper namespace="com.semi.main.profile.ProfileDAO">
   	<select id="memberProfile" parameterType="ProfileDTO" resultType="ProfileDTO">
-  		SELECT M.*, P.ORIGINALNAME
+  		SELECT M.*, P.FILENAME
 		FROM MEMBER M LEFT JOIN PROFILE P
 		ON(M.USERNO=P.USERNO)
 		WHERE M.USERNO=#{userNo}
@@ -35,7 +35,7 @@
   	<select id="memberReviewList" parameterType="Map" resultType="ProductReviewDTO">
 		SELECT * FROM
 		(SELECT ROWNUM R, A.* FROM
-		(SELECT RE.*, M.USERID, P.FILENAME, PD.PRONAME FROM REVIEW RE
+		(SELECT RE.*, M.USERID, P.FILENAME FROM REVIEW RE
 		JOIN MEMBER M ON(RE.USERNO=M.USERNO)
 		LEFT JOIN PROFILE P ON(RE.USERNO=P.USERNO)
 		LEFT JOIN PRODUCT PD ON(RE.PRONO=PD.PRONO)
