@@ -28,7 +28,7 @@
 					<td>${d.paymentNo}</td>
 					<td>${d.userId}</td>
 					<td>${d.name}</td>
-					<td><a class="text-decoration-none" href="../product/detail?proNo=${d.proNo}">${d.proName}</a></td>
+					<td><a class="text-decoration-none" href="./payDetail?paymentNo=${d.paymentNo}">${d.proName}</a></td>
 					<td>${d.totalPrice}</td>
 					<td>${d.paymentDate}</td>
 					<td>${d.statusName}</td>

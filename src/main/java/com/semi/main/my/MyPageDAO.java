@@ -72,13 +72,39 @@ public class MyPageDAO {
   	public Long getTotal(Map<String, Object> map)throws Exception{
   		return sqlSession.selectOne(NAMESPACE+"getTotal", map);
   	}
-
+    
+  	// 내게 쓴 후기 
+  	public List<ReviewsDTO> getReviews(Long userNo) throws Exception{
+  		List<ReviewsDTO> ar = sqlSession.selectList(NAMESPACE + "getReview", userNo);
+  		System.out.println("리뷰 사이즈 : " + ar.size());
+  		return ar;
+  	}
+    	
+  	//구매목록
   	public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
   		List<BuyerDTO> ar = sqlSession.selectList(NAMESPACE + "getBuyer", userNo);
   		System.out.println("사이즈1 : " + ar.size());
   		return ar;
   	}
-    	
-    
-
+  	
+  	//판매목록
+  	public List<SaleDTO> getSale(Long userNo) throws Exception{
+  		List<SaleDTO> arr = sqlSession.selectList(NAMESPACE+"getSale", userNo);
+  		System.out.println("판매목록 사이즈 : " + arr.size());
+  		return arr;
+  	}
+  	
+  	//구매목록 카운트
+  	public Long getBuyCount(Long userNo) throws Exception{
+  		Long a = sqlSession.selectOne(NAMESPACE+"getBuyCount", userNo);
+  		System.out.println("구매카운트? : " + a);
+  		return a;
+  	}
+  	
+  	//판매목록 카운트
+  	public Long getSaleCount(Long userNo) throws Exception{
+  		Long b = sqlSession.selectOne(NAMESPACE+"getSaleCount", userNo);
+  		System.out.println("판매카운트? : " + b);
+  		return b;
+  	}
 }

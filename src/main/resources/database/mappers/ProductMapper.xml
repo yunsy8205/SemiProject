@@ -208,6 +208,12 @@ SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
     WHERE FILENO = #{fileNo}
 </select>
 
+<insert id="reviewAdd" parameterType="ProductReviewDTO">
+	INSERT INTO REVIEW (REVIEWNO, PRONO, USERNO, PRONAME, CONTENTS, SCORE, REVIEWDATE)
+	VALUES (REVIEW_SEQ.NEXTVAL, #{proNo}, #{userNo}, #{proName}, #{contents}, #{score}, SYSDATE)
+</insert>
+
+
 
 
 

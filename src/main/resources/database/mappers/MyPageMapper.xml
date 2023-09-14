@@ -43,6 +43,7 @@
         SELECT * FROM CHAT
     </select>
     
+    <!-- 상품관리(내가 쓴 글) -->
     <select id="memberProList" parameterType="Map" resultMap="getResult">
 		SELECT C.*, PI.* FROM
 		(SELECT B.* FROM
@@ -88,8 +89,7 @@
       		DIBS d
       		ON m.USERNO = d.USERNO 
       		
-      		INNER 
-      		JOIN PRODUCT p
+      		INNER JOIN PRODUCT p
       		ON d.PRONO = p.PRONO 
       		
       		INNER JOIN 
@@ -116,17 +116,22 @@
     	</collection>
 	</resultMap>
 
-	<select id="getBuyer" parameterType="Long" resultMap="SaleResult">
-       SELECT * FROM PAYMENT p left JOIN PRODUCTIMAGE p2 
-		ON p.PRONO = p2.PRONO
+	<!-- 구매목록 -->
+	<select id="getBuyer" parameterType="Long" resultMap="buyerResult">
+       SELECT * FROM PAYMENT P left JOIN PRODUCTIMAGE PM 
+		ON P.PRONO = PM.PRONO
 		WHERE USERNO = #{userNo}
+		ORDER BY P.PAYMENTDATE DESC
     </select>
     
-    <resultMap id="SaleResult"   type="BuyerDTO">
+    <resultMap id="buyerResult"   type="BuyerDTO">
     	<result property="userNo" column="USERNO"/>
     	<result property="proNo" column="PRONO"/>
     	<result property="proName" column="PRONAME"/>
     	<result property="totalPrice" column="TOTALPRICE"/>
+    	<result property="paymentDate" column="PAYMENTDATE"/>
+    	<result property="uidNo" column="UIDNO"/>
+    	<result property="statusNo" column="STATUSNO"/>
 
     	
     	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
@@ -135,7 +140,73 @@
         	<result column="FILENAME" property="fileName"/>
     	</collection>
 	</resultMap>
+	
+	<!-- 판매목록 -->
+    <select id="getSale" parameterType="Long" resultMap="SaleResult">
+		SELECT * FROM PRODUCT P
+		LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) LEFT JOIN PRODUCTIMAGE p3 
+		ON P.PRONO = p3.PRONO 
+		WHERE P.USERNO=#{userNo}
+    </select>
     
+    <resultMap id="SaleResult"   type="SaleDTO">
+    	<result property="userNo" column="USERNO"/>
+    	<result property="proName" column="PRONAME"/>
+    	<result property="totalPrice" column="TOTALPRICE"/>
+    	<result property="proAmount" column="PROAMOUNT"/>
+    	<result property="createDate" column="CREATEDATE"/>
+    	<result property="statusNo" column="STATUSNO"/>
+    	<result property="proNo" column="PRONO"/>
+    	<result property="paymentDate" column="PAYMENTDATE"/>
+    	
+    	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+        	<id column="FILENO" property="fileNo"/>
+        	<result column="ORIGINALNAME" property="originalName"/>
+        	<result column="FILENAME" property="fileName"/>
+    	</collection>
+	</resultMap>
+    
+    
+    
+    <!-- 내게 쓴 리뷰 -->
+	<select id="getReview" parameterType="Long" resultMap="getReviews">
+		SELECT * FROM REVIEW R INNER JOIN PRODUCTIMAGE P
+		ON R.PRONO = P.PRONO
+		WHERE USERNO = #{userNo}
+	</select>
 
+	<resultMap type="ReviewsDTO" id="getReviews">
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONO" property="proNo"/>
+	  		<result column="REVIEWNO" property="reviewNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="CONTENTS" property="contents"/>
+	  		<result column="REVIEWDATE" property="reviewDate"/>
+	  		<result column="SCORE" property="score"/>
+	  	
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	
+	<!-- 구매목록 카운트 -->
+		<select parameterType="Long" id="getBuyCount" resultType="Long">
+			SELECT count(*) FROM PAYMENT P 
+			left JOIN PRODUCTIMAGE PM
+			ON P.PRONO = PM.PRONO
+			WHERE USERNO = #{userNo} 
+		</select>
+
+	<!-- 판매목록 카운트 -->
+		<select parameterType="Long" id="getSaleCount" resultType="Long">
+			SELECT count(*) FROM PRODUCT P
+			LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) 
+			LEFT JOIN PRODUCTIMAGE p3
+			ON P.PRONO = p3.PRONO
+			WHERE P.USERNO=#{userNo} 
+		</select>
 
   </mapper>

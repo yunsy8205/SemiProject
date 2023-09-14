@@ -26,6 +26,11 @@ public class MemberDAO {
 		  return sqlSession.insert(NAMESPACE+"setJoin", memberDTO); 
 	  }
 	  
+	  public int joinGrant(MemberDTO memberDTO)throws Exception{
+		  return sqlSession.insert(NAMESPACE+"joinGrant", memberDTO);
+	  }
+	 
+	  
 	// ID 체크
 	  public MemberDTO getUserIdCheck(MemberDTO memberDTO) throws Exception{
 		  return sqlSession.selectOne(NAMESPACE+"getUserIdCheck", memberDTO);

@@ -46,6 +46,18 @@ public class AdminController {
 	private QnaService qnaService;
 	@Autowired
 	private PaymentService paymentService;
+	
+	@GetMapping("payDetail")
+	public String getPayDetail(PaymentDTO paymentDTO, Model model)throws Exception{
+		
+	    paymentDTO = paymentService.getPayDetail(paymentDTO);
+	    
+	    model.addAttribute("dto", paymentDTO);
+	    
+	    return "admin/payDetail";
+		
+		
+	}
 
 	//비번초기화
 	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)
@@ -106,12 +118,12 @@ public class AdminController {
 		return "commons/ajaxResult";
 	}
 	
-// 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
-// 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
-// 		memberDTO = adminService.memberDetail(memberDTO);
-// 		model.addAttribute("dto", memberDTO);
-// 		return "admin/memberdetail";
-// 	}
+ 	@RequestMapping(value = "memberdetail", method = RequestMethod.GET)
+ 	public String memberList(MemberDTO memberDTO, Model model) throws Exception{
+ 		memberDTO = adminService.memberDetail(memberDTO);
+ 		model.addAttribute("dto", memberDTO);
+ 		return "admin/memberdetail";
+ 	}
 	
 	@RequestMapping(value = "memberupdate", method = RequestMethod.GET)
 	public String memberUpdate(MemberDTO memberDTO, Model model) throws Exception{

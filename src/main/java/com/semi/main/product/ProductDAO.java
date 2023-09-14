@@ -122,4 +122,8 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE+"dibsNum", productDTO);
 	}
 	
+	public int reviewAdd(ProductReviewDTO productReviewDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"reviewAdd", productReviewDTO);
+	}
+	
 }

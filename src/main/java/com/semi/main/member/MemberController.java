@@ -261,6 +261,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("mailCheck")
 	public int getMailCheck(@RequestBody MemberDTO memberDTO, Model model) throws Exception{
+		System.out.println("이메일체");
 		System.out.println(memberDTO.getEmail());
 		memberDTO = memberService.getMailCheck(memberDTO);
 		
@@ -270,6 +271,7 @@ public class MemberController {
 			result=1;
 		}
 		
+//		System.out.println("이메일체크: "+memberDTO.getEmail());
 		System.out.println("result: "+ result);
 		
 		return result;

@@ -92,10 +92,30 @@ public class MyPageService {
 		pager.makePageNum(total);
 		return myPageDAO.memberProList(map);
 	}
-    
 
+    //내게 쓴 후기
+    public List<ReviewsDTO> getReviews(Long userNo) throws Exception{
+    	return myPageDAO.getReviews(userNo);
+    }
+
+    //구매목록
     public List<BuyerDTO> getBuyer(Long userNo) throws Exception{
     	return myPageDAO.getBuyer(userNo);
     }
-
+    
+    //판매목록
+    public List<SaleDTO> getSale(Long userNo) throws Exception{
+    	return myPageDAO.getSale(userNo);
+    }
+    
+  //구매목록카운트
+    public Long getBuyCount(Long userNo) throws Exception{
+    	return myPageDAO.getBuyCount(userNo);
+    }
+    
+  //판매목록카운트
+    public Long getSaleCount(Long userNo) throws Exception{
+    	return myPageDAO.getSaleCount(userNo);
+    }
+    
 }

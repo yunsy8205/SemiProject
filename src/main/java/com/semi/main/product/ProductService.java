@@ -174,4 +174,8 @@ public class ProductService {
 	public Long dibsNum(ProductDTO productDTO)throws Exception{
 		return productDAO.dibsNum(productDTO);
 	}
+	
+	public int reviewAdd(ProductReviewDTO productReviewDTO) throws Exception{
+		return productDAO.reviewAdd(productReviewDTO);
+	}
 }

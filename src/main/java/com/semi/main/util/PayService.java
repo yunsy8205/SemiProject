@@ -125,6 +125,7 @@ public class PayService {
          
          JSONParser parser = new JSONParser();
          JSONObject json = (JSONObject)parser.parse(br.readLine());
+//         System.out.println("응답 결과 : " + json.toString());
          
          /*
             잘못된 요청을 할 경우에 응답 결과는 다음과 같으므로 NullPointerException이 발생하게 된다.
