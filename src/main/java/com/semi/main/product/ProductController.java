@@ -74,6 +74,7 @@ public class ProductController {
 		    pager.setCondition(condition); // 최신순, 인기순, 저가순, 고가순 중 어떤 조건으로 리스트를 가져올지 설정합니다.
 		    pager.setCatNo(catNo); // 카테고리 번호를 설정합니다.
 
+		    System.out.println(pager.getLastNum());
 	        List<ProductDTO> ar = productService.getCategoryList(pager);
 	      
 //	        // 각 상품에 대한 이미지 리스트 가져오기

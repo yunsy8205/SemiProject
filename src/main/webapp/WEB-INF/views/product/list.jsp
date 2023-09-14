@@ -136,7 +136,7 @@
 					</div>
 				</div>
 				<section class="container mt-5">
-					<div class="col-md-12">
+					<div class="col-md-15">
 				    <div class="row ">
 				        <c:forEach var="product" items="${list}" >
 				            <div class="col-md-3">
@@ -170,17 +170,17 @@
 						<ul class="pagination justify-content-center"> <!-- Add 'justify-content-center' class here -->
 						 <c:if test="${pager.pre}">
 							 <li class="page-item">
-								 <a class="page-link" href="/product/list?page=${pager.startNum - 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}" aria-label="Previous">
+								 <a class="page-link" href="/product/list?condition=${param.condition}&page=${pager.startNum - 1}" aria-label="Previous">
 									 <span aria-hidden="true">&laquo;</span>
 								 </a>
 							 </li>
 						 </c:if>
 						 <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							 <li class="page-item"><a class="page-link" href="/product/list?page=${i}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}">${i}</a></li>
+							 <li class="page-item"><a class="page-link" href="/product/list?condition=${param.condition}&page=${i}">${i}</a></li>
 						 </c:forEach>
 						 <c:if test="${pager.next}">
 							 <li class="page-item">
-								 <a class="page-link" href="/product/list?page=${pager.lastNum + 1}&kind=${param.kind}&search=${param.search}&condition=${param.condition}&catNo=${catNo}" aria-label="Next">
+								 <a class="page-link" href="/product/list?condition=${param.condition}&page=${pager.lastNum + 1}" aria-label="Next">
 									 <span aria-hidden="true">&raquo;</span>
 								 </a>
 							 </li>
@@ -203,7 +203,7 @@
 								<td><button type="submit" class="search-btn">검색</button></td>
                                  <!-- 선택된 condition을 hidden input으로 추가 -->
                              <input type="hidden" name="condition" value="${param.condition}">
-                             <input type="hidden" name="catNo" value="${param.catNo}">
+                            <%--  <input type="hidden" name="catNo" value="${param.catNo}"> --%>
 							</tr>
 						</table>
 					</form>
