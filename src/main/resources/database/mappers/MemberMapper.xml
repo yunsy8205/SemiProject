@@ -36,6 +36,9 @@
 		<result column="ZIPCODE" property="zipCode"/>
 		<result column="REFADDRESS" property="refAddress"/>
 		<result column="DETAILADDRESS" property="detailAddress"/>
+		<result column="HOLDER" property="holder"/>
+		<result column="BANKCODE" property="bankCode"/>
+		<result column="BANKNUM" property="bankNum"/>
 		
 		<association property="memberFileDTO" javaType="MemberFileDTO">
 			<id column="FILENO" property="fileNo"/>
@@ -53,30 +56,44 @@
 	<!-- 회원가입 -->
  	<insert id="setJoin"  parameterType="MemberDTO">
  		<selectKey keyProperty="userNo" resultType="Long" order="BEFORE">
- 			SELECT USERNO_SEQ.NEXTVAL FROM DUAL
+ 			SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
  		</selectKey>
  		INSERT INTO MEMBER (USERNO,USERID,USERPW,NAME,EMAIL,BIRTH,ADDRESS,PHONE,ACCOUNTDATE
- 		,INTRO,STATUSNO,ZIPCODE,REFADDRESS,DETAILADDRESS)VALUES(#{userNo},#{userId},#{userPw},#{name},#{email}
- 		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress})
+ 		,INTRO,STATUSNO,ZIPCODE,REFADDRESS,DETAILADDRESS,HOLDER,BANKCODE,BANKNUM)
+ 		VALUES(#{userNo},#{userId},#{userPw},#{name},#{email}
+ 		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress}
+ 		,#{holder}, #{bankCode}, #{bankNum})
  	</insert>
  	
+ 	<!-- 권한설정 -->
  	<insert id="joinGrant" parameterType="MemberDTO">
  		INSERT INTO MEMBERROLE VALUES (#{userNo},1)
  	</insert>
+ 	
  	<!-- ID 중복체크 -->
  	<select id="getUserIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT USERID FROM MEMBER WHERE USERID = #{userId}
  	</select>	
-	
-	 <!-- Email 중복체크 -->
- 	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
- 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
- 	</select>
- 	 <!-- Email 중복체크 -->
+ 	
+ 	<!-- Email 중복체크 -->
  	<select id="getMailCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}
  	</select>
+	
+	<!-- 회원 정보 조회 -->
+	<select id="getMemberDetail" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT * FROM MEMBER WHERE USERID = #{userId}
+ 	</select>
  	
- 	
+ 	<!-- PW 변경 -->
+ 	<update id="setUpdatePw" parameterType="MemberDTO">
+		UPDATE MEMBER SET USERPW = #{userPw} WHERE USERID = #{userId}
+	</update>
+	
+	<!-- ID 찾기 -->
+	<select id="getFindId" parameterType="MemberDTO" resultType="String">
+ 		SELECT USERID FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+	
 	
 </mapper>

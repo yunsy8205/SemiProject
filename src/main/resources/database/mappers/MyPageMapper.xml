@@ -191,6 +191,22 @@
 		  		<result column="FILENAME" property="fileName"/>
 	  		</collection>
 	  	</resultMap>
+	
+	<!-- 구매목록 카운트 -->
+		<select parameterType="Long" id="getBuyCount" resultType="Long">
+			SELECT count(*) FROM PAYMENT P 
+			left JOIN PRODUCTIMAGE PM
+			ON P.PRONO = PM.PRONO
+			WHERE USERNO = #{userNo} 
+		</select>
 
+	<!-- 판매목록 카운트 -->
+		<select parameterType="Long" id="getSaleCount" resultType="Long">
+			SELECT count(*) FROM PRODUCT P
+			LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) 
+			LEFT JOIN PRODUCTIMAGE p3
+			ON P.PRONO = p3.PRONO
+			WHERE P.USERNO=#{userNo} 
+		</select>
 
   </mapper>
