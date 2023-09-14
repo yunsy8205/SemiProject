@@ -41,6 +41,20 @@ public class MemberDAO {
 		  return sqlSession.selectOne(NAMESPACE+"getMailCheck", memberDTO);
 	  }
 	 
+	// ID 찾기
+	  public MemberDTO getMemberDetail(MemberDTO memberDTO) throws Exception{
+		  return sqlSession.selectOne(NAMESPACE+"getMemberDetail", memberDTO);
+	  }
+	  
+	  public String getFindId(MemberDTO memberDTO) throws Exception{
+		  return sqlSession.selectOne(NAMESPACE+"getFindId", memberDTO);
+	  }
+	  
+	// PW 변경
+	  public int setUpdatePw(MemberDTO memberDTO) throws Exception{
+		  return sqlSession.update(NAMESPACE+"setUpdatePw", memberDTO);
+	  }
+	 
 	
 
 }
