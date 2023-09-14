@@ -153,7 +153,7 @@
       
       <c:forEach var="product" items="${sale}"  varStatus="i">	
 			
-			<c:if test="${product.statusNo == 1}">
+			
 					
 					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="255" height="200"></a>
 					
@@ -163,11 +163,11 @@
 		
 			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
 			        
-			       <div>
-			       <input type="hidden"  data-toggle="modal" data-target="#exampleModal" id="c" >
-			      <%--  <button class="d-nonr" data-toggle="modal" data-target="#exampleModal" id="c" data-uid ="${product.uidNo}"></button> --%>
-	</div>		        
-			</c:if>		
+			      
+					<div>	<button class="btn btn-primary"  >계좌 입력</button>     </div>
+
+	
+				
 			     
 			     
 	  		</c:forEach>
