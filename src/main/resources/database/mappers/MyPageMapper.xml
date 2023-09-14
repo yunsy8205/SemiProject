@@ -43,6 +43,7 @@
         SELECT * FROM CHAT
     </select>
     
+    <!-- 상품관리(내가 쓴 글) -->
     <select id="memberProList" parameterType="Map" resultMap="getResult">
 		SELECT C.*, PI.* FROM
 		(SELECT B.* FROM
@@ -88,8 +89,7 @@
       		DIBS d
       		ON m.USERNO = d.USERNO 
       		
-      		INNER 
-      		JOIN PRODUCT p
+      		INNER JOIN PRODUCT p
       		ON d.PRONO = p.PRONO 
       		
       		INNER JOIN 
@@ -116,6 +116,7 @@
     	</collection>
 	</resultMap>
 
+	<!-- 구매목록 -->
 	<select id="getBuyer" parameterType="Long" resultMap="SaleResult">
        SELECT * FROM PAYMENT p left JOIN PRODUCTIMAGE p2 
 		ON p.PRONO = p2.PRONO
@@ -136,6 +137,30 @@
     	</collection>
 	</resultMap>
     
+    
+    <!-- 내게 쓴 리뷰 -->
+	<select id="getReview" parameterType="Long" resultMap="getReviews">
+		SELECT * FROM REVIEW R INNER JOIN PRODUCTIMAGE P
+		ON R.PRONO = P.PRONO
+		WHERE USERNO = #{userNo}
+	</select>
+
+	<resultMap type="ReviewsDTO" id="getReviews">
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONO" property="proNo"/>
+	  		<result column="REVIEWNO" property="reviewNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="CONTENTS" property="contents"/>
+	  		<result column="REVIEWDATE" property="reviewDate"/>
+	  		<result column="SCORE" property="score"/>
+	  	
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
 
 
   </mapper>
