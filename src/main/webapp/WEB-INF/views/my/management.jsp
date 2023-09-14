@@ -135,7 +135,7 @@
 			        <button class="btn btn-danger open"   data-uid ="${product.uidNo}">
  					 결제취소
 					</button>
-					<a href="../product/reviewadd?proNo=${product.proNo}">후기!</a>
+					<button class="btn btn open"><a href="../product/reviewadd?proNo=${product.proNo}">후기!</a></button>
 					</div>
 					
 			</c:if>		
@@ -159,13 +159,13 @@
 					
 			     	<div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
 		
-					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.totalPrice}원</div>
+					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.proPrice}원</div>
 		
 			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
 			        
 			      
 					<div>	<button class="btn btn-primary"  >계좌 입력</button>     </div>
-
+					<br>
 	
 				
 			     
