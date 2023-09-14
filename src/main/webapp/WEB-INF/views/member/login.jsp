@@ -1,4 +1,7 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -17,17 +20,18 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
 	<title>Login</title>
+	<c:import url="../temp/bootstrap.jsp"></c:import>
 </head>
 
 <body>
+	<c:import url="../temp/header1.jsp"></c:import>
 <!-- ======= Join Section ======= -->
 	<section class="container">
 		<h1 class="text-center">Login Page</h1>
 
-	
 	<!-- login form -->
 	<!--  action="${pageContext.request.contextPath}/login.com -->
-	<form role="form" method="post" id="loginfrm" action="./login.com" enctype="multipart/form-data">
+	<form role="form" method="post" id="loginfrm" action="./login.com" enctype="multipart/form-data" autocomplete="off">
 		<fieldset>
 		<div class="form-group">
 			<label for="id" class="col-sm-2">ID</label>
@@ -60,33 +64,29 @@
    
    <!-- 아이디 비번 찾기 및 회원가입 영역 -->
    <div class="loginEtc">
-   		<a href="./findId" class="lnk_etc">아이디 찾기</a>
+   		<a href="./findId" class="lnk_etc"><button type="button" class="site-btn">아이디 찾기</button></a>
    		<em class="divi"> | </em>
-   		<a href="./findPw" class="lnk_etc">비밀번호 찾기</a>
+   		<a href="./findPw" class="lnk_etc"><button type="button" class="site-btn">비밀번호 찾기</button></a>
    		<em class="divi"> | </em>
-   		<a href="./signUp" class="lnk_etc">회원가입</a>
+   		<a href="./signUp" class="lnk_etc"><button type="button" class="site-btn">회원가입</button></a>
    </div>
    
    <!-- cd934c1bfa1d419ececfe6e1e1ef9624
    http://localhost:82/member/kakao/kakaoLogin -->
-<div>
+	<div>
 	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d5aa1769209cd0342601e6c69c838176&redirect_uri=http://localhost:82/kakao/callback">
 			 <img src="/resources/img/kakao_login_medium_wide.png">
 	</a>
-
-            </div>	  
-   <!-- 소셜 로그인 영역 -->
-   <ul class="loginSocialLi" style="display:;">
-		<li class="oddCol "><a href="javascript:void(0);" id="FBLoginSub_aBtnNaverLogin" onClick="callNaverAuth('R');dfinerySnsLogIn('Naver');" class="btn_social"><span class="bWrap"><em class="ico_social ico_na bgMem"></em><em class="txt">네이버 아이디로 로그인</em></span></a>  </li>
-		<li class="evenCol"><a href="javascript:void(0);" id="FBLoginSub_aBtnKakaoLogin" onClick="callKakaoLogin();dfinerySnsLogIn('Kakao');" class="btn_social"><span class="bWrap"><em class="ico_social ico_ka bgMem"></em><em class="txt">카카오 아이디로 로그인</em></span></a>  </li>	
-	</ul>
+    </div>	  
+   </section>	
    
+   <c:import url="../temp/footer1.jsp"></c:import>
 	
 	 <!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="/resources/js/login.js"></script>
 	<!-- 카카오 스크립트 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 </body>
 </html>
