@@ -55,7 +55,63 @@
          background-color: #007bff; 
          color: #ffffff; 
       }
-      
+
+      .header-search .search-btn {
+        background-color: #D10024;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        height: 40px;
+        border-radius: 0px;
+        width: 40%;
+    }
+    .input-select {
+    padding: 0px 15px;
+    background: #FFF;
+    border: 1px solid #E4E7ED;
+    height: 40px;
+}
+.header-search .form-control {
+    width: 100%;
+    height: 40px;
+    border-radius: 0px; 
+}
+.header-search .search-btn {
+    background-color: #D10024;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 0px;
+    width: 40%;
+}
+#search-header{
+    display: flex;
+    align-items: center;
+    height: 10rem;
+}
+.input-select {
+    padding: 0px 15px;
+    background: #FFF;
+    border: 1px solid #E4E7ED;
+    height: 40px;
+}
+.header-search form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.header-ctn {
+    float: right;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+}
+
+.input-select {margin: 0 !important;}
+.form-control {margin: 0 !important;}
    </style>
    
       
@@ -105,12 +161,12 @@
         <!-- container -->
         <div class="container">
             <!-- row -->
-            <div class="row">
+            <div class="row" id="search-header">
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="../" class="logo">
-                            <img src="/resources/img/장터로고2.jpg" alt="">
+                            <img src="/resources/img/logoMain.jpg" alt="">
                         </a>
                     </div>
                 </div>
@@ -120,13 +176,13 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form action="/product/list" method="GET">
-                            <select name="kind" id="k" class="input-select" data-kind="${pager.kind}" aria-label="Default select example">
+                            <select name="kind" id="k" class="input-select" aria-label="Default select example">
                                 <option class="kind" value="proName">상품명</option>
                                 <option class="kind" value="proContents">상품설명</option>
                                 <option class="kind" value="userId">이름</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input type="text" name="search" value="${pager.search}" class="form-control" placeholder="Search here">
+                            <button type="submit" class="search-btn">검색</button>
                         </form>
                     </div>
                 </div>

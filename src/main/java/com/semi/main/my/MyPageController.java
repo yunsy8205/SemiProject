@@ -212,8 +212,12 @@ public class MyPageController {
 
 		// 후기
 		@GetMapping("review")
-		public void review() throws Exception{
+		public void review(HttpSession session, Model model) throws Exception{
+			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		    long userNo = memberDTO.getUserNo();
+			List<ReviewsDTO> ar = myPageService.getReviews(userNo);
 			
+			model.addAttribute("reviews", ar);
 		}
 	 
 }

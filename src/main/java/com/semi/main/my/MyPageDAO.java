@@ -78,6 +78,13 @@ public class MyPageDAO {
   		System.out.println("사이즈1 : " + ar.size());
   		return ar;
   	}
+    
+  	// 내게 쓴 후기 
+  	public List<ReviewsDTO> getReviews(Long userNo) throws Exception{
+  		List<ReviewsDTO> ar = sqlSession.selectList(NAMESPACE + "getReview", userNo);
+  		System.out.println("리뷰 사이즈 : " + ar.size());
+  		return ar;
+  	}
     	
     
 

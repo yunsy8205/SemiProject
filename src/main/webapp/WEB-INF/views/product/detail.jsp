@@ -7,8 +7,6 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../resources/css/prodetail.css">
-
-
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
@@ -17,19 +15,18 @@
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
-					<div class="col-md-12">
+					
 						<ul class="breadcrumb-tree">
 							<li><a href="../">Home</a></li>
 							<li><a href="#">${dto.catNo}</a></li><!--  -->
 						</ul>
 					</div>
 				</div>
+		
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
 		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
@@ -179,16 +176,9 @@
 			<!-- /container -->
 		</div>
 
-		<!-- /SECTION -->
+		<!-- /SECTION -->	
+<!-- FOOTER -->
 
-
-	</div> 
-
-	<div>
-    <a href="/product/update?proNo=${dto.proNo}">수정</a>
-	</div>	
-	
-	<!-- FOOTER -->
 		<footer id="footer">
 			<!-- top footer -->
 			<div class="section">

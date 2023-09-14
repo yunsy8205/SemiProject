@@ -82,7 +82,7 @@
 						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
 						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
 						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
-						<li><a href="./product/categoryList?catNo=1006">기타</a></li>
+						<li><a href="./product/categoryList?catNo=1007">기타</a></li>
 
 					</ul>
 					<!-- /NAV -->
@@ -141,7 +141,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i>구매하기</button>
+													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i><a href="../payment/paymentadd?proNo=${product.proNo}">구매하기</a></button>
 												</div>
 											</div>
 										</c:forEach>
