@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MemberDTO {
 	
-	/* MEMBER 테이블 기본 컬럼*/
+/* MEMBER 테이블 기본 컬럼*/
 	
 	private Long userNo;
 	
@@ -38,15 +38,7 @@ public class MemberDTO {
 	private String refAddress;
 	
 	// 상세주소
-	private String DetailAddress;
-	
-	
-	
-	/* JOIN절에 따른 추가 컬럼 */
-	
-	private List<RoleDTO> roles;
-	
-	private MemberFileDTO memberFileDTO;
+	private String detailAddress;
 	
 	/* 계좌관련 추가 칼럼 */
 	
@@ -55,16 +47,11 @@ public class MemberDTO {
 	private String bankCode;
 	
 	private String bankNum;
-
-	
-	/* getter and setter */
 	
 	
-	public Long getUserNo() {
-		return userNo;
-	}
-
-
+	
+	/* JOIN절에 따른 추가 컬럼 */
+	
 	public String getHolder() {
 		return holder;
 	}
@@ -95,6 +82,19 @@ public class MemberDTO {
 	}
 
 
+	private List<RoleDTO> roles;
+	
+	private MemberFileDTO memberFileDTO;
+	
+
+	
+	/* getter and setter */
+	
+	public Long getUserNo() {
+		return userNo;
+	}
+
+
 	public Long getZipCode() {
 		return zipCode;
 	}
@@ -106,7 +106,7 @@ public class MemberDTO {
 
 
 	public String getDetailAddress() {
-		return DetailAddress;
+		return detailAddress;
 	}
 
 
@@ -126,7 +126,7 @@ public class MemberDTO {
 
 
 	public void setDetailAddress(String detailAddress) {
-		DetailAddress = detailAddress;
+		this.detailAddress = detailAddress;
 	}
 
 
@@ -248,5 +248,5 @@ public class MemberDTO {
 	public void setRoles(List<RoleDTO> roles) {
 		this.roles = roles;
 	}
-
+	
 }
