@@ -36,6 +36,9 @@
 		<result column="ZIPCODE" property="zipCode"/>
 		<result column="REFADDRESS" property="refAddress"/>
 		<result column="DETAILADDRESS" property="detailAddress"/>
+		<result column="HOLDER" property="holder"/>
+		<result column="BANKCODE" property="bankCode"/>
+		<result column="BANKNUM" property="bankNum"/>
 		
 		<association property="memberFileDTO" javaType="MemberFileDTO">
 			<id column="FILENO" property="fileNo"/>
@@ -52,24 +55,37 @@
 
 	<!-- 회원가입 -->
  	<insert id="setJoin"  parameterType="MemberDTO">
- 		INSERT INTO MEMBER VALUES(USERNO_SEQ.NEXTVAL,#{userId},#{userPw},#{name},#{email}
- 		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress})
+ 		INSERT INTO MEMBER (USERNO,USERID,USERPW,NAME,EMAIL,BIRTH,ADDRESS,PHONE,ACCOUNTDATE
+ 		,INTRO,STATUSNO,ZIPCODE,REFADDRESS,DETAILADDRESS,HOLDER,BANKCODE,BANKNUM)
+ 		VALUES(MEMBER_SEQ.NEXTVAL,#{userId},#{userPw},#{name},#{email}
+ 		,#{birth},#{address},#{phone},SYSDATE,#{intro},1,#{zipCode}, #{refAddress}, #{detailAddress}
+ 		,#{holder}, #{bankCode}, #{bankNum})
  	</insert>
  	
  	<!-- ID 중복체크 -->
  	<select id="getUserIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT USERID FROM MEMBER WHERE USERID = #{userId}
  	</select>	
-	
-	 <!-- Email 중복체크 -->
- 	<select id="getEmailCheck" parameterType="MemberDTO" resultType="MemberDTO">
- 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
- 	</select>
- 	 <!-- Email 중복체크 -->
+ 	
+ 	<!-- Email 중복체크 -->
  	<select id="getMailCheck" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT EMAIL FROM MEMBER WHERE EMAIL = #{email}
  	</select>
+	
+	<!-- 회원 정보 조회 -->
+	<select id="getMemberDetail" parameterType="MemberDTO" resultType="MemberDTO">
+ 		SELECT * FROM MEMBER WHERE USERID = #{userId}
+ 	</select>
  	
- 	
+ 	<!-- PW 변경 -->
+ 	<update id="setUpdatePw" parameterType="MemberDTO">
+		UPDATE MEMBER SET USERPW = #{userPw} WHERE USERID = #{userId}
+	</update>
+	
+	<!-- ID 찾기 -->
+	<select id="getFindId" parameterType="MemberDTO" resultType="String">
+ 		SELECT USERID FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+	
 	
 </mapper>
