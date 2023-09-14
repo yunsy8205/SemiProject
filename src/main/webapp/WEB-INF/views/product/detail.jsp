@@ -102,7 +102,7 @@
 							 	<c:otherwise>
 									<div id="button1">
 				                        <button style="background-color: #15161D;" class="btn2" id="dibs" type="button"><div class="t btn1"><i id="heart" class="bi bi-heart"></i>찜<span id="dibsNum" class="ms-2">${dibsNum}</span></div></button>
-				                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn4">톡</div></button>
+				                        <button style="background-color: #fcca26;" class="btn2 ms-3" type="button"><div class="t btn4"><a href="../my/chat">톡</a></div></button>
 				                        <button id="buy" style="background-color: #D10024;" class="btn2 ms-3" type="button"><div class="t btn3">바로구매</div></button>
 			                         
 			                        </div>

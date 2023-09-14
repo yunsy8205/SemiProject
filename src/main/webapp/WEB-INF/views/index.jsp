@@ -124,7 +124,7 @@
 											<div class="product">
 												<div class="product-img">
 												
-													<img src="./resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
+													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
 													
 													<div class="product-label">
 														<span class="new">NEW</span>
