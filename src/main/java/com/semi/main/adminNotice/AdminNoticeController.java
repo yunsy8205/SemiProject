@@ -34,6 +34,7 @@ public class AdminNoticeController {
 	//filedelete
 	@GetMapping("fileDelete")
 	public String setFileDelete(AdminNoticeFileDTO adminNoticeFileDTO,HttpSession session, Model model)throws Exception{
+		
 		int result = adminNoticeService.setFileDelete(adminNoticeFileDTO, session);
 		model.addAttribute("result",result);
 		return "commons/ajaxResult";

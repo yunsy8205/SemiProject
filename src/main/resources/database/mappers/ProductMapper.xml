@@ -120,6 +120,7 @@ SELECT COUNT(PRONO) FROM PRODUCT P INNER JOIN MEMBER M ON P.USERNO = M.USERNO WH
 <result column="PROHIT" property="hit"/>
 <result column="PROSALE" property="proSale"/>
 <result column="USERID" property="userId"/>
+<result column="PROAMOUNT" property="proAmount"/>
 <!--
   <association property="category" javaType="CategoryDTO">
 	        <id column="CATNO" property="catNo"/>
@@ -151,12 +152,12 @@ SELECT COUNT(REVIEWNO) FROM REVIEW WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHE
 </select>
 <select id="memberProList" parameterType="ProductDTO" resultMap="getSelectResult">
 <![CDATA[
-SELECT A.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM (SELECT * FROM PRODUCT WHERE USERNO=#{userNo} AND ROWNUM < 6 )A LEFT JOIN PRODUCTIMAGE PI ON (A.PRONO=PI.PRONO) ORDER BY CREATEDATE DESC
+SELECT A.*, PI.FILENO, PI.ORIGINALNAME, PI.FILENAME FROM (SELECT * FROM PRODUCT WHERE USERNO=#{userNo} AND ROWNUM <5 )A LEFT JOIN PRODUCTIMAGE PI ON (A.PRONO=PI.PRONO) ORDER BY CREATEDATE DESC
 ]]>
 </select>
 <select id="memberReviewList" parameterType="ProductDTO" resultType="ProductReviewDTO">
 <![CDATA[
-SELECT C.* FROM (SELECT R.*, M.USERID FROM REVIEW R JOIN MEMBER M ON(R.USERNO=M.USERNO) WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo}) ORDER BY REVIEWDATE DESC)C WHERE ROWNUM < 6
+SELECT C.* FROM (SELECT R.*, M.USERID FROM REVIEW R JOIN MEMBER M ON(R.USERNO=M.USERNO) WHERE PRONO IN (SELECT PRONO FROM PRODUCT WHERE USERNO=#{userNo}) ORDER BY REVIEWDATE DESC)C WHERE ROWNUM < 3
 ]]>
 </select>
 <insert id="setAdd" parameterType="ProductDTO">
@@ -164,7 +165,7 @@ SELECT C.* FROM (SELECT R.*, M.USERID FROM REVIEW R JOIN MEMBER M ON(R.USERNO=M.
 INSERT INTO PRODUCT (PRONO,CATNO,USERNO,PRONAME,PROPRICE,PROCONTENTS, PROAMOUNT,CREATEDATE,MODIFYDATE,EXCHANGE,PROSTATUS,PROHIT,PROSALE) VALUES (#{proNo}, #{catNo}, (SELECT USERNO FROM MEMBER WHERE USERID = #{userId}), #{proName}, #{proPrice}, #{proContents}, #{proAmount}, sysdate, sysdate, #{exchange}, #{proStatus}, 0, #{proSale})
 </insert>
 <insert id="setFileAdd" parameterType="ProductFileDTO">
-INSERT INTO PRODUCTIMAGE VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{fileName}, #{originalName} )
+INSERT INTO PRODUCTIMAGE VALUES (PRODUCTIMAGE_SEQ.NEXTVAL,#{proNo}, #{originalName},#{fileName} )
 </insert>
 <select id="getDetail" parameterType="ProductDTO" resultMap="getSelectResult">
 SELECT P.*, PR.*, C.CATNAME, M.USERID FROM PRODUCT P LEFT JOIN PRODUCTIMAGE PR ON (P.PRONO=PR.PRONO) JOIN CATEGORY C ON (P.CATNO = C.CATNO) JOIN MEMBER M ON (P.USERNO = M.USERNO) WHERE P.PRONO= #{proNo}
@@ -192,7 +193,29 @@ SELECT * FROM DIBS WHERE PRONO=#{proNo} AND USERNO=#{userNo}
         PROSTATUS = #{proStatus},
         PROSALE = #{proSale}
     WHERE
-         PRONO = #{proNo, jdbcType=NUMERIC}
+         PRONO = #{proNo}
 </update>
+<delete id="setDelete" parameterType="Long">
+    DELETE FROM PRODUCT WHERE PRONO = #{proNo}
+</delete>
+<delete id="setFileDelete" parameterType="ProductFileDTO">
+    DELETE FROM PRODUCTIMAGE WHERE FILENO = #{fileNo}
+</delete>
+
+<select id="getFileDetail" parameterType="ProductFileDTO" resultType="ProductFileDTO">
+    SELECT FILENO, FILENAME
+    FROM PRODUCTIMAGE
+    WHERE FILENO = #{fileNo}
+</select>
+
+<insert id="reviewAdd" parameterType="ProductReviewDTO">
+	INSERT INTO REVIEW (REVIEWNO, PRONO, USERNO, PRONAME, CONTENTS, SCORE, REVIEWDATE)
+	VALUES (REVIEW_SEQ.NEXTVAL, #{proNo}, #{userNo}, #{proName}, #{contents}, #{score}, SYSDATE)
+</insert>
+
+
+
+
+
 
 </mapper>

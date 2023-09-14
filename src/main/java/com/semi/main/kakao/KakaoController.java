@@ -16,9 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.semi.main.member.MemberDTO;
@@ -72,7 +76,8 @@ public class KakaoController {
          if(memberDTO2 != null) {
  			//4. 세션에 저장
  			System.out.println("기존 정보 있음");
- 			session.setAttribute("member", memberDTO2);				
+ 			session.setAttribute("member", memberDTO2);	
+ 			System.out.println(memberDTO2.getName());
  			return "redirect:/";
  		}else {
  			System.out.println("기존 정보 없음");
@@ -91,7 +96,7 @@ public class KakaoController {
          
          //HttpHeader 담기
          RestTemplate rt = new RestTemplate();
-         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity(headers);
          ResponseEntity<String> response = rt.exchange(
                  "https://kapi.kakao.com/v2/user/me",
                  HttpMethod.POST,
@@ -110,10 +115,10 @@ public class KakaoController {
          memberDTO.setEmail(email);
          
          System.out.println(memberDTO);
+         System.out.println(memberDTO.getName());
          return memberDTO;
  	}
 }
-
 
 
 

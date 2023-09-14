@@ -32,15 +32,181 @@
 		WHERE USERID=#{userId} AND USERPW=#{userPw}
 	</delete>
 
-	
+	<!-- 채팅내용저장 -->	
     <insert id="saveChatMessage" parameterType="java.util.Map">
         INSERT INTO CHAT (CHATNO, USERID, MESSAGE, CHATDATE)
         VALUES (CHAT_SEQ.NEXTVAL, #{userId}, #{message}, sysdate)
     </insert>
 
-    
+    <!-- 채팅목록 -->
     <select id="getChatMessages" parameterType="String" resultType="ChatMessageDTO">
         SELECT * FROM CHAT
     </select>
+    
+    <!-- 상품관리(내가 쓴 글) -->
+    <select id="memberProList" parameterType="Map" resultMap="getResult">
+		SELECT C.*, PI.* FROM
+		(SELECT B.* FROM
+		(SELECT ROWNUM R, A.* FROM
+		(SELECT * FROM PRODUCT WHERE USERNO=#{profileDTO.userNo} ORDER BY CREATEDATE DESC)A)B)C
+		LEFT JOIN PRODUCTIMAGE PI
+		ON(C.PRONO=PI.PRONO)
+		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+  	      <resultMap type="ProductDTO" id="getResult">
+	  		<id column="PRONO" property="proNo"/>
+	  		<result column="CATNO" property="catNo"/>
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="PROPRICE" property="proPrice"/>
+	  		<result column="PROCONTENTS" property="proContents"/>
+	  		<result column="PROAMOUNT" property="proAmount"/>
+	  		<result column="CREATEDATE" property="createDate"/>
+	  		<result column="MODIFYDATE" property="modifyDate"/>
+	  		<result column="EXCHANGE" property="exchange"/>
+	  		<result column="PROSTATUS" property="proStatus"/>
+	  		<result column="PROHIT" property="hit"/>
+	  		<result column="PROSALE" property="proSale"/>
+	  		<result column="CATNAME" property="catName"/>
+	  		<result column="USERID" property="userId"/>
+	  		
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	  	<select id="getTotal" resultType="Long" parameterType="Map">
+  		SELECT COUNT(PRONO) FROM PRODUCT WHERE USERNO=#{profileDTO.userNo}
+  		</select>
      
+     <!-- 찜목록 -->
+     <select id="getDibs" parameterType="Long" resultMap="dibsResultMap">
+      SELECT p.*, pr.* 
+      FROM MEMBER m 
+      			INNER JOIN 
+      		DIBS d
+      		ON m.USERNO = d.USERNO 
+      		
+      		INNER JOIN PRODUCT p
+      		ON d.PRONO = p.PRONO 
+      		
+      		INNER JOIN 
+      		PRODUCTIMAGE pr
+      		ON p.PRONO = pr.PRONO
+      		
+      WHERE m.USERNO = #{userNo}
+     </select>
+     
+     <resultMap id="dibsResultMap"   type="DibsDTO">
+    	<result property="userNo" column="USERNO"/>
+    	<result property="proNo" column="PRONO"/>
+    	<result property="proName" column="PRONAME"/>
+    	<result property="userId" column="USERID"/>
+    	<result property="proContents" column="PROCONTENTS"/>
+    	<result property="proPrice" column="PROPRICE"/>
+    	<result property="createDate" column="CREATEDATE"/>
+    	<result property="proHit" column="PROHIT"/>
+    	
+    	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+        	<id column="FILENO" property="fileNo"/>
+        	<result column="ORIGINALNAME" property="originalName"/>
+        	<result column="FILENAME" property="fileName"/>
+    	</collection>
+	</resultMap>
+
+	<!-- 구매목록 -->
+	<select id="getBuyer" parameterType="Long" resultMap="buyerResult">
+       SELECT * FROM PAYMENT P left JOIN PRODUCTIMAGE PM 
+		ON P.PRONO = PM.PRONO
+		WHERE USERNO = #{userNo}
+		ORDER BY P.PAYMENTDATE DESC
+    </select>
+    
+    <resultMap id="buyerResult"   type="BuyerDTO">
+    	<result property="userNo" column="USERNO"/>
+    	<result property="proNo" column="PRONO"/>
+    	<result property="proName" column="PRONAME"/>
+    	<result property="totalPrice" column="TOTALPRICE"/>
+    	<result property="paymentDate" column="PAYMENTDATE"/>
+    	<result property="uidNo" column="UIDNO"/>
+    	<result property="statusNo" column="STATUSNO"/>
+
+    	
+    	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+        	<id column="FILENO" property="fileNo"/>
+        	<result column="ORIGINALNAME" property="originalName"/>
+        	<result column="FILENAME" property="fileName"/>
+    	</collection>
+	</resultMap>
+	
+	<!-- 판매목록 -->
+    <select id="getSale" parameterType="Long" resultMap="SaleResult">
+		SELECT * FROM PRODUCT P
+		LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) LEFT JOIN PRODUCTIMAGE p3 
+		ON P.PRONO = p3.PRONO 
+		WHERE P.USERNO=#{userNo}
+    </select>
+    
+    <resultMap id="SaleResult"   type="SaleDTO">
+    	<result property="userNo" column="USERNO"/>
+    	<result property="proName" column="PRONAME"/>
+    	<result property="totalPrice" column="TOTALPRICE"/>
+    	<result property="proAmount" column="PROAMOUNT"/>
+    	<result property="createDate" column="CREATEDATE"/>
+    	<result property="statusNo" column="STATUSNO"/>
+    	<result property="proNo" column="PRONO"/>
+    	<result property="paymentDate" column="PAYMENTDATE"/>
+    	
+    	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+        	<id column="FILENO" property="fileNo"/>
+        	<result column="ORIGINALNAME" property="originalName"/>
+        	<result column="FILENAME" property="fileName"/>
+    	</collection>
+	</resultMap>
+    
+    
+    
+    <!-- 내게 쓴 리뷰 -->
+	<select id="getReview" parameterType="Long" resultMap="getReviews">
+		SELECT * FROM REVIEW R INNER JOIN PRODUCTIMAGE P
+		ON R.PRONO = P.PRONO
+		WHERE USERNO = #{userNo}
+	</select>
+
+	<resultMap type="ReviewsDTO" id="getReviews">
+	  		<result column="USERNO" property="userNo"/>
+	  		<result column="PRONO" property="proNo"/>
+	  		<result column="REVIEWNO" property="reviewNo"/>
+	  		<result column="PRONAME" property="proName"/>
+	  		<result column="CONTENTS" property="contents"/>
+	  		<result column="REVIEWDATE" property="reviewDate"/>
+	  		<result column="SCORE" property="score"/>
+	  	
+	  		<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+		  		<id column="FILENO" property="fileNo"/>
+		  		<result column="PRONO" property="proNo"/>
+		  		<result column="ORIGINALNAME" property="originalName"/>
+		  		<result column="FILENAME" property="fileName"/>
+	  		</collection>
+	  	</resultMap>
+	
+	<!-- 구매목록 카운트 -->
+		<select parameterType="Long" id="getBuyCount" resultType="Long">
+			SELECT count(*) FROM PAYMENT P 
+			left JOIN PRODUCTIMAGE PM
+			ON P.PRONO = PM.PRONO
+			WHERE USERNO = #{userNo} 
+		</select>
+
+	<!-- 판매목록 카운트 -->
+		<select parameterType="Long" id="getSaleCount" resultType="Long">
+			SELECT count(*) FROM PRODUCT P
+			LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) 
+			LEFT JOIN PRODUCTIMAGE p3
+			ON P.PRONO = p3.PRONO
+			WHERE P.USERNO=#{userNo} 
+		</select>
+
   </mapper>

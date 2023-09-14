@@ -31,10 +31,30 @@
 					</td>
 				</tr>
 				<tr>
-					<th>권한</th><td><c:forEach items="${dto.roles}" var="r">${r.grantName}/</c:forEach></td><th>가입일</th><td>${dto.accountDate}</td>
+					<th>권한</th>
+					<td>
+						<c:forEach items="${dto.roles}" var="r">
+						<c:if test="${r.grantName eq 'MEMBER'}">
+						<select class="" name="grantNo">
+								<option value="1" selected>MEMBER</option>
+								<option value="2">ADMIN</option>
+						</select></c:if>
+						<c:if test="${r.grantName eq 'ADMIN'}">
+						<select class="" name="grantNo">
+								<option value="1">MEMBER</option>
+								<option value="2" selected>ADMIN</option>
+						</select></c:if>
+						</c:forEach>
+						<c:if test="${empty dto.roles}">
+						<select class="" name="grantNo">
+								<option value="1">MEMBER</option>
+								<option value="2">ADMIN</option>
+						</select></c:if>
+					</td>
+					<th>가입일</th><td>${dto.accountDate}</td>
 				</tr>
 				<tr>
-					<th>ID</th><td>${dto.userId}</td><th>PW</th><td><input type="password" name="userPw" value="${dto.userPw}"></td>
+					<th>ID</th><td>${dto.userId}</td><th>PW</th><td><input type="password" name="userPw" readonly value="${dto.userPw}"></td>
 				</tr>
 				<tr>
 					<th>이름</th><td><input type="text" name="name" value="${dto.name}"></td><th>생년월일</th><td><input type="date" name="birth" value="${dto.birth}"></td>

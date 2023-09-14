@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="com.semi.main.payment.PaymentDAO">
+
+    
+    <sql id="searchSql">
+ 			<if test="kind == 'userId'">
+		 		AND	M.USERID LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'paymentNo'">
+		 		AND	PAYMENTNO LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'proName'">
+		 		AND	PRONAME LIKE '%'||#{search}||'%'
+		 	</if>
+		 	<if test="kind == 'statusName'">
+		 		AND	PS.STATUSNAME LIKE '%'||#{search}||'%'
+		 	</if>
+  	</sql>
+  	
+
+  	<update id="checkAccount" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		HOLDER=#{holder}, BANKCODE=#{bankCode}, BANKNUM=#{bankNum}
+  		WHERE USERNO=#{userNo}
+  	</update>
+  	<delete id="c"></delete>
+  	<select id="d"></select>
+
+
+     <insert id="paymentAdd" parameterType="PaymentDTO">
+        INSERT INTO PAYMENT (PAYMENTNO, USERNO, PRONO, STATUSNO, UIDNO, PAYMENTDATE, TOTALPRICE, NAME, PRONAME)
+        VALUES (#{paymentNo}, #{userNo}, #{proNo}, 1, #{uidNo}, SYSDATE, #{totalPrice}, #{name}, #{proName})
+     </insert>
+     
+
+     <select id="getPayList" resultType="PaymentDTO" parameterType="Pager">
+     
+	  SELECT PAYMENTNO,USERID,NAME,PRONAME,TOTALPRICE,PAYMENTDATE,STATUSNAME,PRONO
+	  FROM(SELECT ROWNUM R, B.*   	
+	     FROM(	
+	     	SELECT PM.*, M.USERID, PS.STATUSNAME
+	     	FROM PAYMENT PM JOIN MEMBER M
+	     	ON (PM.USERNO = M.USERNO) JOIN PAYMENTSTATUS PS
+	     	ON (PM.STATUSNO = PS.STATUSNO)
+	     	<include refid="searchSql"/>
+	     	ORDER BY PAYMENTDATE DESC
+	     	)B )
+	     WHERE R BETWEEN #{startRow} AND #{lastRow}
+ 
+     </select>
+     
+     <select id="getTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(PAYMENTNO) 
+  		FROM PAYMENT PM JOIN MEMBER M
+	     	ON (PM.USERNO = M.USERNO) JOIN PAYMENTSTATUS PS
+	     	ON (PM.STATUSNO = PS.STATUSNO)
+  		
+  		<include refid="searchSql"/>
+  	</select>
+  	
+  	<update id="setPayUpdate" parameterType="PaymentDTO">
+  		UPDATE PAYMENT SET STATUSNO = 0 , REASON=#{reason} WHERE UIDNO = #{uidNo}
+  	</update>
+     
+     <!-- ADMIN결제관리 -->
+     
+     <select id="getPayDetail" resultType="PaymentDTO" parameterType="PaymentDTO">
+       SELECT M.USERID, p2.REASON, M.HOLDER, M.BANKCODE, M.BANKNUM
+		FROM PRODUCT P LEFT JOIN PAYMENT p2 
+		ON (P.PRONO=P2.PRONO) LEFT JOIN MEMBER M
+		ON (P.USERNO = M.USERNO)
+	 WHERE p2.PAYMENTNO = #{paymentNo}
+     </select>
+ 
+	     
+  </mapper>

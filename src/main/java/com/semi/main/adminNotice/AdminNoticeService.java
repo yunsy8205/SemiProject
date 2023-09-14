@@ -62,6 +62,7 @@ public class AdminNoticeService implements BoardService{
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
+		pager.setPerPage(15L);
 		pager.makeRowNum();
 		Long total = adminNoticeDAO.getTotal(pager);
 		pager.makePageNum(total);

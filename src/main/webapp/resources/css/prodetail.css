@@ -1,0 +1,251 @@
+@charset "UTF-8";
+	
+	.btn1{
+		color: white;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    padding-left: 50px;
+	    padding-right: 50px;
+	}
+	
+	.btn3{
+		color: white;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+	    padding-left: 44px;
+	    padding-right: 44px;
+	}
+	
+	.btn4{
+		    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 73px;
+    padding-right: 73px;
+	}
+	
+	.btn2{
+		border:none;
+	}
+	
+	.proImage{
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		
+	}
+	
+	#wrap1{
+		width: 100%;
+		height: 500px;
+
+	}
+	
+	.div1{
+		width: 50%;
+		height: 100%;
+		float: left;
+		box-sizing: border-box;
+	}
+	.div2{
+		width: 50%;
+		height: 100%;
+		float: left;
+		padding-top: 5%;
+		
+	}
+	
+	.imgdiv{
+		width: 90%;
+		height: 95%;
+		
+	}
+	
+	.t{
+		font-weight : bold; 
+		font-size: 20px;
+	}
+	
+	.bi-heart-fill{
+		color: red;
+	}
+	
+	.bi{
+		margin: 4px;
+	}
+	
+	#wrap2{
+		width: 100%;
+		height: 900px;
+
+	}
+		
+	.div3{
+		width: 65%;
+		height: 100%;
+		float: left;
+	}
+	.div4{
+		width: 35%;
+		height: 100%;
+		float: left;
+		
+	}
+	
+	.div5{
+		height:90%;
+		margin-top: 30px;
+		margin-right: 30px;
+	}
+	
+	.div6{
+		margin: 30px;
+		height: 90%;
+	}
+	
+	.div7{
+		height: 7%;
+		padding-top: 30px;
+	}
+	
+	.div8{
+		
+		margin-bottom: 30px;
+	}
+	
+	#report{
+		margin-left: 420px;
+	}
+	
+	#rt{
+		color: #CCCCCC;
+	    font-weight: bold;
+	    text-decoration: underline;
+	    font-size: 17px;
+	}
+	
+	#p1{
+		font-size: 15px;
+	}
+	
+	.product-price{
+		color: #D10024;
+		margin-top: 15px;
+    	margin-bottom: 20px;
+    	font-size: 40px;
+	}
+	
+	.div9{
+		height: 900px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
+	.div10{
+		height: 10%;
+	    width: 100%;
+	    margin-top: 15px;
+	}
+	
+	.div11{
+		width: 80px;
+	    height: 80px;
+	    margin-right: 20px;
+	    box-sizing: border-box;
+	    float: left;
+	    border-radius: 70%;
+	    overflow: hidden;
+	}
+	
+	.div12{
+		width: 50%;
+		height: 100%;
+		float: left;
+		padding-top: 8px;
+	}
+	.div13{
+		padding-left: 4px;
+		
+	}
+	.image{
+		width: 140px;
+		height: 125px;
+	}
+	
+	figure {
+    float: left;
+    flex-flow: column;
+    padding: 5px;
+    max-width: 300px;
+    margin: auto;
+	}
+	
+	.imtext{
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	.div14{
+		width: 100%;
+		height: 4%;
+		margin-top: 320px;
+		padding-left: 35%;
+	}
+	
+	.div15{
+		width: 100%;
+		height: 7%;
+		padding-top: 35px;
+	}
+	
+	#reviewh{
+	
+		font-size: 15px;
+		font-weight: bold;
+		float: left;
+	}
+	
+	.star{
+		color: rgb(252, 219, 3);
+	}
+	
+	.bi-star{
+		color: #CCCCCC;
+	}
+	
+	.div16{
+		margin-bottom:10px; 
+	}
+	
+	.div17{
+		width: 100%;
+		height: 45px;
+		padding-top: 5%;
+		padding-left: 35%;
+	}
+	
+	.div18{
+		width: 100%;
+		height: 250px;
+		padding-top: 7%;
+	}
+	
+	.mt{
+		margin-top: 15px;
+		font-size: 15px;
+	}
+	
+	#button1{
+		padding-top: 70px;
+	}
+	
+	.memberImage{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.t2{
+		font-weight: bold;
+	    margin-top: 8px;
+	}

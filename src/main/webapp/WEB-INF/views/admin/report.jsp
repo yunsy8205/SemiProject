@@ -11,7 +11,7 @@
 </head>
 <body>
 	<section class="container mt-5">
-		<h1 class="text-center mb-5">신고관리</h1>
+		<h1 class="text-center mb-5">신고목록</h1>
 		<table class="table">
 			<thead>
 				<th>번호</th><th>신고유형</th><th>신고자</th><th>제목</th><th>등록일</th><th>확인여부</th>

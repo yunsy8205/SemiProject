@@ -13,7 +13,9 @@
 <c:import url="../temp/BoardHeader.jsp"></c:import>
 	<section class="container mt-5">
 	
-		<table class="table">
+		<h1 align="center">NOTICE</h1>
+		
+		<table class="table mt-5">
 		
 		<thead class="table-dark">
 			 <th>ID</th><th>TITLE</th><th>DATE</th><th>HIT</th>
@@ -32,7 +34,7 @@
 		</table>
 		
 		
-		<nav aria-label="Page navigation example">
+		<nav class="nav justify-content-center" aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	
 				    <li class="page-item ${pager.pre?'':'disabled'}">
@@ -57,22 +59,33 @@
 		<div class="input-group mb-3">
 		 <form action="./list" method="get" id="frm">
 		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
-		 	  	
+		
+		<table> 
+		<tr>
+		 	 <td> 	
 			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
 				  <option class="kind" value="title">title</option>
 				  <option class="kind" value="contents">Contents</option>
 				  
-			  </select>
+			  </select></td>
+			  
+			  <td>
 			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
+			  <td>
 			   <div class="col-auto">
-			    <button type="submit" class="btn btn-primary">검색</button>
+			    <button type="submit" class="btn btn-dark">검색</button>
 			  </div>
+			  </td>
+		</table> 	
 		  </form>
 		</div>
-	
-		<c:if test="${member.userId == '관리자1'}">
-			<a class="btn btn-primary me-2" style="float:right" href="./add">글등록</a>
-			</c:if>
+		
+		<c:forEach items="${member.roles}" var="r"> 
+		<c:if test="${r.grantName == 'admin'}">
+			<a class="btn btn-dark me-2" style="float:right" href="./add">글등록</a>
+		
+		</c:if>
+		</c:forEach>
 	
 	</section>
 	

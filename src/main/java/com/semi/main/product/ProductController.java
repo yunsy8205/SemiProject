@@ -14,10 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletRequest;
 
+import com.semi.main.admin.AdminService;
+import com.semi.main.admin.ReportDTO;
 import com.semi.main.member.MemberDTO;
 import com.semi.main.profile.ProfileService;
+import com.semi.main.util.FileManager;
 import com.semi.main.util.Pager;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/product/*")
@@ -25,6 +31,12 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private FileManager fileManager;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@RequestMapping(value = "list",method = RequestMethod.GET)
 	public String getList(Pager pager,Model model,Long catNo,String condition) throws Exception{
@@ -159,16 +171,62 @@ public class ProductController {
 	
 	}
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session)throws Exception{
-		
-		 System.out.println(productDTO.getProNo());
-		 System.out.println("진입");
-		 int result = productService.setUpdate(productDTO, photos, session);
-		 Long proNo = productDTO.getProNo();
-		 System.out.println(productDTO.getProNo());
-		 System.out.println("2번진입");
-		 return "redirect:/product/detail?proNo=" + proNo;
+	public String setUpdate(ProductDTO productDTO, MultipartFile[] photos, HttpSession session, HttpServletRequest request) throws Exception {
+	    // 제품 정보 업데이트
+	    int result = productService.setUpdate(productDTO, photos, session);
+
+//	    // 선택한 파일 삭제
+//	    String[] fileIds = request.getParameterValues("deleteFiles");
+//	    if (fileIds != null) {
+//	        for (String fileId : fileIds) {
+//	            ProductFileDTO productFileDTO = new ProductFileDTO();
+//	            productFileDTO.setFileNo(Long.parseLong(fileId));
+//	            
+//	            // 파일 삭제 메서드 호출
+//	            productService.setFileDelete(productFileDTO, session);
+//	        }
+//	    }
+//
+//	    // 새 파일 업로드
+//	    for (MultipartFile file : photos) {
+//	        if (file != null && !file.isEmpty()) {
+//	            String fileName = fileManager.fileSave("/resources/upload/product/", session, file);
+//
+//	            ProductFileDTO productFileDTO = new ProductFileDTO();
+//	            productFileDTO.setFileNo(productDTO.getProNo());
+//	            productFileDTO.setFileName(fileName);
+//	            productFileDTO.setOriginalName(file.getOriginalFilename());
+//	            productFileDTO.setProNo(productDTO.getProNo());
+//
+//	            // 파일 추가 메서드 호출
+//	            productService.setFileAdd(productFileDTO);
+//	        }
+//	    }
+
+	    Long proNo = productDTO.getProNo();
+	    return "redirect:/product/detail?proNo=" + proNo;
 	}
+
+	
+	@GetMapping("fileDelete")
+	public String setFileDelete(ProductFileDTO productFileDTO,Model modle,HttpSession session) throws Exception{
+		System.out.println("Controller = "+productFileDTO.getFileNo());
+		System.out.println("Controller = "+productFileDTO.getFileName());
+		System.out.println("Controller = "+productFileDTO.getOriginalName());
+		int result = productService.setFileDelete(productFileDTO,session);;
+		modle.addAttribute("result",result);
+		
+		return "commons/ajaxResult";
+		
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setDelete(@RequestParam Long proNo)throws Exception{
+		int result =productService.setDelete(proNo);
+		return "redirect:/my/list";
+	}	
+
+	
 	
 	@GetMapping("dibsDelete")
 	public String dibsDelete(ProductDTO productDTO, Model model, HttpSession session)throws Exception{
@@ -191,5 +249,47 @@ public class ProductController {
 			model.addAttribute("result", 0);
 		}
 		return "commons/ajaxResult";
+	}
+	
+	@GetMapping("reviewadd")
+	public String reviewAdd(ProductDTO productDTO, Model model)throws Exception{
+		productDTO=productService.getDetail(productDTO);
+		System.out.println(productDTO.getProName());
+		model.addAttribute("dto", productDTO);
+		return "product/reviewadd";
+	}
+	
+	@PostMapping("reviewadd")
+	public String reviewAdd(ProductReviewDTO productReviewDTO, Model model)throws Exception{
+		
+
+		int result =productService.reviewAdd(productReviewDTO);
+		System.out.println(result);
+		return "redirect:../";
+	}
+	
+	@GetMapping("reportadd")
+	public void reportAdd(ReportDTO reportDTO, Model model)throws Exception{
+		MemberDTO memberDTO=adminService.reportId(reportDTO);
+		System.out.println(memberDTO.getUserId());
+		model.addAttribute("dto", memberDTO);
+		
+	}
+	
+	@PostMapping("reportadd")
+	public String reportAdd(ReportDTO reportDTO, MultipartFile [] photos, HttpSession session, Model model)throws Exception{
+		int result =adminService.reportAdd(photos, reportDTO, session);
+		
+		String message="신고 실패";
+		
+		if(result>0) {
+			message="신고 완료";	
+		}
+		
+		model.addAttribute("message", message);
+		model.addAttribute("url", "/");
+		
+		return "commons/result";
+		
 	}
 }

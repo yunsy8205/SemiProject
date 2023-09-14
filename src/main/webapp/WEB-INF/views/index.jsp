@@ -31,6 +31,8 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -73,13 +75,15 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="./product/categoryList?catNo=1001">에어컨</a></li>
 
-						<li><a href="./product/categoryList?catNo=1002">냉장고</a></li>
-						<li><a href="./product/categoryList?catNo=1003">세탁기</a></li>
-						<li><a href="./product/categoryList?catNo=1004">TV</a></li>
-						<li><a href="./product/categoryList?catNo=1005">노트북</a></li>
-						<li><a href="./product/categoryList?catNo=1006">청소기</a></li>
+						<li><a href="./product/categoryList?catNo=1001">핸드폰</a></li>
+						<li><a href="./product/categoryList?catNo=1002">전자기기</a></li>
+						<li><a href="./product/categoryList?catNo=1003">미용가전</a></li>
+						<li><a href="./product/categoryList?catNo=1004">주방가전</a></li>
+						<li><a href="./product/categoryList?catNo=1005">생활가전</a></li>
+						<li><a href="./product/categoryList?catNo=1006">사무기기</a></li>
+						<li><a href="./product/categoryList?catNo=1007">기타</a></li>
+
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -107,11 +111,6 @@
 					</div>
 					<!-- /section title -->
 
-					
-
-					
-					  
-					
 
 					<!-- Products tab & slick -->
 					<div class="col-md-12">
@@ -125,7 +124,7 @@
 											<div class="product">
 												<div class="product-img">
 												
-													<img src="./resources/upload/product/${product.fileDTOs[0].originalName}" alt="" width="200" height="200">
+													<img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="200" height="200">
 													
 													<div class="product-label">
 														<span class="new">NEW</span>
@@ -142,7 +141,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+													<button class="add-to-cart-btn"><i class="bi bi-currency-exchange"></i><a href="../payment/paymentadd?proNo=${product.proNo}">구매하기</a></button>
 												</div>
 											</div>
 										</c:forEach>
@@ -173,32 +172,32 @@
 							<ul class="hot-deal-countdown">
 								<li>
 									<div>
-										<h3>02</h3>
+										<h3>11</h3>
 										<span>Days</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>10</h3>
+										<h3>06</h3>
 										<span>Hours</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>34</h3>
+										<h3>27</h3>
 										<span>Mins</span>
 									</div>
 								</li>
 								<li>
 									<div>
-										<h3>60</h3>
+										<h3>36</h3>
 										<span>Secs</span>
 									</div>
 								</li>
 							</ul>
-							<h2 class="text-uppercase">hot deal this week</h2>
-							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="./product/list">Shop now</a>
+							<h2 class="text-uppercase">소가전 직거래 플랫폼</h2>
+							<p>구디장터</p>
+							<a class="primary-btn cta-btn" href="./product/list">GO SHOP</a>
 						</div>
 					</div>
 				</div>
