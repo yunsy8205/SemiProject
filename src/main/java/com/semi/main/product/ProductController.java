@@ -257,8 +257,7 @@ public class ProductController {
 	
 	@PostMapping("reviewadd")
 	public String reviewAdd(ProductReviewDTO productReviewDTO, Model model)throws Exception{
-		System.out.println(productReviewDTO.getProNo());
-		System.out.println(productReviewDTO.getUserNo());
+		
 
 		int result =productService.reviewAdd(productReviewDTO);
 		System.out.println(result);

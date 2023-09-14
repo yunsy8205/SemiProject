@@ -7,9 +7,10 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../resources/css/prodetail.css">
-<c:import url="../temp/header1.jsp"></c:import>
+
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
 <!-- NAVIGATION -->
 		<nav id="navigation">
 			<!-- container -->
@@ -33,6 +34,7 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
+
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">

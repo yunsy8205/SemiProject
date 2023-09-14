@@ -8,10 +8,11 @@
 <link rel="stylesheet" href="../resources/css/profile.css">
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<c:import url="../temp/header1.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>
 </head>
 <body>
+<c:import url="../temp/header.jsp"></c:import>
+
 	<section class="contain">
 <h1 class="mt-5 ms-5">회원 프로필</h1>
 <div class="wrap border">

@@ -15,7 +15,8 @@
 							<div>
 						</c:otherwise>
 					</c:choose>
-			<c:forEach var="i" begin="1" end="${d.score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${d.score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:forEach var="i" begin="1" end="${5-d.score}" step="1"><i class="bi bi-star"></i></c:forEach>
+			<c:forEach var="i" begin="1" end="${d.score}" step="1"><i class="bi bi-star-fill"></i></c:forEach><c:if test="${d.score%1>=0.5}"><i class="bi bi-star-half"></i></c:if><c:if test="${d.score%1<0.5}"><c:if test="${d.score%1>0}"><i class="bi bi-star"></i></c:if></c:if><c:forEach var="i" begin="1" end="${5-d.score}" step="1"><i class="bi bi-star"></i></c:forEach>
+			
 		</div> 
 		<div><a href="../product/detail?proNo=${d.proNo}">${d.proName}</a></div>
 		<div>${d.contents}</div><br>

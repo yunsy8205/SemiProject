@@ -24,6 +24,9 @@ public class ProductReviewDTO {
 		this.originalName = originalName;
 	}
 	public Double getScore() {
+		if(score==null) {
+			score=0.0;
+		}
 		return score;
 	}
 	public void setScore(Double score) {

@@ -33,7 +33,7 @@
 				<tr>
 					<th>권한</th>
 					<td>
-						<c:forEach items="${dto.roles}" var="r">${r.grantName}
+						<c:forEach items="${dto.roles}" var="r">
 						<c:if test="${r.grantName eq 'MEMBER'}">
 						<select class="" name="grantNo">
 								<option value="1" selected>MEMBER</option>
