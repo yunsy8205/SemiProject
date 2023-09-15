@@ -11,7 +11,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-      <title>Electro - HTML Ecommerce Template</title>
+      <title>구디장터</title>
 
       <!-- Google font -->
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -199,8 +199,12 @@
                             </a>
                         </div>
                         <!-- /Wishlist -->
-
-                      
+                      <div>
+                            <a href="../my/chat">
+                            <i class="bi bi-chat-left-dots-fill"></i>
+                                <span>1대1 채팅</span>
+                            </a>
+                        </div>
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#">

@@ -140,14 +140,14 @@
 			                        </div>
 			                    </div>
 			                    <div class="add-to-cart">
-			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
+			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i><a href="../payment/paymentadd?proNo=${product.proNo}">구매하기</a></button>
 			                    </div>
 			                </div>
 			            </div>
 			        </c:forEach>
 			    </div>
 			</div>
-
+<%-- 
 						  <!-- ... (페이징 및 검색 부분) ... -->
 						  
 				 <nav aria-label="Page navigation example">
@@ -176,7 +176,7 @@
 			
 				<!-- 검색 부분 -->
 				<div class="input-group mb-3 justify-content-center">
-				<form action="/product/list" method="GET">
+				<form action="./my/dibs" method="GET">
 				    <!-- 기존 검색 폼 입력 내용 -->
 				    <select name="kind" id="k" class="input-select" aria-label="Default select example">
 				        <option class="kind" value="proName">상품명</option>
@@ -192,7 +192,7 @@
 
 
 				</div>
-			
+			 --%>
 			</section>
 				</div>
 				<!-- /row -->

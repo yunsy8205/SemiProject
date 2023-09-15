@@ -30,6 +30,7 @@ public class ProductService {
 	
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception {
+		pager.setPerPage(12L);
 		pager.makeRowNum();
 		pager.makePageNum(productDAO.getTotal(pager));
 		
@@ -38,7 +39,7 @@ public class ProductService {
 	}
 	
 	public List<ProductDTO> getCategoryList(Pager pager) throws Exception{
-		
+		pager.setPerPage(12L);
 		pager.makeRowNum();
 		pager.makePageNum(productDAO.getTotal(pager));
         return productDAO.getCategoryList(pager);
