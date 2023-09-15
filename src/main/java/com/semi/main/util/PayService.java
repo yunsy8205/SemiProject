@@ -84,7 +84,7 @@ public class PayService {
       paymentInfo.put("pay_method", pay_method); // 결제 방법
       paymentInfo.put("amount", amount); // 결제 금액
       paymentInfo.put("canceled_amount", canceled_amount); // 결제 금액 중 취소된 금액
-      
+    
       br.close();
       conn.disconnect();
       
@@ -125,7 +125,7 @@ public class PayService {
          
          JSONParser parser = new JSONParser();
          JSONObject json = (JSONObject)parser.parse(br.readLine());
-//         System.out.println("응답 결과 : " + json.toString());
+         System.out.println("응답 결과 : " + json.toString());
          
          /*
             잘못된 요청을 할 경우에 응답 결과는 다음과 같으므로 NullPointerException이 발생하게 된다.
