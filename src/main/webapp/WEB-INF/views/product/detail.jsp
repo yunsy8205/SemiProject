@@ -19,7 +19,13 @@
 					
 						<ul class="breadcrumb-tree">
 							<li><a href="../">Home</a></li>
-							<li><a href="#">${dto.catNo}</a></li><!--  -->
+							<c:if test="${dto.catNo==1001}"><li><a>핸드폰</a></li></c:if>
+                  <c:if test="${dto.catNo==1002}"><li><a>전자기기</a></li></c:if>
+                  <c:if test="${dto.catNo==1003}"><li><a>미용가전</a></li></c:if>
+                  <c:if test="${dto.catNo==1004}"><li><a>주방가전</a></li></c:if>
+                  <c:if test="${dto.catNo==1005}"><li><a>생활가전</a></li></c:if>
+                  <c:if test="${dto.catNo==1006}"><li><a>사무기기</a></li></c:if>
+                  <c:if test="${dto.catNo==1007}"><li><a>기타</a></li></c:if>
 						</ul>
 					</div>
 				</div>

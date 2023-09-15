@@ -122,6 +122,14 @@
 			<section class="container mt-5">
 				<div class="col-md-12">
 			    <div class="row ">
+			    <c:choose>
+                            <c:when test="${empty dibs}">
+                                <div class="col-md-12">
+                                    <p>찜목록이 비어있습니다. <a href="../">찜하러가기</a></p>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+			    
 			        <c:forEach var="product" items="${dibs}" >
 			            <div class="col-md-3">
 			                <div class="product">
@@ -145,6 +153,8 @@
 			                </div>
 			            </div>
 			        </c:forEach>
+			        </c:otherwise>
+                        </c:choose>
 			    </div>
 			</div>
 <%-- 

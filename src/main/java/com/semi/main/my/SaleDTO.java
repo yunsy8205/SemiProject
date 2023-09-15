@@ -16,11 +16,16 @@ public class SaleDTO {
 	private Long proNo;
 	private Date paymentDate;
 	private Long proPrice;
+	private String paymentNo;
 	
 	
 	
-	
-	
+	public String getPaymentNo() {
+		return paymentNo;
+	}
+	public void setPaymentNo(String paymentNo) {
+		this.paymentNo = paymentNo;
+	}
 	public Long getProPrice() {
 		return proPrice;
 	}

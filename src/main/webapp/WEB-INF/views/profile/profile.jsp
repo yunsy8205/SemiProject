@@ -44,27 +44,7 @@
 
 	
 	<div id="add" style="margin-top: 10%;" class="mt-3 ms-5" data-add-num="${dto.userNo}" >
-					        <c:forEach var="product" items="${list}" >
-			            <div class="col-md-3">
-			                <div class="product">
-			                    <div class="product-img">
-			                        <img src="../resources/upload/product/${dto.originalName}" alt="" width="200" height="200">
-			                    </div>
-			                    <div class="product-body">
-			                        <p class="product-name"><a href="./detail?proNo=${dto.proNo}">${dto.proName}</a></p>
-			                        <h4 class="product-price">${dto.proPrice} </h4>
-			                        <p class="product-createDate">작성일: ${dto.createDate}</p>
-			                        <p class="product-hit">조회수: ${dto.hit}</p>
-			                        <div class="product-btns">
-			                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">찜하기</span></button>
-			                        </div>
-			                    </div>
-			                    <div class="add-to-cart">
-			                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>구매하기</button>
-			                    </div>
-			                </div>
-			            </div>
-			        </c:forEach>
+
 	</div>
 	<div id="more">
 	</div>

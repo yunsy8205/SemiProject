@@ -159,6 +159,8 @@
     	<result property="proNo" column="PRONO"/>
     	<result property="paymentDate" column="PAYMENTDATE"/>
     	<result property="proPrice" column="PROPRICE"/>
+    	<result property="paymentNo" column="PAYMENTNO"/>
+    	
     	
     	 <collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
         	<id column="FILENO" property="fileNo"/>

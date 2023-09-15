@@ -151,30 +151,35 @@
       
       <h1>판매내역</h1>
       
-      <c:forEach var="product" items="${sale}"  varStatus="i">	
-			
-			
-					
-					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="255" height="200"></a>
-					
-			     	<div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
-		
-					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.proPrice}원</div>
-		
-			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
-			        
-			      
-					<div>	<button class="btn btn-primary"  >계좌 입력</button>     </div>
-					<br>
-	
-				
-			     
-			     
-	  		</c:forEach>
+      <c:forEach var="product" items="${sale}"  varStatus="i">   
+         
+         <c:choose>
+            <c:when test="${not empty product.paymentNo}">
+               
+               <a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="255" height="200"></a>
+               
+                 <div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
+      
+               <div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.proPrice}원</div>
+      
+                 <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
+                 
+               <a href="../payment/bankadd?userNo=${product.userNo}">계좌등록 ></a>
+               <br>
+   
+            
+              
+              </c:when>
+            <c:otherwise>
+                <!-- paymentNo가 null인 경우 -->
+               
+            </c:otherwise>
+        </c:choose>
+           </c:forEach>
       
       
       </div>
-     
+
       
       </div>
       

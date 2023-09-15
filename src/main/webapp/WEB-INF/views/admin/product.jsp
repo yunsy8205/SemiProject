@@ -65,7 +65,7 @@
 								<figure>
 									<c:forEach items="${m.fileDTOs}" var="f">
 										<c:if test="${flag?true:false}">
-											<img class="image" src="../resources/upload/product/${f.originalName}" class="d-block w-100" alt="...">
+											<img class="image" src="../resources/upload/product/${f.fileName}" class="d-block w-100" alt="...">
 											<c:set var="flag" value="false"/>
 										</c:if>
 									</c:forEach>

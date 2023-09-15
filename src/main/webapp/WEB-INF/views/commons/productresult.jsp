@@ -17,7 +17,7 @@
 					</c:choose>
 						<c:forEach items="${d.fileDTOs}" var="f">
 							<c:if test="${flag?true:false}">		
-			                        <a href="../product/detail?proNo=${d.proNo}"><img src="../resources/upload/product/${f.originalName}" alt="" width="200px" height="200px"></a>
+			                        <a href="../product/detail?proNo=${d.proNo}"><img src="../resources/upload/product/${f.fileName}" alt="" width="200px" height="200px"></a>
 			                    <c:set var="flag" value="false"/>
 							</c:if>
 						</c:forEach>

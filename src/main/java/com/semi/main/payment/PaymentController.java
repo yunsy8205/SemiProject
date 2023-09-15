@@ -127,5 +127,11 @@ public class PaymentController {
 	      model.addAttribute("result", result);
 	      return "commons/ajaxResult";
 	   }
+	 
+	    @GetMapping("bankadd")
+	    public String bankAdd(MemberDTO memberDTO, Model model) {
+	       model.addAttribute("dto", memberDTO);
+	       return "payment/bankadd";
+	    }
 
 }
