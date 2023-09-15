@@ -46,6 +46,18 @@ public class AdminController {
 	private QnaService qnaService;
 	@Autowired
 	private PaymentService paymentService;
+	
+	@GetMapping("payDetail")
+	public String getPayDetail(PaymentDTO paymentDTO, Model model)throws Exception{
+		
+	    paymentDTO = paymentService.getPayDetail(paymentDTO);
+	    
+	    model.addAttribute("dto", paymentDTO);
+	    
+	    return "admin/payDetail";
+		
+		
+	}
 
 	//비번초기화
 	@RequestMapping(value = "passwordreset", method = RequestMethod.POST)

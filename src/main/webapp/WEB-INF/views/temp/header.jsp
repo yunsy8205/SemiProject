@@ -11,7 +11,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-      <title>Electro - HTML Ecommerce Template</title>
+      <title>구디장터</title>
 
       <!-- Google font -->
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -132,10 +132,11 @@
                <c:if test="${not empty member}">
        			  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
 	               <c:forEach items="${member.roles}" var="m">
-             			<c:if test="${m.grantNo==1}">${m.grantNo}
+             			<c:if test="${m.grantNo == 1}">
                   			<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
+                  			<li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
              			</c:if>
-             			<c:if test="${m.grantNo==2}">${m.grantNo}
+             			<c:if test="${m.grantNo == 2}">
 			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
 	               		</c:if>
 	               </c:forEach>
@@ -196,8 +197,12 @@
                             </a>
                         </div>
                         <!-- /Wishlist -->
-
-                      
+                      <div>
+                            <a href="../my/chat">
+                            <i class="bi bi-chat-left-dots-fill"></i>
+                                <span>1대1 채팅</span>
+                            </a>
+                        </div>
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#">

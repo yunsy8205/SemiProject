@@ -135,7 +135,7 @@
 			        <button class="btn btn-danger open"   data-uid ="${product.uidNo}">
  					 결제취소
 					</button>
-					<a href="../product/reviewadd?proNo=${product.proNo}">후기!</a>
+					<button class="btn btn open"><a href="../product/reviewadd?proNo=${product.proNo}">후기!</a></button>
 					</div>
 					
 			</c:if>		
@@ -153,21 +153,21 @@
       
       <c:forEach var="product" items="${sale}"  varStatus="i">	
 			
-			<c:if test="${product.statusNo == 1}">
+			
 					
 					<a href="../product/detail?proNo=${product.proNo}"><img src="${pageContext.request.contextPath}/resources/upload/product/${product.fileDTOs[0].fileName}" alt="" width="255" height="200"></a>
 					
 			     	<div class="m" style="font-weight: bold; font-size: 17px;">상품제목 : ${product.proName}</div>
 		
-					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.totalPrice}원</div>
+					<div class="m" id="amount" style="font-weight: bold; font-size: 17px;" > 결제금액 : ${product.proPrice}원</div>
 		
 			        <div class="m" style="font-weight: bold; font-size: 17px;">결제날짜 : ${product.paymentDate}일</div>
 			        
-			       <div>
-			       <input type="hidden"  data-toggle="modal" data-target="#exampleModal" id="c" >
-			      <%--  <button class="d-nonr" data-toggle="modal" data-target="#exampleModal" id="c" data-uid ="${product.uidNo}"></button> --%>
-	</div>		        
-			</c:if>		
+			      
+					<div>	<button class="btn btn-primary"  >계좌 입력</button>     </div>
+					<br>
+	
+				
 			     
 			     
 	  		</c:forEach>

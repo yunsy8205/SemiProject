@@ -15,10 +15,18 @@ public class SaleDTO {
 	private Long statusNo;
 	private Long proNo;
 	private Date paymentDate;
+	private Long proPrice;
 	
 	
 	
 	
+	
+	public Long getProPrice() {
+		return proPrice;
+	}
+	public void setProPrice(Long proPrice) {
+		this.proPrice = proPrice;
+	}
 	public Date getPaymentDate() {
 		return paymentDate;
 	}
