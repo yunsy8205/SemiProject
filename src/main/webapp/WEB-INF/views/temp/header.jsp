@@ -131,13 +131,15 @@
 
                <c:if test="${not empty member}">
        			  <li class="nav-item text-white me-3"><a href="../member/logout">로그아웃</a></li>
-	               <c:forEach items="${member.roles}" var="m">
+       			  
+	               <c:forEach items="${member.roles}" var="m">    		
              			<c:if test="${m.grantNo == 1}">
                   			<li class="nav-item text-white me-3"><a href="../my/mypage">mypage</a></li>
                   			<li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
              			</c:if>
              			<c:if test="${m.grantNo == 2}">
 			                 <li class="nav-item text-white me-3"><a href="../admin/member">adminpage</a></li>
+							 <li class="nav-item text-white me-3"><a href="../notice/list">고객센터</a></li>
 	               		</c:if>
 	               </c:forEach>
                </c:if>

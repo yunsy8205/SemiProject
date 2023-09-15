@@ -72,7 +72,7 @@ $("#contents").summernote({
                 enctype: 'multipart/form-data',
                 cache: false,
                 processData: false,
-                   contentType: false,
+                contentType: false,
                 success:function(result){
                     console.log(result)
                     $("#contents").summernote('insertImage', result.trim());
@@ -103,3 +103,4 @@ $("#contents").summernote({
 
     }
 })
+
