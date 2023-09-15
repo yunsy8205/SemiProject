@@ -37,15 +37,13 @@ public class MyPageController {
 	public void myPage(HttpSession session,Model model) throws Exception{
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO=(MemberDTO)session.getAttribute("member");
-		System.out.println(memberDTO.getUserId()+"myPage 메서드");
-		System.out.println(memberDTO.getAccountDate());
-		
 		
 		Long ar = myPageService.getBuyCount(memberDTO.getUserNo());
 		model.addAttribute("buyer", ar);
-		
+		//구매목록
 		Long arr = myPageService.getSaleCount(memberDTO.getUserNo());
 		model.addAttribute("sale", arr);
+		//판매목록
 	}
 	
 	
@@ -60,8 +58,6 @@ public class MyPageController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String setMemberUpdate(MemberDTO memberDTO, MultipartFile file,HttpSession session) throws Exception{
 		MemberDTO memberDTO2 = (MemberDTO)session.getAttribute("member"); //기존 멤버 정보
-		
-
 		
 		String userId = ((MemberDTO)session.getAttribute("member")).getUserId(); 
 		memberDTO.setUserNo(memberDTO2.getUserNo());
@@ -167,11 +163,13 @@ public class MyPageController {
 		return "./my/update";
 	}
 	
-	@GetMapping("chat") // 1대1 채팅
+	// 1대1 채팅
+	@GetMapping("chat") 
 	public void chat() throws Exception{		
 		
 	}
 	
+	//내가 쓴 글
 	@GetMapping("list")
 	public String proList(HttpSession session, Model model, Pager pager) throws Exception{
 	    // 현재 로그인한 사용자의 정보를 세션에서 가져옴
@@ -200,10 +198,7 @@ public class MyPageController {
 	    List<DibsDTO> dibs = myPageService.getDibs(userNo);
 	    model.addAttribute("dibs", dibs);
 	    
-//	    for(int i=0; i<dibs.size(); i++) {
-//	    	System.out.println(dibs.get(i).getUserId());
-//	    	System.out.println(dibs.get(i).getProNo());
-//	    }
+
 	    return "./my/dibs";
 	}
 	
@@ -221,7 +216,7 @@ public class MyPageController {
 			model.addAttribute("sale", arr);
 		}
 
-		// 후기
+		// 내게 쓴 후기목록
 		@GetMapping("review")
 		public void review(HttpSession session, Model model) throws Exception{
 			MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");

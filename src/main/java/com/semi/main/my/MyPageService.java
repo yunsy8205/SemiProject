@@ -35,7 +35,7 @@ public class MyPageService {
 	// 사진등록
 	public String setContentsImg(MultipartFile file, HttpSession session) throws Exception {
 		String path="/resources/upload/member/";
-		String fileName = fileManager.fileSave(path, session, file); // -> fileName ------> insert 해야됨
+		String fileName = fileManager.fileSave(path, session, file); // -> fileName ------> 파일 insert 전
 		session.setAttribute("newFileName", fileName);
 		
 		
@@ -81,7 +81,7 @@ public class MyPageService {
     
 
 
-    
+    //내가 쓴 글 목록
     public List<ProductDTO> memberProList(ProfileDTO profileDTO, Pager pager)throws Exception {
 		pager.setPerPage(3L);
 		pager.makeRowNum();

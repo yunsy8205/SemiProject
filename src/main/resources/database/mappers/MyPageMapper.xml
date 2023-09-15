@@ -209,7 +209,7 @@
 			LEFT JOIN PAYMENT p2 ON (P.PRONO=P2.PRONO) 
 			LEFT JOIN PRODUCTIMAGE p3
 			ON P.PRONO = p3.PRONO
-			WHERE P.USERNO=#{userNo} 
+			WHERE P.USERNO=#{userNo} AND p2.PAYMENTNO IS NOT null
 		</select>
 
   </mapper>
