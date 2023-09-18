@@ -4,7 +4,7 @@
 기  간   : 2023-05-22  2023-11-22<br/>
 프로젝트 : Middle Project<br/>
 주  제   : 쇼핑몰 형식의 소가전 중고거래 사이트<br/>
-팀  원   : 최경묵, 강승권, 윤소영, 서원진, 김성호<br/>
+팀  원   : 서원진, 윤소영, 강승권, 최경묵, 김성호<br/>
 GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 최종 Branch : master<br/>
 
