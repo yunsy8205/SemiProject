@@ -134,11 +134,11 @@
   	
   	<select id="reportList" parameterType="Pager" resultType="ReportDTO">
   		SELECT B.* FROM
-        (SELECT ROWNUM R, A.* FROM
-        (SELECT RE.*, C.CATNAME FROM REPORT RE JOIN REPORTCATEGORY C
-        ON(RE.CATNO=C.CATNO)ORDER BY RE.REPORTNO DESC)A
-        <include refid="searchSql2"></include>)B
-        WHERE R BETWEEN #{startRow} AND #{lastRow}
+  		(SELECT ROWNUM R, A.* FROM
+  		(SELECT RE.*, C.CATNAME FROM REPORT RE JOIN REPORTCATEGORY C
+  		ON(RE.CATNO=C.CATNO)ORDER BY RE.REPORTNO DESC)A
+  		<include refid="searchSql2"></include>)B
+  		WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
   	<select id="reportTotal" parameterType="Pager" resultType="Long">
