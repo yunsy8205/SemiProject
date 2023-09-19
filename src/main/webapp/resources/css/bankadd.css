@@ -10,8 +10,8 @@
    
    .contain{
 
-      width: 800px;
-       height: 600px;
+      width: 600px;
+       height: 500px;
        margin: auto;
        box-sizing: border-box;
    }
