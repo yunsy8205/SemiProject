@@ -40,13 +40,14 @@ GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 ><p><strong>배포일</strong>: 2023.09.15</p>
 
 
-## 🔨 개발 환경 및 도구
+## 🔨 Tech Stacks
 ---
 
+- Design : ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 - Java 1.1 version
 - Spring Framework 4.3.2
 - DB : Oracle Database
 - 기술 스택 : Mybatis, JavaScript, HTML5, CSS, jQuery, AJAX
 - WAS : apache-tomcat-9.0.76
 
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
