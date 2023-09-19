@@ -15,7 +15,7 @@ GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 * 개발 환경 및 도구
 
 
-## :speech_balloon: 팀원 소개
+## 👨‍👨‍👧‍👧 팀원 소개
 ><p><strong>팀장</strong>: 서원진</p>
 >총괄, 로그인, 회원가입 개발
 
