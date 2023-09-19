@@ -12,12 +12,12 @@
 <c:import url="../temp/bootstrap.jsp"></c:import>
 <c:import url="../temp/header.jsp"></c:import>
 <c:import url="../temp/template.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/reviewadd.css">
+<link rel="stylesheet" href="../resources/css/bankadd.css">
 <style type="text/css">
 .billing-details {
     margin-bottom: 30px;
-    margin-top: 5%;
-    margin-left: 5%;
+    margin-top: 8%;
+    margin-left: 17%;
 }
 </style>
 </head>
@@ -32,13 +32,13 @@
                <div class="details">
          <div class="modal-body">
               <form>
-                <div class="mb-3">
+                <div class="mb-3" style="width:200px;">
                   <label for="recipient-name" class="col-form-label">예금주</label>
                   <input type="text" class="form-control" id="holder" name="holder">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group">
                   <label for="message-text" class="col-form-label">은행 선택</label>
-                  <select class="form-select" id="code" name="bankcode">
+                  <select class="input-select" id="code" name="bankcode">
                      <option value="004" selected>KB국민은행</option>
                      <option value="003">기업은행</option>
                      <option value="011">농협</option>
@@ -49,11 +49,11 @@
                 </div>
                 <div class="mb-3">
                   <label for="recipient-name" class="col-form-label">계좌번호</label>
-                  <input type="text" class="form-control" id="num" name="banknum">
+                  <input style="width:350px;" type="text" class="form-control" id="num" name="banknum">
                 </div>
               </form>
             </div>
-                  <button type="button" id="save" data-user="${dto.userNo}" class="btn btn-danger">저장</button>
+                  <button type="button" id="save" data-user="${dto.userNo}" class="btn btn-danger ms-4">저장</button>
                   <!-- /Billing Details -->
                   </div>
                <!-- /Order Details -->

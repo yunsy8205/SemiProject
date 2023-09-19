@@ -17,8 +17,8 @@
    .star-rating {
   display: flex;
   flex-direction: row-reverse;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 5.25rem;
+  line-height: 5.5rem;
   justify-content: space-around;
   padding: 0 0.2em;
   text-align: center;
@@ -50,6 +50,13 @@
     margin-top: 5%;
     margin-left: 5%;
 }
+
+  textarea {
+    width: 100%;
+    height: 10.25em;
+    border: none;
+    resize: none;
+  }
 </style>
 </head>
 <body>
@@ -57,36 +64,20 @@
    <section class="contain border mt-5 mb-5">
       <div class="billing-details">
                      <div class="section-title title2">
-                        <h1 class="title" id="member">후기 남기기</h1>
+                        <h1 class="title" id="member">후기 작성</h1>
                      </div>
    <!-- Order Details -->
-               <div class="details">
-                  <div class="order-summary">
-               <c:set var="flag" value="true"/>
-               <div id="box1" style="margin-left:10%;">
-                  <c:forEach items="${dto.fileDTOs}" var="f">
-                     <c:if test="${flag?true:false}">
-                        <img class="image" src="../resources/upload/product/${f.fileName}" class="d-block w-100" alt="...">
-                              
-                        <c:set var="flag" value="false"/>
-                     </c:if>
-                  </c:forEach>
-               </div>
-                     <div class="order-products">
-                        <div >
-                           <div style="font-size: 15px; font-weight: bold; margin-top: 60px;;">${dto.proName}</div>
-
-                        </div>
-                     </div>
-                  </div>
-                  
-                  
-               </div>
 
                   <div class="section-title" style="margin-bottom:10%;">
-                     <form action="./reviewadd" method="post" style="margin-top:10%;  margin-left:10%; margin-right:10%;">
-                       
-                           <div class="star-rating space-x-4 mx-auto" style="margin-bottom: 10px;">
+                     <form action="./reviewadd" method="post" style="margin-top:-10%; margin-left:10%; margin-right:10%;">
+                             
+                             <div class="order-summary">
+               
+               </div>
+                     <div class="order-products" style="margin-bottom: 3%;">
+                        <div >
+                           <div style="font-size: 20px; font-weight: bold; margin-top: 60px; margin-bottom: 20px;">${dto.proName}</div>
+                     <div class="star-rating space-x-4" style="margin-bottom: 10px;">
                            <input type="radio" id="5-stars" name="score" value="5" v-model="ratings"/>
                            <label for="5-stars" class="star pr-4">★</label>
                            <input type="radio" id="4-stars" name="score" value="4" v-model="ratings"/>
@@ -99,8 +90,12 @@
                            <label for="1-star" class="star">★</label>
                         
                         </div>
-                        <div class="mb-3">
-                           <textarea name="contents" class="form-control" id="message-text" placeholder="후기를 10글자 이상 작성해주세요."></textarea>
+                        </div>
+                     </div>
+                  
+                           
+                        <div style="margin-bottom: 30px;">
+                           <textarea cols="100" rows="10" name="contents" class="form-control" id="message-text" placeholder="후기를 10글자 이상 작성해주세요."></textarea>
                         </div>
                         <input type="hidden" value="${dto.proNo}" name="proNo">
                         <input type="hidden" value="${dto.userNo}" name="userNo">
@@ -111,7 +106,6 @@
                   </div>
                <!-- /Order Details -->
                   </div>
-
 
    </section>
 
