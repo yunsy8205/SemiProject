@@ -10,7 +10,7 @@ GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 
 
 ## :open_file_folder: 목차
-* 팀원
+* 팀원 소개
 * 프로젝트 개요
 * 개발 환경 및 도구
 
