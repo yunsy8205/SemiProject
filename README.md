@@ -32,12 +32,20 @@ GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 >마이페이지, 구매내역/판매내역, 채팅 개발
 
 
-## :date: 프로젝트 개요
-
+## 📆 프로젝트 개요
+---
 ><p><strong>프로젝트</strong>: 쇼핑몰 형식의 소가전 중고거래 사이트</p>
 ><p><strong>기획 및 제작</strong>: 서원진, 윤소영, 강승권, 최경묵, 김성호</p>
-><p><strong>분류</strong>: 팀 프로젝트</p>
-><p><strong>제작 기간</strong>: 2023.08.16 ~ 09.15</p>
-><p><strong>배포일</strong>: 2023</p>
-><p><strong>사용 기술</strong>: SPRING LEGACY</p>
-><p><strong>문의</strong>: sungho9941@naver.com</p>
+><p><strong>제작 기간</strong>: 2023.08.14 ~ 2023. 09.15 
+><p><strong>배포일</strong>: 2023.09.15</p>
+
+
+## 🔨 개발 환경 및 도구
+---
+
+- Java 1.1 version
+- Spring Framework 4.3.2
+- DB : Oracle Database
+- 기술 스택 : Mybatis, JavaScript, HTML5, CSS, jQuery, AJAX
+- WAS : apache-tomcat-9.0.76
+
