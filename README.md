@@ -30,6 +30,25 @@ GitHub URL  : https://github.com/sungho9941/SemiProject<br/>
 ><p><strong>팀원</strong>: 김성호</p>
 >마이페이지, 회원정보 수정, 내 판매/구매목록, 찜목록 불러오기, 다음 주소찾기 API, 1대1 채팅(WebSocket), 채팅내역 불러오기, 회원 탈퇴, 페이징
 
+or
+
+## :speech_balloon: 팀원 소개
+><p><strong>팀장</strong>: 서원진</p>
+>총괄, 로그인, 회원가입 개발
+
+><p><strong>팀원</strong>: 윤소영</p>
+>상품 상세, 회원 프로필, 후기페이지, 관리자페이지 일부 개발
+
+><p><strong>팀원</strong>: 강승권</p>
+>공지사항, 1:1문의, 결제, 관리자페이지 일부 개발
+
+><p><strong>팀원</strong>: 최경묵</p>
+>메인 페이지, 상품관련페이지(리스트, 등록, 수정, 삭제) 개발
+
+><p><strong>팀원</strong>: 김성호</p>
+>마이페이지, 구매내역/판매내역, 채팅 개발
+
+
 ## :date: 프로젝트 개요
 
 ><p><strong>프로젝트</strong>: 쇼핑몰 형식의 소가전 중고거래 사이트</p>
