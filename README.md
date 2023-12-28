@@ -1,5 +1,4 @@
 ## 📆 프로젝트 개요
----
 ><p><strong>프로젝트</strong>: 쇼핑몰 형식의 소가전 중고거래 사이트</p>
 ><p><strong>기획 및 제작</strong>: 서원진, 윤소영, 강승권, 최경묵, 김성호</p>
 ><p><strong>제작 기간</strong>: 2023.08.14 ~ 2023. 09.15 
@@ -24,7 +23,6 @@
 
 
 ## 🔨 Tech Stacks
----
 
 <img src="https://img.shields.io/badge/Design-%23121011?style=for-the-badge"> ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white) <br/>
 
