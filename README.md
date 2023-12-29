@@ -28,9 +28,9 @@
 
 ## 🔨 Tech Stacks
 
-<img src="https://img.shields.io/badge/FRAMEWORK-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MYBATIS](https://img.shields.io/badge/MYBATIS-%236DB33F.svg?style=for-the-badge&logo=MYBATIS&logoColor=white) <br/>
+<img src="https://img.shields.io/badge/FRAMEWORK-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MYBATIS](https://img.shields.io/badge/MYBATIS-1572B6.svg?style=for-the-badge&logo=Mybatis&logoColor=white) <br/>
 
-<img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/LOMBOK-0769AD?style=for-the-badge&logo=LOMBOK&logoColor=white"><br/>
+<img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/LOMBOK-3DDC84?style=for-the-badge&logo=LOMBOK&logoColor=white"><br/>
 
 <img src="https://img.shields.io/badge/IDE-%23121011?style=for-the-badge"> ![Spring Tool Suite 4](https://img.shields.io/badge/Spring%20Tool%20Suite%204-%382923.svg?style=for-the-badge&logo=Spring%20Tool%20Suite%204&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![DBeaver](https://img.shields.io/badge/DBeaver-382923.svg?style=for-the-badge&logo=DBeaver&logoColor=white)<br/>
 
