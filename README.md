@@ -13,10 +13,10 @@
 >총괄, 로그인, 회원가입 개발
 
 ><p><strong>팀원</strong>: 윤소영</p>
->상품 상세, 회원 프로필, 후기페이지, 관리자페이지 일부 개발
+>상품 상세, 회원 프로필, 결제, 관리자페이지 일부 개발
 
 ><p><strong>팀원</strong>: 강승권</p>
->공지사항, 1:1문의, 결제, 관리자페이지 일부 개발
+>공지사항, 1:1문의, 후기페이지, 관리자페이지 일부 개발
 
 ><p><strong>팀원</strong>: 최경묵</p>
 >메인 페이지, 상품관련페이지(리스트, 등록, 수정, 삭제) 개발
@@ -28,6 +28,8 @@
 ## 🔨 Tech Stacks
 
 <img src="https://img.shields.io/badge/FRAMEWORK-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) <br/>
+
+<img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)<br/>
 
 <img src="https://img.shields.io/badge/IDE-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)<br/>
 
