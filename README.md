@@ -4,13 +4,14 @@
 ## 📆 프로젝트 개요
 ><p><strong>프로젝트</strong>: 쇼핑몰 형식의 소가전 중고거래 사이트</p>
 ><p><strong>기획 및 제작</strong>: 서원진, 윤소영, 강승권, 최경묵, 김성호</p>
-><p><strong>제작 기간</strong>: 2023.08.14 ~ 2023. 09.15 
+><p><strong>분류</strong>: 팀 프로젝트</p>
+><p><strong>제작 기간</strong>: 2023.08.14 ~ 2023. 09.15</p>
 ><p><strong>배포일</strong>: 2023.09.15</p>
 
 
 ## 👨‍👨‍👧‍👧 팀원 소개
-><p><strong>팀장</strong>: 서원진</p>
->총괄, 로그인, 회원가입 개발
+><p><strong>팀원</strong>: 서원진</p>
+>로그인, 회원가입 개발
 
 ><p><strong>팀원</strong>: 윤소영</p>
 >상품 상세, 회원 프로필, 결제, 관리자페이지 일부 개발
@@ -29,9 +30,9 @@
 
 <img src="https://img.shields.io/badge/FRAMEWORK-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) <br/>
 
-<img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)<br/>
+<img src="https://img.shields.io/badge/LIBRARY-%23121011?style=for-the-badge"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <br/>
 
-<img src="https://img.shields.io/badge/IDE-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)<br/>
+<img src="https://img.shields.io/badge/IDE-%23121011?style=for-the-badge"> ![Spring](https://img.shields.io/badge/spring-%382923.svg?style=for-the-badge&logo=spring&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![DBeaver](https://img.shields.io/badge/DBeaver-%382923.svg?style=for-the-badge&logo=spring&logoColor=white)<br/>
 
 <img src="https://img.shields.io/badge/Server Hosting-%23121011?style=for-the-badge"> ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) <br/>
 
